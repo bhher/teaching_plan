@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Grid 레이아웃 완벽 가이드</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-align: center;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 20px;
+        }
+        h2 {
+            color: #764ba2;
+            font-size: 1.8em;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-left: 15px;
+            border-left: 5px solid #764ba2;
+        }
+        h3 {
+            color: #555;
+            font-size: 1.3em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+        .section {
+            margin-bottom: 40px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .example-box {
+            background: #fff;
+            border: 2px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .info-box {
+            background: #e3f2fd;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            border-left: 4px solid #2196f3;
+        }
+        .tip-box {
+            background: #fff9c4;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            border-left: 4px solid #fbc02d;
+        }
+        .warning-box {
+            background: #ffebee;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            border-left: 4px solid #f44336;
+        }
+        ul, ol { margin-left: 30px; margin-top: 10px; }
+        li { margin-bottom: 6px; }
+        .highlight { background: #fff9c4; padding: 2px 6px; border-radius: 3px; }
+        /* 데모용 Grid 스타일 */
+        .grid-demo {
+            display: grid;
+            gap: 10px;
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 5px;
+            border: 2px dashed #667eea;
+        }
+        .grid-item {
+            background: #667eea;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+        .grid-item:nth-child(2) { background: #764ba2; }
+        .grid-item:nth-child(3) { background: #4ecdc4; }
+        .grid-item:nth-child(4) { background: #ff6b6b; }
+        .grid-item:nth-child(5) { background: #ffa502; }
+        .grid-item:nth-child(6) { background: #2ed573; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background: #667eea;
+            color: #fff;
+        }
+        tr:nth-child(even) { background: #f2f2f2; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>🧩 CSS Grid 레이아웃 완벽 가이드</h1>
+    <p style="text-align:center; color:#666; margin-bottom:40px;">
+        2차원 레이아웃을 위한 가장 강력한 CSS 도구, Grid를 기초부터 실전까지 정리했습니다.
+    </p>
+
+    <div class="section">
+        <h2>1. Grid 개념</h2>
+        <p>
+            CSS Grid는 행(row)과 열(column)로 이루어진 2차원 레이아웃 시스템입니다.
+            Flexbox가 한 축(1차원) 정렬에 강하다면, Grid는
+            <span class="highlight">가로 + 세로를 동시에 설계</span>하는 레이아웃에 최적화되어 있습니다.
+        </p>
+        <div class="info-box">
+            <strong>💡 핵심 용어</strong>
+            <ul>
+                <li><strong>Grid Container</strong>: <code>display: grid</code>가 적용된 부모 요소</li>
+                <li><strong>Grid Item</strong>: Grid Container의 직접 자식 요소</li>
+                <li><strong>Grid Track</strong>: 행(row) 또는 열(column)</li>
+                <li><strong>Grid Cell</strong>: 하나의 행과 하나의 열이 만나는 칸</li>
+                <li><strong>Grid Area</strong>: 여러 셀이 합쳐진 영역</li>
+            </ul>
+        </div>
+
+        <h3>1.1 기본 구조 예제</h3>
+        <div class="code-block">
+<code>&lt;div class="grid-container"&gt;
+    &lt;div class="item"&gt;1&lt;/div&gt;
+    &lt;div class="item"&gt;2&lt;/div&gt;
+    &lt;div class="item"&gt;3&lt;/div&gt;
+    &lt;div class="item"&gt;4&lt;/div&gt;
+&lt;/div&gt;
+
+.grid-container {
+    display: grid;
+}</code>
+        </div>
+
+        <div class="example-box">
+            <h3>기본 Grid 데모</h3>
+            <div class="grid-demo" style="grid-template-columns: repeat(4, 1fr);">
+                <div class="grid-item">1</div>
+                <div class="grid-item">2</div>
+                <div class="grid-item">3</div>
+                <div class="grid-item">4</div>
+            </div>
+            <p style="margin-top:10px; color:#555;">
+                아직 행/열 정의를 자세히 하지 않으면, 브라우저가 기본 규칙에 따라 자동 배치합니다.
+            </p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>2. Grid Container 주요 속성</h2>
+
+        <h3>2.1 display</h3>
+        <div class="code-block">
+<code>.container {
+    display: grid;      /* 블록 레벨 Grid */
+    /* display: inline-grid;  인라인 레벨 Grid */
+}</code>
+        </div>
+
+        <h3>2.2 grid-template-columns / grid-template-rows</h3>
+        <p>열과 행의 개수 및 크기를 정의합니다.</p>
+        <div class="code-block">
+<code>.grid {
+    display: grid;
+    grid-template-columns: 100px 200px 100px; /* 3열, 고정 너비 */
+    grid-template-rows: 80px 80px;           /* 2행, 고정 높이 */
+}
+
+/* repeat() 함수 사용 */
+.grid-repeat {
+    grid-template-columns: repeat(3, 1fr); /* 3열, 동일 비율 분할 */
+}
+
+/* fr 단위: 남은 공간 비율 */
+.grid-fr {
+    grid-template-columns: 1fr 2fr; /* 왼쪽 1, 오른쪽 2 비율 */
+}</code>
+        </div>
+
+        <div class="example-box">
+            <h3>grid-template-columns 예제</h3>
+            <p>3열 레이아웃 (1fr 2fr 1fr)</p>
+            <div class="grid-demo" style="grid-template-columns: 1fr 2fr 1fr;">
+                <div class="grid-item">1</div>
+                <div class="grid-item">2</div>
+                <div class="grid-item">3</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">5</div>
+                <div class="grid-item">6</div>
+            </div>
+        </div>
+
+        <h3>2.3 gap (grid-gap)</h3>
+        <p>셀 사이의 간격을 설정합니다.</p>
+        <div class="code-block">
+<code>.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;          /* row-gap + column-gap */
+    /* row-gap: 10px;  column-gap: 20px; */
+}</code>
+        </div>
+
+        <div class="example-box">
+            <h3>gap 예제</h3>
+            <div class="grid-demo" style="grid-template-columns: repeat(3, 1fr); gap: 15px;">
+                <div class="grid-item">1</div>
+                <div class="grid-item">2</div>
+                <div class="grid-item">3</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">5</div>
+                <div class="grid-item">6</div>
+            </div>
+        </div>
+
+        <h3>2.4 auto-fit / auto-fill + minmax()</h3>
+        <p>반응형 Grid에서 많이 사용하는 패턴입니다.</p>
+        <div class="code-block">
+<code>.grid-responsive {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}</code>
+        </div>
+
+        <div class="tip-box">
+            <strong>auto-fit vs auto-fill</strong>
+            <ul>
+                <li><strong>auto-fit</strong>: 남는 공간에 빈 트랙을 접어서 아이템을 꽉 채운 느낌</li>
+                <li><strong>auto-fill</strong>: 남는 공간에도 트랙을 유지 (빈 칸이 남을 수 있음)</li>
+            </ul>
+        </div>
+
+        <h3>2.5 justify-content / align-content</h3>
+        <p>Grid 전체(트랙 그룹)를 컨테이너 안에서 정렬합니다.</p>
+        <table>
+            <thead>
+            <tr><th>속성</th><th>설명</th></tr>
+            </thead>
+            <tbody>
+            <tr><td><code>justify-content</code></td><td>가로 방향 정렬</td></tr>
+            <tr><td><code>align-content</code></td><td>세로 방향 정렬</td></tr>
+            </tbody>
+        </table>
+
+        <div class="code-block">
+<code>.grid-center {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(2, 100px);
+    justify-content: center;  /* start, end, center, space-between, space-around, space-evenly */
+    align-content: center;
+}</code>
+        </div>
+
+        <h3>2.6 justify-items / align-items</h3>
+        <p>각 셀 안에서 <strong>Grid 아이템</strong>을 정렬합니다.</p>
+        <table>
+            <thead>
+            <tr><th>속성</th><th>설명</th></tr>
+            </thead>
+            <tbody>
+            <tr><td><code>justify-items</code></td><td>셀 내부의 가로 정렬</td></tr>
+            <tr><td><code>align-items</code></td><td>셀 내부의 세로 정렬</td></tr>
+            </tbody>
+        </table>
+
+        <div class="code-block">
+<code>.grid-items-center {
+    display: grid;
+    grid-template-columns: repeat(3, 120px);
+    grid-template-rows: repeat(2, 80px);
+    justify-items: center; /* start, end, center, stretch */
+    align-items: center;
+}</code>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>3. Grid Item 주요 속성</h2>
+
+        <h3>3.1 grid-column / grid-row</h3>
+        <p>아이템이 차지할 열/행 범위를 지정합니다.</p>
+        <div class="code-block">
+<code>.item1 {
+    grid-column: 1 / 3; /* 1번째 선부터 3번째 선 직전까지 (열 2칸) */
+    grid-row: 1 / 2;    /* 1행만 */
+}
+
+/* 축약형 */
+.item2 {
+    grid-column: 2 / span 2; /* 2번째 선부터 열 2칸 차지 */
+    grid-row: 2 / span 1;
+}</code>
+        </div>
+
+        <h3>3.2 grid-area</h3>
+        <p><code>grid-row-start / grid-column-start / grid-row-end / grid-column-end</code> 순서로 영역을 지정할 수 있습니다.</p>
+        <div class="code-block">
+<code>.item1 { grid-area: 1 / 1 / 2 / 3; } /* 1행1열 ~ 2행3열 직전 */</code>
+        </div>
+
+        <h3>3.3 justify-self / align-self</h3>
+        <p>개별 아이템의 정렬을 제어합니다. 컨테이너의 <code>justify-items</code>, <code>align-items</code>를 덮어씁니다.</p>
+        <div class="code-block">
+<code>.item1 { justify-self: start; align-self: start; }
+.item2 { justify-self: center; align-self: center; }
+.item3 { justify-self: end; align-self: end; }</code>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>4. 명명된 라인과 영역</h2>
+
+        <h3>4.1 라인 이름 사용</h3>
+        <div class="code-block">
+<code>.grid-named-lines {
+    display: grid;
+    grid-template-columns:
+        [sidebar-start] 200px [sidebar-end content-start]
+        1fr
+        [content-end];
+}
+
+.sidebar {
+    grid-column: sidebar-start / sidebar-end;
+}
+
+.content {
+    grid-column: content-start / content-end;
+}</code>
+        </div>
+
+        <h3>4.2 grid-template-areas</h3>
+        <p>영역 이름을 사용하여 레이아웃을 직관적으로 정의합니다.</p>
+        <div class="code-block">
+<code>.layout {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    grid-template-rows: 80px 1fr 60px;
+    grid-template-areas:
+        "header header"
+        "sidebar main"
+        "footer footer";
+}
+
+.header  { grid-area: header; }
+.sidebar { grid-area: sidebar; }
+.main    { grid-area: main; }
+.footer  { grid-area: footer; }</code>
+        </div>
+
+        <div class="example-box">
+            <h3>grid-template-areas 레이아웃 개념</h3>
+            <div class="grid-demo" style="
+                grid-template-columns: 200px 1fr;
+                grid-template-rows: 60px 1fr 40px;
+                grid-template-areas:
+                    'header header'
+                    'sidebar main'
+                    'footer footer';
+            ">
+                <div class="grid-item" style="grid-area: header;">HEADER</div>
+                <div class="grid-item" style="grid-area: sidebar;">SIDEBAR</div>
+                <div class="grid-item" style="grid-area: main;">MAIN</div>
+                <div class="grid-item" style="grid-area: footer;">FOOTER</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>5. auto-fit / auto-fill을 활용한 반응형 그리드</h2>
+        <p>카드 레이아웃, 갤러리 등에 많이 사용하는 패턴입니다.</p>
+
+        <div class="code-block">
+<code>.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}</code>
+        </div>
+
+        <div class="example-box">
+            <h3>카드 그리드 개념</h3>
+            <div class="grid-demo" style="grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));">
+                <div class="grid-item">카드 1</div>
+                <div class="grid-item">카드 2</div>
+                <div class="grid-item">카드 3</div>
+                <div class="grid-item">카드 4</div>
+                <div class="grid-item">카드 5</div>
+            </div>
+            <p style="margin-top:10px; color:#555;">
+                화면 너비에 따라 한 줄에 들어가는 카드 개수가 자동으로 변합니다.
+            </p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>6. Grid vs Flexbox</h2>
+        <table>
+            <thead>
+            <tr><th>특징</th><th>Grid</th><th>Flexbox</th></tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>레이아웃 차원</td>
+                <td>2차원 (행 + 열)</td>
+                <td>1차원 (행 또는 열)</td>
+            </tr>
+            <tr>
+                <td>주 사용 용도</td>
+                <td>페이지 전체, 복잡한 레이아웃</td>
+                <td>버튼 그룹, 네비게이션, 한 줄 정렬</td>
+            </tr>
+            <tr>
+                <td>아이템 간 비율</td>
+                <td>행/열 단위로 제어</td>
+                <td>한 축에서만 비율 제어</td>
+            </tr>
+            <tr>
+                <td>직관성</td>
+                <td>처음엔 복잡하지만 큰 레이아웃에 강함</td>
+                <td>간단한 정렬에 매우 직관적</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>7. 실전 팁</h2>
+        <div class="tip-box">
+            <strong>💡 실무에서 자주 쓰는 패턴</strong>
+            <ul>
+                <li>페이지 전체 레이아웃: <code>grid-template-areas</code> + 헤더/사이드바/콘텐츠/푸터</li>
+                <li>카드 그리드: <code>repeat(auto-fit, minmax())</code> + <code>gap</code></li>
+                <li>폼 레이아웃: 2열/3열 Grid + 반응형에서 1열로 변경</li>
+                <li>대시보드: 다양한 크기의 위젯을 <code>grid-area</code>로 배치</li>
+            </ul>
+        </div>
+
+        <div class="warning-box">
+            <strong>⚠️ 주의사항</strong>
+            <ul>
+                <li>Grid는 <strong>직접 자식</strong>에게만 적용됩니다.</li>
+                <li>너무 복잡한 <code>grid-area</code> 정의는 유지보수에 어려울 수 있습니다.</li>
+                <li>구형 브라우저(IE) 지원이 필요하다면 별도 대응이 필요합니다.</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer style="text-align:center; margin-top:50px; padding-top:20px; border-top:2px solid #ddd; color:#666;">
+        <p>CSS Grid 레이아웃 가이드 - 2025</p>
+        <p style="margin-top:10px;">
+            <a href="html-grid-examples.html" style="color:#667eea; text-decoration:none; font-weight:500;">→ 예제 모음 보기</a>
+        </p>
+    </footer>
+</div>
+</body>
+</html>
+
+
+

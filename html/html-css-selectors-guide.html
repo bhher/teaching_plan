@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS 선택자 완벽 가이드</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-align: center;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 20px;
+        }
+
+        h2 {
+            color: #764ba2;
+            font-size: 1.8em;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-left: 15px;
+            border-left: 5px solid #764ba2;
+        }
+
+        h3 {
+            color: #555;
+            font-size: 1.3em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .example-box {
+            background: #fff;
+            border: 2px solid #667eea;
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #667eea;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .tip-box {
+            background: #fff9c4;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            border-left: 4px solid #fbc02d;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            border-left: 4px solid #2196F3;
+        }
+
+        .warning-box {
+            background: #ffebee;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            border-left: 4px solid #f44336;
+        }
+
+        ul, ol {
+            margin-left: 30px;
+            margin-top: 10px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .highlight {
+            background: #fff9c4;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        /* 예제용 스타일 */
+        .demo-element {
+            padding: 10px;
+            margin: 5px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .demo-element.highlighted {
+            background: #fff9c4;
+            border-color: #fbc02d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 CSS 선택자 완벽 가이드</h1>
+        <p style="text-align: center; font-size: 1.1em; color: #666; margin-bottom: 40px;">
+            CSS로 요소를 선택하는 모든 방법을 알아봅시다
+        </p>
+
+        <!-- 1. 선택자 개요 -->
+        <div class="section">
+            <h2>1. 선택자 개요</h2>
+            <p>CSS 선택자(Selector)는 스타일을 적용할 HTML 요소를 선택하는 패턴입니다. 올바른 선택자를 사용하면 원하는 요소에 정확하게 스타일을 적용할 수 있습니다.</p>
+            
+            <div class="info-box">
+                <strong>💡 핵심 개념:</strong><br>
+                선택자는 CSS 규칙의 첫 번째 부분으로, 어떤 요소에 스타일을 적용할지 결정합니다.<br>
+                <code>선택자 { 속성: 값; }</code>
+            </div>
+
+            <h3>1.1 선택자의 종류</h3>
+            <ul>
+                <li><strong>기본 선택자:</strong> 요소, 클래스, ID 선택자</li>
+                <li><strong>결합자:</strong> 자손, 자식, 형제 선택자</li>
+                <li><strong>의사 클래스:</strong> 상태 기반 선택 (hover, focus 등)</li>
+                <li><strong>의사 요소:</strong> 특정 부분 선택 (::before, ::after 등)</li>
+                <li><strong>속성 선택자:</strong> 속성 값 기반 선택</li>
+            </ul>
+        </div>
+
+        <!-- 2. 기본 선택자 -->
+        <div class="section">
+            <h2>2. 기본 선택자</h2>
+
+            <h3>2.1 요소 선택자 (Element Selector)</h3>
+            <p>HTML 태그 이름으로 요소를 선택합니다.</p>
+            <div class="code-block">
+<code>/* 모든 p 태그 선택 */
+p {
+    color: blue;
+}
+
+/* 모든 h1 태그 선택 */
+h1 {
+    font-size: 2em;
+}
+
+/* 모든 div 태그 선택 */
+div {
+    margin: 10px;
+}</code>
+            </div>
+
+            <h3>2.2 클래스 선택자 (Class Selector)</h3>
+            <p>클래스 속성 값으로 요소를 선택합니다. 점(.)으로 시작합니다.</p>
+            <div class="code-block">
+<code>/* class="highlight"인 모든 요소 선택 */
+.highlight {
+    background-color: yellow;
+}
+
+/* 여러 클래스를 가진 요소 선택 */
+.button.primary {
+    background-color: blue;
+}
+
+/* 특정 요소의 클래스 선택 */
+p.intro {
+    font-size: 1.2em;
+}</code>
+            </div>
+
+            <h3>2.3 ID 선택자 (ID Selector)</h3>
+            <p>ID 속성 값으로 요소를 선택합니다. 해시(#)로 시작합니다.</p>
+            <div class="code-block">
+<code>/* id="header"인 요소 선택 */
+#header {
+    background-color: #333;
+}
+
+/* id="main-content"인 요소 선택 */
+#main-content {
+    width: 80%;
+    margin: 0 auto;
+}</code>
+            </div>
+
+            <div class="warning-box">
+                <strong>⚠️ 주의사항:</strong>
+                <ul>
+                    <li>ID는 페이지당 하나만 사용해야 합니다 (고유성)</li>
+                    <li>ID 선택자는 클래스 선택자보다 우선순위가 높습니다</li>
+                    <li>가능하면 클래스 선택자를 사용하는 것이 좋습니다</li>
+                </ul>
+            </div>
+
+            <h3>2.4 전체 선택자 (Universal Selector)</h3>
+            <p>모든 요소를 선택합니다. 별표(*)를 사용합니다.</p>
+            <div class="code-block">
+<code>/* 모든 요소 선택 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 특정 요소의 모든 자식 선택 */
+.container * {
+    padding: 10px;
+}</code>
+            </div>
+
+            <h3>2.5 그룹 선택자 (Grouping Selector)</h3>
+            <p>여러 선택자를 쉼표로 구분하여 같은 스타일을 적용합니다.</p>
+            <div class="code-block">
+<code>/* h1, h2, h3 모두에 같은 스타일 적용 */
+h1, h2, h3 {
+    color: #333;
+    font-weight: bold;
+}
+
+/* 여러 클래스에 같은 스타일 적용 */
+.button, .link, .menu-item {
+    cursor: pointer;
+}</code>
+            </div>
+        </div>
+
+        <!-- 3. 결합자 (Combinators) -->
+        <div class="section">
+            <h2>3. 결합자 (Combinators)</h2>
+            <p>여러 선택자를 조합하여 더 구체적으로 요소를 선택합니다.</p>
+
+            <h3>3.1 자손 선택자 (Descendant Selector)</h3>
+            <p>공백으로 구분합니다. 조상 요소 안의 모든 자손 요소를 선택합니다.</p>
+            <div class="code-block">
+<code>/* div 안의 모든 p 요소 선택 */
+div p {
+    color: blue;
+}
+
+/* .container 안의 모든 .item 선택 */
+.container .item {
+    margin: 10px;
+}
+
+/* ul 안의 모든 li 안의 모든 a 선택 */
+ul li a {
+    text-decoration: none;
+}</code>
+            </div>
+
+            <h3>3.2 자식 선택자 (Child Selector)</h3>
+            <p>꺾쇠(>)로 구분합니다. 직접 자식 요소만 선택합니다.</p>
+            <div class="code-block">
+<code>/* div의 직접 자식인 p만 선택 (손자는 제외) */
+div > p {
+    color: red;
+}
+
+/* ul의 직접 자식인 li만 선택 */
+ul > li {
+    list-style: none;
+}
+
+/* .menu의 직접 자식인 .menu-item만 선택 */
+.menu > .menu-item {
+    display: inline-block;
+}</code>
+            </div>
+
+            <h3>3.3 인접 형제 선택자 (Adjacent Sibling Selector)</h3>
+            <p>더하기(+)로 구분합니다. 바로 다음 형제 요소만 선택합니다.</p>
+            <div class="code-block">
+<code>/* h1 바로 다음에 오는 p만 선택 */
+h1 + p {
+    font-size: 1.2em;
+    margin-top: 10px;
+}
+
+/* .item 바로 다음에 오는 .item만 선택 */
+.item + .item {
+    margin-left: 10px;
+}</code>
+            </div>
+
+            <h3>3.4 일반 형제 선택자 (General Sibling Selector)</h3>
+            <p>물결(~)로 구분합니다. 같은 부모를 가진 모든 형제 요소를 선택합니다.</p>
+            <div class="code-block">
+<code>/* h2 뒤에 오는 모든 p 요소 선택 */
+h2 ~ p {
+    color: gray;
+}
+
+/* .section 뒤에 오는 모든 .subsection 선택 */
+.section ~ .subsection {
+    margin-top: 20px;
+}</code>
+            </div>
+
+            <h3>3.5 결합자 비교표</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>선택자</th>
+                        <th>기호</th>
+                        <th>설명</th>
+                        <th>예제</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>자손 선택자</td>
+                        <td>공백</td>
+                        <td>모든 자손 요소</td>
+                        <td><code>div p</code></td>
+                    </tr>
+                    <tr>
+                        <td>자식 선택자</td>
+                        <td><code>&gt;</code></td>
+                        <td>직접 자식만</td>
+                        <td><code>div &gt; p</code></td>
+                    </tr>
+                    <tr>
+                        <td>인접 형제</td>
+                        <td><code>+</code></td>
+                        <td>바로 다음 형제</td>
+                        <td><code>h1 + p</code></td>
+                    </tr>
+                    <tr>
+                        <td>일반 형제</td>
+                        <td><code>~</code></td>
+                        <td>모든 형제</td>
+                        <td><code>h1 ~ p</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 4. 의사 클래스 (Pseudo-classes) -->
+        <div class="section">
+            <h2>4. 의사 클래스 (Pseudo-classes)</h2>
+            <p>요소의 특정 상태나 위치를 기반으로 선택합니다. 콜론(:)으로 시작합니다.</p>
+
+            <h3>4.1 링크 관련 의사 클래스</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>선택자</th>
+                        <th>설명</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>:link</code></td>
+                        <td>방문하지 않은 링크</td>
+                    </tr>
+                    <tr>
+                        <td><code>:visited</code></td>
+                        <td>방문한 링크</td>
+                    </tr>
+                    <tr>
+                        <td><code>:hover</code></td>
+                        <td>마우스 오버 시</td>
+                    </tr>
+                    <tr>
+                        <td><code>:active</code></td>
+                        <td>클릭/터치 시</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="code-block">
+<code>/* 링크 스타일 (순서 중요!) */
+a:link {
+    color: blue;
+}
+
+a:visited {
+    color: purple;
+}
+
+a:hover {
+    color: red;
+    text-decoration: underline;
+}
+
+a:active {
+    color: orange;
+}</code>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 링크 의사 클래스 순서:</strong><br>
+                <code>:link</code> → <code>:visited</code> → <code>:hover</code> → <code>:active</code><br>
+                (LoVe HAte - Love Hate로 기억하세요!)
+            </div>
+
+            <h3>4.2 폼 관련 의사 클래스</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>선택자</th>
+                        <th>설명</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>:focus</code></td>
+                        <td>포커스를 받은 요소</td>
+                    </tr>
+                    <tr>
+                        <td><code>:checked</code></td>
+                        <td>체크된 체크박스/라디오</td>
+                    </tr>
+                    <tr>
+                        <td><code>:disabled</code></td>
+                        <td>비활성화된 요소</td>
+                    </tr>
+                    <tr>
+                        <td><code>:enabled</code></td>
+                        <td>활성화된 요소</td>
+                    </tr>
+                    <tr>
+                        <td><code>:required</code></td>
+                        <td>필수 입력 필드</td>
+                    </tr>
+                    <tr>
+                        <td><code>:optional</code></td>
+                        <td>선택 입력 필드</td>
+                    </tr>
+                    <tr>
+                        <td><code>:valid</code></td>
+                        <td>유효한 입력 값</td>
+                    </tr>
+                    <tr>
+                        <td><code>:invalid</code></td>
+                        <td>유효하지 않은 입력 값</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="code-block">
+<code>/* 포커스 스타일 */
+input:focus {
+    outline: 2px solid blue;
+    border-color: blue;
+}
+
+/* 체크된 체크박스 */
+input[type="checkbox"]:checked {
+    accent-color: green;
+}
+
+/* 비활성화된 입력 */
+input:disabled {
+    background-color: #f0f0f0;
+    cursor: not-allowed;
+}
+
+/* 유효하지 않은 입력 */
+input:invalid {
+    border-color: red;
+}</code>
+            </div>
+
+            <h3>4.3 구조적 의사 클래스</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>선택자</th>
+                        <th>설명</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>:first-child</code></td>
+                        <td>첫 번째 자식 요소</td>
+                    </tr>
+                    <tr>
+                        <td><code>:last-child</code></td>
+                        <td>마지막 자식 요소</td>
+                    </tr>
+                    <tr>
+                        <td><code>:nth-child(n)</code></td>
+                        <td>n번째 자식 요소</td>
+                    </tr>
+                    <tr>
+                        <td><code>:nth-last-child(n)</code></td>
+                        <td>뒤에서 n번째 자식 요소</td>
+                    </tr>
+                    <tr>
+                        <td><code>:only-child</code></td>
+                        <td>유일한 자식 요소</td>
+                    </tr>
+                    <tr>
+                        <td><code>:first-of-type</code></td>
+                        <td>같은 타입의 첫 번째 요소</td>
+                    </tr>
+                    <tr>
+                        <td><code>:last-of-type</code></td>
+                        <td>같은 타입의 마지막 요소</td>
+                    </tr>
+                    <tr>
+                        <td><code>:nth-of-type(n)</code></td>
+                        <td>같은 타입의 n번째 요소</td>
+                    </tr>
+                    <tr>
+                        <td><code>:only-of-type</code></td>
+                        <td>같은 타입의 유일한 요소</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="code-block">
+<code>/* 첫 번째 자식 */
+li:first-child {
+    font-weight: bold;
+}
+
+/* 마지막 자식 */
+li:last-child {
+    border-bottom: none;
+}
+
+/* 짝수 번째 (2, 4, 6...) */
+tr:nth-child(even) {
+    background-color: #f0f0f0;
+}
+
+/* 홀수 번째 (1, 3, 5...) */
+tr:nth-child(odd) {
+    background-color: white;
+}
+
+/* 3번째 자식 */
+li:nth-child(3) {
+    color: red;
+}
+
+/* 3의 배수 (3, 6, 9...) */
+li:nth-child(3n) {
+    background-color: yellow;
+}
+
+/* 3의 배수 + 1 (1, 4, 7...) */
+li:nth-child(3n+1) {
+    background-color: blue;
+}
+
+/* 처음 3개 */
+li:nth-child(-n+3) {
+    font-size: 1.2em;
+}
+
+/* 마지막 3개 */
+li:nth-last-child(-n+3) {
+    font-weight: bold;
+}</code>
+            </div>
+
+            <h3>4.4 기타 의사 클래스</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>선택자</th>
+                        <th>설명</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>:not(selector)</code></td>
+                        <td>특정 선택자가 아닌 요소</td>
+                    </tr>
+                    <tr>
+                        <td><code>:empty</code></td>
+                        <td>자식이 없는 요소</td>
+                    </tr>
+                    <tr>
+                        <td><code>:root</code></td>
+                        <td>루트 요소 (html)</td>
+                    </tr>
+                    <tr>
+                        <td><code>:target</code></td>
+                        <td>URL의 앵커 타겟</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="code-block">
+<code>/* .active가 아닌 모든 버튼 */
+.button:not(.active) {
+    opacity: 0.5;
+}
+
+/* 빈 요소 */
+div:empty {
+    display: none;
+}
+
+/* 루트 요소 */
+:root {
+    --main-color: #667eea;
+}
+
+/* 타겟 요소 */
+#section1:target {
+    background-color: yellow;
+}</code>
+            </div>
+        </div>
+
+        <!-- 5. 의사 요소 (Pseudo-elements) -->
+        <div class="section">
+            <h2>5. 의사 요소 (Pseudo-elements)</h2>
+            <p>요소의 특정 부분을 선택합니다. 이중 콜론(::)으로 시작합니다.</p>
+
+            <h3>5.1 주요 의사 요소</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>선택자</th>
+                        <th>설명</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>::before</code></td>
+                        <td>요소 앞에 콘텐츠 추가</td>
+                    </tr>
+                    <tr>
+                        <td><code>::after</code></td>
+                        <td>요소 뒤에 콘텐츠 추가</td>
+                    </tr>
+                    <tr>
+                        <td><code>::first-line</code></td>
+                        <td>첫 번째 줄</td>
+                    </tr>
+                    <tr>
+                        <td><code>::first-letter</code></td>
+                        <td>첫 번째 글자</td>
+                    </tr>
+                    <tr>
+                        <td><code>::selection</code></td>
+                        <td>선택된 텍스트</td>
+                    </tr>
+                    <tr>
+                        <td><code>::placeholder</code></td>
+                        <td>입력 필드의 placeholder</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="code-block">
+<code>/* before와 after는 content 속성 필수 */
+.button::before {
+    content: "→ ";
+}
+
+.button::after {
+    content: " ←";
+}
+
+/* 첫 번째 줄 */
+p::first-line {
+    font-weight: bold;
+    color: blue;
+}
+
+/* 첫 번째 글자 */
+p::first-letter {
+    font-size: 3em;
+    float: left;
+    line-height: 1;
+}
+
+/* 선택된 텍스트 */
+::selection {
+    background-color: yellow;
+    color: black;
+}
+
+/* placeholder 스타일 */
+input::placeholder {
+    color: gray;
+    font-style: italic;
+}</code>
+            </div>
+
+            <div class="warning-box">
+                <strong>⚠️ 주의:</strong> <code>::before</code>와 <code>::after</code>는 <code>content</code> 속성이 없으면 표시되지 않습니다.
+            </div>
+        </div>
+
+        <!-- 6. 속성 선택자 (Attribute Selectors) -->
+        <div class="section">
+            <h2>6. 속성 선택자 (Attribute Selectors)</h2>
+            <p>요소의 속성과 속성 값을 기반으로 선택합니다.</p>
+
+            <h3>6.1 속성 선택자 종류</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>선택자</th>
+                        <th>설명</th>
+                        <th>예제</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>[attr]</code></td>
+                        <td>속성이 있는 요소</td>
+                        <td><code>[disabled]</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>[attr="value"]</code></td>
+                        <td>속성 값이 정확히 일치</td>
+                        <td><code>[type="text"]</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>[attr~="value"]</code></td>
+                        <td>공백으로 구분된 단어 포함</td>
+                        <td><code>[class~="active"]</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>[attr|="value"]</code></td>
+                        <td>하이픈으로 시작하는 값</td>
+                        <td><code>[lang|="en"]</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>[attr^="value"]</code></td>
+                        <td>값으로 시작</td>
+                        <td><code>[href^="https"]</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>[attr$="value"]</code></td>
+                        <td>값으로 끝남</td>
+                        <td><code>[src$=".jpg"]</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>[attr*="value"]</code></td>
+                        <td>값을 포함</td>
+                        <td><code>[href*="example"]</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="code-block">
+<code>/* disabled 속성이 있는 요소 */
+[disabled] {
+    opacity: 0.5;
+}
+
+/* type이 "text"인 input */
+input[type="text"] {
+    border: 1px solid #ccc;
+}
+
+/* class에 "active" 단어가 포함된 요소 */
+[class~="active"] {
+    background-color: yellow;
+}
+
+/* href가 "https"로 시작하는 링크 */
+a[href^="https"] {
+    color: green;
+}
+
+/* src가 ".jpg"로 끝나는 이미지 */
+img[src$=".jpg"] {
+    border: 2px solid blue;
+}
+
+/* href에 "example"이 포함된 링크 */
+a[href*="example"] {
+    font-weight: bold;
+}</code>
+            </div>
+        </div>
+
+        <!-- 7. 선택자 우선순위 -->
+        <div class="section">
+            <h2>7. 선택자 우선순위 (Specificity)</h2>
+            <p>여러 규칙이 같은 요소에 적용될 때 어떤 규칙이 우선되는지 결정합니다.</p>
+
+            <h3>7.1 우선순위 계산</h3>
+            <p>우선순위는 점수로 계산됩니다:</p>
+            <ul>
+                <li><strong>인라인 스타일:</strong> 1000점</li>
+                <li><strong>ID 선택자:</strong> 100점</li>
+                <li><strong>클래스/속성/의사 클래스:</strong> 10점</li>
+                <li><strong>요소/의사 요소:</strong> 1점</li>
+            </ul>
+
+            <div class="code-block">
+<code>/* 점수: 1점 (요소) */
+p { color: black; }
+
+/* 점수: 10점 (클래스) */
+.text { color: blue; }
+
+/* 점수: 11점 (요소 1 + 클래스 10) */
+p.text { color: green; }
+
+/* 점수: 100점 (ID) */
+#header { color: red; }
+
+/* 점수: 111점 (요소 1 + 클래스 10 + ID 100) */
+p.text#header { color: purple; }</code>
+            </div>
+
+            <h3>7.2 !important</h3>
+            <p><code>!important</code>는 모든 우선순위를 무시합니다. 남용하지 마세요!</p>
+            <div class="code-block">
+<code>p {
+    color: red !important;
+}</code>
+            </div>
+
+            <div class="warning-box">
+                <strong>⚠️ 주의:</strong> <code>!important</code>는 최후의 수단으로만 사용하세요. 
+                남용하면 유지보수가 어려워집니다.
+            </div>
+        </div>
+
+        <!-- 8. 실전 팁 -->
+        <div class="section">
+            <h2>8. 실전 팁</h2>
+
+            <div class="tip-box">
+                <h3>💡 유용한 팁들</h3>
+                <ul>
+                    <li><strong>구체성:</strong> 필요한 만큼만 구체적으로 작성하세요</li>
+                    <li><strong>성능:</strong> ID와 클래스 선택자가 요소 선택자보다 빠릅니다</li>
+                    <li><strong>가독성:</strong> 복잡한 선택자는 클래스로 대체하는 것이 좋습니다</li>
+                    <li><strong>유지보수:</strong> 의미 있는 클래스 이름을 사용하세요</li>
+                    <li><strong>BEM 방법론:</strong> Block__Element--Modifier 패턴 사용</li>
+                </ul>
+            </div>
+
+            <h3>8.1 BEM 네이밍 예제</h3>
+            <div class="code-block">
+<code>/* Block */
+.card { }
+
+/* Block__Element */
+.card__title { }
+.card__body { }
+.card__footer { }
+
+/* Block--Modifier */
+.card--highlighted { }
+.card--large { }
+
+/* Block__Element--Modifier */
+.card__title--bold { }</code>
+            </div>
+        </div>
+
+        <!-- 9. 요약 -->
+        <div class="section">
+            <h2>9. 핵심 요약</h2>
+
+            <div class="info-box">
+                <h3>기본 선택자</h3>
+                <ul>
+                    <li><code>요소</code> - 태그 이름</li>
+                    <li><code>.클래스</code> - 클래스</li>
+                    <li><code>#ID</code> - ID</li>
+                    <li><code>*</code> - 전체</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h3>결합자</h3>
+                <ul>
+                    <li><code>A B</code> - 자손</li>
+                    <li><code>A > B</code> - 자식</li>
+                    <li><code>A + B</code> - 인접 형제</li>
+                    <li><code>A ~ B</code> - 일반 형제</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h3>의사 클래스</h3>
+                <ul>
+                    <li><code>:hover</code>, <code>:focus</code> - 상태</li>
+                    <li><code>:first-child</code>, <code>:nth-child()</code> - 위치</li>
+                    <li><code>:not()</code> - 부정</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h3>의사 요소</h3>
+                <ul>
+                    <li><code>::before</code>, <code>::after</code> - 콘텐츠 추가</li>
+                    <li><code>::first-line</code>, <code>::first-letter</code> - 텍스트 부분</li>
+                </ul>
+            </div>
+        </div>
+
+        <footer style="text-align: center; margin-top: 50px; padding-top: 20px; border-top: 2px solid #ddd; color: #666;">
+            <p>CSS 선택자 완벽 가이드 - 2025</p>
+            <p style="margin-top: 10px;">
+                <a href="html-css-selectors-examples.html" style="color: #667eea; text-decoration: none; font-weight: 500;">
+                    → 예제 파일 보기
+                </a>
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
+
+
+

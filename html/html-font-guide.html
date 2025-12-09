@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML 폰트 가이드 - 폰트 사용법 및 구글 폰트</title>
+    <!-- 구글 폰트 예제 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-align: center;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 20px;
+        }
+
+        h2 {
+            color: #764ba2;
+            font-size: 1.8em;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-left: 15px;
+            border-left: 5px solid #764ba2;
+        }
+
+        h3 {
+            color: #555;
+            font-size: 1.3em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .code-block code {
+            color: #f8f8f2;
+        }
+
+        .example-box {
+            background: #fff;
+            border: 2px solid #667eea;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .font-example {
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 4px solid #667eea;
+            background: #f0f0f0;
+        }
+
+        .font-example.serif {
+            font-family: 'Times New Roman', serif;
+        }
+
+        .font-example.sans-serif {
+            font-family: Arial, sans-serif;
+        }
+
+        .font-example.monospace {
+            font-family: 'Courier New', monospace;
+        }
+
+        .font-example.cursive {
+            font-family: 'Comic Sans MS', cursive;
+        }
+
+        .font-example.fantasy {
+            font-family: 'Impact', fantasy;
+        }
+
+        .google-font-example {
+            font-family: 'Roboto', sans-serif;
+            padding: 15px;
+            margin: 10px 0;
+            background: #e8f4f8;
+            border-left: 4px solid #2196F3;
+        }
+
+        .noto-sans-example {
+            font-family: 'Noto Sans KR', sans-serif;
+            padding: 15px;
+            margin: 10px 0;
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+        }
+
+        ul, ol {
+            margin-left: 30px;
+            margin-top: 10px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .method-box {
+            background: #e3f2fd;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            border-left: 4px solid #2196F3;
+        }
+
+        .tip-box {
+            background: #fff9c4;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            border-left: 4px solid #fbc02d;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #667eea;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .step {
+            counter-increment: step-counter;
+            margin: 20px 0;
+            padding: 15px;
+            background: #f5f5f5;
+            border-radius: 5px;
+        }
+
+        .step::before {
+            content: "단계 " counter(step-counter) ": ";
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        ol {
+            counter-reset: step-counter;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📝 HTML 폰트 가이드</h1>
+        <p style="text-align: center; font-size: 1.1em; color: #666; margin-bottom: 40px;">
+            HTML에서 폰트를 사용하는 방법과 구글 폰트 활용법을 알아봅시다
+        </p>
+
+        <!-- 1. HTML 폰트 기본 개념 -->
+        <div class="section">
+            <h2>1. HTML 폰트 기본 개념</h2>
+            
+            <h3>1.1 폰트 패밀리 (Font Family)</h3>
+            <p>HTML에서 폰트를 지정하는 가장 기본적인 방법은 CSS의 <code>font-family</code> 속성을 사용하는 것입니다.</p>
+            
+            <div class="code-block">
+<code>&lt;style&gt;
+    p {
+        font-family: Arial, sans-serif;
+    }
+&lt;/style&gt;</code>
+            </div>
+
+            <h3>1.2 폰트 패밀리 카테고리</h3>
+            <p>CSS에는 5가지 기본 폰트 패밀리 카테고리가 있습니다:</p>
+            
+            <div class="font-example serif">
+                <strong>Serif (세리프):</strong> Times New Roman, Georgia 등 - 장식이 있는 폰트
+            </div>
+            
+            <div class="font-example sans-serif">
+                <strong>Sans-serif (산세리프):</strong> Arial, Helvetica 등 - 장식이 없는 깔끔한 폰트
+            </div>
+            
+            <div class="font-example monospace">
+                <strong>Monospace (고정폭):</strong> Courier New 등 - 모든 문자가 같은 너비
+            </div>
+            
+            <div class="font-example cursive">
+                <strong>Cursive (필기체):</strong> Comic Sans MS 등 - 손글씨 스타일
+            </div>
+            
+            <div class="font-example fantasy">
+                <strong>Fantasy (장식체):</strong> Impact 등 - 장식적인 폰트
+            </div>
+        </div>
+
+        <!-- 2. CSS 폰트 속성 -->
+        <div class="section">
+            <h2>2. CSS 폰트 속성</h2>
+            
+            <h3>2.1 주요 폰트 속성</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>속성</th>
+                        <th>설명</th>
+                        <th>예제 값</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>font-family</code></td>
+                        <td>폰트 패밀리 지정</td>
+                        <td>Arial, sans-serif</td>
+                    </tr>
+                    <tr>
+                        <td><code>font-size</code></td>
+                        <td>폰트 크기</td>
+                        <td>16px, 1em, 100%</td>
+                    </tr>
+                    <tr>
+                        <td><code>font-weight</code></td>
+                        <td>폰트 굵기</td>
+                        <td>normal, bold, 100-900</td>
+                    </tr>
+                    <tr>
+                        <td><code>font-style</code></td>
+                        <td>폰트 스타일</td>
+                        <td>normal, italic, oblique</td>
+                    </tr>
+                    <tr>
+                        <td><code>font-variant</code></td>
+                        <td>폰트 변형</td>
+                        <td>normal, small-caps</td>
+                    </tr>
+                    <tr>
+                        <td><code>line-height</code></td>
+                        <td>줄 간격</td>
+                        <td>1.5, 24px, 150%</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>2.2 폰트 속성 사용 예제</h3>
+            <div class="code-block">
+<code>&lt;style&gt;
+    .custom-font {
+        font-family: 'Georgia', serif;
+        font-size: 18px;
+        font-weight: bold;
+        font-style: italic;
+        line-height: 1.6;
+    }
+&lt;/style&gt;
+
+&lt;p class="custom-font"&gt;이 텍스트는 커스텀 폰트 스타일이 적용됩니다.&lt;/p&gt;</code>
+            </div>
+
+            <div class="example-box">
+                <p style="font-family: 'Georgia', serif; font-size: 18px; font-weight: bold; font-style: italic; line-height: 1.6;">
+                    이 텍스트는 커스텀 폰트 스타일이 적용됩니다.
+                </p>
+            </div>
+        </div>
+
+        <!-- 3. 구글 폰트 사용법 -->
+        <div class="section">
+            <h2>3. 구글 폰트 (Google Fonts) 사용법</h2>
+            
+            <p>구글 폰트는 무료로 사용할 수 있는 웹 폰트 서비스입니다. 수백 가지의 다양한 폰트를 제공합니다.</p>
+
+            <h3>3.1 방법 1: &lt;link&gt; 태그 사용 (권장)</h3>
+            
+            <ol>
+                <li class="step">
+                    <strong>구글 폰트 사이트 방문</strong><br>
+                    <a href="https://fonts.google.com" target="_blank">https://fonts.google.com</a>에 접속합니다.
+                </li>
+                
+                <li class="step">
+                    <strong>원하는 폰트 선택</strong><br>
+                    원하는 폰트를 검색하고 선택합니다. (예: Noto Sans KR, Roboto, Open Sans 등)
+                </li>
+                
+                <li class="step">
+                    <strong>폰트 스타일 선택</strong><br>
+                    필요한 굵기(weight)와 스타일을 선택합니다.
+                </li>
+                
+                <li class="step">
+                    <strong>HTML에 링크 추가</strong><br>
+                    선택한 폰트의 링크를 HTML의 <code>&lt;head&gt;</code> 섹션에 추가합니다.
+                </li>
+            </ol>
+
+            <div class="code-block">
+<code>&lt;!-- HTML head 섹션에 추가 --&gt;
+&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+&lt;link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet"&gt;</code>
+            </div>
+
+            <div class="method-box">
+                <strong>💡 Preconnect 사용 이유:</strong><br>
+                <code>preconnect</code>를 사용하면 폰트를 로드하기 전에 구글 폰트 서버와의 연결을 미리 설정하여 로딩 속도를 향상시킬 수 있습니다.
+            </div>
+
+            <h3>3.2 방법 2: @import 사용</h3>
+            <p>CSS 파일 내에서 직접 import하는 방법입니다.</p>
+            
+            <div class="code-block">
+<code>&lt;style&gt;
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+    
+    body {
+        font-family: 'Roboto', sans-serif;
+    }
+&lt;/style&gt;</code>
+            </div>
+
+            <div class="tip-box">
+                <strong>⚠️ 주의사항:</strong><br>
+                <code>@import</code>는 <code>&lt;link&gt;</code> 태그보다 느리므로, 가능하면 <code>&lt;link&gt;</code> 태그 사용을 권장합니다.
+            </div>
+
+            <h3>3.3 CSS에서 폰트 적용</h3>
+            <p>HTML에 링크를 추가한 후, CSS에서 폰트를 적용합니다.</p>
+            
+            <div class="code-block">
+<code>&lt;style&gt;
+    body {
+        font-family: 'Noto Sans KR', sans-serif;
+    }
+    
+    h1 {
+        font-family: 'Roboto', sans-serif;
+        font-weight: 700;
+    }
+&lt;/style&gt;</code>
+            </div>
+
+            <h3>3.4 구글 폰트 사용 예제</h3>
+            
+            <div class="google-font-example">
+                <strong>Roboto 폰트 예제:</strong><br>
+                The quick brown fox jumps over the lazy dog.<br>
+                빠른 갈색 여우가 게으른 개를 뛰어넘습니다.
+            </div>
+
+            <div class="noto-sans-example">
+                <strong>Noto Sans KR 폰트 예제:</strong><br>
+                한글 폰트는 Noto Sans KR이 가장 인기 있습니다.<br>
+                다양한 굵기와 스타일을 지원합니다.
+            </div>
+        </div>
+
+        <!-- 4. 실전 예제 -->
+        <div class="section">
+            <h2>4. 완전한 예제 코드</h2>
+            
+            <div class="code-block">
+<code>&lt;!DOCTYPE html&gt;
+&lt;html lang="ko"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;구글 폰트 예제&lt;/title&gt;
+    
+    &lt;!-- 구글 폰트 링크 --&gt;
+    &lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+    &lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+    &lt;link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet"&gt;
+    
+    &lt;style&gt;
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        
+        h1 {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+        }
+        
+        .bold-text {
+            font-weight: 700;
+        }
+        
+        .light-text {
+            font-weight: 300;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;구글 폰트 예제&lt;/h1&gt;
+    &lt;p&gt;일반 텍스트입니다.&lt;/p&gt;
+    &lt;p class="bold-text"&gt;굵은 텍스트입니다.&lt;/p&gt;
+    &lt;p class="light-text"&gt;얇은 텍스트입니다.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code>
+            </div>
+        </div>
+
+        <!-- 5. 폰트 최적화 팁 -->
+        <div class="section">
+            <h2>5. 폰트 최적화 팁</h2>
+            
+            <h3>5.1 필요한 폰트만 로드</h3>
+            <p>사용하지 않는 굵기나 스타일은 제외하여 로딩 속도를 개선합니다.</p>
+            
+            <div class="code-block">
+<code>&lt;!-- ❌ 나쁜 예: 모든 굵기 로드 --&gt;
+&lt;link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"&gt;
+
+&lt;!-- ✅ 좋은 예: 필요한 굵기만 로드 --&gt;
+&lt;link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"&gt;</code>
+            </div>
+
+            <h3>5.2 display=swap 사용</h3>
+            <p>폰트가 로드되는 동안 텍스트가 보이도록 설정합니다.</p>
+            
+            <div class="code-block">
+<code>&lt;link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"&gt;</code>
+            </div>
+
+            <h3>5.3 폴백 폰트 지정</h3>
+            <p>웹 폰트가 로드되지 않을 경우를 대비해 폴백 폰트를 지정합니다.</p>
+            
+            <div class="code-block">
+<code>font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif;</code>
+            </div>
+
+            <h3>5.4 폰트 서브셋 사용</h3>
+            <p>한글 폰트의 경우 필요한 문자만 포함하는 서브셋을 사용할 수 있습니다.</p>
+            
+            <div class="code-block">
+<code>&lt;link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&subset=korean&display=swap" rel="stylesheet"&gt;</code>
+            </div>
+        </div>
+
+        <!-- 6. 인기 있는 구글 폰트 추천 -->
+        <div class="section">
+            <h2>6. 인기 있는 구글 폰트 추천</h2>
+            
+            <h3>6.1 한글 폰트</h3>
+            <ul>
+                <li><strong>Noto Sans KR:</strong> 가장 인기 있는 한글 폰트, 다양한 굵기 지원</li>
+                <li><strong>Noto Serif KR:</strong> 세리프 스타일 한글 폰트</li>
+                <li><strong>Nanum Gothic:</strong> 나눔고딕, 깔끔한 한글 폰트</li>
+                <li><strong>Nanum Myeongjo:</strong> 나눔명조, 전통적인 한글 폰트</li>
+            </ul>
+
+            <h3>6.2 영문 폰트</h3>
+            <ul>
+                <li><strong>Roboto:</strong> 구글의 공식 폰트, 모던하고 읽기 쉬움</li>
+                <li><strong>Open Sans:</strong> 웹에서 가장 많이 사용되는 폰트</li>
+                <li><strong>Lato:</strong> 우아하고 현대적인 폰트</li>
+                <li><strong>Montserrat:</strong> 기하학적이고 세련된 폰트</li>
+                <li><strong>Poppins:</strong> 둥근 형태의 친근한 폰트</li>
+            </ul>
+        </div>
+
+        <!-- 7. 요약 -->
+        <div class="section">
+            <h2>7. 요약</h2>
+            
+            <div class="method-box">
+                <h3>구글 폰트 사용 단계:</h3>
+                <ol>
+                    <li>구글 폰트 사이트에서 원하는 폰트 선택</li>
+                    <li>필요한 굵기와 스타일 선택</li>
+                    <li>생성된 링크를 HTML <code>&lt;head&gt;</code>에 추가</li>
+                    <li>CSS에서 <code>font-family</code>로 폰트 적용</li>
+                    <li>폴백 폰트 지정 (선택사항)</li>
+                </ol>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 기억할 점:</strong>
+                <ul>
+                    <li>필요한 폰트만 로드하여 성능 최적화</li>
+                    <li><code>display=swap</code> 사용으로 사용자 경험 개선</li>
+                    <li>폴백 폰트 지정으로 안정성 확보</li>
+                    <li><code>preconnect</code> 사용으로 로딩 속도 향상</li>
+                </ul>
+            </div>
+        </div>
+
+        <footer style="text-align: center; margin-top: 50px; padding-top: 20px; border-top: 2px solid #ddd; color: #666;">
+            <p>HTML 폰트 가이드 - 2025</p>
+        </footer>
+    </div>
+</body>
+</html>
+
+
+

@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Table 예제 모음</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-align: center;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 20px;
+        }
+
+        h2 {
+            color: #764ba2;
+            font-size: 1.8em;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-left: 15px;
+            border-left: 5px solid #764ba2;
+        }
+
+        .example-section {
+            margin-bottom: 50px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .example-title {
+            color: #555;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        /* 기본 테이블 스타일 */
+        .basic-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+        }
+
+        .basic-table th,
+        .basic-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .basic-table th {
+            background-color: #667eea;
+            color: white;
+            font-weight: 600;
+        }
+
+        .basic-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .basic-table tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        /* 스타일 테이블 1 - 모던 스타일 */
+        .modern-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .modern-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .modern-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .modern-table tr:hover {
+            background-color: #f8f9ff;
+        }
+
+        /* 스타일 테이블 2 - 미니멀 스타일 */
+        .minimal-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+        }
+
+        .minimal-table th {
+            background-color: #f8f9fa;
+            color: #333;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .minimal-table td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .minimal-table tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        /* 스타일 테이블 3 - 보더 스타일 */
+        .bordered-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+        }
+
+        .bordered-table th,
+        .bordered-table td {
+            border: 2px solid #667eea;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .bordered-table th {
+            background-color: #667eea;
+            color: white;
+            font-weight: 600;
+        }
+
+        .bordered-table tr:nth-child(even) {
+            background-color: #f0f4ff;
+        }
+
+        /* 스타일 테이블 4 - 카드 스타일 */
+        .card-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 10px;
+            margin: 20px 0;
+        }
+
+        .card-table th {
+            background-color: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .card-table th:first-child {
+            border-top-left-radius: 8px;
+        }
+
+        .card-table th:last-child {
+            border-top-right-radius: 8px;
+        }
+
+        .card-table td {
+            background-color: white;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .card-table tr:hover td {
+            box-shadow: 0 4px 8px rgba(102, 126, 234, 0.2);
+            transform: translateY(-2px);
+            transition: all 0.3s;
+        }
+
+        /* 고정 헤더 테이블 */
+        .fixed-header-container {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            margin: 20px 0;
+        }
+
+        .fixed-header-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .fixed-header-table th {
+            position: sticky;
+            top: 0;
+            background-color: #667eea;
+            color: white;
+            padding: 12px;
+            z-index: 10;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .fixed-header-table td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .fixed-header-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        /* 반응형 테이블 컨테이너 */
+        .responsive-container {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 20px 0;
+        }
+
+        .responsive-table {
+            min-width: 600px;
+        }
+
+        /* 숫자 정렬 */
+        .text-right {
+            text-align: right;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* 배지 스타일 */
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.875em;
+            font-weight: 500;
+        }
+
+        .badge-success {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        .badge-warning {
+            background-color: #ff9800;
+            color: white;
+        }
+
+        .badge-danger {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .badge-info {
+            background-color: #2196F3;
+            color: white;
+        }
+
+        /* 코드 블록 */
+        .code-preview {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin-top: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            display: none;
+        }
+
+        .code-preview.show {
+            display: block;
+        }
+
+        .toggle-code {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .toggle-code:hover {
+            background: #5568d3;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            border-left: 4px solid #2196F3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 HTML Table 예제 모음</h1>
+        <p style="text-align: center; color: #666; margin-bottom: 40px;">
+            실제로 사용할 수 있는 다양한 테이블 예제들
+        </p>
+
+        <!-- 예제 1: 기본 테이블 -->
+        <div class="example-section">
+            <h2>예제 1: 기본 테이블</h2>
+            <div class="example-title">가장 기본적인 테이블 구조</div>
+            
+            <table class="basic-table">
+                <thead>
+                    <tr>
+                        <th scope="col">이름</th>
+                        <th scope="col">나이</th>
+                        <th scope="col">직업</th>
+                        <th scope="col">이메일</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>홍길동</td>
+                        <td>25</td>
+                        <td>개발자</td>
+                        <td>hong@example.com</td>
+                    </tr>
+                    <tr>
+                        <td>김철수</td>
+                        <td>30</td>
+                        <td>디자이너</td>
+                        <td>kim@example.com</td>
+                    </tr>
+                    <tr>
+                        <td>이영희</td>
+                        <td>28</td>
+                        <td>기획자</td>
+                        <td>lee@example.com</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <button class="toggle-code" onclick="toggleCode('basicCode')">코드 보기/숨기기</button>
+            <div id="basicCode" class="code-preview">
+&lt;table class="basic-table"&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th scope="col"&gt;이름&lt;/th&gt;
+            &lt;th scope="col"&gt;나이&lt;/th&gt;
+            &lt;th scope="col"&gt;직업&lt;/th&gt;
+            &lt;th scope="col"&gt;이메일&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;홍길동&lt;/td&gt;
+            &lt;td&gt;25&lt;/td&gt;
+            &lt;td&gt;개발자&lt;/td&gt;
+            &lt;td&gt;hong@example.com&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;!-- 더 많은 행들 --&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+            </div>
+        </div>
+
+        <!-- 예제 2: 시맨틱 테이블 (caption, tfoot 포함) -->
+        <div class="example-section">
+            <h2>예제 2: 시맨틱 테이블</h2>
+            <div class="example-title">caption, thead, tbody, tfoot를 모두 사용한 완전한 구조</div>
+            
+            <table class="basic-table">
+                <caption style="font-weight: bold; margin-bottom: 10px; text-align: left; font-size: 1.1em;">
+                    2024년 월별 매출 현황
+                </caption>
+                <thead>
+                    <tr>
+                        <th scope="col">월</th>
+                        <th scope="col" class="text-right">매출액</th>
+                        <th scope="col" class="text-right">비용</th>
+                        <th scope="col" class="text-right">순이익</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1월</td>
+                        <td class="text-right">10,000,000원</td>
+                        <td class="text-right">6,000,000원</td>
+                        <td class="text-right">4,000,000원</td>
+                    </tr>
+                    <tr>
+                        <td>2월</td>
+                        <td class="text-right">12,000,000원</td>
+                        <td class="text-right">7,000,000원</td>
+                        <td class="text-right">5,000,000원</td>
+                    </tr>
+                    <tr>
+                        <td>3월</td>
+                        <td class="text-right">15,000,000원</td>
+                        <td class="text-right">8,000,000원</td>
+                        <td class="text-right">7,000,000원</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th scope="row">합계</th>
+                        <td class="text-right"><strong>37,000,000원</strong></td>
+                        <td class="text-right"><strong>21,000,000원</strong></td>
+                        <td class="text-right"><strong>16,000,000원</strong></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+        <!-- 예제 3: 셀 병합 테이블 -->
+        <div class="example-section">
+            <h2>예제 3: 셀 병합 테이블</h2>
+            <div class="example-title">colspan과 rowspan을 사용한 복잡한 테이블</div>
+            
+            <table class="basic-table">
+                <thead>
+                    <tr>
+                        <th rowspan="2">부서</th>
+                        <th colspan="3">1분기</th>
+                        <th colspan="3">2분기</th>
+                    </tr>
+                    <tr>
+                        <th>1월</th>
+                        <th>2월</th>
+                        <th>3월</th>
+                        <th>4월</th>
+                        <th>5월</th>
+                        <th>6월</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="2">개발팀</td>
+                        <td class="text-right">100만원</td>
+                        <td class="text-right">120만원</td>
+                        <td class="text-right">150만원</td>
+                        <td class="text-right">130만원</td>
+                        <td class="text-right">140만원</td>
+                        <td class="text-right">160만원</td>
+                    </tr>
+                    <tr>
+                        <td class="text-right">110만원</td>
+                        <td class="text-right">125만원</td>
+                        <td class="text-right">145만원</td>
+                        <td class="text-right">135만원</td>
+                        <td class="text-right">150만원</td>
+                        <td class="text-right">170만원</td>
+                    </tr>
+                    <tr>
+                        <td>디자인팀</td>
+                        <td class="text-right">80만원</td>
+                        <td class="text-right">90만원</td>
+                        <td class="text-right">100만원</td>
+                        <td class="text-right">95만원</td>
+                        <td class="text-right">105만원</td>
+                        <td class="text-right">110만원</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 예제 4: 모던 스타일 테이블 -->
+        <div class="example-section">
+            <h2>예제 4: 모던 스타일 테이블</h2>
+            <div class="example-title">그라디언트 헤더와 호버 효과가 있는 모던한 디자인</div>
+            
+            <table class="modern-table">
+                <thead>
+                    <tr>
+                        <th scope="col">상품명</th>
+                        <th scope="col">카테고리</th>
+                        <th scope="col" class="text-right">가격</th>
+                        <th scope="col" class="text-center">재고</th>
+                        <th scope="col" class="text-center">상태</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>노트북 Pro</td>
+                        <td>전자제품</td>
+                        <td class="text-right">1,500,000원</td>
+                        <td class="text-center">15</td>
+                        <td class="text-center"><span class="badge badge-success">판매중</span></td>
+                    </tr>
+                    <tr>
+                        <td>무선 마우스</td>
+                        <td>전자제품</td>
+                        <td class="text-right">35,000원</td>
+                        <td class="text-center">50</td>
+                        <td class="text-center"><span class="badge badge-success">판매중</span></td>
+                    </tr>
+                    <tr>
+                        <td>키보드</td>
+                        <td>전자제품</td>
+                        <td class="text-right">120,000원</td>
+                        <td class="text-center">3</td>
+                        <td class="text-center"><span class="badge badge-warning">품절임박</span></td>
+                    </tr>
+                    <tr>
+                        <td>모니터</td>
+                        <td>전자제품</td>
+                        <td class="text-right">350,000원</td>
+                        <td class="text-center">0</td>
+                        <td class="text-center"><span class="badge badge-danger">품절</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 예제 5: 미니멀 스타일 테이블 -->
+        <div class="example-section">
+            <h2>예제 5: 미니멀 스타일 테이블</h2>
+            <div class="example-title">깔끔하고 미니멀한 디자인</div>
+            
+            <table class="minimal-table">
+                <thead>
+                    <tr>
+                        <th scope="col">과목</th>
+                        <th scope="col" class="text-right">점수</th>
+                        <th scope="col" class="text-center">등급</th>
+                        <th scope="col" class="text-center">비고</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>수학</td>
+                        <td class="text-right">95</td>
+                        <td class="text-center">A+</td>
+                        <td class="text-center">-</td>
+                    </tr>
+                    <tr>
+                        <td>영어</td>
+                        <td class="text-right">88</td>
+                        <td class="text-center">B+</td>
+                        <td class="text-center">-</td>
+                    </tr>
+                    <tr>
+                        <td>과학</td>
+                        <td class="text-right">92</td>
+                        <td class="text-center">A</td>
+                        <td class="text-center">-</td>
+                    </tr>
+                    <tr>
+                        <td>국어</td>
+                        <td class="text-right">90</td>
+                        <td class="text-center">A</td>
+                        <td class="text-center">-</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 예제 6: 카드 스타일 테이블 -->
+        <div class="example-section">
+            <h2>예제 6: 카드 스타일 테이블</h2>
+            <div class="example-title">각 행이 카드처럼 보이는 스타일</div>
+            
+            <table class="card-table">
+                <thead>
+                    <tr>
+                        <th scope="col">프로젝트명</th>
+                        <th scope="col">담당자</th>
+                        <th scope="col" class="text-center">진행률</th>
+                        <th scope="col" class="text-center">상태</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>웹사이트 리뉴얼</td>
+                        <td>홍길동</td>
+                        <td class="text-center">75%</td>
+                        <td class="text-center"><span class="badge badge-info">진행중</span></td>
+                    </tr>
+                    <tr>
+                        <td>모바일 앱 개발</td>
+                        <td>김철수</td>
+                        <td class="text-center">90%</td>
+                        <td class="text-center"><span class="badge badge-success">완료</span></td>
+                    </tr>
+                    <tr>
+                        <td>시스템 구축</td>
+                        <td>이영희</td>
+                        <td class="text-center">45%</td>
+                        <td class="text-center"><span class="badge badge-warning">대기</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 예제 7: 고정 헤더 테이블 -->
+        <div class="example-section">
+            <h2>예제 7: 고정 헤더 테이블</h2>
+            <div class="example-title">스크롤해도 헤더가 고정되는 테이블</div>
+            
+            <div class="fixed-header-container">
+                <table class="fixed-header-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">번호</th>
+                            <th scope="col">이름</th>
+                            <th scope="col">부서</th>
+                            <th scope="col">직급</th>
+                            <th scope="col">입사일</th>
+                            <th scope="col">연락처</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1</td><td>홍길동</td><td>개발팀</td><td>과장</td><td>2020-01-15</td><td>010-1234-5678</td></tr>
+                        <tr><td>2</td><td>김철수</td><td>디자인팀</td><td>대리</td><td>2021-03-20</td><td>010-2345-6789</td></tr>
+                        <tr><td>3</td><td>이영희</td><td>기획팀</td><td>차장</td><td>2019-05-10</td><td>010-3456-7890</td></tr>
+                        <tr><td>4</td><td>박민수</td><td>개발팀</td><td>사원</td><td>2022-07-01</td><td>010-4567-8901</td></tr>
+                        <tr><td>5</td><td>최지영</td><td>디자인팀</td><td>과장</td><td>2020-09-15</td><td>010-5678-9012</td></tr>
+                        <tr><td>6</td><td>정수진</td><td>기획팀</td><td>대리</td><td>2021-11-20</td><td>010-6789-0123</td></tr>
+                        <tr><td>7</td><td>강동원</td><td>개발팀</td><td>부장</td><td>2018-02-05</td><td>010-7890-1234</td></tr>
+                        <tr><td>8</td><td>윤서연</td><td>디자인팀</td><td>사원</td><td>2023-04-12</td><td>010-8901-2345</td></tr>
+                        <tr><td>9</td><td>오준호</td><td>기획팀</td><td>과장</td><td>2020-06-25</td><td>010-9012-3456</td></tr>
+                        <tr><td>10</td><td>한소희</td><td>개발팀</td><td>대리</td><td>2021-08-30</td><td>010-0123-4567</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 예제 8: 반응형 테이블 -->
+        <div class="example-section">
+            <h2>예제 8: 반응형 테이블</h2>
+            <div class="example-title">모바일에서 수평 스크롤이 가능한 테이블</div>
+            
+            <div class="responsive-container">
+                <table class="responsive-table basic-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">날짜</th>
+                            <th scope="col">제목</th>
+                            <th scope="col">작성자</th>
+                            <th scope="col">조회수</th>
+                            <th scope="col">댓글수</th>
+                            <th scope="col">상태</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2024-01-15</td>
+                            <td>공지사항입니다</td>
+                            <td>관리자</td>
+                            <td class="text-right">1,234</td>
+                            <td class="text-right">56</td>
+                            <td class="text-center"><span class="badge badge-info">공지</span></td>
+                        </tr>
+                        <tr>
+                            <td>2024-01-14</td>
+                            <td>새로운 기능 업데이트</td>
+                            <td>개발팀</td>
+                            <td class="text-right">892</td>
+                            <td class="text-right">23</td>
+                            <td class="text-center"><span class="badge badge-success">일반</span></td>
+                        </tr>
+                        <tr>
+                            <td>2024-01-13</td>
+                            <td>이벤트 안내</td>
+                            <td>마케팅팀</td>
+                            <td class="text-right">2,456</td>
+                            <td class="text-right">89</td>
+                            <td class="text-center"><span class="badge badge-warning">이벤트</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 예제 9: 복합 스타일 테이블 -->
+        <div class="example-section">
+            <h2>예제 9: 복합 스타일 테이블</h2>
+            <div class="example-title">다양한 스타일 요소를 결합한 테이블</div>
+            
+            <table class="bordered-table">
+                <caption style="font-weight: bold; margin-bottom: 10px; text-align: left; font-size: 1.1em;">
+                    팀별 성과 평가
+                </caption>
+                <thead>
+                    <tr>
+                        <th scope="col" rowspan="2">팀</th>
+                        <th scope="col" colspan="3">1분기</th>
+                        <th scope="col" colspan="3">2분기</th>
+                        <th scope="col" rowspan="2" class="text-center">평균</th>
+                    </tr>
+                    <tr>
+                        <th scope="col" class="text-right">목표</th>
+                        <th scope="col" class="text-right">실적</th>
+                        <th scope="col" class="text-center">달성률</th>
+                        <th scope="col" class="text-right">목표</th>
+                        <th scope="col" class="text-right">실적</th>
+                        <th scope="col" class="text-center">달성률</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">개발팀</th>
+                        <td class="text-right">100</td>
+                        <td class="text-right">95</td>
+                        <td class="text-center"><span class="badge badge-warning">95%</span></td>
+                        <td class="text-right">120</td>
+                        <td class="text-right">115</td>
+                        <td class="text-center"><span class="badge badge-success">96%</span></td>
+                        <td class="text-center"><strong>95.5%</strong></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">디자인팀</th>
+                        <td class="text-right">80</td>
+                        <td class="text-right">85</td>
+                        <td class="text-center"><span class="badge badge-success">106%</span></td>
+                        <td class="text-right">90</td>
+                        <td class="text-right">88</td>
+                        <td class="text-center"><span class="badge badge-warning">98%</span></td>
+                        <td class="text-center"><strong>102%</strong></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">기획팀</th>
+                        <td class="text-right">90</td>
+                        <td class="text-right">92</td>
+                        <td class="text-center"><span class="badge badge-success">102%</span></td>
+                        <td class="text-right">100</td>
+                        <td class="text-right">98</td>
+                        <td class="text-center"><span class="badge badge-warning">98%</span></td>
+                        <td class="text-center"><strong>100%</strong></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th scope="row">전체 평균</th>
+                        <td class="text-right"><strong>90</strong></td>
+                        <td class="text-right"><strong>90.7</strong></td>
+                        <td class="text-center"><strong>101%</strong></td>
+                        <td class="text-right"><strong>103.3</strong></td>
+                        <td class="text-right"><strong>100.3</strong></td>
+                        <td class="text-center"><strong>97%</strong></td>
+                        <td class="text-center"><strong>99%</strong></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+        <!-- 예제 10: 시간표 (셀 병합 활용) -->
+        <div class="example-section">
+            <h2>예제 10: 시간표 (셀 병합 활용)</h2>
+            <div class="example-title">rowspan과 colspan을 활용한 시간표</div>
+            
+            <table class="bordered-table">
+                <caption style="font-weight: bold; margin-bottom: 10px; text-align: left; font-size: 1.1em;">
+                    주간 시간표
+                </caption>
+                <thead>
+                    <tr>
+                        <th scope="col" rowspan="2">시간</th>
+                        <th scope="col" colspan="5">요일</th>
+                    </tr>
+                    <tr>
+                        <th scope="col">월</th>
+                        <th scope="col">화</th>
+                        <th scope="col">수</th>
+                        <th scope="col">목</th>
+                        <th scope="col">금</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">09:00</th>
+                        <td>수학</td>
+                        <td>영어</td>
+                        <td>과학</td>
+                        <td>국어</td>
+                        <td>체육</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">10:00</th>
+                        <td>영어</td>
+                        <td>과학</td>
+                        <td>수학</td>
+                        <td>체육</td>
+                        <td>국어</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">11:00</th>
+                        <td>과학</td>
+                        <td>수학</td>
+                        <td>영어</td>
+                        <td>음악</td>
+                        <td>미술</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" colspan="6" style="text-align: center; background: #f0f0f0;">점심시간</th>
+                    </tr>
+                    <tr>
+                        <th scope="row">13:00</th>
+                        <td>국어</td>
+                        <td>체육</td>
+                        <td>음악</td>
+                        <td>수학</td>
+                        <td>과학</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">14:00</th>
+                        <td>체육</td>
+                        <td>국어</td>
+                        <td>미술</td>
+                        <td>영어</td>
+                        <td>수학</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <button class="toggle-code" onclick="toggleCode('scheduleCode')">코드 보기/숨기기</button>
+            <div id="scheduleCode" class="code-preview">
+&lt;table&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th rowspan="2"&gt;시간&lt;/th&gt;
+            &lt;th colspan="5"&gt;요일&lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;th&gt;월&lt;/th&gt;
+            &lt;th&gt;화&lt;/th&gt;
+            &lt;th&gt;수&lt;/th&gt;
+            &lt;th&gt;목&lt;/th&gt;
+            &lt;th&gt;금&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;th&gt;09:00&lt;/th&gt;
+            &lt;td&gt;수학&lt;/td&gt;
+            &lt;!-- 더 많은 셀들 --&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+            </div>
+        </div>
+
+        <!-- 예제 11: 재고 관리표 (복잡한 병합) -->
+        <div class="example-section">
+            <h2>예제 11: 재고 관리표 (복잡한 병합)</h2>
+            <div class="example-title">rowspan과 colspan을 함께 사용한 재고 관리표</div>
+            
+            <table class="bordered-table">
+                <caption style="font-weight: bold; margin-bottom: 10px; text-align: left; font-size: 1.1em;">
+                    월별 재고 관리 현황
+                </caption>
+                <thead>
+                    <tr>
+                        <th scope="col" rowspan="2">제품명</th>
+                        <th scope="col" colspan="3">1분기</th>
+                        <th scope="col" colspan="3">2분기</th>
+                        <th scope="col" rowspan="2" class="text-center">총계</th>
+                    </tr>
+                    <tr>
+                        <th scope="col" class="text-right">입고</th>
+                        <th scope="col" class="text-right">출고</th>
+                        <th scope="col" class="text-right">재고</th>
+                        <th scope="col" class="text-right">입고</th>
+                        <th scope="col" class="text-right">출고</th>
+                        <th scope="col" class="text-right">재고</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">노트북</th>
+                        <td class="text-right">50</td>
+                        <td class="text-right">30</td>
+                        <td class="text-right">20</td>
+                        <td class="text-right">40</td>
+                        <td class="text-right">25</td>
+                        <td class="text-right">35</td>
+                        <td class="text-center"><strong>55</strong></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">마우스</th>
+                        <td class="text-right">100</td>
+                        <td class="text-right">80</td>
+                        <td class="text-right">20</td>
+                        <td class="text-right">120</td>
+                        <td class="text-right">90</td>
+                        <td class="text-right">50</td>
+                        <td class="text-center"><strong>70</strong></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">키보드</th>
+                        <td class="text-right">30</td>
+                        <td class="text-right">25</td>
+                        <td class="text-right">5</td>
+                        <td class="text-right">35</td>
+                        <td class="text-right">30</td>
+                        <td class="text-right">10</td>
+                        <td class="text-center"><strong>15</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 예제 12: 조직도 테이블 -->
+        <div class="example-section">
+            <h2>예제 12: 조직도 테이블</h2>
+            <div class="example-title">rowspan을 활용한 조직 구조 표현</div>
+            
+            <table class="bordered-table">
+                <caption style="font-weight: bold; margin-bottom: 10px; text-align: left; font-size: 1.1em;">
+                    부서별 조직 구조
+                </caption>
+                <thead>
+                    <tr>
+                        <th scope="col">부서</th>
+                        <th scope="col">이름</th>
+                        <th scope="col">직급</th>
+                        <th scope="col">이메일</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row" rowspan="3">개발팀</th>
+                        <td>홍길동</td>
+                        <td>팀장</td>
+                        <td>hong@example.com</td>
+                    </tr>
+                    <tr>
+                        <td>김철수</td>
+                        <td>과장</td>
+                        <td>kim@example.com</td>
+                    </tr>
+                    <tr>
+                        <td>이영희</td>
+                        <td>대리</td>
+                        <td>lee@example.com</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" rowspan="2">디자인팀</th>
+                        <td>박민수</td>
+                        <td>팀장</td>
+                        <td>park@example.com</td>
+                    </tr>
+                    <tr>
+                        <td>최지영</td>
+                        <td>과장</td>
+                        <td>choi@example.com</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">기획팀</th>
+                        <td>정수진</td>
+                        <td>팀장</td>
+                        <td>jung@example.com</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 예제 13: 분할된 테이블 (기본 상태) -->
+        <div class="example-section">
+            <h2>예제 13: 분할된 테이블 (기본 상태)</h2>
+            <div class="example-title">모든 셀이 독립적으로 분할된 테이블</div>
+            
+            <table class="bordered-table">
+                <caption style="font-weight: bold; margin-bottom: 10px; text-align: left; font-size: 1.1em;">
+                    분할된 셀 예제 (병합 없음)
+                </caption>
+                <thead>
+                    <tr>
+                        <th scope="col">구분</th>
+                        <th scope="col">항목 1</th>
+                        <th scope="col">항목 2</th>
+                        <th scope="col">항목 3</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">행 1</th>
+                        <td>셀 1-1</td>
+                        <td>셀 1-2</td>
+                        <td>셀 1-3</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">행 2</th>
+                        <td>셀 2-1</td>
+                        <td>셀 2-2</td>
+                        <td>셀 2-3</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">행 3</th>
+                        <td>셀 3-1</td>
+                        <td>셀 3-2</td>
+                        <td>셀 3-3</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="info-box" style="margin-top: 20px;">
+                <strong>💡 설명:</strong> 이 테이블은 모든 셀이 독립적으로 분할되어 있습니다. 
+                병합 속성(colspan, rowspan)을 사용하지 않으면 기본적으로 이렇게 표시됩니다.
+            </div>
+        </div>
+
+        <!-- 예제 14: 병합과 분할 비교 -->
+        <div class="example-section">
+            <h2>예제 14: 병합과 분할 비교</h2>
+            <div class="example-title">같은 데이터를 병합/분할로 표현한 비교</div>
+            
+            <h3 style="margin-top: 20px; color: #555;">분할된 테이블 (기본)</h3>
+            <table class="bordered-table" style="margin-bottom: 30px;">
+                <thead>
+                    <tr>
+                        <th scope="col">부서</th>
+                        <th scope="col">이름</th>
+                        <th scope="col">직급</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>개발팀</td>
+                        <td>홍길동</td>
+                        <td>과장</td>
+                    </tr>
+                    <tr>
+                        <td>개발팀</td>
+                        <td>김철수</td>
+                        <td>대리</td>
+                    </tr>
+                    <tr>
+                        <td>디자인팀</td>
+                        <td>이영희</td>
+                        <td>과장</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 style="margin-top: 20px; color: #555;">병합된 테이블 (rowspan 사용)</h3>
+            <table class="bordered-table">
+                <thead>
+                    <tr>
+                        <th scope="col">부서</th>
+                        <th scope="col">이름</th>
+                        <th scope="col">직급</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="2">개발팀</td>
+                        <td>홍길동</td>
+                        <td>과장</td>
+                    </tr>
+                    <tr>
+                        <td>김철수</td>
+                        <td>대리</td>
+                    </tr>
+                    <tr>
+                        <td>디자인팀</td>
+                        <td>이영희</td>
+                        <td>과장</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="info-box" style="margin-top: 20px;">
+                <strong>💡 비교:</strong> 위 테이블은 같은 데이터를 분할된 상태로, 아래 테이블은 rowspan을 사용하여 병합한 상태로 표현했습니다. 
+                병합을 사용하면 중복된 데이터를 제거하고 더 깔끔한 구조를 만들 수 있습니다.
+            </div>
+        </div>
+
+        <div class="info-box" style="margin-top: 40px;">
+            <strong>💡 참고:</strong> 이 예제들은 다양한 테이블 스타일링 기법과 셀 병합/분할 방법을 보여줍니다. 
+            실제 프로젝트에서는 디자인 요구사항에 맞게 스타일을 조정하여 사용하세요.
+        </div>
+    </div>
+
+    <script>
+        function toggleCode(id) {
+            const codeBlock = document.getElementById(id);
+            codeBlock.classList.toggle('show');
+        }
+    </script>
+</body>
+</html>
+

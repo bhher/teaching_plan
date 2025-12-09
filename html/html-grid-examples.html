@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Grid 예제 모음</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-align: center;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 20px;
+        }
+        h2 {
+            color: #764ba2;
+            font-size: 1.8em;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-left: 15px;
+            border-left: 5px solid #764ba2;
+        }
+        .example-section {
+            margin-bottom: 50px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        .example-title {
+            color: #555;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        .demo-box {
+            border: 2px solid #ddd;
+            padding: 20px;
+            border-radius: 5px;
+            background: #fff;
+        }
+        .grid {
+            display: grid;
+            gap: 10px;
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .item {
+            background: #667eea;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+        .item:nth-child(2) { background: #764ba2; }
+        .item:nth-child(3) { background: #4ecdc4; }
+        .item:nth-child(4) { background: #ff6b6b; }
+        .item:nth-child(5) { background: #ffa502; }
+        .item:nth-child(6) { background: #2ed573; }
+        .code-preview {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin-top: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            display: none;
+        }
+        .code-preview.show { display: block; }
+        .toggle-code {
+            background: #667eea;
+            color: #fff;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        .toggle-code:hover { background: #5568d3; }
+        .info-box {
+            background: #e3f2fd;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            border-left: 4px solid #2196f3;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>🧩 CSS Grid 예제 모음</h1>
+    <p style="text-align:center; color:#666; margin-bottom:40px;">
+        실제로 바로 사용할 수 있는 다양한 Grid 레이아웃 예제들입니다.
+    </p>
+
+    <div class="example-section">
+        <h2>예제 1: 기본 3열 Grid</h2>
+        <div class="example-title">grid-template-columns + gap</div>
+        <div class="demo-box">
+            <div class="grid" style="grid-template-columns: repeat(3, 1fr);">
+                <div class="item">1</div>
+                <div class="item">2</div>
+                <div class="item">3</div>
+                <div class="item">4</div>
+                <div class="item">5</div>
+                <div class="item">6</div>
+            </div>
+        </div>
+        <button class="toggle-code" onclick="toggleCode('code1')">코드 보기/숨기기</button>
+        <div id="code1" class="code-preview">
+&lt;div class="grid"&gt;
+    &lt;div class="item"&gt;1&lt;/div&gt;
+    &lt;div class="item"&gt;2&lt;/div&gt;
+    &lt;div class="item"&gt;3&lt;/div&gt;
+    &lt;div class="item"&gt;4&lt;/div&gt;
+    &lt;div class="item"&gt;5&lt;/div&gt;
+    &lt;div class="item"&gt;6&lt;/div&gt;
+&lt;/div&gt;
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+        </div>
+    </div>
+
+    <div class="example-section">
+        <h2>예제 2: 고정 + 비율 혼합 레이아웃</h2>
+        <div class="example-title">왼쪽 고정 사이드바 + 오른쪽 가변 콘텐츠</div>
+        <div class="demo-box">
+            <div class="grid" style="grid-template-columns: 200px 1fr;">
+                <div class="item">사이드바</div>
+                <div class="item" style="min-height:80px;">메인 콘텐츠</div>
+            </div>
+        </div>
+        <button class="toggle-code" onclick="toggleCode('code2')">코드 보기/숨기기</button>
+        <div id="code2" class="code-preview">
+.layout {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 16px;
+}
+        </div>
+    </div>
+
+    <div class="example-section">
+        <h2>예제 3: 카드 그리드 (반응형)</h2>
+        <div class="example-title">repeat(auto-fit, minmax()) 패턴</div>
+        <div class="demo-box">
+            <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
+                <div class="item">카드 1</div>
+                <div class="item">카드 2</div>
+                <div class="item">카드 3</div>
+                <div class="item">카드 4</div>
+                <div class="item">카드 5</div>
+                <div class="item">카드 6</div>
+            </div>
+        </div>
+        <button class="toggle-code" onclick="toggleCode('code3')">코드 보기/숨기기</button>
+        <div id="code3" class="code-preview">
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+}
+        </div>
+    </div>
+
+    <div class="example-section">
+        <h2>예제 4: 페이지 기본 레이아웃 (header/sidebar/main/footer)</h2>
+        <div class="example-title">grid-template-areas 사용</div>
+        <div class="demo-box">
+            <div class="grid" style="
+                grid-template-columns: 200px 1fr;
+                grid-template-rows: 60px 1fr 40px;
+                grid-template-areas:
+                    'header header'
+                    'sidebar main'
+                    'footer footer';
+            ">
+                <div class="item" style="grid-area: header;">HEADER</div>
+                <div class="item" style="grid-area: sidebar;">SIDEBAR</div>
+                <div class="item" style="grid-area: main; min-height:100px;">MAIN</div>
+                <div class="item" style="grid-area: footer;">FOOTER</div>
+            </div>
+        </div>
+        <button class="toggle-code" onclick="toggleCode('code4')">코드 보기/숨기기</button>
+        <div id="code4" class="code-preview">
+.layout {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    grid-template-rows: 60px 1fr 40px;
+    grid-template-areas:
+        'header header'
+        'sidebar main'
+        'footer footer';
+}
+
+.header  { grid-area: header; }
+.sidebar { grid-area: sidebar; }
+.main    { grid-area: main; }
+.footer  { grid-area: footer; }
+        </div>
+    </div>
+
+    <div class="example-section">
+        <h2>예제 5: 갤러리 레이아웃</h2>
+        <div class="example-title">정사각형 이미지 그리드</div>
+        <div class="demo-box">
+            <div class="grid" style="grid-template-columns: repeat(4, 1fr);">
+                <div class="item" style="aspect-ratio: 1 / 1;">1</div>
+                <div class="item" style="aspect-ratio: 1 / 1;">2</div>
+                <div class="item" style="aspect-ratio: 1 / 1;">3</div>
+                <div class="item" style="aspect-ratio: 1 / 1;">4</div>
+                <div class="item" style="aspect-ratio: 1 / 1;">5</div>
+                <div class="item" style="aspect-ratio: 1 / 1;">6</div>
+                <div class="item" style="aspect-ratio: 1 / 1;">7</div>
+                <div class="item" style="aspect-ratio: 1 / 1;">8</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="example-section">
+        <h2>예제 6: 블로그 카드 레이아웃</h2>
+        <div class="example-title">카드 3열 레이아웃 (반응형)</div>
+        <div class="demo-box">
+            <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
+                <div class="item" style="text-align:left;">
+                    <h3>게시글 1</h3>
+                    <p>간단한 설명 텍스트입니다.</p>
+                </div>
+                <div class="item" style="text-align:left;">
+                    <h3>게시글 2</h3>
+                    <p>간단한 설명 텍스트입니다.</p>
+                </div>
+                <div class="item" style="text-align:left;">
+                    <h3>게시글 3</h3>
+                    <p>간단한 설명 텍스트입니다.</p>
+                </div>
+                <div class="item" style="text-align:left;">
+                    <h3>게시글 4</h3>
+                    <p>간단한 설명 텍스트입니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="example-section">
+        <h2>예제 7: 대시보드 위젯 레이아웃</h2>
+        <div class="example-title">서로 다른 크기의 위젯 배치</div>
+        <div class="demo-box">
+            <div class="grid" style="
+                grid-template-columns: repeat(4, 1fr);
+                grid-auto-rows: 100px;
+            ">
+                <div class="item" style="grid-column: 1 / span 2; grid-row: 1 / span 2;">큰 위젯</div>
+                <div class="item" style="grid-column: 3 / span 2;">위젯 2</div>
+                <div class="item">위젯 3</div>
+                <div class="item">위젯 4</div>
+                <div class="item" style="grid-column: 2 / span 3;">가로로 긴 위젯</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="example-section">
+        <h2>예제 8: 폼 레이아웃</h2>
+        <div class="example-title">2열 폼 + 반응형 1열</div>
+        <div class="demo-box">
+            <form class="grid" style="grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px;">
+                <div class="item" style="text-align:left;">
+                    <label>이름</label><br />
+                    <input type="text" style="width:100%; padding:6px; margin-top:4px;" />
+                </div>
+                <div class="item" style="text-align:left;">
+                    <label>이메일</label><br />
+                    <input type="email" style="width:100%; padding:6px; margin-top:4px;" />
+                </div>
+                <div class="item" style="grid-column: 1 / -1; text-align:left;">
+                    <label>메시지</label><br />
+                    <textarea style="width:100%; padding:6px; margin-top:4px; min-height:80px;"></textarea>
+                </div>
+            </form>
+            <div class="info-box">
+                <strong>반응형 팁:</strong> 작은 화면에서는 미디어 쿼리로 <code>grid-template-columns: 1fr;</code> 로 변경하면 1열 폼이 됩니다.
+            </div>
+        </div>
+    </div>
+
+    <div class="example-section">
+        <h2>예제 9: 중앙 정렬 레이아웃</h2>
+        <div class="example-title">Grid로 수직/수평 완전 가운데 정렬</div>
+        <div class="demo-box" style="height:220px;">
+            <div class="grid" style="height:100%; grid-template-columns: 1fr; justify-items:center; align-items:center;">
+                <div class="item" style="width:200px;">정중앙 박스</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="info-box" style="margin-top:40px;">
+        <strong>💡 참고:</strong> 이 파일은 Grid 예제만 모아 둔 파일입니다. 속성에 대한 자세한 설명은
+        <code>html-grid-guide.html</code>에서 확인하실 수 있습니다.
+    </div>
+</div>
+<script>
+    function toggleCode(id) {
+        const el = document.getElementById(id);
+        el.classList.toggle('show');
+    }
+</script>
+</body>
+</html>
+
+
+

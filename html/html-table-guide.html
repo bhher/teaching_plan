@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Table 태그 완벽 가이드</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-align: center;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 20px;
+        }
+
+        h2 {
+            color: #764ba2;
+            font-size: 1.8em;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-left: 15px;
+            border-left: 5px solid #764ba2;
+        }
+
+        h3 {
+            color: #555;
+            font-size: 1.3em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .example-box {
+            background: #fff;
+            border: 2px solid #667eea;
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #667eea;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .tip-box {
+            background: #fff9c4;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            border-left: 4px solid #fbc02d;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            border-left: 4px solid #2196F3;
+        }
+
+        .warning-box {
+            background: #ffebee;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            border-left: 4px solid #f44336;
+        }
+
+        .element-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .element-item {
+            background: #fff;
+            border: 2px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        .element-item code {
+            background: #f5f5f5;
+            padding: 3px 8px;
+            border-radius: 3px;
+            color: #d63384;
+            font-family: 'Courier New', monospace;
+        }
+
+        ul, ol {
+            margin-left: 30px;
+            margin-top: 10px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .highlight {
+            background: #fff9c4;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        /* 예제 테이블 스타일 */
+        .demo-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        .demo-table th,
+        .demo-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .demo-table th {
+            background-color: #667eea;
+            color: white;
+            font-weight: 600;
+        }
+
+        .demo-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .demo-table tr:hover {
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 HTML Table 태그 완벽 가이드</h1>
+        <p style="text-align: center; font-size: 1.1em; color: #666; margin-bottom: 40px;">
+            테이블의 모든 것을 알아봅시다
+        </p>
+
+        <!-- 1. Table 개요 -->
+        <div class="section">
+            <h2>1. Table 개요</h2>
+            <p>HTML의 <code>&lt;table&gt;</code> 태그는 행과 열로 구성된 표 형식의 데이터를 표시하는 데 사용됩니다. 데이터를 구조화하여 보여주는 가장 효과적인 방법 중 하나입니다.</p>
+            
+            <div class="info-box">
+                <strong>💡 핵심 개념:</strong><br>
+                Table은 행(row)과 열(column)로 구성되며, 각 셀(cell)에 데이터를 배치합니다. 
+                시맨틱 태그를 사용하여 테이블의 구조를 명확하게 표현할 수 있습니다.
+            </div>
+
+            <div class="warning-box">
+                <strong>⚠️ 주의사항:</strong><br>
+                Table은 레이아웃 용도로 사용하지 않아야 합니다. CSS Grid나 Flexbox를 레이아웃에 사용하고, 
+                Table은 실제 표 형식의 데이터를 표시할 때만 사용하세요.
+            </div>
+        </div>
+
+        <!-- 2. Table 기본 구조 -->
+        <div class="section">
+            <h2>2. Table 기본 구조</h2>
+            
+            <h3>2.1 기본 문법</h3>
+            <div class="code-block">
+<code>&lt;table&gt;
+    &lt;tr&gt;
+        &lt;th&gt;헤더 1&lt;/th&gt;
+        &lt;th&gt;헤더 2&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;데이터 1&lt;/td&gt;
+        &lt;td&gt;데이터 2&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</code>
+            </div>
+
+            <h3>2.2 기본 요소 설명</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>태그</th>
+                        <th>설명</th>
+                        <th>용도</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>&lt;table&gt;</code></td>
+                        <td>테이블 컨테이너</td>
+                        <td>전체 테이블을 감싸는 최상위 요소</td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;tr&gt;</code></td>
+                        <td>Table Row (행)</td>
+                        <td>테이블의 한 행을 정의</td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;th&gt;</code></td>
+                        <td>Table Header (헤더 셀)</td>
+                        <td>열 또는 행의 제목 (기본적으로 굵게, 가운데 정렬)</td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;td&gt;</code></td>
+                        <td>Table Data (데이터 셀)</td>
+                        <td>실제 데이터를 담는 셀</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>2.3 기본 예제</h3>
+            <div class="code-block">
+<code>&lt;table&gt;
+    &lt;tr&gt;
+        &lt;th&gt;이름&lt;/th&gt;
+        &lt;th&gt;나이&lt;/th&gt;
+        &lt;th&gt;직업&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;홍길동&lt;/td&gt;
+        &lt;td&gt;25&lt;/td&gt;
+        &lt;td&gt;개발자&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;김철수&lt;/td&gt;
+        &lt;td&gt;30&lt;/td&gt;
+        &lt;td&gt;디자이너&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</code>
+            </div>
+
+            <div class="example-box">
+                <table class="demo-table">
+                    <tr>
+                        <th>이름</th>
+                        <th>나이</th>
+                        <th>직업</th>
+                    </tr>
+                    <tr>
+                        <td>홍길동</td>
+                        <td>25</td>
+                        <td>개발자</td>
+                    </tr>
+                    <tr>
+                        <td>김철수</td>
+                        <td>30</td>
+                        <td>디자이너</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- 3. Table 시맨틱 구조 -->
+        <div class="section">
+            <h2>3. Table 시맨틱 구조</h2>
+            <p>더 구조화되고 접근성이 좋은 테이블을 만들기 위해 시맨틱 태그를 사용할 수 있습니다.</p>
+
+            <h3>3.1 시맨틱 태그</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>태그</th>
+                        <th>설명</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>&lt;thead&gt;</code></td>
+                        <td>테이블 헤더 영역 (열 제목)</td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;tbody&gt;</code></td>
+                        <td>테이블 본문 영역 (데이터 행들)</td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;tfoot&gt;</code></td>
+                        <td>테이블 푸터 영역 (합계, 요약 등)</td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;caption&gt;</code></td>
+                        <td>테이블 제목/설명</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>3.2 시맨틱 구조 예제</h3>
+            <div class="code-block">
+<code>&lt;table&gt;
+    &lt;caption&gt;직원 정보표&lt;/caption&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;이름&lt;/th&gt;
+            &lt;th&gt;부서&lt;/th&gt;
+            &lt;th&gt;급여&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;홍길동&lt;/td&gt;
+            &lt;td&gt;개발팀&lt;/td&gt;
+            &lt;td&gt;5,000,000원&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;김철수&lt;/td&gt;
+            &lt;td&gt;디자인팀&lt;/td&gt;
+            &lt;td&gt;4,500,000원&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+    &lt;tfoot&gt;
+        &lt;tr&gt;
+            &lt;td colspan="2"&gt;합계&lt;/td&gt;
+            &lt;td&gt;9,500,000원&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tfoot&gt;
+&lt;/table&gt;</code>
+            </div>
+
+            <div class="example-box">
+                <table class="demo-table">
+                    <caption style="font-weight: bold; margin-bottom: 10px; text-align: left;">직원 정보표</caption>
+                    <thead>
+                        <tr>
+                            <th>이름</th>
+                            <th>부서</th>
+                            <th>급여</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>홍길동</td>
+                            <td>개발팀</td>
+                            <td>5,000,000원</td>
+                        </tr>
+                        <tr>
+                            <td>김철수</td>
+                            <td>디자인팀</td>
+                            <td>4,500,000원</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="2" style="font-weight: bold;">합계</td>
+                            <td style="font-weight: bold;">9,500,000원</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 장점:</strong>
+                <ul>
+                    <li>접근성 향상 (스크린 리더 지원)</li>
+                    <li>CSS 스타일링 용이</li>
+                    <li>코드 가독성 향상</li>
+                    <li>인쇄 시 헤더/푸터 반복 가능</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 4. 셀 병합 -->
+        <div class="section">
+            <h2>4. 셀 병합과 분할 (colspan, rowspan)</h2>
+            <p>여러 셀을 하나로 합치거나, 복잡한 테이블 구조를 만들 수 있습니다.</p>
+
+            <div class="info-box">
+                <strong>💡 핵심 개념:</strong><br>
+                <ul>
+                    <li><code>colspan</code>: 여러 열을 하나의 셀로 합침 (가로 방향 병합)</li>
+                    <li><code>rowspan</code>: 여러 행을 하나의 셀로 합침 (세로 방향 병합)</li>
+                    <li>값은 병합할 셀의 개수를 의미합니다 (예: colspan="2"는 2개 열 병합)</li>
+                    <li>병합된 셀의 위치에 해당하는 다른 셀은 생략해야 합니다</li>
+                </ul>
+            </div>
+
+            <h3>4.1 colspan (열 병합)</h3>
+            <p>여러 열을 하나의 셀로 합칩니다. 가로 방향으로 셀을 병합합니다.</p>
+            
+            <h4>기본 사용법</h4>
+            <div class="code-block">
+<code>&lt;table&gt;
+    &lt;tr&gt;
+        &lt;th colspan="2"&gt;이름과 나이&lt;/th&gt;
+        &lt;th&gt;직업&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;홍길동&lt;/td&gt;
+        &lt;td&gt;25&lt;/td&gt;
+        &lt;td&gt;개발자&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</code>
+            </div>
+
+            <div class="example-box">
+                <h4>예제 1: 기본 colspan</h4>
+                <table class="demo-table">
+                    <tr>
+                        <th colspan="2">이름과 나이</th>
+                        <th>직업</th>
+                    </tr>
+                    <tr>
+                        <td>홍길동</td>
+                        <td>25</td>
+                        <td>개발자</td>
+                    </tr>
+                </table>
+            </div>
+
+            <h4>colspan 활용 예제</h4>
+            <div class="code-block">
+<code>&lt;table&gt;
+    &lt;tr&gt;
+        &lt;th&gt;번호&lt;/th&gt;
+        &lt;th colspan="3"&gt;연락처 정보&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;1&lt;/td&gt;
+        &lt;td&gt;홍길동&lt;/td&gt;
+        &lt;td&gt;010-1234-5678&lt;/td&gt;
+        &lt;td&gt;hong@example.com&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</code>
+            </div>
+
+            <div class="example-box">
+                <h4>예제 2: 헤더에 colspan 사용</h4>
+                <table class="demo-table">
+                    <tr>
+                        <th>번호</th>
+                        <th colspan="3">연락처 정보</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>홍길동</td>
+                        <td>010-1234-5678</td>
+                        <td>hong@example.com</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>김철수</td>
+                        <td>010-2345-6789</td>
+                        <td>kim@example.com</td>
+                    </tr>
+                </table>
+            </div>
+
+            <h4>colspan 주의사항</h4>
+            <div class="warning-box">
+                <strong>⚠️ 중요:</strong>
+                <ul>
+                    <li>colspan을 사용하면 해당 행의 다른 셀 개수가 줄어듭니다</li>
+                    <li>예: 4개 열이 있는 행에서 colspan="2"를 사용하면 나머지 셀은 2개만 필요합니다</li>
+                    <li>colspan 값은 1 이상의 정수여야 합니다</li>
+                    <li>테이블의 전체 열 수를 초과하면 안 됩니다</li>
+                </ul>
+            </div>
+
+            <h3>4.2 rowspan (행 병합)</h3>
+            <p>여러 행을 하나의 셀로 합칩니다. 세로 방향으로 셀을 병합합니다.</p>
+
+            <h4>기본 사용법</h4>
+            <div class="code-block">
+<code>&lt;table&gt;
+    &lt;tr&gt;
+        &lt;th rowspan="2"&gt;부서&lt;/th&gt;
+        &lt;th&gt;이름&lt;/th&gt;
+        &lt;th&gt;직급&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;홍길동&lt;/td&gt;
+        &lt;td&gt;과장&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;김철수&lt;/td&gt;
+        &lt;td&gt;대리&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</code>
+            </div>
+
+            <div class="example-box">
+                <h4>예제 1: 기본 rowspan</h4>
+                <table class="demo-table">
+                    <tr>
+                        <th rowspan="2">개발팀</th>
+                        <th>이름</th>
+                        <th>직급</th>
+                    </tr>
+                    <tr>
+                        <td>홍길동</td>
+                        <td>과장</td>
+                    </tr>
+                    <tr>
+                        <td>김철수</td>
+                        <td>대리</td>
+                    </tr>
+                </table>
+            </div>
+
+            <h4>rowspan 활용 예제</h4>
+            <div class="code-block">
+<code>&lt;table&gt;
+    &lt;tr&gt;
+        &lt;th rowspan="3"&gt;과목&lt;/th&gt;
+        &lt;th&gt;학생&lt;/th&gt;
+        &lt;th&gt;점수&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;홍길동&lt;/td&gt;
+        &lt;td&gt;95&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;김철수&lt;/td&gt;
+        &lt;td&gt;88&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;이영희&lt;/td&gt;
+        &lt;td&gt;92&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</code>
+            </div>
+
+            <div class="example-box">
+                <h4>예제 2: 여러 행 병합</h4>
+                <table class="demo-table">
+                    <tr>
+                        <th rowspan="3">수학</th>
+                        <th>학생</th>
+                        <th>점수</th>
+                    </tr>
+                    <tr>
+                        <td>홍길동</td>
+                        <td>95</td>
+                    </tr>
+                    <tr>
+                        <td>김철수</td>
+                        <td>88</td>
+                    </tr>
+                    <tr>
+                        <td>이영희</td>
+                        <td>92</td>
+                    </tr>
+                </table>
+            </div>
+
+            <h4>rowspan 주의사항</h4>
+            <div class="warning-box">
+                <strong>⚠️ 중요:</strong>
+                <ul>
+                    <li>rowspan을 사용하면 아래 행에서 해당 위치의 셀을 생략해야 합니다</li>
+                    <li>예: 첫 번째 행에서 rowspan="2"를 사용하면, 두 번째 행의 첫 번째 셀은 생략합니다</li>
+                    <li>rowspan 값은 1 이상의 정수여야 합니다</li>
+                    <li>병합된 셀 아래의 행들은 셀 개수가 줄어듭니다</li>
+                </ul>
+            </div>
+
+            <h3>4.3 colspan과 rowspan 함께 사용</h3>
+            <p>복잡한 테이블 구조를 만들 때 두 속성을 함께 사용할 수 있습니다.</p>
+
+            <h4>기본 예제</h4>
+            <div class="code-block">
+<code>&lt;table&gt;
+    &lt;tr&gt;
+        &lt;th rowspan="2"&gt;부서&lt;/th&gt;
+        &lt;th colspan="2"&gt;개인정보&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;th&gt;이름&lt;/th&gt;
+        &lt;th&gt;나이&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;개발팀&lt;/td&gt;
+        &lt;td&gt;홍길동&lt;/td&gt;
+        &lt;td&gt;25&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</code>
+            </div>
+
+            <div class="example-box">
+                <h4>예제 1: rowspan + colspan 조합</h4>
+                <table class="demo-table">
+                    <tr>
+                        <th rowspan="2">부서</th>
+                        <th colspan="2">개인정보</th>
+                    </tr>
+                    <tr>
+                        <th>이름</th>
+                        <th>나이</th>
+                    </tr>
+                    <tr>
+                        <td>개발팀</td>
+                        <td>홍길동</td>
+                        <td>25</td>
+                    </tr>
+                </table>
+            </div>
+
+            <h4>복잡한 예제</h4>
+            <div class="code-block">
+<code>&lt;table&gt;
+    &lt;tr&gt;
+        &lt;th rowspan="2"&gt;부서&lt;/th&gt;
+        &lt;th colspan="3"&gt;1분기&lt;/th&gt;
+        &lt;th colspan="3"&gt;2분기&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;th&gt;1월&lt;/th&gt;
+        &lt;th&gt;2월&lt;/th&gt;
+        &lt;th&gt;3월&lt;/th&gt;
+        &lt;th&gt;4월&lt;/th&gt;
+        &lt;th&gt;5월&lt;/th&gt;
+        &lt;th&gt;6월&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td rowspan="2"&gt;개발팀&lt;/td&gt;
+        &lt;td&gt;100&lt;/td&gt;
+        &lt;td&gt;120&lt;/td&gt;
+        &lt;td&gt;150&lt;/td&gt;
+        &lt;td&gt;130&lt;/td&gt;
+        &lt;td&gt;140&lt;/td&gt;
+        &lt;td&gt;160&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;110&lt;/td&gt;
+        &lt;td&gt;125&lt;/td&gt;
+        &lt;td&gt;145&lt;/td&gt;
+        &lt;td&gt;135&lt;/td&gt;
+        &lt;td&gt;150&lt;/td&gt;
+        &lt;td&gt;170&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</code>
+            </div>
+
+            <div class="example-box">
+                <h4>예제 2: 복잡한 병합 구조</h4>
+                <table class="demo-table">
+                    <tr>
+                        <th rowspan="2">부서</th>
+                        <th colspan="3">1분기</th>
+                        <th colspan="3">2분기</th>
+                    </tr>
+                    <tr>
+                        <th>1월</th>
+                        <th>2월</th>
+                        <th>3월</th>
+                        <th>4월</th>
+                        <th>5월</th>
+                        <th>6월</th>
+                    </tr>
+                    <tr>
+                        <td rowspan="2">개발팀</td>
+                        <td>100</td>
+                        <td>120</td>
+                        <td>150</td>
+                        <td>130</td>
+                        <td>140</td>
+                        <td>160</td>
+                    </tr>
+                    <tr>
+                        <td>110</td>
+                        <td>125</td>
+                        <td>145</td>
+                        <td>135</td>
+                        <td>150</td>
+                        <td>170</td>
+                    </tr>
+                </table>
+            </div>
+
+            <h3>4.4 셀 병합 계산 방법</h3>
+            <p>셀 병합을 올바르게 사용하려면 각 행의 셀 개수를 정확히 계산해야 합니다.</p>
+
+            <div class="tip-box">
+                <strong>💡 계산 공식:</strong><br>
+                <ul>
+                    <li><strong>일반 셀:</strong> 1개로 계산</li>
+                    <li><strong>colspan="n":</strong> n개 열을 차지하지만, 해당 행에서는 1개 셀로 계산</li>
+                    <li><strong>rowspan="n":</strong> n개 행을 차지하지만, 첫 번째 행에서만 1개 셀로 계산</li>
+                    <li><strong>각 행의 총 셀 개수:</strong> 일반 셀 + colspan 셀 = 행의 열 개수</li>
+                </ul>
+            </div>
+
+            <h4>계산 예제</h4>
+            <div class="code-block">
+<code>&lt;!-- 행 1: 3개 셀 (colspan="2"는 1개로 계산) --&gt;
+&lt;tr&gt;
+    &lt;th colspan="2"&gt;A&lt;/th&gt;  &lt;!-- 1개 셀 --&gt;
+    &lt;th&gt;B&lt;/th&gt;              &lt;!-- 1개 셀 --&gt;
+&lt;/tr&gt;
+
+&lt;!-- 행 2: 3개 셀 (일반 셀 3개) --&gt;
+&lt;tr&gt;
+    &lt;td&gt;1&lt;/td&gt;  &lt;!-- 1개 셀 --&gt;
+    &lt;td&gt;2&lt;/td&gt;  &lt;!-- 1개 셀 --&gt;
+    &lt;td&gt;3&lt;/td&gt;  &lt;!-- 1개 셀 --&gt;
+&lt;/tr&gt;</code>
+            </div>
+
+            <h3>4.5 실전 활용 예제</h3>
+
+            <h4>예제 1: 시간표</h4>
+            <div class="code-block">
+<code>&lt;table&gt;
+    &lt;tr&gt;
+        &lt;th rowspan="2"&gt;시간&lt;/th&gt;
+        &lt;th colspan="5"&gt;요일&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;th&gt;월&lt;/th&gt;
+        &lt;th&gt;화&lt;/th&gt;
+        &lt;th&gt;수&lt;/th&gt;
+        &lt;th&gt;목&lt;/th&gt;
+        &lt;th&gt;금&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;09:00&lt;/td&gt;
+        &lt;td&gt;수학&lt;/td&gt;
+        &lt;td&gt;영어&lt;/td&gt;
+        &lt;td&gt;과학&lt;/td&gt;
+        &lt;td&gt;국어&lt;/td&gt;
+        &lt;td&gt;체육&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</code>
+            </div>
+
+            <div class="example-box">
+                <h4>시간표 예제</h4>
+                <table class="demo-table">
+                    <tr>
+                        <th rowspan="2">시간</th>
+                        <th colspan="5">요일</th>
+                    </tr>
+                    <tr>
+                        <th>월</th>
+                        <th>화</th>
+                        <th>수</th>
+                        <th>목</th>
+                        <th>금</th>
+                    </tr>
+                    <tr>
+                        <td>09:00</td>
+                        <td>수학</td>
+                        <td>영어</td>
+                        <td>과학</td>
+                        <td>국어</td>
+                        <td>체육</td>
+                    </tr>
+                    <tr>
+                        <td>10:00</td>
+                        <td>영어</td>
+                        <td>과학</td>
+                        <td>수학</td>
+                        <td>체육</td>
+                        <td>국어</td>
+                    </tr>
+                </table>
+            </div>
+
+            <h4>예제 2: 재고 관리표</h4>
+            <div class="code-block">
+<code>&lt;table&gt;
+    &lt;tr&gt;
+        &lt;th rowspan="2"&gt;제품&lt;/th&gt;
+        &lt;th colspan="2"&gt;재고&lt;/th&gt;
+        &lt;th rowspan="2"&gt;비고&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;th&gt;입고&lt;/th&gt;
+        &lt;th&gt;출고&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;노트북&lt;/td&gt;
+        &lt;td&gt;50&lt;/td&gt;
+        &lt;td&gt;30&lt;/td&gt;
+        &lt;td&gt;재고 충분&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</code>
+            </div>
+
+            <div class="example-box">
+                <h4>재고 관리표 예제</h4>
+                <table class="demo-table">
+                    <tr>
+                        <th rowspan="2">제품</th>
+                        <th colspan="2">재고</th>
+                        <th rowspan="2">비고</th>
+                    </tr>
+                    <tr>
+                        <th>입고</th>
+                        <th>출고</th>
+                    </tr>
+                    <tr>
+                        <td>노트북</td>
+                        <td>50</td>
+                        <td>30</td>
+                        <td>재고 충분</td>
+                    </tr>
+                    <tr>
+                        <td>마우스</td>
+                        <td>100</td>
+                        <td>80</td>
+                        <td>재고 충분</td>
+                    </tr>
+                    <tr>
+                        <td>키보드</td>
+                        <td>30</td>
+                        <td>25</td>
+                        <td>재고 부족</td>
+                    </tr>
+                </table>
+            </div>
+
+            <h3>4.6 셀 분할 (병합 해제)</h3>
+            <p>HTML에서는 셀을 직접 "나누는" 속성이 없습니다. 대신 병합을 사용하지 않으면 각 셀이 독립적으로 표시됩니다.</p>
+
+            <div class="info-box">
+                <strong>💡 셀 분할 방법:</strong><br>
+                <ul>
+                    <li><strong>기본 상태:</strong> 각 셀은 기본적으로 독립적입니다 (병합하지 않으면 분할된 상태)</li>
+                    <li><strong>병합 해제:</strong> colspan이나 rowspan을 제거하면 셀이 분할됩니다</li>
+                    <li><strong>CSS 활용:</strong> 시각적으로 셀을 나눈 것처럼 보이게 하려면 border를 사용합니다</li>
+                </ul>
+            </div>
+
+            <h4>분할된 테이블 예제</h4>
+            <div class="code-block">
+<code>&lt;!-- 모든 셀이 분할된 상태 (기본) --&gt;
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;td&gt;셀 1&lt;/td&gt;
+        &lt;td&gt;셀 2&lt;/td&gt;
+        &lt;td&gt;셀 3&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;셀 4&lt;/td&gt;
+        &lt;td&gt;셀 5&lt;/td&gt;
+        &lt;td&gt;셀 6&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</code>
+            </div>
+
+            <div class="example-box">
+                <h4>분할된 테이블 (기본 상태)</h4>
+                <table class="demo-table">
+                    <tr>
+                        <td>셀 1</td>
+                        <td>셀 2</td>
+                        <td>셀 3</td>
+                    </tr>
+                    <tr>
+                        <td>셀 4</td>
+                        <td>셀 5</td>
+                        <td>셀 6</td>
+                    </tr>
+                </table>
+            </div>
+
+            <h4>CSS로 시각적 분할 강조</h4>
+            <div class="code-block">
+<code>&lt;style&gt;
+    .divided-table {
+        border-collapse: separate;
+        border-spacing: 5px; /* 셀 간격 */
+    }
+    
+    .divided-table td {
+        border: 2px solid #667eea;
+        padding: 10px;
+        background: #f0f0f0;
+    }
+&lt;/style&gt;</code>
+            </div>
+
+            <h3>4.7 병합 시 주의사항 및 팁</h3>
+
+            <div class="warning-box">
+                <strong>⚠️ 자주 발생하는 오류:</strong>
+                <ul>
+                    <li><strong>셀 개수 불일치:</strong> 행마다 셀 개수가 다르면 테이블이 깨질 수 있습니다</li>
+                    <li><strong>rowspan 위치 오류:</strong> rowspan을 사용한 셀 아래 행에서 해당 위치 셀을 생략하지 않으면 오류 발생</li>
+                    <li><strong>colspan 값 오류:</strong> colspan 값이 행의 실제 열 개수를 초과하면 안 됩니다</li>
+                    <li><strong>중첩 병합:</strong> 이미 병합된 셀 안에 다시 병합할 수 없습니다</li>
+                </ul>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 디버깅 팁:</strong>
+                <ul>
+                    <li>테이블을 만들 때 각 행의 셀 개수를 먼저 계산하세요</li>
+                    <li>rowspan을 사용할 때는 아래 행에서 해당 위치를 비워야 합니다</li>
+                    <li>복잡한 테이블은 단계별로 만들어가세요</li>
+                    <li>브라우저 개발자 도구로 테이블 구조를 확인하세요</li>
+                    <li>접근성을 위해 병합된 셀에 적절한 scope나 headers 속성을 사용하세요</li>
+                </ul>
+            </div>
+
+            <h3>4.8 접근성 고려사항</h3>
+            <p>셀 병합을 사용할 때 접근성을 고려해야 합니다.</p>
+
+            <div class="code-block">
+<code>&lt;!-- 좋은 예: scope 속성 사용 --&gt;
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;th rowspan="2" scope="rowgroup"&gt;부서&lt;/th&gt;
+        &lt;th colspan="2" scope="colgroup"&gt;개인정보&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;th scope="col"&gt;이름&lt;/th&gt;
+        &lt;th scope="col"&gt;나이&lt;/th&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</code>
+            </div>
+
+            <div class="info-box">
+                <strong>💡 접근성 팁:</strong>
+                <ul>
+                    <li>병합된 헤더 셀에 <code>scope</code> 속성을 추가하세요</li>
+                    <li>복잡한 테이블은 <code>headers</code> 속성으로 셀 관계를 명시하세요</li>
+                    <li>병합된 셀의 의미를 명확하게 표현하세요</li>
+                    <li>스크린 리더 사용자를 위해 테이블 구조를 설명하는 caption을 추가하세요</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 5. Table 속성 -->
+        <div class="section">
+            <h2>5. Table 속성</h2>
+
+            <h3>5.1 주요 속성</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>속성</th>
+                        <th>설명</th>
+                        <th>값</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>border</code></td>
+                        <td>테이블 테두리 (HTML5에서 비권장, CSS 사용 권장)</td>
+                        <td>숫자 (픽셀)</td>
+                    </tr>
+                    <tr>
+                        <td><code>cellpadding</code></td>
+                        <td>셀 내부 여백 (HTML5에서 비권장, CSS padding 사용)</td>
+                        <td>숫자 (픽셀)</td>
+                    </tr>
+                    <tr>
+                        <td><code>cellspacing</code></td>
+                        <td>셀 간격 (HTML5에서 비권장, CSS border-spacing 사용)</td>
+                        <td>숫자 (픽셀)</td>
+                    </tr>
+                    <tr>
+                        <td><code>width</code></td>
+                        <td>테이블 너비 (CSS 사용 권장)</td>
+                        <td>픽셀 또는 퍼센트</td>
+                    </tr>
+                    <tr>
+                        <td><code>align</code></td>
+                        <td>테이블 정렬 (HTML5에서 비권장, CSS 사용)</td>
+                        <td>left, center, right</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="warning-box">
+                <strong>⚠️ 중요:</strong> HTML5에서는 대부분의 테이블 속성이 비권장(deprecated)되었습니다. 
+                대신 CSS를 사용하여 스타일을 지정하는 것이 권장됩니다.
+            </div>
+
+            <h3>5.2 CSS로 스타일링</h3>
+            <div class="code-block">
+<code>&lt;style&gt;
+    table {
+        width: 100%;
+        border-collapse: collapse; /* 셀 테두리 합치기 */
+        border-spacing: 0; /* 셀 간격 */
+    }
+    
+    th, td {
+        padding: 12px;
+        border: 1px solid #ddd;
+        text-align: left;
+    }
+    
+    th {
+        background-color: #667eea;
+        color: white;
+        font-weight: bold;
+    }
+    
+    tr:nth-child(even) {
+        background-color: #f2f2f2; /* 짝수 행 배경색 */
+    }
+    
+    tr:hover {
+        background-color: #f5f5f5; /* 마우스 오버 효과 */
+    }
+&lt;/style&gt;</code>
+            </div>
+        </div>
+
+        <!-- 6. colgroup과 col -->
+        <div class="section">
+            <h2>6. colgroup과 col</h2>
+            <p>특정 열에 스타일을 적용하거나 너비를 지정할 수 있습니다.</p>
+
+            <h3>6.1 기본 사용법</h3>
+            <div class="code-block">
+<code>&lt;table&gt;
+    &lt;colgroup&gt;
+        &lt;col style="width: 30%;"&gt;
+        &lt;col style="width: 40%;"&gt;
+        &lt;col style="width: 30%;"&gt;
+    &lt;/colgroup&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;이름&lt;/th&gt;
+            &lt;th&gt;설명&lt;/th&gt;
+            &lt;th&gt;가격&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;상품 A&lt;/td&gt;
+            &lt;td&gt;상세 설명...&lt;/td&gt;
+            &lt;td&gt;10,000원&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;</code>
+            </div>
+
+            <h3>6.2 span 속성 사용</h3>
+            <div class="code-block">
+<code>&lt;table&gt;
+    &lt;colgroup&gt;
+        &lt;col span="2" style="background-color: #f0f0f0;"&gt;
+        &lt;col style="background-color: #e0e0e0;"&gt;
+    &lt;/colgroup&gt;
+    &lt;!-- 테이블 내용 --&gt;
+&lt;/table&gt;</code>
+            </div>
+        </div>
+
+        <!-- 7. 접근성 -->
+        <div class="section">
+            <h2>7. 접근성 (Accessibility)</h2>
+
+            <h3>7.1 scope 속성</h3>
+            <p><code>scope</code> 속성은 헤더 셀이 어떤 데이터를 설명하는지 명시합니다.</p>
+            <div class="code-block">
+<code>&lt;table&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th scope="col"&gt;이름&lt;/th&gt;
+            &lt;th scope="col"&gt;나이&lt;/th&gt;
+            &lt;th scope="col"&gt;직업&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;th scope="row"&gt;홍길동&lt;/th&gt;
+            &lt;td&gt;25&lt;/td&gt;
+            &lt;td&gt;개발자&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;</code>
+            </div>
+
+            <h3>7.2 scope 속성 값</h3>
+            <ul>
+                <li><code>col</code> - 열 헤더</li>
+                <li><code>row</code> - 행 헤더</li>
+                <li><code>colgroup</code> - 열 그룹 헤더</li>
+                <li><code>rowgroup</code> - 행 그룹 헤더</li>
+            </ul>
+
+            <h3>7.3 headers 속성</h3>
+            <p>복잡한 테이블에서 셀이 어떤 헤더와 연관되는지 명시합니다.</p>
+            <div class="code-block">
+<code>&lt;table&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th id="name"&gt;이름&lt;/th&gt;
+            &lt;th id="age"&gt;나이&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td headers="name"&gt;홍길동&lt;/td&gt;
+            &lt;td headers="age"&gt;25&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;</code>
+            </div>
+
+            <h3>7.4 접근성 모범 사례</h3>
+            <ul>
+                <li>모든 테이블에 <code>&lt;caption&gt;</code> 사용</li>
+                <li>헤더 셀에 <code>scope</code> 속성 지정</li>
+                <li>복잡한 테이블은 <code>headers</code> 속성 사용</li>
+                <li>의미 있는 테이블만 사용 (레이아웃 용도 아님)</li>
+                <li>테이블에 대한 설명 제공</li>
+            </ul>
+        </div>
+
+        <!-- 8. 반응형 테이블 -->
+        <div class="section">
+            <h2>8. 반응형 테이블</h2>
+            <p>모바일 환경에서 테이블을 보기 좋게 만드는 방법들입니다.</p>
+
+            <h3>8.1 수평 스크롤</h3>
+            <div class="code-block">
+<code>&lt;style&gt;
+    .table-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    table {
+        min-width: 600px;
+    }
+&lt;/style&gt;
+
+&lt;div class="table-container"&gt;
+    &lt;table&gt;
+        &lt;!-- 테이블 내용 --&gt;
+    &lt;/table&gt;
+&lt;/div&gt;</code>
+            </div>
+
+            <h3>8.2 카드 형태로 변환</h3>
+            <div class="code-block">
+<code>&lt;style&gt;
+    @media (max-width: 768px) {
+        table, thead, tbody, th, td, tr {
+            display: block;
+        }
+        
+        thead tr {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+        
+        tr {
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+        
+        td {
+            border: none;
+            position: relative;
+            padding-left: 50%;
+        }
+        
+        td:before {
+            content: attr(data-label);
+            position: absolute;
+            left: 6px;
+            font-weight: bold;
+        }
+    }
+&lt;/style&gt;</code>
+            </div>
+        </div>
+
+        <!-- 9. 실전 팁 -->
+        <div class="section">
+            <h2>9. 실전 팁</h2>
+
+            <div class="tip-box">
+                <h3>💡 유용한 팁들</h3>
+                <ul>
+                    <li><strong>border-collapse:</strong> <code>collapse</code>로 셀 테두리를 합치면 더 깔끔합니다</li>
+                    <li><strong>zebra striping:</strong> <code>nth-child(even)</code>로 짝수 행에 배경색을 주면 가독성이 향상됩니다</li>
+                    <li><strong>hover 효과:</strong> <code>tr:hover</code>로 마우스 오버 시 강조</li>
+                    <li><strong>고정 헤더:</strong> <code>position: sticky</code>로 스크롤 시 헤더 고정</li>
+                    <li><strong>빈 셀:</strong> 빈 셀에는 <code>&amp;nbsp;</code> 또는 설명 텍스트 추가</li>
+                    <li><strong>정렬:</strong> 숫자는 오른쪽, 텍스트는 왼쪽 정렬이 일반적</li>
+                </ul>
+            </div>
+
+            <h3>9.1 고정 헤더 예제</h3>
+            <div class="code-block">
+<code>&lt;style&gt;
+    .sticky-header th {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
+&lt;/style&gt;
+
+&lt;table class="sticky-header"&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;헤더 1&lt;/th&gt;
+            &lt;th&gt;헤더 2&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;!-- 긴 테이블 내용 --&gt;
+&lt;/table&gt;</code>
+            </div>
+        </div>
+
+        <!-- 10. 요약 -->
+        <div class="section">
+            <h2>10. 핵심 요약</h2>
+
+            <div class="info-box">
+                <h3>기본 구조</h3>
+                <ul>
+                    <li><code>&lt;table&gt;</code> - 테이블 컨테이너</li>
+                    <li><code>&lt;tr&gt;</code> - 행 (Table Row)</li>
+                    <li><code>&lt;th&gt;</code> - 헤더 셀 (Table Header)</li>
+                    <li><code>&lt;td&gt;</code> - 데이터 셀 (Table Data)</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h3>시맨틱 구조</h3>
+                <ul>
+                    <li><code>&lt;thead&gt;</code> - 헤더 영역</li>
+                    <li><code>&lt;tbody&gt;</code> - 본문 영역</li>
+                    <li><code>&lt;tfoot&gt;</code> - 푸터 영역</li>
+                    <li><code>&lt;caption&gt;</code> - 테이블 제목</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h3>셀 병합</h3>
+                <ul>
+                    <li><code>colspan</code> - 열 병합</li>
+                    <li><code>rowspan</code> - 행 병합</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h3>접근성</h3>
+                <ul>
+                    <li><code>scope</code> - 헤더 범위 지정</li>
+                    <li><code>headers</code> - 헤더 연결</li>
+                    <li><code>caption</code> - 테이블 설명</li>
+                </ul>
+            </div>
+        </div>
+
+        <footer style="text-align: center; margin-top: 50px; padding-top: 20px; border-top: 2px solid #ddd; color: #666;">
+            <p>HTML Table 태그 완벽 가이드 - 2025</p>
+            <p style="margin-top: 10px;">
+                <a href="html-table-examples.html" style="color: #667eea; text-decoration: none; font-weight: 500;">
+                    → 예제 파일 보기
+                </a>
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
+

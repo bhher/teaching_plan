@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Form 예제 모음</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-align: center;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 20px;
+        }
+
+        h2 {
+            color: #764ba2;
+            font-size: 1.8em;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-left: 15px;
+            border-left: 5px solid #764ba2;
+        }
+
+        .example-section {
+            margin-bottom: 50px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .example-title {
+            color: #555;
+            font-size: 1.3em;
+            margin-bottom: 20px;
+        }
+
+        /* Form 스타일링 */
+        .styled-form {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            max-width: 600px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .form-group label .required {
+            color: #f44336;
+            margin-left: 3px;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="password"],
+        .form-group input[type="tel"],
+        .form-group input[type="number"],
+        .form-group input[type="date"],
+        .form-group input[type="url"],
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            font-family: 'Noto Sans KR', sans-serif;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-group .help-text {
+            font-size: 0.875em;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .form-group .error-message {
+            color: #f44336;
+            font-size: 0.875em;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .form-group.error .error-message {
+            display: block;
+        }
+
+        .form-group.error input,
+        .form-group.error select,
+        .form-group.error textarea {
+            border-color: #f44336;
+        }
+
+        /* 체크박스와 라디오 버튼 */
+        .checkbox-group,
+        .radio-group {
+            margin: 10px 0;
+        }
+
+        .checkbox-group label,
+        .radio-group label {
+            display: flex;
+            align-items: center;
+            font-weight: normal;
+            cursor: pointer;
+        }
+
+        .checkbox-group input[type="checkbox"],
+        .radio-group input[type="radio"] {
+            margin-right: 8px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        /* 버튼 스타일 */
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        /* Fieldset 스타일 */
+        fieldset {
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        legend {
+            padding: 0 10px;
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        /* Range 슬라이더 */
+        .range-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .range-container input[type="range"] {
+            flex: 1;
+        }
+
+        .range-value {
+            min-width: 50px;
+            text-align: center;
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        /* 파일 업로드 */
+        .file-upload {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-upload input[type="file"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px dashed #ddd;
+            border-radius: 5px;
+            background: #f8f9fa;
+        }
+
+        /* 코드 블록 */
+        .code-preview {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin-top: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+
+        .toggle-code {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .toggle-code:hover {
+            background: #5568d3;
+        }
+
+        .code-block {
+            display: none;
+        }
+
+        .code-block.show {
+            display: block;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            border-left: 4px solid #2196F3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📝 HTML Form 예제 모음</h1>
+        <p style="text-align: center; color: #666; margin-bottom: 40px;">
+            실제로 사용할 수 있는 다양한 폼 예제들
+        </p>
+
+        <!-- 예제 1: 기본 로그인 폼 -->
+        <div class="example-section">
+            <h2>예제 1: 로그인 폼</h2>
+            <div class="example-title">기본적인 로그인 폼 예제</div>
+            
+            <form class="styled-form" id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="login-email">이메일 <span class="required">*</span></label>
+                    <input 
+                        type="email" 
+                        id="login-email" 
+                        name="email" 
+                        placeholder="example@email.com"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="login-password">비밀번호 <span class="required">*</span></label>
+                    <input 
+                        type="password" 
+                        id="login-password" 
+                        name="password" 
+                        placeholder="비밀번호를 입력하세요"
+                        required
+                        minlength="8"
+                    >
+                    <div class="help-text">최소 8자 이상 입력하세요</div>
+                </div>
+
+                <div class="checkbox-group">
+                    <label>
+                        <input type="checkbox" name="remember">
+                        로그인 상태 유지
+                    </label>
+                </div>
+
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-primary">로그인</button>
+                    <button type="button" class="btn btn-secondary" onclick="resetForm('loginForm')">초기화</button>
+                </div>
+            </form>
+
+            <button class="toggle-code" onclick="toggleCode('loginCode')">코드 보기/숨기기</button>
+            <div id="loginCode" class="code-block code-preview">
+&lt;form id="loginForm"&gt;
+    &lt;div class="form-group"&gt;
+        &lt;label for="login-email"&gt;이메일 &lt;span class="required"&gt;*&lt;/span&gt;&lt;/label&gt;
+        &lt;input 
+            type="email" 
+            id="login-email" 
+            name="email" 
+            placeholder="example@email.com"
+            required
+        &gt;
+    &lt;/div&gt;
+
+    &lt;div class="form-group"&gt;
+        &lt;label for="login-password"&gt;비밀번호 &lt;span class="required"&gt;*&lt;/span&gt;&lt;/label&gt;
+        &lt;input 
+            type="password" 
+            id="login-password" 
+            name="password" 
+            placeholder="비밀번호를 입력하세요"
+            required
+            minlength="8"
+        &gt;
+    &lt;/div&gt;
+
+    &lt;div class="checkbox-group"&gt;
+        &lt;label&gt;
+            &lt;input type="checkbox" name="remember"&gt;
+            로그인 상태 유지
+        &lt;/label&gt;
+    &lt;/div&gt;
+
+    &lt;button type="submit"&gt;로그인&lt;/button&gt;
+&lt;/form&gt;
+            </div>
+        </div>
+
+        <!-- 예제 2: 회원가입 폼 -->
+        <div class="example-section">
+            <h2>예제 2: 회원가입 폼</h2>
+            <div class="example-title">상세한 회원가입 폼 예제</div>
+            
+            <form class="styled-form" id="signupForm" onsubmit="handleSignup(event)">
+                <fieldset>
+                    <legend>기본 정보</legend>
+                    
+                    <div class="form-group">
+                        <label for="signup-name">이름 <span class="required">*</span></label>
+                        <input 
+                            type="text" 
+                            id="signup-name" 
+                            name="name" 
+                            placeholder="홍길동"
+                            required
+                            pattern="[가-힣]{2,10}"
+                        >
+                        <div class="help-text">한글 2-10자</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signup-email">이메일 <span class="required">*</span></label>
+                        <input 
+                            type="email" 
+                            id="signup-email" 
+                            name="email" 
+                            placeholder="example@email.com"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signup-password">비밀번호 <span class="required">*</span></label>
+                        <input 
+                            type="password" 
+                            id="signup-password" 
+                            name="password" 
+                            placeholder="비밀번호를 입력하세요"
+                            required
+                            minlength="8"
+                            maxlength="20"
+                        >
+                        <div class="help-text">8-20자, 영문, 숫자, 특수문자 포함</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signup-password-confirm">비밀번호 확인 <span class="required">*</span></label>
+                        <input 
+                            type="password" 
+                            id="signup-password-confirm" 
+                            name="passwordConfirm" 
+                            placeholder="비밀번호를 다시 입력하세요"
+                            required
+                        >
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>추가 정보</legend>
+                    
+                    <div class="form-group">
+                        <label for="signup-phone">전화번호</label>
+                        <input 
+                            type="tel" 
+                            id="signup-phone" 
+                            name="phone" 
+                            placeholder="010-1234-5678"
+                            pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
+                        >
+                        <div class="help-text">형식: 010-1234-5678</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signup-birth">생년월일</label>
+                        <input 
+                            type="date" 
+                            id="signup-birth" 
+                            name="birth"
+                            max="2024-12-31"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signup-gender">성별</label>
+                        <div class="radio-group">
+                            <label>
+                                <input type="radio" name="gender" value="male">
+                                남성
+                            </label>
+                            <label>
+                                <input type="radio" name="gender" value="female">
+                                여성
+                            </label>
+                            <label>
+                                <input type="radio" name="gender" value="other">
+                                기타
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signup-country">국가</label>
+                        <select id="signup-country" name="country">
+                            <option value="">선택하세요</option>
+                            <option value="kr" selected>한국</option>
+                            <option value="us">미국</option>
+                            <option value="jp">일본</option>
+                            <option value="cn">중국</option>
+                        </select>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>약관 동의</legend>
+                    
+                    <div class="checkbox-group">
+                        <label>
+                            <input type="checkbox" name="terms" required>
+                            이용약관 동의 <span class="required">*</span>
+                        </label>
+                    </div>
+                    
+                    <div class="checkbox-group">
+                        <label>
+                            <input type="checkbox" name="privacy" required>
+                            개인정보 처리방침 동의 <span class="required">*</span>
+                        </label>
+                    </div>
+                    
+                    <div class="checkbox-group">
+                        <label>
+                            <input type="checkbox" name="marketing">
+                            마케팅 정보 수신 동의 (선택)
+                        </label>
+                    </div>
+                </fieldset>
+
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-primary">회원가입</button>
+                    <button type="reset" class="btn btn-secondary">초기화</button>
+                </div>
+            </form>
+
+            <button class="toggle-code" onclick="toggleCode('signupCode')">코드 보기/숨기기</button>
+            <div id="signupCode" class="code-block code-preview">
+&lt;form id="signupForm"&gt;
+    &lt;fieldset&gt;
+        &lt;legend&gt;기본 정보&lt;/legend&gt;
+        &lt;!-- 필드들 --&gt;
+    &lt;/fieldset&gt;
+    &lt;!-- 더 많은 필드들 --&gt;
+&lt;/form&gt;
+            </div>
+        </div>
+
+        <!-- 예제 3: 연락처 폼 -->
+        <div class="example-section">
+            <h2>예제 3: 연락처 폼</h2>
+            <div class="example-title">문의하기 폼 예제</div>
+            
+            <form class="styled-form" id="contactForm" onsubmit="handleContact(event)">
+                <div class="form-group">
+                    <label for="contact-name">이름 <span class="required">*</span></label>
+                    <input 
+                        type="text" 
+                        id="contact-name" 
+                        name="name" 
+                        placeholder="홍길동"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="contact-email">이메일 <span class="required">*</span></label>
+                    <input 
+                        type="email" 
+                        id="contact-email" 
+                        name="email" 
+                        placeholder="example@email.com"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="contact-subject">제목 <span class="required">*</span></label>
+                    <input 
+                        type="text" 
+                        id="contact-subject" 
+                        name="subject" 
+                        placeholder="문의 제목"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="contact-message">메시지 <span class="required">*</span></label>
+                    <textarea 
+                        id="contact-message" 
+                        name="message" 
+                        placeholder="문의 내용을 입력하세요"
+                        required
+                        rows="6"
+                    ></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="contact-file">첨부 파일</label>
+                    <div class="file-upload">
+                        <input 
+                            type="file" 
+                            id="contact-file" 
+                            name="file"
+                            accept=".pdf,.doc,.docx,.jpg,.png"
+                        >
+                    </div>
+                    <div class="help-text">PDF, DOC, 이미지 파일만 업로드 가능</div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">문의하기</button>
+            </form>
+        </div>
+
+        <!-- 예제 4: 검색 폼 -->
+        <div class="example-section">
+            <h2>예제 4: 검색 폼</h2>
+            <div class="example-title">다양한 검색 옵션이 있는 폼</div>
+            
+            <form class="styled-form" id="searchForm" method="get" onsubmit="handleSearch(event)">
+                <div class="form-group">
+                    <label for="search-query">검색어</label>
+                    <input 
+                        type="search" 
+                        id="search-query" 
+                        name="q" 
+                        placeholder="검색어를 입력하세요"
+                        autofocus
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="search-category">카테고리</label>
+                    <select id="search-category" name="category">
+                        <option value="">전체</option>
+                        <optgroup label="전자제품">
+                            <option value="laptop">노트북</option>
+                            <option value="phone">스마트폰</option>
+                            <option value="tablet">태블릿</option>
+                        </optgroup>
+                        <optgroup label="의류">
+                            <option value="shirt">셔츠</option>
+                            <option value="pants">바지</option>
+                            <option value="shoes">신발</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="search-price">가격 범위</label>
+                    <div class="range-container">
+                        <input 
+                            type="range" 
+                            id="search-price" 
+                            name="price" 
+                            min="0" 
+                            max="1000000" 
+                            step="10000"
+                            value="500000"
+                            oninput="updateRangeValue(this, 'priceValue')"
+                        >
+                        <span class="range-value" id="priceValue">500,000원</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">검색</button>
+            </form>
+        </div>
+
+        <!-- 예제 5: 설문조사 폼 -->
+        <div class="example-section">
+            <h2>예제 5: 설문조사 폼</h2>
+            <div class="example-title">다양한 입력 타입을 사용한 설문조사</div>
+            
+            <form class="styled-form" id="surveyForm" onsubmit="handleSurvey(event)">
+                <div class="form-group">
+                    <label>만족도 평가</label>
+                    <div class="radio-group">
+                        <label>
+                            <input type="radio" name="satisfaction" value="5" required>
+                            매우 만족
+                        </label>
+                        <label>
+                            <input type="radio" name="satisfaction" value="4" required>
+                            만족
+                        </label>
+                        <label>
+                            <input type="radio" name="satisfaction" value="3" required>
+                            보통
+                        </label>
+                        <label>
+                            <input type="radio" name="satisfaction" value="2" required>
+                            불만족
+                        </label>
+                        <label>
+                            <input type="radio" name="satisfaction" value="1" required>
+                            매우 불만족
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>선호하는 기능 (복수 선택 가능)</label>
+                    <div class="checkbox-group">
+                        <label>
+                            <input type="checkbox" name="features" value="speed">
+                            빠른 속도
+                        </label>
+                        <label>
+                            <input type="checkbox" name="features" value="design">
+                            디자인
+                        </label>
+                        <label>
+                            <input type="checkbox" name="features" value="price">
+                            가격
+                        </label>
+                        <label>
+                            <input type="checkbox" name="features" value="service">
+                            고객 서비스
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="survey-color">선호하는 색상</label>
+                    <input 
+                        type="color" 
+                        id="survey-color" 
+                        name="color" 
+                        value="#667eea"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="survey-date">설문 날짜</label>
+                    <input 
+                        type="date" 
+                        id="survey-date" 
+                        name="date"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="survey-time">선호 시간</label>
+                    <input 
+                        type="time" 
+                        id="survey-time" 
+                        name="time"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="survey-comment">의견</label>
+                    <textarea 
+                        id="survey-comment" 
+                        name="comment" 
+                        placeholder="추가 의견을 입력하세요"
+                        rows="4"
+                    ></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">제출</button>
+            </form>
+        </div>
+
+        <div class="info-box" style="margin-top: 40px;">
+            <strong>💡 참고:</strong> 이 예제들은 클라이언트 측 유효성 검사만 포함되어 있습니다. 
+            실제 서버로 데이터를 전송하려면 서버 측 처리가 필요합니다.
+        </div>
+    </div>
+
+    <script>
+        // 코드 토글 함수
+        function toggleCode(id) {
+            const codeBlock = document.getElementById(id);
+            codeBlock.classList.toggle('show');
+        }
+
+        // 폼 리셋 함수
+        function resetForm(formId) {
+            document.getElementById(formId).reset();
+        }
+
+        // Range 값 업데이트
+        function updateRangeValue(input, valueId) {
+            const value = parseInt(input.value);
+            document.getElementById(valueId).textContent = value.toLocaleString() + '원';
+        }
+
+        // 폼 제출 핸들러들
+        function handleLogin(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            console.log('로그인 데이터:', Object.fromEntries(formData));
+            alert('로그인 폼이 제출되었습니다! (콘솔 확인)');
+        }
+
+        function handleSignup(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData);
+            
+            // 비밀번호 확인
+            if (data.password !== data.passwordConfirm) {
+                alert('비밀번호가 일치하지 않습니다.');
+                return;
+            }
+            
+            console.log('회원가입 데이터:', data);
+            alert('회원가입 폼이 제출되었습니다! (콘솔 확인)');
+        }
+
+        function handleContact(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            console.log('연락처 데이터:', Object.fromEntries(formData));
+            alert('문의 폼이 제출되었습니다! (콘솔 확인)');
+        }
+
+        function handleSearch(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const query = new URLSearchParams(formData).toString();
+            console.log('검색 쿼리:', query);
+            alert('검색이 실행되었습니다! (콘솔 확인)\n실제로는 서버로 전송됩니다.');
+        }
+
+        function handleSurvey(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            
+            // 체크박스 값 수집
+            const features = formData.getAll('features');
+            const data = Object.fromEntries(formData);
+            data.features = features;
+            
+            console.log('설문조사 데이터:', data);
+            alert('설문조사가 제출되었습니다! (콘솔 확인)');
+        }
+    </script>
+</body>
+</html>
+
+
+
