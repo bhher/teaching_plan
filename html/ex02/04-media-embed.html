@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="미디어 요소 및 임베드 예제">
+    <title>미디어 요소 및 임베드 예제</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.8;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        section {
+            margin: 30px 0;
+            padding: 25px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+        h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        audio, video {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px 0;
+        }
+        iframe {
+            width: 100%;
+            max-width: 800px;
+            height: 450px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        .note {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .warning {
+            background-color: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .media-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>미디어 요소 및 임베드 예제</h1>
+
+    <section>
+        <h2>1. 오디오 (audio)</h2>
+        <p>오디오 파일을 재생할 수 있습니다.</p>
+        
+        <div class="media-container">
+            <h3>기본 오디오 플레이어</h3>
+            <audio controls>
+                <source src="audio.mp3" type="audio/mpeg">
+                <source src="audio.ogg" type="audio/ogg">
+                브라우저가 오디오 태그를 지원하지 않습니다.
+            </audio>
+            <p><em>참고: 실제 오디오 파일이 없어 재생되지 않습니다.</em></p>
+        </div>
+
+        <h3>코드 예시</h3>
+        <pre><code>&lt;audio controls&gt;
+  &lt;source src="audio.mp3" type="audio/mpeg"&gt;
+  &lt;source src="audio.ogg" type="audio/ogg"&gt;
+  브라우저가 오디오 태그를 지원하지 않습니다.
+&lt;/audio&gt;</code></pre>
+
+        <h3>오디오 속성</h3>
+        <ul>
+            <li><code>controls</code>: 재생 컨트롤 표시</li>
+            <li><code>autoplay</code>: 자동 재생 (권장하지 않음)</li>
+            <li><code>loop</code>: 반복 재생</li>
+            <li><code>muted</code>: 음소거</li>
+            <li><code>preload</code>: 미리 로드 (none, metadata, auto)</li>
+        </ul>
+
+        <div class="warning">
+            <strong>주의:</strong> <code>autoplay</code> 속성은 사용자 경험을 해칠 수 있으므로 
+            신중하게 사용해야 합니다. 대부분의 브라우저는 자동 재생을 제한합니다.
+        </div>
+    </section>
+
+    <section>
+        <h2>2. 비디오 (video)</h2>
+        <p>비디오 파일을 재생할 수 있습니다.</p>
+        
+        <div class="media-container">
+            <h3>기본 비디오 플레이어</h3>
+            <video controls width="640" height="360">
+                <source src="video.mp4" type="video/mp4">
+                <source src="video.webm" type="video/webm">
+                브라우저가 비디오 태그를 지원하지 않습니다.
+            </video>
+            <p><em>참고: 실제 비디오 파일이 없어 재생되지 않습니다.</em></p>
+        </div>
+
+        <h3>코드 예시</h3>
+        <pre><code>&lt;video controls width="640" height="360"&gt;
+  &lt;source src="video.mp4" type="video/mp4"&gt;
+  &lt;source src="video.webm" type="video/webm"&gt;
+  브라우저가 비디오 태그를 지원하지 않습니다.
+&lt;/video&gt;</code></pre>
+
+        <h3>비디오 속성</h3>
+        <ul>
+            <li><code>controls</code>: 재생 컨트롤 표시</li>
+            <li><code>width</code>, <code>height</code>: 비디오 크기</li>
+            <li><code>poster</code>: 썸네일 이미지</li>
+            <li><code>autoplay</code>, <code>loop</code>, <code>muted</code>, <code>preload</code>: 오디오와 동일</li>
+        </ul>
+
+        <h3>썸네일 이미지 사용</h3>
+        <pre><code>&lt;video controls poster="thumbnail.jpg"&gt;
+  &lt;source src="video.mp4" type="video/mp4"&gt;
+&lt;/video&gt;</code></pre>
+    </section>
+
+    <section>
+        <h2>3. 비디오 자막 (track)</h2>
+        <p>비디오에 자막을 추가할 수 있습니다.</p>
+        
+        <pre><code>&lt;video controls&gt;
+  &lt;source src="video.mp4" type="video/mp4"&gt;
+  &lt;track kind="subtitles" src="subtitles-ko.vtt" srclang="ko" label="한국어" default&gt;
+  &lt;track kind="subtitles" src="subtitles-en.vtt" srclang="en" label="English"&gt;
+&lt;/video&gt;</code></pre>
+
+        <div class="note">
+            <strong>접근성:</strong> 자막은 청각 장애인과 다양한 언어 사용자를 위한 중요한 기능입니다. 
+            가능하면 자막을 제공하세요.
+        </div>
+    </section>
+
+    <section>
+        <h2>4. iframe 기본 사용법</h2>
+        <p>다른 웹 페이지를 현재 페이지에 임베드할 수 있습니다.</p>
+        
+        <div class="media-container">
+            <h3>예제 웹사이트 임베드</h3>
+            <iframe 
+                src="https://example.com" 
+                title="예제 웹사이트"
+                width="800" 
+                height="450">
+                브라우저가 iframe을 지원하지 않습니다.
+            </iframe>
+        </div>
+
+        <h3>코드 예시</h3>
+        <pre><code>&lt;iframe 
+  src="https://www.example.com" 
+  title="예제 웹사이트"
+  width="800" 
+  height="450"&gt;
+  브라우저가 iframe을 지원하지 않습니다.
+&lt;/iframe&gt;</code></pre>
+
+        <div class="note">
+            <strong>접근성:</strong> <code>title</code> 속성은 필수입니다. 
+            스크린 리더가 iframe의 목적을 이해할 수 있도록 합니다.
+        </div>
+    </section>
+
+    <section>
+        <h2>5. YouTube 비디오 임베드</h2>
+        <p>YouTube 비디오를 웹페이지에 임베드할 수 있습니다.</p>
+        
+        <div class="media-container">
+            <h3>YouTube 비디오 예제</h3>
+            <iframe 
+                width="560" 
+                height="315" 
+                src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                title="YouTube video player" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <h3>사용 방법</h3>
+        <ol>
+            <li>YouTube 비디오 페이지에서 "공유" 버튼 클릭</li>
+            <li>"퍼가기" 탭 선택</li>
+            <li>제공된 코드 복사</li>
+            <li>웹페이지에 붙여넣기</li>
+        </ol>
+
+        <h3>코드 예시</h3>
+        <pre><code>&lt;iframe 
+  width="560" 
+  height="315" 
+  src="https://www.youtube.com/embed/VIDEO_ID" 
+  title="YouTube video player" 
+  frameborder="0" 
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+  allowfullscreen&gt;
+&lt;/iframe&gt;</code></pre>
+    </section>
+
+    <section>
+        <h2>6. Google Maps 임베드</h2>
+        <p>Google Maps를 웹페이지에 임베드할 수 있습니다.</p>
+        
+        <div class="media-container">
+            <h3>Google Maps 예제</h3>
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.303441776123!2d126.9780!3d37.5665!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzfCsDMzJzU5LjQiTiAxMjbCsDU4JzQwLjgiRQ!5e0!3m2!1sko!2skr!4v1234567890123!5m2!1sko!2skr" 
+                width="600" 
+                height="450" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                title="서울시청 위치">
+            </iframe>
+        </div>
+
+        <h3>사용 방법</h3>
+        <ol>
+            <li>Google Maps에서 원하는 위치 검색</li>
+            <li>"공유" 버튼 클릭</li>
+            <li>"지도 퍼가기" 탭 선택</li>
+            <li>제공된 코드 복사</li>
+            <li>웹페이지에 붙여넣기</li>
+        </ol>
+    </section>
+
+    <section>
+        <h2>7. iframe 보안: sandbox 속성</h2>
+        <p>sandbox 속성으로 iframe의 기능을 제한할 수 있습니다.</p>
+        
+        <pre><code>&lt;iframe 
+  src="https://example.com" 
+  sandbox="allow-scripts allow-same-origin"
+  title="제한된 iframe"&gt;
+&lt;/iframe&gt;</code></pre>
+
+        <h3>sandbox 값</h3>
+        <ul>
+            <li><code>allow-scripts</code>: JavaScript 실행 허용</li>
+            <li><code>allow-same-origin</code>: 같은 출처로 취급</li>
+            <li><code>allow-forms</code>: 폼 제출 허용</li>
+            <li><code>allow-popups</code>: 팝업 허용</li>
+        </ul>
+
+        <div class="warning">
+            <strong>보안 주의:</strong> 신뢰할 수 없는 사이트를 iframe으로 임베드할 때는 
+            sandbox 속성을 사용하여 보안을 강화하세요.
+        </div>
+    </section>
+
+    <section>
+        <h2>8. 미디어 접근성 체크리스트</h2>
+        <ul>
+            <li>✅ 비디오에 자막 제공 (<code>&lt;track&gt;</code> 태그)</li>
+            <li>✅ 오디오에 대체 텍스트나 전사본 제공</li>
+            <li>✅ 자동 재생하지 않기 (사용자 경험 고려)</li>
+            <li>✅ 컨트롤 제공 (<code>controls</code> 속성)</li>
+            <li>✅ iframe에 <code>title</code> 속성 필수</li>
+            <li>✅ 대체 콘텐츠 제공 (태그 내 텍스트)</li>
+            <li>✅ 키보드 접근 가능한지 확인</li>
+        </ul>
+    </section>
+</body>
+</html>
+
+

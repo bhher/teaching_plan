@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="텍스트, 제목, 문단 태그 예제">
+    <title>텍스트/제목/문단 태그 예제</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 { color: #d32f2f; }
+        h2 { color: #1976d2; }
+        h3 { color: #388e3c; }
+        h4 { color: #f57c00; }
+        h5 { color: #7b1fa2; }
+        h6 { color: #455a64; }
+        hr {
+            border: none;
+            border-top: 2px solid #ccc;
+            margin: 30px 0;
+        }
+        code {
+            background-color: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>가장 중요한 제목 (h1) - 페이지당 1개 권장</h1>
+    <p>h1은 페이지의 가장 중요한 제목입니다. 보통 페이지당 하나만 사용합니다.</p>
+
+    <hr>
+
+    <h2>두 번째 수준 제목 (h2)</h2>
+    <p>이것은 일반적인 문단(p) 태그입니다. 여러 문장을 포함할 수 있습니다.</p>
+    <p>각 문단은 별도의 블록으로 구분됩니다.</p>
+
+    <h3>세 번째 수준 제목 (h3)</h3>
+    <p>h3는 h2 아래에 오는 하위 제목입니다.</p>
+
+    <h4>네 번째 수준 제목 (h4)</h4>
+    <p>h4는 더 세부적인 제목입니다.</p>
+
+    <h5>다섯 번째 수준 제목 (h5)</h5>
+    <p>h5는 거의 사용하지 않지만 필요할 때 사용합니다.</p>
+
+    <h6>여섯 번째 수준 제목 (h6)</h6>
+    <p>h6는 가장 작은 제목 레벨입니다.</p>
+
+    <hr>
+
+    <h2>텍스트 강조</h2>
+    <p>
+        <strong>strong 태그</strong>는 중요한 내용을 강조합니다. (굵게 표시)
+    </p>
+    <p>
+        <em>em 태그</em>는 내용을 강조합니다. (기울임 표시)
+    </p>
+
+    <h2>줄바꿈</h2>
+    <p>
+        첫 번째 줄<br>
+        두 번째 줄<br>
+        세 번째 줄
+    </p>
+    <p>br 태그는 줄바꿈을 강제로 합니다. 남용하지 않는 것이 좋습니다.</p>
+
+    <h2>인용문</h2>
+    <blockquote>
+        이것은 blockquote 태그입니다. 긴 인용문에 사용됩니다.
+        여러 문단을 포함할 수 있습니다.
+    </blockquote>
+    <p>
+        짧은 인용문은 <q>q 태그</q>를 사용합니다.
+    </p>
+
+    <hr>
+
+    <h2>제목 계층 구조 예시</h2>
+    <h3>올바른 예 (순서대로)</h3>
+    <pre><code>
+h1 → h2 → h3 → h4
+h1 → h2 → h2 → h3
+    </code></pre>
+
+    <h3>잘못된 예 (건너뛰기)</h3>
+    <pre><code>
+h1 → h3 (h2를 건너뜀) ❌
+h2 → h4 (h3를 건너뜀) ❌
+    </code></pre>
+</body>
+</html>
+
+

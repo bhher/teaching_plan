@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="애니메이션 예제">
+    <title>애니메이션 예제</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.8;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        section {
+            background-color: white;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        code {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            display: block;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+        
+        .demo-box {
+            background-color: #e3f2fd;
+            border: 2px solid #2196f3;
+            padding: 40px;
+            margin: 15px 0;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        /* 페이드 인 */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        /* 슬라이드 인 */
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .slide-in {
+            animation: slideIn 1s ease-out;
+        }
+        
+        /* 회전 */
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .spin {
+            animation: spin 2s linear infinite;
+        }
+        
+        /* 바운스 */
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-30px);
+            }
+        }
+        
+        .bounce {
+            animation: bounce 1s ease-in-out infinite;
+        }
+        
+        /* 펄스 */
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.8;
+            }
+        }
+        
+        .pulse {
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        /* 복합 애니메이션 */
+        @keyframes complex {
+            0% {
+                transform: translateX(0) rotate(0deg);
+                background-color: #3498db;
+            }
+            25% {
+                transform: translateX(100px) rotate(90deg);
+                background-color: #27ae60;
+            }
+            50% {
+                transform: translateX(100px) translateY(100px) rotate(180deg);
+                background-color: #e74c3c;
+            }
+            75% {
+                transform: translateX(0) translateY(100px) rotate(270deg);
+                background-color: #f39c12;
+            }
+            100% {
+                transform: translateX(0) translateY(0) rotate(360deg);
+                background-color: #3498db;
+            }
+        }
+        
+        .complex {
+            animation: complex 4s ease-in-out infinite;
+        }
+        
+        /* 애니메이션 제어 */
+        .control-box {
+            background-color: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 30px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+        
+        .control-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .control-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .control-btn:hover {
+            opacity: 0.8;
+        }
+        
+        .play-btn {
+            background-color: #27ae60;
+            color: white;
+        }
+        
+        .pause-btn {
+            background-color: #e74c3c;
+            color: white;
+        }
+        
+        .reset-btn {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .highlight {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>애니메이션 예제</h1>
+
+    <section>
+        <h2>1. @keyframes 기본</h2>
+        <p>애니메이션의 키프레임을 정의합니다.</p>
+        
+        <code>@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* 또는 */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}</code>
+    </section>
+
+    <section>
+        <h2>2. 페이드 인 (Fade In)</h2>
+        <div class="demo-box fade-in">
+            페이드 인 애니메이션
+        </div>
+        
+        <code>@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.element {
+    animation: fadeIn 1s ease-in-out;
+}</code>
+    </section>
+
+    <section>
+        <h2>3. 슬라이드 인 (Slide In)</h2>
+        <div class="demo-box slide-in">
+            슬라이드 인 애니메이션
+        </div>
+        
+        <code>@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.element {
+    animation: slideIn 1s ease-out;
+}</code>
+    </section>
+
+    <section>
+        <h2>4. 회전 (Spin)</h2>
+        <div class="demo-box spin">
+            회전 애니메이션 (무한 반복)
+        </div>
+        
+        <code>@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.element {
+    animation: spin 2s linear infinite;
+}</code>
+        
+        <div class="highlight">
+            <strong>사용 예시:</strong> 로딩 스피너, 아이콘 회전 등
+        </div>
+    </section>
+
+    <section>
+        <h2>5. 바운스 (Bounce)</h2>
+        <div class="demo-box bounce">
+            바운스 애니메이션
+        </div>
+        
+        <code>@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-30px);
+    }
+}
+
+.element {
+    animation: bounce 1s ease-in-out infinite;
+}</code>
+    </section>
+
+    <section>
+        <h2>6. 펄스 (Pulse)</h2>
+        <div class="demo-box pulse" style="background-color: #e74c3c; color: white;">
+            펄스 애니메이션
+        </div>
+        
+        <code>@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+}
+
+.element {
+    animation: pulse 2s ease-in-out infinite;
+}</code>
+    </section>
+
+    <section>
+        <h2>7. 복합 애니메이션</h2>
+        <div class="demo-box complex" style="color: white;">
+            복합 애니메이션 (이동 + 회전 + 색상 변경)
+        </div>
+        
+        <code>@keyframes complex {
+    0% {
+        transform: translateX(0) rotate(0deg);
+        background-color: #3498db;
+    }
+    25% {
+        transform: translateX(100px) rotate(90deg);
+        background-color: #27ae60;
+    }
+    50% {
+        transform: translateX(100px) translateY(100px) rotate(180deg);
+        background-color: #e74c3c;
+    }
+    75% {
+        transform: translateX(0) translateY(100px) rotate(270deg);
+        background-color: #f39c12;
+    }
+    100% {
+        transform: translateX(0) translateY(0) rotate(360deg);
+        background-color: #3498db;
+    }
+}
+
+.element {
+    animation: complex 4s ease-in-out infinite;
+}</code>
+    </section>
+
+    <section>
+        <h2>8. 애니메이션 속성</h2>
+        <p>애니메이션의 세부 속성을 제어할 수 있습니다.</p>
+        
+        <div class="control-box">
+            <div id="control-demo" style="background-color: #3498db; color: white; padding: 20px; border-radius: 8px; margin-bottom: 15px;">
+                애니메이션 제어 예제
+            </div>
+            <div class="control-buttons">
+                <button class="control-btn play-btn" onclick="playAnimation()">재생</button>
+                <button class="control-btn pause-btn" onclick="pauseAnimation()">일시정지</button>
+                <button class="control-btn reset-btn" onclick="resetAnimation()">리셋</button>
+            </div>
+        </div>
+        
+        <code>/* 개별 속성 */
+.element {
+    animation-name: fadeIn;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-delay: 0.5s;
+    animation-iteration-count: 3;      /* 3번 반복 */
+    animation-iteration-count: infinite; /* 무한 반복 */
+    animation-direction: alternate;     /* 왕복 */
+    animation-fill-mode: forwards;      /* 애니메이션 후 상태 유지 */
+    animation-play-state: running;      /* 재생 중 */
+    animation-play-state: paused;       /* 일시정지 */
+}
+
+/* 단축 속성 */
+.element {
+    animation: fadeIn 1s ease-in-out 0.5s 3 alternate forwards;
+}</code>
+        
+        <script>
+            const demo = document.getElementById('control-demo');
+            let animationState = 'running';
+            
+            function playAnimation() {
+                demo.style.animation = 'fadeIn 2s ease-in-out infinite';
+                animationState = 'running';
+            }
+            
+            function pauseAnimation() {
+                demo.style.animationPlayState = 'paused';
+                animationState = 'paused';
+            }
+            
+            function resetAnimation() {
+                demo.style.animation = 'none';
+                setTimeout(() => {
+                    demo.style.animation = 'fadeIn 2s ease-in-out infinite';
+                }, 10);
+            }
+            
+            // 초기 애니메이션
+            playAnimation();
+        </script>
+    </section>
+
+    <section>
+        <h2>9. 실전 애니메이션 예제</h2>
+        
+        <h3>로딩 스피너</h3>
+        <div style="text-align: center; margin: 20px 0;">
+            <div style="width: 50px; height: 50px; border: 5px solid #f3f3f3; border-top: 5px solid #3498db; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto;"></div>
+        </div>
+        
+        <code>@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}</code>
+        
+        <h3>모달 애니메이션</h3>
+        <div style="background-color: #fff3cd; padding: 20px; border-radius: 8px; margin: 20px 0; animation: fadeIn 0.3s ease-out;">
+            모달이 나타나는 애니메이션
+        </div>
+        
+        <code>@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.modal {
+    animation: fadeIn 0.3s ease-out;
+}</code>
+    </section>
+</body>
+</html>
+
+

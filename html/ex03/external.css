@@ -1,0 +1,33 @@
+/* 외부 스타일시트 예제 */
+
+.external-style {
+    background-color: #e8f5e9;
+    padding: 15px;
+    border-left: 4px solid #4caf50;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+/* 우선순위 예제용 스타일 */
+p {
+    color: blue;
+}
+
+.test-class {
+    color: green;
+}
+
+#test {
+    color: red;
+}
+
+/* !important 예제 */
+.important-demo {
+    color: purple !important;
+    font-weight: bold;
+    background-color: #f3e5f5;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+

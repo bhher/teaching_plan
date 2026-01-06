@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Flex 아이템 속성 예제">
+    <title>Flex 아이템 속성 예제</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.8;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        section {
+            background-color: white;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        code {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            display: block;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+        
+        .demo-container {
+            border: 3px solid #3498db;
+            padding: 15px;
+            margin: 20px 0;
+            background-color: #e3f2fd;
+            min-height: 150px;
+        }
+        
+        .demo-item {
+            background-color: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        /* flex-grow */
+        .grow-0 {
+            display: flex;
+        }
+        
+        .grow-0 .item {
+            flex-grow: 0;
+        }
+        
+        .grow-1 {
+            display: flex;
+        }
+        
+        .grow-1 .item {
+            flex-grow: 1;
+        }
+        
+        .grow-mixed {
+            display: flex;
+        }
+        
+        .grow-mixed .item1 {
+            flex-grow: 1;
+        }
+        
+        .grow-mixed .item2 {
+            flex-grow: 2;
+        }
+        
+        .grow-mixed .item3 {
+            flex-grow: 1;
+        }
+        
+        /* flex-shrink */
+        .shrink-0 {
+            display: flex;
+        }
+        
+        .shrink-0 .item {
+            flex-shrink: 0;
+            min-width: 200px;
+        }
+        
+        .shrink-1 {
+            display: flex;
+        }
+        
+        .shrink-1 .item {
+            flex-shrink: 1;
+            min-width: 200px;
+        }
+        
+        /* flex-basis */
+        .basis-auto {
+            display: flex;
+        }
+        
+        .basis-auto .item {
+            flex-basis: auto;
+        }
+        
+        .basis-fixed {
+            display: flex;
+        }
+        
+        .basis-fixed .item {
+            flex-basis: 200px;
+        }
+        
+        .basis-percent {
+            display: flex;
+        }
+        
+        .basis-percent .item {
+            flex-basis: 30%;
+        }
+        
+        /* flex 단축 */
+        .flex-1 {
+            display: flex;
+        }
+        
+        .flex-1 .item {
+            flex: 1;
+        }
+        
+        .flex-fixed {
+            display: flex;
+        }
+        
+        .flex-fixed .item {
+            flex: 0 0 200px;
+        }
+        
+        .flex-mixed {
+            display: flex;
+        }
+        
+        .flex-mixed .item1 {
+            flex: 2;
+        }
+        
+        .flex-mixed .item2 {
+            flex: 1;
+        }
+        
+        .flex-mixed .item3 {
+            flex: 1;
+        }
+        
+        /* align-self */
+        .self-container {
+            display: flex;
+            align-items: flex-start;
+            min-height: 200px;
+        }
+        
+        .self-start {
+            align-self: flex-start;
+        }
+        
+        .self-end {
+            align-self: flex-end;
+        }
+        
+        .self-center {
+            align-self: center;
+        }
+        
+        .self-stretch {
+            align-self: stretch;
+        }
+        
+        /* order */
+        .order-container {
+            display: flex;
+        }
+        
+        .order-1 {
+            order: 1;
+        }
+        
+        .order-2 {
+            order: 2;
+        }
+        
+        .order-3 {
+            order: 3;
+        }
+        
+        .order-minus {
+            order: -1;
+        }
+        
+        .highlight {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Flex 아이템 속성 예제</h1>
+
+    <section>
+        <h2>1. flex-grow (공간 분배)</h2>
+        <p>남은 공간을 아이템이 얼마나 차지할지 지정합니다.</p>
+        
+        <h3>flex-grow: 0 (기본값: 늘지 않음)</h3>
+        <div class="demo-container grow-0">
+            <div class="demo-item item">Item 1</div>
+            <div class="demo-item item">Item 2</div>
+            <div class="demo-item item">Item 3</div>
+        </div>
+        
+        <h3>flex-grow: 1 (균등 분배)</h3>
+        <div class="demo-container grow-1">
+            <div class="demo-item item">Item 1</div>
+            <div class="demo-item item">Item 2</div>
+            <div class="demo-item item">Item 3</div>
+        </div>
+        
+        <h3>flex-grow: 1, 2, 1 (비율 분배)</h3>
+        <div class="demo-container grow-mixed">
+            <div class="demo-item item1">Item 1 (grow: 1)</div>
+            <div class="demo-item item2">Item 2 (grow: 2)</div>
+            <div class="demo-item item3">Item 3 (grow: 1)</div>
+        </div>
+        
+        <code>flex-grow: 0;  /* 기본값: 늘지 않음 */
+flex-grow: 1;  /* 남은 공간을 차지 */
+flex-grow: 2;  /* 다른 아이템의 2배 */</code>
+        
+        <div class="highlight">
+            <strong>동작 방식:</strong> 숫자가 클수록 더 많은 공간을 차지합니다. 
+            비율로 계산됩니다. (1:2:1 = 25%:50%:25%)
+        </div>
+    </section>
+
+    <section>
+        <h2>2. flex-shrink (축소 비율)</h2>
+        <p>공간이 부족할 때 아이템이 얼마나 줄어들지 지정합니다.</p>
+        
+        <h3>flex-shrink: 0 (줄어들지 않음)</h3>
+        <div class="demo-container shrink-0">
+            <div class="demo-item item">Item 1 (200px)</div>
+            <div class="demo-item item">Item 2 (200px)</div>
+            <div class="demo-item item">Item 3 (200px)</div>
+            <div class="demo-item item">Item 4 (200px)</div>
+        </div>
+        
+        <h3>flex-shrink: 1 (기본값: 줄어듦)</h3>
+        <div class="demo-container shrink-1">
+            <div class="demo-item item">Item 1 (200px)</div>
+            <div class="demo-item item">Item 2 (200px)</div>
+            <div class="demo-item item">Item 3 (200px)</div>
+            <div class="demo-item item">Item 4 (200px)</div>
+        </div>
+        
+        <code>flex-shrink: 1;  /* 기본값: 줄어듦 */
+flex-shrink: 0;  /* 줄어들지 않음 (최소 크기 유지) */
+flex-shrink: 2;  /* 다른 아이템의 2배로 줄어듦 */</code>
+    </section>
+
+    <section>
+        <h2>3. flex-basis (초기 크기)</h2>
+        <p>아이템의 초기 크기를 지정합니다.</p>
+        
+        <h3>flex-basis: auto (기본값: 콘텐츠 크기)</h3>
+        <div class="demo-container basis-auto">
+            <div class="demo-item item">Item 1</div>
+            <div class="demo-item item">긴 텍스트 Item 2</div>
+            <div class="demo-item item">Item 3</div>
+        </div>
+        
+        <h3>flex-basis: 200px (고정 크기)</h3>
+        <div class="demo-container basis-fixed">
+            <div class="demo-item item">Item 1</div>
+            <div class="demo-item item">Item 2</div>
+            <div class="demo-item item">Item 3</div>
+        </div>
+        
+        <h3>flex-basis: 30% (비율)</h3>
+        <div class="demo-container basis-percent">
+            <div class="demo-item item">Item 1</div>
+            <div class="demo-item item">Item 2</div>
+            <div class="demo-item item">Item 3</div>
+        </div>
+        
+        <code>flex-basis: auto;    /* 기본값: 콘텐츠 크기 */
+flex-basis: 200px;   /* 고정 크기 */
+flex-basis: 30%;     /* 비율 */
+flex-basis: 0;       /* 최소 크기 */</code>
+    </section>
+
+    <section>
+        <h2>4. flex (단축 속성)</h2>
+        <p>flex-grow, flex-shrink, flex-basis를 한 번에 지정합니다.</p>
+        
+        <h3>flex: 1 (균등 분배)</h3>
+        <div class="demo-container flex-1">
+            <div class="demo-item item">Item 1</div>
+            <div class="demo-item item">Item 2</div>
+            <div class="demo-item item">Item 3</div>
+        </div>
+        
+        <h3>flex: 0 0 200px (고정 크기)</h3>
+        <div class="demo-container flex-fixed">
+            <div class="demo-item item">Item 1 (200px)</div>
+            <div class="demo-item item">Item 2 (200px)</div>
+            <div class="demo-item item">Item 3 (200px)</div>
+        </div>
+        
+        <h3>flex: 2, 1, 1 (비율 분배)</h3>
+        <div class="demo-container flex-mixed">
+            <div class="demo-item item1">Item 1 (flex: 2)</div>
+            <div class="demo-item item2">Item 2 (flex: 1)</div>
+            <div class="demo-item item3">Item 3 (flex: 1)</div>
+        </div>
+        
+        <code>flex: 1;              /* flex: 1 1 0 (균등 분배) */
+flex: 0 0 200px;      /* 고정 크기 200px */
+flex: 2;              /* flex: 2 1 0 (2배) */
+flex: 0 1 auto;       /* 기본값 */</code>
+        
+        <div class="highlight">
+            <strong>자주 사용하는 패턴:</strong><br>
+            - <code>flex: 1</code>: 균등 분배<br>
+            - <code>flex: 0 0 250px</code>: 고정 크기 (사이드바 등)<br>
+            - <code>flex: 2</code>, <code>flex: 1</code>: 비율 분배
+        </div>
+    </section>
+
+    <section>
+        <h2>5. align-self (개별 정렬)</h2>
+        <p>개별 아이템의 교차축 정렬을 지정합니다. 부모의 align-items보다 우선순위가 높습니다.</p>
+        
+        <div class="demo-container self-container">
+            <div class="demo-item self-start">flex-start</div>
+            <div class="demo-item self-center">center</div>
+            <div class="demo-item self-end">flex-end</div>
+            <div class="demo-item self-stretch">stretch</div>
+        </div>
+        
+        <code>align-self: flex-start; /* 시작점 정렬 */
+align-self: flex-end;   /* 끝점 정렬 */
+align-self: center;     /* 가운데 정렬 */
+align-self: stretch;    /* 늘림 */
+align-self: baseline;  /* 기준선 정렬 */</code>
+    </section>
+
+    <section>
+        <h2>6. order (순서 변경)</h2>
+        <p>HTML 구조는 변경하지 않고 시각적 순서만 변경합니다.</p>
+        
+        <h3>기본 순서</h3>
+        <div class="demo-container order-container">
+            <div class="demo-item">Item 1 (HTML 순서)</div>
+            <div class="demo-item">Item 2 (HTML 순서)</div>
+            <div class="demo-item">Item 3 (HTML 순서)</div>
+        </div>
+        
+        <h3>order로 순서 변경</h3>
+        <div class="demo-container order-container">
+            <div class="demo-item order-2">Item 1 (order: 2)</div>
+            <div class="demo-item order-3">Item 2 (order: 3)</div>
+            <div class="demo-item order-1">Item 3 (order: 1)</div>
+        </div>
+        
+        <h3>order: -1 (앞으로 이동)</h3>
+        <div class="demo-container order-container">
+            <div class="demo-item">Item 1</div>
+            <div class="demo-item">Item 2</div>
+            <div class="demo-item order-minus">Item 3 (order: -1)</div>
+        </div>
+        
+        <code>order: 0;   /* 기본값 */
+order: 1;   /* 뒤로 이동 */
+order: -1;  /* 앞으로 이동 */</code>
+        
+        <div class="highlight">
+            <strong>주의:</strong> 숫자가 작을수록 앞에 배치됩니다. 
+            HTML 구조는 변경되지 않고 시각적 순서만 변경됩니다.
+        </div>
+    </section>
+</body>
+</html>
+
+

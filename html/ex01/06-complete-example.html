@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="HTML 기초 구조 및 시맨틱 마크업 종합 예제">
+    <title>HTML 기초 종합 예제 - 블로그 포스트</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        header h1 {
+            margin-bottom: 10px;
+        }
+        nav {
+            background-color: #34495e;
+            padding: 10px 0;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        main {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        article {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        article h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        article h3 {
+            color: #34495e;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        article p {
+            margin-bottom: 15px;
+        }
+        article img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .placeholder-img {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            border-radius: 5px;
+        }
+        section {
+            margin: 30px 0;
+            padding: 20px;
+            background-color: #ecf0f1;
+            border-left: 4px solid #3498db;
+            border-radius: 4px;
+        }
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+        footer a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        hr {
+            border: none;
+            border-top: 2px solid #ecf0f1;
+            margin: 30px 0;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER: 페이지 헤더 -->
+    <header>
+        <h1>웹 개발 블로그</h1>
+        <p>HTML과 웹 기술을 배워봅시다</p>
+    </header>
+
+    <!-- NAV: 네비게이션 -->
+    <nav>
+        <ul>
+            <li><a href="#home">홈</a></li>
+            <li><a href="#about">소개</a></li>
+            <li><a href="#posts">포스트</a></li>
+            <li><a href="#contact">연락처</a></li>
+        </ul>
+    </nav>
+
+    <!-- MAIN: 주요 콘텐츠 -->
+    <main>
+        <!-- ARTICLE: 블로그 포스트 -->
+        <article>
+            <h2>HTML 기초 구조 및 시맨틱 마크업 완벽 가이드</h2>
+            <p><em>작성일: 2024년 12월 10일</em></p>
+
+            <hr>
+
+            <h3>HTML 문서의 기본 구조</h3>
+            <p>
+                모든 HTML 문서는 <code>&lt;!DOCTYPE html&gt;</code>로 시작합니다.
+                이것은 브라우저에게 HTML5 문서임을 알려주는 선언문입니다.
+            </p>
+
+            <section>
+                <h4>구조 요소</h4>
+                <ul>
+                    <li><strong>&lt;html&gt;</strong>: 문서의 루트 요소</li>
+                    <li><strong>&lt;head&gt;</strong>: 메타데이터 영역</li>
+                    <li><strong>&lt;body&gt;</strong>: 실제 콘텐츠 영역</li>
+                </ul>
+            </section>
+
+            <h3>시맨틱 태그의 중요성</h3>
+            <p>
+                시맨틱 태그는 콘텐츠의 의미를 명확히 표현합니다.
+                <code>&lt;div&gt;</code> 대신 <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>,
+                <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;article&gt;</code>,
+                <code>&lt;footer&gt;</code> 등을 사용하면 코드의 가독성과 접근성이 향상됩니다.
+            </p>
+
+            <div class="placeholder-img">
+                [이미지: HTML 시맨틱 태그 구조 다이어그램]
+            </div>
+            <p><em>이미지 설명: HTML 문서의 시맨틱 구조를 보여주는 다이어그램</em></p>
+
+            <h3>제목 태그의 계층 구조</h3>
+            <p>
+                제목 태그는 h1부터 h6까지 있으며, 논리적인 계층 구조를 유지해야 합니다.
+                숫자를 건너뛰지 말고 순서대로 사용하는 것이 중요합니다.
+            </p>
+
+            <section>
+                <h4>올바른 사용 예시</h4>
+                <pre><code>
+h1 (페이지 제목)
+  └─ h2 (섹션 제목)
+      └─ h3 (하위 섹션)
+          └─ h4 (더 세부적인 제목)
+                </code></pre>
+            </section>
+
+            <h3>링크와 이미지의 접근성</h3>
+            <p>
+                링크는 의미 있는 텍스트를 사용하고, 이미지는 반드시 <code>alt</code> 속성을 포함해야 합니다.
+                이것은 스크린 리더 사용자와 시각 장애인을 위한 필수 사항입니다.
+            </p>
+
+            <p>
+                더 자세한 내용은 
+                <a href="https://www.w3.org/WAI/WCAG21/quickref/" target="_blank" rel="noopener noreferrer">
+                    WCAG 접근성 가이드라인
+                </a>을 참고하세요.
+            </p>
+
+            <hr>
+
+            <h3>관련 자료</h3>
+            <ul>
+                <li><a href="01-basic-structure.html">기본 구조 예제</a></li>
+                <li><a href="02-semantic-tags.html">시맨틱 태그 예제</a></li>
+                <li><a href="03-text-headings-paragraphs.html">텍스트 태그 예제</a></li>
+                <li><a href="04-links.html">링크 예제</a></li>
+                <li><a href="05-images-accessibility.html">이미지 및 접근성 예제</a></li>
+            </ul>
+        </article>
+    </main>
+
+    <!-- FOOTER: 페이지 푸터 -->
+    <footer>
+        <p>&copy; 2024 웹 개발 블로그. All rights reserved.</p>
+        <p>
+            문의: <a href="mailto:contact@example.com">contact@example.com</a> |
+            <a href="tel:+821012345678">010-1234-5678</a>
+        </p>
+    </footer>
+</body>
+</html>
+
+

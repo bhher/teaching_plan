@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="고급 CSS 기술 종합 예제">
+    <title>고급 CSS 기술 종합 예제</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            /* 색상 변수 */
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --success-color: #27ae60;
+            --danger-color: #e74c3c;
+            --text-color: #2c3e50;
+            --bg-color: #ffffff;
+            --light-bg: #f5f5f5;
+            
+            /* 간격 변수 */
+            --spacing-unit: 8px;
+            --spacing-small: calc(var(--spacing-unit) * 1);
+            --spacing-medium: calc(var(--spacing-unit) * 2);
+            --spacing-large: calc(var(--spacing-unit) * 4);
+            
+            /* 그림자 변수 */
+            --shadow-small: 0 2px 5px rgba(0,0,0,0.1);
+            --shadow-medium: 0 5px 15px rgba(0,0,0,0.2);
+            --shadow-large: 0 10px 30px rgba(0,0,0,0.3);
+            
+            /* 테두리 변수 */
+            --border-radius: 12px;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: var(--light-bg);
+            color: var(--text-color);
+        }
+        
+        /* 스킵 링크 */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background-color: var(--text-color);
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 0 0 5px 0;
+            z-index: 1000;
+        }
+        
+        .skip-link:focus {
+            top: 0;
+        }
+        
+        /* 헤더 - BEM 적용 */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: var(--spacing-large);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .header__container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header__logo {
+            font-size: 1.8em;
+            font-weight: bold;
+        }
+        
+        .header__nav {
+            display: flex;
+            gap: var(--spacing-medium);
+        }
+        
+        .header__link {
+            color: white;
+            text-decoration: none;
+            padding: var(--spacing-small) var(--spacing-medium);
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        
+        .header__link:hover {
+            background-color: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+        
+        .header__link:focus {
+            outline: 3px solid white;
+            outline-offset: 2px;
+        }
+        
+        /* 히어로 섹션 - 애니메이션 */
+        .hero {
+            max-width: 1200px;
+            margin: var(--spacing-large) auto;
+            padding: var(--spacing-large);
+            text-align: center;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hero__title {
+            font-size: 3em;
+            margin-bottom: var(--spacing-medium);
+            animation: fadeInUp 1s ease-out;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero__subtitle {
+            font-size: 1.2em;
+            color: #666;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+        
+        /* 카드 그리드 - BEM 적용 */
+        .card-grid {
+            max-width: 1200px;
+            margin: var(--spacing-large) auto;
+            padding: 0 var(--spacing-large);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-large);
+        }
+        
+        .card {
+            background-color: var(--bg-color);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-large);
+            box-shadow: var(--shadow-medium);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-large);
+        }
+        
+        .card__icon {
+            font-size: 3em;
+            margin-bottom: var(--spacing-medium);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+        
+        .card__title {
+            color: var(--text-color);
+            font-size: 1.5em;
+            margin-bottom: var(--spacing-medium);
+        }
+        
+        .card__text {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: var(--spacing-medium);
+        }
+        
+        .card__button {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border: none;
+            padding: var(--spacing-small) var(--spacing-medium);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: var(--shadow-small);
+        }
+        
+        .card__button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .card__button:focus {
+            outline: 3px solid var(--primary-color);
+            outline-offset: 2px;
+        }
+        
+        .card__button--secondary {
+            background: linear-gradient(135deg, var(--success-color) 0%, #2ecc71 100%);
+        }
+        
+        /* 푸터 */
+        .footer {
+            background-color: var(--text-color);
+            color: white;
+            padding: var(--spacing-large);
+            margin-top: var(--spacing-large);
+            text-align: center;
+        }
+        
+        .footer__text {
+            opacity: 0.8;
+        }
+        
+        /* 반응형 */
+        @media (max-width: 768px) {
+            .hero__title {
+                font-size: 2em;
+            }
+            
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">메인 콘텐츠로 건너뛰기</a>
+    
+    <header class="header">
+        <div class="header__container">
+            <div class="header__logo">고급 CSS 사이트</div>
+            <nav class="header__nav">
+                <a href="#home" class="header__link">홈</a>
+                <a href="#about" class="header__link">소개</a>
+                <a href="#services" class="header__link">서비스</a>
+                <a href="#contact" class="header__link">연락처</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <section class="hero">
+            <h1 class="hero__title">고급 CSS 기술</h1>
+            <p class="hero__subtitle">트랜지션, 애니메이션, CSS 변수, BEM을 활용한 현대적인 웹사이트</p>
+        </section>
+
+        <section class="card-grid">
+            <article class="card">
+                <div class="card__icon">🎨</div>
+                <h2 class="card__title">트랜지션 & 애니메이션</h2>
+                <p class="card__text">
+                    부드러운 트랜지션과 @keyframes를 사용한 애니메이션으로 
+                    인터랙티브한 사용자 경험을 제공합니다.
+                </p>
+                <button class="card__button">자세히 보기</button>
+            </article>
+
+            <article class="card">
+                <div class="card__icon">🔧</div>
+                <h2 class="card__title">CSS 변수</h2>
+                <p class="card__text">
+                    CSS 변수를 사용하여 재사용 가능하고 유지보수가 쉬운 
+                    스타일 시스템을 구축했습니다.
+                </p>
+                <button class="card__button card__button--secondary">자세히 보기</button>
+            </article>
+
+            <article class="card">
+                <div class="card__icon">📐</div>
+                <h2 class="card__title">BEM 네이밍</h2>
+                <p class="card__text">
+                    BEM 방법론을 적용하여 명확하고 일관된 클래스 네이밍으로 
+                    코드 가독성과 유지보수성을 향상시켰습니다.
+                </p>
+                <button class="card__button">자세히 보기</button>
+            </article>
+
+            <article class="card">
+                <div class="card__icon">♿</div>
+                <h2 class="card__title">접근성 & 성능</h2>
+                <p class="card__text">
+                    색상 대비, 포커스 관리 등 접근성을 고려하고, 
+                    GPU 가속을 활용하여 최적의 성능을 제공합니다.
+                </p>
+                <button class="card__button card__button--secondary">자세히 보기</button>
+            </article>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p class="footer__text">&copy; 2024 고급 CSS 사이트. All rights reserved.</p>
+    </footer>
+</body>
+</html>
+
+

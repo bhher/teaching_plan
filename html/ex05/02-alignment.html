@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Flexbox 정렬 속성 예제">
+    <title>Flexbox 정렬 속성 예제</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.8;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        section {
+            background-color: white;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        code {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            display: block;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+        
+        .demo-container {
+            border: 3px solid #3498db;
+            padding: 15px;
+            margin: 20px 0;
+            background-color: #e3f2fd;
+            min-height: 200px;
+        }
+        
+        .demo-item {
+            background-color: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 20px;
+            text-align: center;
+            font-weight: bold;
+            min-width: 100px;
+        }
+        
+        .demo-item-tall {
+            background-color: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 20px;
+            text-align: center;
+            font-weight: bold;
+            min-width: 100px;
+            height: 80px;
+        }
+        
+        /* justify-content */
+        .justify-start {
+            display: flex;
+            justify-content: flex-start;
+        }
+        
+        .justify-end {
+            display: flex;
+            justify-content: flex-end;
+        }
+        
+        .justify-center {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .justify-between {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .justify-around {
+            display: flex;
+            justify-content: space-around;
+        }
+        
+        .justify-evenly {
+            display: flex;
+            justify-content: space-evenly;
+        }
+        
+        /* align-items */
+        .align-stretch {
+            display: flex;
+            align-items: stretch;
+        }
+        
+        .align-start {
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .align-end {
+            display: flex;
+            align-items: flex-end;
+        }
+        
+        .align-center {
+            display: flex;
+            align-items: center;
+        }
+        
+        .align-baseline {
+            display: flex;
+            align-items: baseline;
+        }
+        
+        /* align-content */
+        .content-container {
+            display: flex;
+            flex-wrap: wrap;
+            min-height: 300px;
+        }
+        
+        .content-stretch {
+            align-content: stretch;
+        }
+        
+        .content-start {
+            align-content: flex-start;
+        }
+        
+        .content-end {
+            align-content: flex-end;
+        }
+        
+        .content-center {
+            align-content: center;
+        }
+        
+        .content-between {
+            align-content: space-between;
+        }
+        
+        .content-around {
+            align-content: space-around;
+        }
+        
+        /* gap */
+        .gap-demo {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .gap-demo-2 {
+            display: flex;
+            gap: 10px 30px;
+        }
+        
+        .highlight {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Flexbox 정렬 속성 예제</h1>
+
+    <section>
+        <h2>1. justify-content (주축 정렬)</h2>
+        <p>주축(Main Axis) 방향으로 아이템을 정렬합니다.</p>
+        
+        <h3>flex-start (기본값: 시작점 정렬)</h3>
+        <div class="demo-container justify-start">
+            <div class="demo-item">Item 1</div>
+            <div class="demo-item">Item 2</div>
+            <div class="demo-item">Item 3</div>
+        </div>
+        
+        <h3>flex-end (끝점 정렬)</h3>
+        <div class="demo-container justify-end">
+            <div class="demo-item">Item 1</div>
+            <div class="demo-item">Item 2</div>
+            <div class="demo-item">Item 3</div>
+        </div>
+        
+        <h3>center (가운데 정렬)</h3>
+        <div class="demo-container justify-center">
+            <div class="demo-item">Item 1</div>
+            <div class="demo-item">Item 2</div>
+            <div class="demo-item">Item 3</div>
+        </div>
+        
+        <h3>space-between (양끝 정렬, 사이 간격)</h3>
+        <div class="demo-container justify-between">
+            <div class="demo-item">Item 1</div>
+            <div class="demo-item">Item 2</div>
+            <div class="demo-item">Item 3</div>
+        </div>
+        
+        <h3>space-around (양쪽 간격 동일)</h3>
+        <div class="demo-container justify-around">
+            <div class="demo-item">Item 1</div>
+            <div class="demo-item">Item 2</div>
+            <div class="demo-item">Item 3</div>
+        </div>
+        
+        <h3>space-evenly (모든 간격 동일)</h3>
+        <div class="demo-container justify-evenly">
+            <div class="demo-item">Item 1</div>
+            <div class="demo-item">Item 2</div>
+            <div class="demo-item">Item 3</div>
+        </div>
+        
+        <code>justify-content: flex-start;    /* 시작점 정렬 */
+justify-content: flex-end;      /* 끝점 정렬 */
+justify-content: center;        /* 가운데 정렬 */
+justify-content: space-between; /* 양끝 정렬, 사이 간격 */
+justify-content: space-around;  /* 양쪽 간격 동일 */
+justify-content: space-evenly;   /* 모든 간격 동일 */</code>
+        
+        <div class="highlight">
+            <strong>시각화:</strong><br>
+            flex-start:    [A][B][C]───────<br>
+            flex-end:      ───────[A][B][C]<br>
+            center:        ───[A][B][C]───<br>
+            space-between: [A]───[B]───[C]<br>
+            space-around:  ─[A]─[B]─[C]─<br>
+            space-evenly:  ─[A]─[B]─[C]─
+        </div>
+    </section>
+
+    <section>
+        <h2>2. align-items (교차축 정렬)</h2>
+        <p>교차축(Cross Axis) 방향으로 아이템을 정렬합니다.</p>
+        
+        <h3>stretch (기본값: 늘림)</h3>
+        <div class="demo-container align-stretch" style="min-height: 150px;">
+            <div class="demo-item">Item 1</div>
+            <div class="demo-item">Item 2<br>긴 텍스트</div>
+            <div class="demo-item">Item 3</div>
+        </div>
+        
+        <h3>flex-start (시작점 정렬)</h3>
+        <div class="demo-container align-start" style="min-height: 150px;">
+            <div class="demo-item-tall">Item 1</div>
+            <div class="demo-item-tall" style="height: 120px;">Item 2<br>높이 120px</div>
+            <div class="demo-item-tall">Item 3</div>
+        </div>
+        
+        <h3>flex-end (끝점 정렬)</h3>
+        <div class="demo-container align-end" style="min-height: 150px;">
+            <div class="demo-item-tall">Item 1</div>
+            <div class="demo-item-tall" style="height: 120px;">Item 2<br>높이 120px</div>
+            <div class="demo-item-tall">Item 3</div>
+        </div>
+        
+        <h3>center (가운데 정렬)</h3>
+        <div class="demo-container align-center" style="min-height: 150px;">
+            <div class="demo-item-tall">Item 1</div>
+            <div class="demo-item-tall" style="height: 120px;">Item 2<br>높이 120px</div>
+            <div class="demo-item-tall">Item 3</div>
+        </div>
+        
+        <h3>baseline (텍스트 기준선 정렬)</h3>
+        <div class="demo-container align-baseline" style="min-height: 150px;">
+            <div class="demo-item-tall" style="font-size: 20px; padding-top: 30px;">Item 1</div>
+            <div class="demo-item-tall" style="font-size: 14px; padding-top: 20px;">Item 2</div>
+            <div class="demo-item-tall" style="font-size: 24px; padding-top: 40px;">Item 3</div>
+        </div>
+        
+        <code>align-items: stretch;    /* 늘림 (기본값) */
+align-items: flex-start; /* 시작점 정렬 */
+align-items: flex-end;   /* 끝점 정렬 */
+align-items: center;     /* 가운데 정렬 */
+align-items: baseline;   /* 텍스트 기준선 정렬 */</code>
+    </section>
+
+    <section>
+        <h2>3. align-content (여러 줄 정렬)</h2>
+        <p>여러 줄이 있을 때 교차축 방향으로 줄들을 정렬합니다. (flex-wrap: wrap일 때만 효과)</p>
+        
+        <h3>stretch (기본값: 늘림)</h3>
+        <div class="demo-container content-container content-stretch">
+            <div class="demo-item">Item 1</div>
+            <div class="demo-item">Item 2</div>
+            <div class="demo-item">Item 3</div>
+            <div class="demo-item">Item 4</div>
+            <div class="demo-item">Item 5</div>
+            <div class="demo-item">Item 6</div>
+        </div>
+        
+        <h3>flex-start (시작점 정렬)</h3>
+        <div class="demo-container content-container content-start">
+            <div class="demo-item">Item 1</div>
+            <div class="demo-item">Item 2</div>
+            <div class="demo-item">Item 3</div>
+            <div class="demo-item">Item 4</div>
+            <div class="demo-item">Item 5</div>
+            <div class="demo-item">Item 6</div>
+        </div>
+        
+        <h3>flex-end (끝점 정렬)</h3>
+        <div class="demo-container content-container content-end">
+            <div class="demo-item">Item 1</div>
+            <div class="demo-item">Item 2</div>
+            <div class="demo-item">Item 3</div>
+            <div class="demo-item">Item 4</div>
+            <div class="demo-item">Item 5</div>
+            <div class="demo-item">Item 6</div>
+        </div>
+        
+        <h3>center (가운데 정렬)</h3>
+        <div class="demo-container content-container content-center">
+            <div class="demo-item">Item 1</div>
+            <div class="demo-item">Item 2</div>
+            <div class="demo-item">Item 3</div>
+            <div class="demo-item">Item 4</div>
+            <div class="demo-item">Item 5</div>
+            <div class="demo-item">Item 6</div>
+        </div>
+        
+        <h3>space-between (양끝 정렬)</h3>
+        <div class="demo-container content-container content-between">
+            <div class="demo-item">Item 1</div>
+            <div class="demo-item">Item 2</div>
+            <div class="demo-item">Item 3</div>
+            <div class="demo-item">Item 4</div>
+            <div class="demo-item">Item 5</div>
+            <div class="demo-item">Item 6</div>
+        </div>
+        
+        <h3>space-around (양쪽 간격 동일)</h3>
+        <div class="demo-container content-container content-around">
+            <div class="demo-item">Item 1</div>
+            <div class="demo-item">Item 2</div>
+            <div class="demo-item">Item 3</div>
+            <div class="demo-item">Item 4</div>
+            <div class="demo-item">Item 5</div>
+            <div class="demo-item">Item 6</div>
+        </div>
+        
+        <code>align-content: stretch;      /* 늘림 (기본값) */
+align-content: flex-start;  /* 시작점 정렬 */
+align-content: flex-end;    /* 끝점 정렬 */
+align-content: center;      /* 가운데 정렬 */
+align-content: space-between; /* 양끝 정렬 */
+align-content: space-around;  /* 양쪽 간격 동일 */</code>
+        
+        <div class="highlight">
+            <strong>주의:</strong> align-content는 flex-wrap: wrap일 때만 효과가 있습니다.
+            한 줄일 때는 align-items가 적용됩니다.
+        </div>
+    </section>
+
+    <section>
+        <h2>4. gap (간격)</h2>
+        <p>아이템 사이의 간격을 지정합니다. margin보다 간편합니다.</p>
+        
+        <h3>gap: 20px (모든 방향)</h3>
+        <div class="demo-container gap-demo">
+            <div class="demo-item">Item 1</div>
+            <div class="demo-item">Item 2</div>
+            <div class="demo-item">Item 3</div>
+            <div class="demo-item">Item 4</div>
+        </div>
+        
+        <h3>gap: 10px 30px (세로 가로)</h3>
+        <div class="demo-container gap-demo-2" style="flex-wrap: wrap;">
+            <div class="demo-item">Item 1</div>
+            <div class="demo-item">Item 2</div>
+            <div class="demo-item">Item 3</div>
+            <div class="demo-item">Item 4</div>
+        </div>
+        
+        <code>gap: 20px;           /* 모든 방향 간격 */
+gap: 10px 30px;        /* 세로 가로 */
+row-gap: 10px;         /* 세로 간격 */
+column-gap: 30px;      /* 가로 간격 */</code>
+        
+        <div class="highlight">
+            <strong>특징:</strong> 아이템 사이에만 간격이 적용되고, 
+            양끝에는 적용되지 않습니다. margin보다 훨씬 간편합니다.
+        </div>
+    </section>
+
+    <section>
+        <h2>5. 정렬 속성 조합 예제</h2>
+        
+        <h3>완벽한 중앙 정렬</h3>
+        <div class="demo-container" style="display: flex; justify-content: center; align-items: center; min-height: 200px;">
+            <div class="demo-item">중앙 정렬된 아이템</div>
+        </div>
+        
+        <code>/* 완벽한 중앙 정렬 */
+.container {
+    display: flex;
+    justify-content: center;  /* 주축 중앙 */
+    align-items: center;      /* 교차축 중앙 */
+    min-height: 100vh;        /* 전체 화면 높이 */
+}</code>
+        
+        <h3>헤더 레이아웃</h3>
+        <div class="demo-container" style="display: flex; justify-content: space-between; align-items: center; background-color: #2c3e50; color: white;">
+            <div class="demo-item" style="background-color: #34495e;">로고</div>
+            <div class="demo-item" style="background-color: #34495e;">메뉴</div>
+            <div class="demo-item" style="background-color: #34495e;">사용자</div>
+        </div>
+        
+        <code>/* 헤더 레이아웃 */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}</code>
+    </section>
+</body>
+</html>
+
+

@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="색상, 배경, 테두리 예제">
+    <title>색상, 배경, 테두리 예제</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.8;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        section {
+            background-color: white;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        code {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            display: block;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+        
+        .demo-box {
+            border: 2px solid #ddd;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 5px;
+            background-color: #fafafa;
+        }
+        
+        .color-box {
+            width: 100px;
+            height: 100px;
+            display: inline-block;
+            margin: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        
+        /* 색상 예제 */
+        .color-keyword {
+            color: red;
+        }
+        
+        .color-hex {
+            color: #ff0000;
+        }
+        
+        .color-rgb {
+            color: rgb(255, 0, 0);
+        }
+        
+        .color-rgba {
+            color: rgba(255, 0, 0, 0.5);
+            background-color: #f0f0f0;
+        }
+        
+        .color-hsl {
+            color: hsl(0, 100%, 50%);
+        }
+        
+        .color-hsla {
+            color: hsla(0, 100%, 50%, 0.5);
+            background-color: #f0f0f0;
+        }
+        
+        /* 배경 예제 */
+        .bg-color {
+            background-color: #e3f2fd;
+            padding: 15px;
+        }
+        
+        .bg-image {
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect fill="%23f0f0f0" width="100" height="100"/><circle fill="%233498db" cx="50" cy="50" r="20"/></svg>');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 100px 100px;
+            height: 150px;
+            padding: 15px;
+        }
+        
+        .bg-repeat {
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50"><rect fill="%233498db" width="50" height="50"/></svg>');
+            background-repeat: repeat;
+            height: 100px;
+            padding: 15px;
+        }
+        
+        .bg-no-repeat {
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><circle fill="%23e74c3c" cx="50" cy="50" r="40"/></svg>');
+            background-repeat: no-repeat;
+            background-position: center;
+            height: 150px;
+            padding: 15px;
+        }
+        
+        .bg-cover {
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><rect fill="%2327ae60" width="200" height="200"/><circle fill="white" cx="100" cy="100" r="60"/></svg>');
+            background-size: cover;
+            background-position: center;
+            height: 200px;
+            padding: 15px;
+            color: white;
+        }
+        
+        .bg-contain {
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><rect fill="%239b59b6" width="200" height="200"/><rect fill="white" x="50" y="50" width="100" height="100"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            height: 200px;
+            padding: 15px;
+        }
+        
+        /* 테두리 예제 */
+        .border-solid {
+            border: 2px solid #3498db;
+            padding: 15px;
+        }
+        
+        .border-dashed {
+            border: 2px dashed #e74c3c;
+            padding: 15px;
+        }
+        
+        .border-dotted {
+            border: 2px dotted #27ae60;
+            padding: 15px;
+        }
+        
+        .border-double {
+            border: 4px double #9b59b6;
+            padding: 15px;
+        }
+        
+        .border-individual {
+            border-top: 3px solid #e74c3c;
+            border-right: 2px dashed #3498db;
+            border-bottom: 4px dotted #27ae60;
+            border-left: 2px solid #9b59b6;
+            padding: 15px;
+        }
+        
+        .border-radius {
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            padding: 15px;
+        }
+        
+        .border-radius-circle {
+            width: 100px;
+            height: 100px;
+            border: 2px solid #e74c3c;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 10px auto;
+        }
+        
+        .border-radius-custom {
+            border: 2px solid #27ae60;
+            border-radius: 20px 5px 20px 5px;
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1>색상, 배경, 테두리 예제</h1>
+
+    <section>
+        <h2>1. 색상 지정 방법</h2>
+        <p>CSS에서 색상을 지정하는 여러 방법이 있습니다.</p>
+        
+        <div class="demo-box">
+            <p class="color-keyword">키워드: color: red;</p>
+            <p class="color-hex">16진수: color: #ff0000;</p>
+            <p class="color-rgb">RGB: color: rgb(255, 0, 0);</p>
+            <p class="color-rgba">RGBA (반투명): color: rgba(255, 0, 0, 0.5);</p>
+            <p class="color-hsl">HSL: color: hsl(0, 100%, 50%);</p>
+            <p class="color-hsla">HSLA (반투명): color: hsla(0, 100%, 50%, 0.5);</p>
+        </div>
+        
+        <code>/* 키워드 */
+color: red;
+
+/* 16진수 */
+color: #ff0000;
+color: #333; /* #333333의 축약형 */
+
+/* RGB */
+color: rgb(255, 0, 0);
+color: rgba(255, 0, 0, 0.5); /* 반투명 */
+
+/* HSL */
+color: hsl(0, 100%, 50%);
+color: hsla(0, 100%, 50%, 0.5); /* 반투명 */</code>
+        
+        <div style="background-color: #e3f2fd; padding: 15px; border-left: 4px solid #2196f3; margin: 15px 0;">
+            <strong>HSL 설명:</strong>
+            <ul>
+                <li>H (Hue): 색상 (0~360)</li>
+                <li>S (Saturation): 채도 (0~100%)</li>
+                <li>L (Lightness): 명도 (0~100%)</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>2. 색상 속성</h2>
+        <p>색상을 적용할 수 있는 다양한 속성이 있습니다.</p>
+        
+        <div class="demo-box">
+            <p style="color: #333;">color: 글자 색상</p>
+            <div style="background-color: #e3f2fd; padding: 15px;">background-color: 배경 색상</div>
+            <div style="border: 3px solid #3498db; padding: 15px; margin-top: 10px;">border-color: 테두리 색상</div>
+        </div>
+        
+        <code>color: #333; /* 글자 색상 */
+background-color: #e3f2fd; /* 배경 색상 */
+border-color: #3498db; /* 테두리 색상 */</code>
+    </section>
+
+    <section>
+        <h2>3. 배경 색상 (background-color)</h2>
+        <p>요소의 배경 색상을 지정합니다.</p>
+        
+        <div class="demo-box">
+            <div class="bg-color">
+                background-color: #e3f2fd;
+            </div>
+        </div>
+        
+        <code>background-color: #e3f2fd;
+background-color: rgba(0, 0, 0, 0.8); /* 반투명 검정 */</code>
+    </section>
+
+    <section>
+        <h2>4. 배경 이미지 (background-image)</h2>
+        <p>요소의 배경 이미지를 지정합니다.</p>
+        
+        <div class="demo-box">
+            <div class="bg-image">
+                background-image 사용 예제
+            </div>
+        </div>
+        
+        <code>background-image: url('image.jpg');</code>
+    </section>
+
+    <section>
+        <h2>5. 배경 반복 (background-repeat)</h2>
+        <p>배경 이미지의 반복을 지정합니다.</p>
+        
+        <div class="demo-box">
+            <div class="bg-repeat">
+                background-repeat: repeat (기본값)
+            </div>
+            <div class="bg-no-repeat" style="margin-top: 10px;">
+                background-repeat: no-repeat
+            </div>
+        </div>
+        
+        <code>background-repeat: repeat; /* 반복 (기본값) */
+background-repeat: no-repeat; /* 반복 안 함 */
+background-repeat: repeat-x; /* 가로만 반복 */
+background-repeat: repeat-y; /* 세로만 반복 */</code>
+    </section>
+
+    <section>
+        <h2>6. 배경 크기 (background-size)</h2>
+        <p>배경 이미지의 크기를 지정합니다.</p>
+        
+        <div class="demo-box">
+            <div class="bg-cover">
+                background-size: cover (영역을 가득 채움)
+            </div>
+            <div class="bg-contain" style="margin-top: 10px;">
+                background-size: contain (이미지 전체가 보이도록)
+            </div>
+        </div>
+        
+        <code>background-size: cover; /* 영역을 가득 채움 */
+background-size: contain; /* 이미지 전체가 보이도록 */
+background-size: 100% 100%; /* 가로 세로 100% */
+background-size: 200px 150px; /* 고정 크기 */</code>
+    </section>
+
+    <section>
+        <h2>7. 배경 단축 속성 (background)</h2>
+        <p>여러 배경 속성을 한 번에 지정할 수 있습니다.</p>
+        
+        <code>background: #f0f0f0 url('image.jpg') no-repeat center/cover;
+/* background: color image repeat position/size */</code>
+    </section>
+
+    <section>
+        <h2>8. 테두리 기본 (border)</h2>
+        <p>테두리를 만드는 기본 속성들입니다.</p>
+        
+        <div class="demo-box">
+            <div class="border-solid">
+                border: 2px solid #3498db;
+            </div>
+            <div class="border-dashed" style="margin-top: 10px;">
+                border: 2px dashed #e74c3c;
+            </div>
+            <div class="border-dotted" style="margin-top: 10px;">
+                border: 2px dotted #27ae60;
+            </div>
+            <div class="border-double" style="margin-top: 10px;">
+                border: 4px double #9b59b6;
+            </div>
+        </div>
+        
+        <code>/* border 단축 속성 */
+border: 2px solid #3498db;
+/* border: width style color */
+
+/* 개별 속성 */
+border-width: 2px;
+border-style: solid;
+border-color: #3498db;</code>
+    </section>
+
+    <section>
+        <h2>9. 테두리 스타일 (border-style)</h2>
+        <p>테두리의 스타일을 지정합니다.</p>
+        
+        <div class="demo-box">
+            <div style="border: 2px solid #333; padding: 10px; margin: 5px 0;">solid - 실선</div>
+            <div style="border: 2px dashed #333; padding: 10px; margin: 5px 0;">dashed - 점선</div>
+            <div style="border: 2px dotted #333; padding: 10px; margin: 5px 0;">dotted - 점</div>
+            <div style="border: 4px double #333; padding: 10px; margin: 5px 0;">double - 이중선</div>
+            <div style="border: 4px groove #333; padding: 10px; margin: 5px 0;">groove - 홈</div>
+            <div style="border: 4px ridge #333; padding: 10px; margin: 5px 0;">ridge - 능선</div>
+        </div>
+        
+        <code>border-style: solid; /* 실선 */
+border-style: dashed; /* 점선 */
+border-style: dotted; /* 점 */
+border-style: double; /* 이중선 */
+border-style: groove; /* 홈 */
+border-style: ridge; /* 능선 */
+border-style: inset; /* 안으로 */
+border-style: outset; /* 밖으로 */
+border-style: none; /* 없음 */</code>
+    </section>
+
+    <section>
+        <h2>10. 개별 테두리</h2>
+        <p>각 방향의 테두리를 개별적으로 지정할 수 있습니다.</p>
+        
+        <div class="demo-box">
+            <div class="border-individual">
+                border-top: 3px solid red;<br>
+                border-right: 2px dashed blue;<br>
+                border-bottom: 4px dotted green;<br>
+                border-left: 2px solid purple;
+            </div>
+        </div>
+        
+        <code>border-top: 2px solid red;
+border-right: 1px dashed blue;
+border-bottom: 3px dotted green;
+border-left: 1px solid #333;</code>
+    </section>
+
+    <section>
+        <h2>11. border-radius (둥근 모서리)</h2>
+        <p>테두리 모서리를 둥글게 만듭니다.</p>
+        
+        <div class="demo-box">
+            <div class="border-radius">
+                border-radius: 10px (모든 모서리)
+            </div>
+            <div class="border-radius-circle">
+                원형
+            </div>
+            <div class="border-radius-custom" style="margin-top: 10px;">
+                border-radius: 20px 5px 20px 5px (각 모서리 개별 지정)
+            </div>
+        </div>
+        
+        <code>border-radius: 5px; /* 모든 모서리 */
+border-radius: 10px 20px; /* 왼쪽위/오른쪽아래 왼쪽아래/오른쪽위 */
+border-radius: 5px 10px 15px 20px; /* 왼쪽위 오른쪽위 오른쪽아래 왼쪽아래 */
+border-radius: 50%; /* 원형 */</code>
+        
+        <div style="background-color: #e3f2fd; padding: 15px; border-left: 4px solid #2196f3; margin: 15px 0;">
+            <strong>팁:</strong> border-radius: 50%를 사용하면 원형을 만들 수 있습니다.
+        </div>
+    </section>
+</body>
+</html>
+
+

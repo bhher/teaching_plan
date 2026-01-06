@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="미디어 쿼리 예제">
+    <title>미디어 쿼리 예제</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.8;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        section {
+            background-color: white;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        code {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            display: block;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+        
+        .demo-box {
+            background-color: #e3f2fd;
+            border: 2px solid #2196f3;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+        
+        /* 모바일 우선 기본 스타일 */
+        .responsive-box {
+            background-color: #fff3cd;
+            padding: 15px;
+            border: 2px solid #ffc107;
+            margin: 15px 0;
+            text-align: center;
+        }
+        
+        /* 작은 태블릿 (480px 이상) */
+        @media (min-width: 480px) {
+            .responsive-box {
+                background-color: #e3f2fd;
+                border-color: #2196f3;
+                padding: 20px;
+            }
+        }
+        
+        /* 태블릿 (768px 이상) */
+        @media (min-width: 768px) {
+            .responsive-box {
+                background-color: #e8f5e9;
+                border-color: #4caf50;
+                padding: 25px;
+            }
+        }
+        
+        /* 데스크톱 (1024px 이상) */
+        @media (min-width: 1024px) {
+            .responsive-box {
+                background-color: #f3e5f5;
+                border-color: #9b59b6;
+                padding: 30px;
+            }
+        }
+        
+        /* 큰 데스크톱 (1440px 이상) */
+        @media (min-width: 1440px) {
+            .responsive-box {
+                background-color: #ffebee;
+                border-color: #e74c3c;
+                padding: 40px;
+            }
+        }
+        
+        /* 방향별 스타일 */
+        .orientation-box {
+            background-color: #e3f2fd;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+        
+        @media (orientation: portrait) {
+            .orientation-box {
+                background-color: #fff3cd;
+            }
+        }
+        
+        @media (orientation: landscape) {
+            .orientation-box {
+                background-color: #e8f5e9;
+            }
+        }
+        
+        /* 복합 조건 */
+        .complex-box {
+            background-color: #e3f2fd;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+        
+        @media (min-width: 768px) and (max-width: 1023px) {
+            .complex-box {
+                background-color: #fff3cd;
+            }
+        }
+        
+        @media (min-width: 1024px) and (orientation: landscape) {
+            .complex-box {
+                background-color: #e8f5e9;
+            }
+        }
+        
+        .highlight {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        @media (min-width: 768px) {
+            .info-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .info-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        .info-item {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>미디어 쿼리 예제</h1>
+
+        <section>
+            <h2>1. 기본 미디어 쿼리 (모바일 우선)</h2>
+            <p>화면 크기에 따라 스타일이 변경됩니다. 화면 크기를 조절해보세요.</p>
+            
+            <div class="responsive-box">
+                <p><strong>반응형 박스</strong></p>
+                <p>화면 크기에 따라 색상과 패딩이 변경됩니다.</p>
+                <ul style="text-align: left; margin-top: 15px;">
+                    <li>모바일 (기본): 노란색</li>
+                    <li>작은 태블릿 (480px+): 파란색</li>
+                    <li>태블릿 (768px+): 초록색</li>
+                    <li>데스크톱 (1024px+): 보라색</li>
+                    <li>큰 데스크톱 (1440px+): 빨간색</li>
+                </ul>
+            </div>
+            
+            <code>/* 기본: 모바일 */
+.responsive-box {
+    background-color: #fff3cd;
+    padding: 15px;
+}
+
+/* 작은 태블릿 (480px 이상) */
+@media (min-width: 480px) {
+    .responsive-box {
+        background-color: #e3f2fd;
+        padding: 20px;
+    }
+}
+
+/* 태블릿 (768px 이상) */
+@media (min-width: 768px) {
+    .responsive-box {
+        background-color: #e8f5e9;
+        padding: 25px;
+    }
+}
+
+/* 데스크톱 (1024px 이상) */
+@media (min-width: 1024px) {
+    .responsive-box {
+        background-color: #f3e5f5;
+        padding: 30px;
+    }
+}</code>
+        </section>
+
+        <section>
+            <h2>2. 브레이크포인트 정의</h2>
+            <p>일반적으로 사용하는 브레이크포인트입니다.</p>
+            
+            <div class="info-grid">
+                <div class="info-item">
+                    <h3>모바일</h3>
+                    <p><strong>320px ~ 479px</strong></p>
+                    <p>기본 스타일 (모바일 우선)</p>
+                </div>
+                <div class="info-item">
+                    <h3>작은 태블릿</h3>
+                    <p><strong>480px ~ 767px</strong></p>
+                    <p>@media (min-width: 480px)</p>
+                </div>
+                <div class="info-item">
+                    <h3>태블릿</h3>
+                    <p><strong>768px ~ 1023px</strong></p>
+                    <p>@media (min-width: 768px)</p>
+                </div>
+                <div class="info-item">
+                    <h3>데스크톱</h3>
+                    <p><strong>1024px ~ 1439px</strong></p>
+                    <p>@media (min-width: 1024px)</p>
+                </div>
+                <div class="info-item">
+                    <h3>큰 데스크톱</h3>
+                    <p><strong>1440px ~</strong></p>
+                    <p>@media (min-width: 1440px)</p>
+                </div>
+            </div>
+            
+            <code>/* 일반적인 브레이크포인트 */
+/* 모바일: 320px ~ 479px (기본) */
+/* 작은 태블릿: 480px ~ 767px */
+@media (min-width: 480px) { }
+
+/* 태블릿: 768px ~ 1023px */
+@media (min-width: 768px) { }
+
+/* 데스크톱: 1024px ~ 1439px */
+@media (min-width: 1024px) { }
+
+/* 큰 데스크톱: 1440px ~ */
+@media (min-width: 1440px) { }</code>
+            
+            <div class="highlight">
+                <strong>팁:</strong> 브레이크포인트는 콘텐츠에 따라 조정할 수 있습니다. 
+                고정된 값보다는 콘텐츠가 자연스럽게 깨지는 지점을 찾는 것이 좋습니다.
+            </div>
+        </section>
+
+        <section>
+            <h2>3. 화면 방향 (Orientation)</h2>
+            <p>세로 모드와 가로 모드를 구분할 수 있습니다.</p>
+            
+            <div class="orientation-box">
+                <p><strong>방향별 스타일</strong></p>
+                <p>기기를 회전시켜보세요:</p>
+                <ul>
+                    <li>세로 모드 (Portrait): 노란색</li>
+                    <li>가로 모드 (Landscape): 초록색</li>
+                </ul>
+            </div>
+            
+            <code>/* 세로 모드 */
+@media (orientation: portrait) {
+    .box {
+        background-color: #fff3cd;
+    }
+}
+
+/* 가로 모드 */
+@media (orientation: landscape) {
+    .box {
+        background-color: #e8f5e9;
+    }
+}</code>
+        </section>
+
+        <section>
+            <h2>4. 복합 조건</h2>
+            <p>여러 조건을 조합하여 사용할 수 있습니다.</p>
+            
+            <div class="complex-box">
+                <p><strong>복합 조건 예제</strong></p>
+                <p>태블릿 크기 (768px~1023px)일 때 노란색으로 변경됩니다.</p>
+                <p>데스크톱 + 가로 모드일 때 초록색으로 변경됩니다.</p>
+            </div>
+            
+            <code>/* AND 조건: 태블릿 크기 */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .box {
+        background-color: #fff3cd;
+    }
+}
+
+/* AND 조건: 데스크톱 + 가로 모드 */
+@media (min-width: 1024px) and (orientation: landscape) {
+    .box {
+        background-color: #e8f5e9;
+    }
+}
+
+/* OR 조건 */
+@media (min-width: 768px), (orientation: landscape) {
+    .box {
+        /* 768px 이상 또는 가로 모드 */
+    }
+}
+
+/* NOT 조건 */
+@media not (max-width: 767px) {
+    .box {
+        /* 768px 이상 */
+    }
+}</code>
+        </section>
+
+        <section>
+            <h2>5. 미디어 쿼리 적용 방법</h2>
+            
+            <h3>방법 1: CSS 파일 내부</h3>
+            <code>/* 기본 스타일 */
+.container {
+    width: 100%;
+}
+
+/* 미디어 쿼리 */
+@media (min-width: 768px) {
+    .container {
+        width: 750px;
+        margin: 0 auto;
+    }
+}</code>
+            
+            <h3>방법 2: 별도 CSS 파일</h3>
+            <code>&lt;link rel="stylesheet" href="mobile.css"&gt;
+&lt;link rel="stylesheet" href="tablet.css" media="(min-width: 768px)"&gt;
+&lt;link rel="stylesheet" href="desktop.css" media="(min-width: 1024px)"&gt;</code>
+            
+            <div class="highlight">
+                <strong>권장:</strong> 방법 1 (CSS 파일 내부)을 사용하는 것이 
+                HTTP 요청을 줄이고 성능에 유리합니다.
+            </div>
+        </section>
+
+        <section>
+            <h2>6. 실전 패턴</h2>
+            
+            <h3>패턴 1: 폰트 크기 조절</h3>
+            <code>body {
+    font-size: 14px;  /* 모바일 */
+}
+
+@media (min-width: 768px) {
+    body {
+        font-size: 16px;  /* 태블릿 */
+    }
+}
+
+@media (min-width: 1024px) {
+    body {
+        font-size: 18px;  /* 데스크톱 */
+    }
+}</code>
+            
+            <h3>패턴 2: 레이아웃 전환</h3>
+            <code>/* 모바일: 세로 배치 */
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+/* 태블릿 이상: 가로 배치 */
+@media (min-width: 768px) {
+    .container {
+        flex-direction: row;
+    }
+}</code>
+            
+            <h3>패턴 3: 그리드 열 개수 조절</h3>
+            <code>/* 모바일: 1열 */
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+/* 태블릿: 2열 */
+@media (min-width: 768px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* 데스크톱: 3열 */
+@media (min-width: 1024px) {
+    .grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}</code>
+        </section>
+    </div>
+</body>
+</html>
+
+

@@ -1,0 +1,40 @@
+{
+  "name": "my-web-project",
+  "version": "1.0.0",
+  "description": "웹 프로젝트 설명",
+  "main": "index.html",
+  "scripts": {
+    "dev": "live-server --port=3000 --open=/index.html",
+    "start": "npm run dev",
+    "build": "npm run build:css && npm run build:js",
+    "build:css": "postcss assets/css/main.css -o dist/css/main.css --use autoprefixer --use cssnano",
+    "build:js": "webpack --mode production",
+    "watch": "npm run watch:css & npm run watch:js",
+    "watch:css": "watch 'npm run build:css' assets/css/",
+    "watch:js": "webpack --mode development --watch",
+    "clean": "rm -rf dist",
+    "lint": "eslint assets/js/**/*.js",
+    "format": "prettier --write \"**/*.{html,css,js}\""
+  },
+  "keywords": [
+    "web",
+    "html",
+    "css",
+    "javascript"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "live-server": "^1.2.2",
+    "postcss-cli": "^10.0.0",
+    "autoprefixer": "^10.4.14",
+    "cssnano": "^6.0.1",
+    "webpack": "^5.88.0",
+    "webpack-cli": "^5.1.4",
+    "eslint": "^8.45.0",
+    "prettier": "^3.0.0"
+  },
+  "dependencies": {}
+}
+
+

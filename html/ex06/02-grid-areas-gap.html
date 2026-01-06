@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Grid 영역 배치와 갭 예제">
+    <title>Grid 영역 배치와 갭 예제</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.8;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        section {
+            background-color: white;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        code {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            display: block;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+        
+        .demo-container {
+            border: 3px solid #3498db;
+            padding: 15px;
+            margin: 20px 0;
+            background-color: #e3f2fd;
+        }
+        
+        .demo-item {
+            background-color: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 20px;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+        
+        /* gap 예제 */
+        .gap-none {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+        
+        .gap-small {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+        
+        .gap-large {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        .gap-separate {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            row-gap: 10px;
+            column-gap: 30px;
+        }
+        
+        /* grid-column/grid-row 예제 */
+        .span-demo {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        
+        .span-2-cols {
+            grid-column: 1 / 3;
+        }
+        
+        .span-2-rows {
+            grid-row: 1 / 3;
+        }
+        
+        .span-both {
+            grid-column: 3 / 5;
+            grid-row: 1 / 3;
+        }
+        
+        .span-keyword {
+            grid-column: span 2;
+        }
+        
+        /* grid-area 예제 */
+        .area-container {
+            display: grid;
+            grid-template-columns: 200px 1fr 200px;
+            grid-template-rows: 100px 1fr 100px;
+            grid-template-areas:
+                "header header header"
+                "sidebar main aside"
+                "footer footer footer";
+            gap: 15px;
+            min-height: 400px;
+        }
+        
+        .area-header {
+            grid-area: header;
+            background-color: #e74c3c;
+            color: white;
+        }
+        
+        .area-sidebar {
+            grid-area: sidebar;
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .area-main {
+            grid-area: main;
+            background-color: #27ae60;
+            color: white;
+        }
+        
+        .area-aside {
+            grid-area: aside;
+            background-color: #9b59b6;
+            color: white;
+        }
+        
+        .area-footer {
+            grid-area: footer;
+            background-color: #34495e;
+            color: white;
+        }
+        
+        .highlight {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Grid 영역 배치와 갭 예제</h1>
+
+    <section>
+        <h2>1. gap (간격)</h2>
+        <p>그리드 아이템 사이의 간격을 지정합니다.</p>
+        
+        <h3>gap 없음</h3>
+        <div class="demo-container gap-none">
+            <div class="demo-item">Item 1</div>
+            <div class="demo-item">Item 2</div>
+            <div class="demo-item">Item 3</div>
+            <div class="demo-item">Item 4</div>
+            <div class="demo-item">Item 5</div>
+            <div class="demo-item">Item 6</div>
+        </div>
+        
+        <h3>gap: 10px (작은 간격)</h3>
+        <div class="demo-container gap-small">
+            <div class="demo-item">Item 1</div>
+            <div class="demo-item">Item 2</div>
+            <div class="demo-item">Item 3</div>
+            <div class="demo-item">Item 4</div>
+            <div class="demo-item">Item 5</div>
+            <div class="demo-item">Item 6</div>
+        </div>
+        
+        <h3>gap: 30px (큰 간격)</h3>
+        <div class="demo-container gap-large">
+            <div class="demo-item">Item 1</div>
+            <div class="demo-item">Item 2</div>
+            <div class="demo-item">Item 3</div>
+            <div class="demo-item">Item 4</div>
+            <div class="demo-item">Item 5</div>
+            <div class="demo-item">Item 6</div>
+        </div>
+        
+        <h3>row-gap: 10px, column-gap: 30px (개별 지정)</h3>
+        <div class="demo-container gap-separate">
+            <div class="demo-item">Item 1</div>
+            <div class="demo-item">Item 2</div>
+            <div class="demo-item">Item 3</div>
+            <div class="demo-item">Item 4</div>
+            <div class="demo-item">Item 5</div>
+            <div class="demo-item">Item 6</div>
+        </div>
+        
+        <code>gap: 20px;           /* 모든 방향 간격 */
+gap: 10px 30px;        /* 행 간격 열 간격 */
+row-gap: 10px;         /* 행 간격 */
+column-gap: 30px;      /* 열 간격 */
+
+/* 구형 브라우저 */
+grid-gap: 20px;
+grid-row-gap: 10px;
+grid-column-gap: 30px;</code>
+    </section>
+
+    <section>
+        <h2>2. grid-column / grid-row (영역 지정)</h2>
+        <p>아이템이 차지할 열/행을 지정합니다.</p>
+        
+        <h3>grid-column: 1 / 3 (2개 열 차지)</h3>
+        <div class="demo-container span-demo">
+            <div class="demo-item span-2-cols">Item 1 (2개 열)</div>
+            <div class="demo-item">Item 2</div>
+            <div class="demo-item">Item 3</div>
+            <div class="demo-item">Item 4</div>
+            <div class="demo-item">Item 5</div>
+        </div>
+        
+        <h3>grid-row: 1 / 3 (2개 행 차지)</h3>
+        <div class="demo-container span-demo">
+            <div class="demo-item span-2-rows">Item 1 (2개 행)</div>
+            <div class="demo-item">Item 2</div>
+            <div class="demo-item">Item 3</div>
+            <div class="demo-item">Item 4</div>
+        </div>
+        
+        <h3>grid-column + grid-row (2x2 영역)</h3>
+        <div class="demo-container span-demo">
+            <div class="demo-item">Item 1</div>
+            <div class="demo-item">Item 2</div>
+            <div class="demo-item span-both">Item 3 (2x2)</div>
+            <div class="demo-item">Item 4</div>
+            <div class="demo-item">Item 5</div>
+            <div class="demo-item">Item 6</div>
+        </div>
+        
+        <h3>span 키워드 사용</h3>
+        <div class="demo-container span-demo">
+            <div class="demo-item span-keyword">Item 1 (span 2)</div>
+            <div class="demo-item">Item 2</div>
+            <div class="demo-item">Item 3</div>
+            <div class="demo-item">Item 4</div>
+        </div>
+        
+        <code>/* grid-column */
+grid-column: 1 / 3;        /* 1번 선부터 3번 선까지 (2개 열) */
+grid-column: span 2;       /* 현재 위치부터 2개 열 */
+grid-column-start: 1;
+grid-column-end: 3;
+
+/* grid-row */
+grid-row: 1 / 3;           /* 1번 선부터 3번 선까지 (2개 행) */
+grid-row: span 2;          /* 현재 위치부터 2개 행 */
+grid-row-start: 1;
+grid-row-end: 3;</code>
+    </section>
+
+    <section>
+        <h2>3. grid-area (영역 이름으로 배치)</h2>
+        <p>grid-template-areas로 정의한 영역 이름으로 아이템을 배치합니다.</p>
+        
+        <div class="demo-container area-container">
+            <header class="demo-item area-header">Header</header>
+            <aside class="demo-item area-sidebar">Sidebar</aside>
+            <main class="demo-item area-main">Main Content</main>
+            <aside class="demo-item area-aside">Aside</aside>
+            <footer class="demo-item area-footer">Footer</footer>
+        </div>
+        
+        <code>/* 컨테이너 */
+.container {
+    display: grid;
+    grid-template-columns: 200px 1fr 200px;
+    grid-template-rows: 100px 1fr 100px;
+    grid-template-areas:
+        "header header header"
+        "sidebar main aside"
+        "footer footer footer";
+    gap: 15px;
+}
+
+/* 아이템 */
+header {
+    grid-area: header;
+}
+
+.sidebar {
+    grid-area: sidebar;
+}
+
+main {
+    grid-area: main;
+}
+
+.aside {
+    grid-area: aside;
+}
+
+footer {
+    grid-area: footer;
+}</code>
+        
+        <div class="highlight">
+            <strong>장점:</strong>
+            <ul>
+                <li>시각적으로 레이아웃 구조를 파악하기 쉬움</li>
+                <li>반응형 디자인에서 영역 순서 변경이 쉬움</li>
+                <li>코드 가독성이 향상됨</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>4. grid-area 단축 사용법</h2>
+        <p>grid-area는 grid-column/grid-row의 단축 속성으로도 사용할 수 있습니다.</p>
+        
+        <code>/* grid-area 단축 */
+.item {
+    grid-area: 1 / 1 / 3 / 3;
+    /* row-start / col-start / row-end / col-end */
+}
+
+/* 위와 동일 */
+.item {
+    grid-row-start: 1;
+    grid-column-start: 1;
+    grid-row-end: 3;
+    grid-column-end: 3;
+}</code>
+        
+        <div class="highlight">
+            <strong>순서:</strong> row-start / col-start / row-end / col-end
+        </div>
+    </section>
+
+    <section>
+        <h2>5. 복잡한 영역 배치 예제</h2>
+        <p>여러 기법을 조합한 복잡한 레이아웃입니다.</p>
+        
+        <div class="demo-container" style="display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(4, 80px); gap: 10px;">
+            <div class="demo-item" style="grid-column: 1 / 3; grid-row: 1 / 2; background-color: #e74c3c; color: white;">Header (2x1)</div>
+            <div class="demo-item" style="grid-column: 3 / 5; grid-row: 1 / 3; background-color: #3498db; color: white;">Sidebar (2x2)</div>
+            <div class="demo-item" style="grid-column: 1 / 2; grid-row: 2 / 4; background-color: #27ae60; color: white;">Nav (1x2)</div>
+            <div class="demo-item" style="grid-column: 2 / 4; grid-row: 2 / 4; background-color: #f39c12; color: white;">Main (2x2)</div>
+            <div class="demo-item" style="grid-column: 4 / 5; grid-row: 3 / 5; background-color: #9b59b6; color: white;">Aside (1x2)</div>
+            <div class="demo-item" style="grid-column: 1 / 4; grid-row: 4 / 5; background-color: #34495e; color: white;">Footer (3x1)</div>
+        </div>
+        
+        <code>/* 복잡한 레이아웃 */
+.container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 80px);
+    gap: 10px;
+}
+
+.header {
+    grid-column: 1 / 3;
+    grid-row: 1 / 2;
+}
+
+.sidebar {
+    grid-column: 3 / 5;
+    grid-row: 1 / 3;
+}
+
+.nav {
+    grid-column: 1 / 2;
+    grid-row: 2 / 4;
+}
+
+.main {
+    grid-column: 2 / 4;
+    grid-row: 2 / 4;
+}
+
+.aside {
+    grid-column: 4 / 5;
+    grid-row: 3 / 5;
+}
+
+.footer {
+    grid-column: 1 / 4;
+    grid-row: 4 / 5;
+}</code>
+    </section>
+</body>
+</html>
+
+
