@@ -119,6 +119,66 @@ javac -version
 3. "Extension Pack for Java" 검색 후 설치
 4. 설치 후 자동으로 Java 프로젝트 인식
 
+### 3. VS Code Java 단축키
+
+#### 코드 편집 관련
+- `Ctrl + Space`: 자동 완성 (IntelliSense)
+- `Ctrl + Shift + Space`: 매개변수 힌트 표시
+- `Alt + Shift + F`: 코드 포맷팅 (전체 파일)
+- `Ctrl + K, Ctrl + F`: 선택 영역 포맷팅
+- `Ctrl + /`: 주석 토글 (한 줄)
+- `Shift + Alt + A`: 블록 주석 토글
+- `Ctrl + D`: 같은 단어 선택 (여러 개 선택 가능)
+- `Alt + ↑/↓`: 현재 줄 위/아래로 이동
+- `Shift + Alt + ↑/↓`: 현재 줄 복사하여 위/아래에 붙여넣기
+- `Ctrl + Shift + K`: 현재 줄 삭제
+- `Ctrl + Enter`: 아래에 새 줄 삽입
+- `Ctrl + Shift + Enter`: 위에 새 줄 삽입
+
+#### 코드 탐색 및 이동
+- `Ctrl + P`: 파일 빠른 열기
+- `Ctrl + Shift + O`: 현재 파일의 심볼(클래스, 메서드 등) 검색
+- `Ctrl + T`: 전체 프로젝트의 심볼 검색
+- `F12`: 정의로 이동 (Go to Definition)
+- `Alt + F12`: 정의 피킹 (Peek Definition) - 새 창에서 확인
+- `Shift + F12`: 참조 찾기 (Find All References)
+- `Ctrl + -`: 이전 위치로 이동
+- `Ctrl + Shift + -`: 다음 위치로 이동
+- `Ctrl + B`: 사이드바 토글
+
+#### 리팩토링 관련
+- `F2`: 심볼 이름 바꾸기 (Rename Symbol)
+- `Ctrl + Shift + R`: 리팩토링 메뉴 열기
+- `Alt + Shift + R`: 선택한 심볼 이름 바꾸기
+- `Ctrl + .`: 빠른 수정 (Quick Fix) - 오류 수정 제안
+
+#### 실행 및 디버깅
+- `F5`: 디버깅 시작/계속
+- `F9`: 중단점 토글
+- `F10`: Step Over (다음 줄로)
+- `F11`: Step Into (함수 안으로)
+- `Shift + F11`: Step Out (함수 밖으로)
+- `Ctrl + Shift + F5`: 디버깅 재시작
+- `Shift + F5`: 디버깅 중지
+- `Ctrl + F5`: 디버깅 없이 실행
+
+#### Java 특화 기능
+- `Ctrl + Shift + P` → "Java: Clean Java Language Server Workspace": Java 언어 서버 재시작
+- `Ctrl + Shift + P` → "Java: Rebuild Projects": 프로젝트 재빌드
+- `Ctrl + Shift + P` → "Java: Show Build Job Status": 빌드 상태 확인
+- `Alt + Shift + S`: Source 액션 (Getter/Setter 생성 등)
+- `Ctrl + 1`: 빠른 수정 제안 표시
+
+#### 기타 유용한 단축키
+- `Ctrl + `` (백틱)`: 터미널 토글
+- `Ctrl + Shift + `` (백틱)`: 새 터미널 생성
+- `Ctrl + K, Ctrl + S`: 키보드 단축키 설정 열기
+- `Ctrl + ,`: 설정 열기
+- `Ctrl + K, Ctrl + W`: 모든 탭 닫기
+- `Ctrl + Tab`: 열린 파일 간 전환
+- `Ctrl + W`: 현재 탭 닫기
+- `Ctrl + Shift + T`: 최근에 닫은 파일 다시 열기
+
 ---
 
 ## 첫 Java 프로그램 (Hello World)

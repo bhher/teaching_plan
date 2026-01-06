@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CSS 기초 종합 예제">
+    <title>CSS 기초 종합 예제 - 프로필 카드</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* 전체 스타일 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* 헤더 */
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        /* 프로필 카드 */
+        .profile-card {
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+            max-width: 400px;
+            margin: 0 auto 40px;
+        }
+        
+        .profile-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+        }
+        
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 5px solid white;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .profile-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .profile-title {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+        
+        .profile-body {
+            padding: 30px;
+        }
+        
+        .profile-section {
+            margin-bottom: 25px;
+        }
+        
+        .profile-section h3 {
+            color: #2c3e50;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 5px;
+        }
+        
+        .profile-section p {
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .skill-tag {
+            background-color: #e3f2fd;
+            color: #1976d2;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid #bbdefb;
+        }
+        
+        .contact-info {
+            list-style: none;
+        }
+        
+        .contact-info li {
+            padding: 8px 0;
+            color: #555;
+        }
+        
+        .contact-info li strong {
+            color: #2c3e50;
+            margin-right: 10px;
+        }
+        
+        /* 버튼 */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 700;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        /* CSS 설명 섹션 */
+        .css-info {
+            background-color: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .css-info h2 {
+            color: #2c3e50;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .css-item {
+            margin-bottom: 25px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .css-item h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .css-item code {
+            background-color: #2c3e50;
+            color: #4caf50;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>프로필 카드</h1>
+            <p>CSS 기초를 활용한 실전 예제</p>
+        </header>
+
+        <div class="profile-card">
+            <div class="profile-header">
+                <div class="profile-avatar">👨‍💻</div>
+                <h2 class="profile-name">홍길동</h2>
+                <p class="profile-title">웹 개발자</p>
+            </div>
+            
+            <div class="profile-body">
+                <div class="profile-section">
+                    <h3>소개</h3>
+                    <p>
+                        열정적인 웹 개발자로, 사용자 경험을 최우선으로 생각합니다.
+                        최신 웹 기술을 학습하고 적용하는 것을 좋아합니다.
+                    </p>
+                </div>
+                
+                <div class="profile-section">
+                    <h3>기술 스택</h3>
+                    <div class="skills">
+                        <span class="skill-tag">HTML</span>
+                        <span class="skill-tag">CSS</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Node.js</span>
+                    </div>
+                </div>
+                
+                <div class="profile-section">
+                    <h3>연락처</h3>
+                    <ul class="contact-info">
+                        <li><strong>이메일:</strong> hong@example.com</li>
+                        <li><strong>전화:</strong> 010-1234-5678</li>
+                        <li><strong>위치:</strong> 서울, 대한민국</li>
+                    </ul>
+                </div>
+                
+                <div class="button-group">
+                    <a href="#" class="btn">포트폴리오</a>
+                    <a href="#" class="btn btn-secondary">연락하기</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="css-info">
+            <h2>사용된 CSS 기법</h2>
+            
+            <div class="css-item">
+                <h3>1. 외부 폰트 적용</h3>
+                <p>Google Fonts에서 Noto Sans KR 폰트를 가져와 사용했습니다.</p>
+                <code>@import 또는 &lt;link&gt; 태그로 폰트 연결</code>
+            </div>
+            
+            <div class="css-item">
+                <h3>2. 그라데이션 배경</h3>
+                <p>linear-gradient를 사용하여 아름다운 그라데이션 배경을 만들었습니다.</p>
+                <code>background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);</code>
+            </div>
+            
+            <div class="css-item">
+                <h3>3. border-radius로 둥근 모서리</h3>
+                <p>border-radius를 사용하여 카드와 아바타를 둥글게 만들었습니다.</p>
+                <code>border-radius: 20px; /* 카드 */<br>border-radius: 50%; /* 원형 아바타 */</code>
+            </div>
+            
+            <div class="css-item">
+                <h3>4. box-shadow로 그림자 효과</h3>
+                <p>box-shadow를 사용하여 입체감을 주었습니다.</p>
+                <code>box-shadow: 0 10px 30px rgba(0,0,0,0.3);</code>
+            </div>
+            
+            <div class="css-item">
+                <h3>5. 텍스트 스타일링</h3>
+                <p>font-weight, font-size, line-height 등을 사용하여 텍스트를 스타일링했습니다.</p>
+                <code>font-weight: 700; font-size: 1.8rem; line-height: 1.6;</code>
+            </div>
+            
+            <div class="css-item">
+                <h3>6. 색상 사용</h3>
+                <p>16진수 색상 코드를 사용하여 정확한 색상을 지정했습니다.</p>
+                <code>color: #2c3e50; background-color: #e3f2fd;</code>
+            </div>
+            
+            <div class="css-item">
+                <h3>7. 호버 효과</h3>
+                <p>:hover 가상 클래스를 사용하여 인터랙티브한 효과를 추가했습니다.</p>
+                <code>.btn:hover { transform: translateY(-2px); }</code>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+

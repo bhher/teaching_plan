@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="텍스트 스타일링 예제">
+    <title>텍스트 스타일링 예제</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            line-height: 1.8;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        section {
+            background-color: white;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        code {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            display: block;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+        
+        .demo-box {
+            border: 2px solid #ddd;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 5px;
+            background-color: #fafafa;
+        }
+        
+        /* font-family 예제 */
+        .font-serif {
+            font-family: 'Times New Roman', serif;
+        }
+        
+        .font-sans {
+            font-family: Arial, sans-serif;
+        }
+        
+        .font-mono {
+            font-family: 'Courier New', monospace;
+        }
+        
+        .font-korean {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        
+        /* font-size 예제 */
+        .size-px {
+            font-size: 16px;
+        }
+        
+        .size-em {
+            font-size: 1.5em;
+        }
+        
+        .size-rem {
+            font-size: 1.5rem;
+        }
+        
+        .size-percent {
+            font-size: 150%;
+        }
+        
+        /* font-weight 예제 */
+        .weight-normal {
+            font-weight: normal;
+        }
+        
+        .weight-bold {
+            font-weight: bold;
+        }
+        
+        .weight-300 {
+            font-weight: 300;
+        }
+        
+        .weight-600 {
+            font-weight: 600;
+        }
+        
+        .weight-900 {
+            font-weight: 900;
+        }
+        
+        /* font-style 예제 */
+        .style-normal {
+            font-style: normal;
+        }
+        
+        .style-italic {
+            font-style: italic;
+        }
+        
+        .style-oblique {
+            font-style: oblique;
+        }
+        
+        /* line-height 예제 */
+        .line-tight {
+            line-height: 1.2;
+        }
+        
+        .line-normal {
+            line-height: 1.5;
+        }
+        
+        .line-spacious {
+            line-height: 2;
+        }
+        
+        .line-fixed {
+            line-height: 24px;
+        }
+        
+        /* letter-spacing 예제 */
+        .letter-normal {
+            letter-spacing: normal;
+        }
+        
+        .letter-wide {
+            letter-spacing: 2px;
+        }
+        
+        .letter-tight {
+            letter-spacing: -1px;
+        }
+        
+        .letter-em {
+            letter-spacing: 0.1em;
+        }
+        
+        /* text-align 예제 */
+        .align-left {
+            text-align: left;
+        }
+        
+        .align-center {
+            text-align: center;
+        }
+        
+        .align-right {
+            text-align: right;
+        }
+        
+        .align-justify {
+            text-align: justify;
+        }
+        
+        /* text-decoration 예제 */
+        .decoration-none {
+            text-decoration: none;
+        }
+        
+        .decoration-underline {
+            text-decoration: underline;
+        }
+        
+        .decoration-line-through {
+            text-decoration: line-through;
+        }
+        
+        .decoration-overline {
+            text-decoration: overline;
+        }
+        
+        /* text-transform 예제 */
+        .transform-none {
+            text-transform: none;
+        }
+        
+        .transform-uppercase {
+            text-transform: uppercase;
+        }
+        
+        .transform-lowercase {
+            text-transform: lowercase;
+        }
+        
+        .transform-capitalize {
+            text-transform: capitalize;
+        }
+        
+        /* font 단축 속성 */
+        .font-shorthand {
+            font: italic bold 18px/1.6 'Noto Sans KR', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>텍스트 스타일링 예제</h1>
+
+    <section>
+        <h2>1. font-family (글꼴)</h2>
+        <p>글꼴을 지정합니다. 여러 글꼴을 나열하면 앞에서부터 사용 가능한 글꼴을 사용합니다.</p>
+        
+        <div class="demo-box">
+            <p class="font-serif">Serif 폰트 (Times New Roman)</p>
+            <p class="font-sans">Sans-serif 폰트 (Arial)</p>
+            <p class="font-mono">Monospace 폰트 (Courier New)</p>
+            <p class="font-korean">한글 폰트 (Noto Sans KR)</p>
+        </div>
+        
+        <code>font-family: 'Noto Sans KR', Arial, sans-serif;</code>
+        
+        <div style="background-color: #fff3cd; padding: 15px; border-left: 4px solid #ffc107; margin: 15px 0;">
+            <strong>팁:</strong> 마지막에 일반 폰트 계열(serif, sans-serif, monospace)을 지정하는 것이 좋습니다.
+        </div>
+    </section>
+
+    <section>
+        <h2>2. font-size (글자 크기)</h2>
+        <p>글자 크기를 지정합니다.</p>
+        
+        <div class="demo-box">
+            <p class="size-px">16px - 픽셀 단위 (고정 크기)</p>
+            <p class="size-em">1.5em - 부모 요소의 1.5배</p>
+            <p class="size-rem">1.5rem - 루트 요소의 1.5배 (권장)</p>
+            <p class="size-percent">150% - 부모 요소의 150%</p>
+        </div>
+        
+        <code>font-size: 16px;
+font-size: 1.5em;
+font-size: 1.5rem; /* 권장 */
+font-size: 150%;</code>
+        
+        <div style="background-color: #e8f5e9; padding: 15px; border-left: 4px solid #4caf50; margin: 15px 0;">
+            <strong>권장:</strong> rem 단위를 사용하면 일관된 크기 조절이 가능합니다.
+        </div>
+    </section>
+
+    <section>
+        <h2>3. font-weight (글자 굵기)</h2>
+        <p>글자 굵기를 지정합니다.</p>
+        
+        <div class="demo-box">
+            <p class="weight-normal">normal (400) - 기본 굵기</p>
+            <p class="weight-300">300 - 가늘게</p>
+            <p class="weight-bold">bold (700) - 굵게</p>
+            <p class="weight-600">600 - 중간 굵게</p>
+            <p class="weight-900">900 - 매우 굵게</p>
+        </div>
+        
+        <code>font-weight: normal; /* 400 */
+font-weight: bold; /* 700 */
+font-weight: 300;
+font-weight: 600;</code>
+    </section>
+
+    <section>
+        <h2>4. font-style (글자 스타일)</h2>
+        <p>글자 스타일을 지정합니다.</p>
+        
+        <div class="demo-box">
+            <p class="style-normal">normal - 기본 스타일</p>
+            <p class="style-italic">italic - 기울임</p>
+            <p class="style-oblique">oblique - 기울임 (약간 다름)</p>
+        </div>
+        
+        <code>font-style: normal;
+font-style: italic;
+font-style: oblique;</code>
+    </section>
+
+    <section>
+        <h2>5. line-height (줄 간격)</h2>
+        <p>줄 간격을 지정합니다. 가독성에 매우 중요합니다.</p>
+        
+        <div class="demo-box">
+            <p class="line-tight">line-height: 1.2 - 좁은 간격. 여러 줄의 텍스트가 있을 때 줄 간격이 좁아서 읽기 어려울 수 있습니다.</p>
+            <p class="line-normal">line-height: 1.5 - 일반적인 간격 (권장). 본문에 적합한 줄 간격으로 읽기 편합니다.</p>
+            <p class="line-spacious">line-height: 2 - 넓은 간격. 줄 간격이 넓어서 여유롭게 느껴집니다.</p>
+            <p class="line-fixed">line-height: 24px - 고정 값. 픽셀 단위로 고정된 줄 간격입니다.</p>
+        </div>
+        
+        <code>line-height: 1.5; /* 권장 - 글자 크기의 1.5배 */
+line-height: 24px; /* 고정 값 */
+line-height: 150%; /* 백분율 */</code>
+        
+        <div style="background-color: #e3f2fd; padding: 15px; border-left: 4px solid #2196f3; margin: 15px 0;">
+            <strong>권장 값:</strong>
+            <ul>
+                <li>본문: 1.5 ~ 1.8</li>
+                <li>제목: 1.2 ~ 1.4</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>6. letter-spacing (자간)</h2>
+        <p>글자 사이 간격을 지정합니다.</p>
+        
+        <div class="demo-box">
+            <p class="letter-normal">normal - 기본 자간</p>
+            <p class="letter-wide">wide - 넓은 자간 (2px)</p>
+            <p class="letter-tight">tight - 좁은 자간 (-1px)</p>
+            <p class="letter-em">em - 상대적 자간 (0.1em)</p>
+        </div>
+        
+        <code>letter-spacing: normal;
+letter-spacing: 2px;
+letter-spacing: -1px;
+letter-spacing: 0.1em;</code>
+        
+        <div style="background-color: #fff3cd; padding: 15px; border-left: 4px solid #ffc107; margin: 15px 0;">
+            <strong>사용 예:</strong> 제목이나 로고에 넓은 자간을 주면 고급스러운 느낌을 줄 수 있습니다.
+        </div>
+    </section>
+
+    <section>
+        <h2>7. text-align (텍스트 정렬)</h2>
+        <p>텍스트 정렬을 지정합니다.</p>
+        
+        <div class="demo-box">
+            <p class="align-left">왼쪽 정렬 (left) - 기본값입니다. 대부분의 텍스트는 왼쪽 정렬을 사용합니다.</p>
+            <p class="align-center">가운데 정렬 (center) - 제목이나 특별한 강조에 사용합니다.</p>
+            <p class="align-right">오른쪽 정렬 (right) - 날짜나 숫자에 사용할 수 있습니다.</p>
+            <p class="align-justify">양쪽 정렬 (justify) - 양쪽 끝을 맞춰서 정렬합니다. 신문이나 잡지에서 자주 사용합니다.</p>
+        </div>
+        
+        <code>text-align: left;
+text-align: center;
+text-align: right;
+text-align: justify;</code>
+    </section>
+
+    <section>
+        <h2>8. text-decoration (텍스트 장식)</h2>
+        <p>텍스트 장식을 지정합니다.</p>
+        
+        <div class="demo-box">
+            <p class="decoration-none">none - 장식 없음</p>
+            <p class="decoration-underline">underline - 밑줄</p>
+            <p class="decoration-line-through">line-through - 취소선</p>
+            <p class="decoration-overline">overline - 윗줄</p>
+        </div>
+        
+        <code>text-decoration: none;
+text-decoration: underline;
+text-decoration: line-through;
+text-decoration: overline;</code>
+        
+        <div style="background-color: #e3f2fd; padding: 15px; border-left: 4px solid #2196f3; margin: 15px 0;">
+            <strong>팁:</strong> 링크의 기본 밑줄을 제거할 때 <code>text-decoration: none;</code>을 사용합니다.
+        </div>
+    </section>
+
+    <section>
+        <h2>9. text-transform (대소문자 변환)</h2>
+        <p>텍스트 대소문자를 변환합니다.</p>
+        
+        <div class="demo-box">
+            <p class="transform-none">none - 원본 그대로 (Hello World)</p>
+            <p class="transform-uppercase">uppercase - 대문자 (HELLO WORLD)</p>
+            <p class="transform-lowercase">lowercase - 소문자 (hello world)</p>
+            <p class="transform-capitalize">capitalize - 단어 첫 글자 대문자 (Hello World)</p>
+        </div>
+        
+        <code>text-transform: none;
+text-transform: uppercase;
+text-transform: lowercase;
+text-transform: capitalize;</code>
+    </section>
+
+    <section>
+        <h2>10. font 단축 속성</h2>
+        <p>여러 폰트 속성을 한 번에 지정할 수 있습니다.</p>
+        
+        <div class="demo-box">
+            <p class="font-shorthand">font 단축 속성: italic bold 18px/1.6 'Noto Sans KR', sans-serif</p>
+        </div>
+        
+        <code>font: italic bold 18px/1.6 'Noto Sans KR', sans-serif;
+/* font: style weight size/line-height family */</code>
+        
+        <div style="background-color: #fff3cd; padding: 15px; border-left: 4px solid #ffc107; margin: 15px 0;">
+            <strong>순서:</strong> style → weight → size/line-height → family
+        </div>
+    </section>
+</body>
+</html>
+
+

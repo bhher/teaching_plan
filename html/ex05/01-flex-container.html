@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Flex 컨테이너 속성 예제">
+    <title>Flex 컨테이너 속성 예제</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.8;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        section {
+            background-color: white;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        code {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            display: block;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+        
+        .demo-container {
+            border: 3px solid #3498db;
+            padding: 15px;
+            margin: 20px 0;
+            background-color: #e3f2fd;
+            min-height: 150px;
+        }
+        
+        .demo-item {
+            background-color: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        /* display: flex */
+        .flex-container {
+            display: flex;
+        }
+        
+        /* flex-direction */
+        .direction-row {
+            flex-direction: row;
+        }
+        
+        .direction-row-reverse {
+            flex-direction: row-reverse;
+        }
+        
+        .direction-column {
+            flex-direction: column;
+        }
+        
+        .direction-column-reverse {
+            flex-direction: column-reverse;
+        }
+        
+        /* flex-wrap */
+        .wrap-nowrap {
+            flex-wrap: nowrap;
+        }
+        
+        .wrap-wrap {
+            flex-wrap: wrap;
+        }
+        
+        .wrap-wrap-reverse {
+            flex-wrap: wrap-reverse;
+        }
+        
+        .highlight {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        
+        .warning {
+            background-color: #f8d7da;
+            padding: 15px;
+            border-left: 4px solid #dc3545;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Flex 컨테이너 속성 예제</h1>
+
+    <section>
+        <h2>1. display: flex</h2>
+        <p>Flexbox를 활성화합니다. 부모 요소에 적용하면 직접 자식 요소들이 Flex Item이 됩니다.</p>
+        
+        <div class="demo-container flex-container">
+            <div class="demo-item">Item 1</div>
+            <div class="demo-item">Item 2</div>
+            <div class="demo-item">Item 3</div>
+        </div>
+        
+        <code>.container {
+    display: flex;  /* Flexbox 활성화 */
+}</code>
+        
+        <div class="highlight">
+            <strong>특징:</strong> 기본적으로 가로 방향으로 배치되며, 
+            아이템들이 한 줄에 배치됩니다.
+        </div>
+    </section>
+
+    <section>
+        <h2>2. flex-direction (주축 방향)</h2>
+        <p>주축의 방향을 지정합니다. 아이템이 배치되는 주요 방향을 결정합니다.</p>
+        
+        <h3>row (기본값: 가로, 왼쪽→오른쪽)</h3>
+        <div class="demo-container flex-container direction-row">
+            <div class="demo-item">Item 1</div>
+            <div class="demo-item">Item 2</div>
+            <div class="demo-item">Item 3</div>
+        </div>
+        
+        <h3>row-reverse (가로, 오른쪽→왼쪽)</h3>
+        <div class="demo-container flex-container direction-row-reverse">
+            <div class="demo-item">Item 1</div>
+            <div class="demo-item">Item 2</div>
+            <div class="demo-item">Item 3</div>
+        </div>
+        
+        <h3>column (세로, 위→아래)</h3>
+        <div class="demo-container flex-container direction-column" style="min-height: 200px;">
+            <div class="demo-item">Item 1</div>
+            <div class="demo-item">Item 2</div>
+            <div class="demo-item">Item 3</div>
+        </div>
+        
+        <h3>column-reverse (세로, 아래→위)</h3>
+        <div class="demo-container flex-container direction-column-reverse" style="min-height: 200px;">
+            <div class="demo-item">Item 1</div>
+            <div class="demo-item">Item 2</div>
+            <div class="demo-item">Item 3</div>
+        </div>
+        
+        <code>flex-direction: row;           /* 가로 (왼쪽→오른쪽) */
+flex-direction: row-reverse;  /* 가로 (오른쪽→왼쪽) */
+flex-direction: column;        /* 세로 (위→아래) */
+flex-direction: column-reverse; /* 세로 (아래→위) */</code>
+    </section>
+
+    <section>
+        <h2>3. flex-wrap (줄바꿈)</h2>
+        <p>아이템이 넘칠 때 줄바꿈을 허용할지 지정합니다.</p>
+        
+        <h3>nowrap (기본값: 줄바꿈 안 함)</h3>
+        <div class="demo-container flex-container wrap-nowrap">
+            <div class="demo-item" style="min-width: 200px;">Item 1 (200px)</div>
+            <div class="demo-item" style="min-width: 200px;">Item 2 (200px)</div>
+            <div class="demo-item" style="min-width: 200px;">Item 3 (200px)</div>
+            <div class="demo-item" style="min-width: 200px;">Item 4 (200px)</div>
+            <div class="demo-item" style="min-width: 200px;">Item 5 (200px)</div>
+        </div>
+        <div class="warning">
+            <strong>주의:</strong> nowrap일 때 아이템이 축소될 수 있습니다.
+        </div>
+        
+        <h3>wrap (줄바꿈 허용)</h3>
+        <div class="demo-container flex-container wrap-wrap">
+            <div class="demo-item" style="min-width: 200px;">Item 1 (200px)</div>
+            <div class="demo-item" style="min-width: 200px;">Item 2 (200px)</div>
+            <div class="demo-item" style="min-width: 200px;">Item 3 (200px)</div>
+            <div class="demo-item" style="min-width: 200px;">Item 4 (200px)</div>
+            <div class="demo-item" style="min-width: 200px;">Item 5 (200px)</div>
+        </div>
+        
+        <h3>wrap-reverse (줄바꿈 허용, 역순)</h3>
+        <div class="demo-container flex-container wrap-wrap-reverse">
+            <div class="demo-item" style="min-width: 200px;">Item 1 (200px)</div>
+            <div class="demo-item" style="min-width: 200px;">Item 2 (200px)</div>
+            <div class="demo-item" style="min-width: 200px;">Item 3 (200px)</div>
+            <div class="demo-item" style="min-width: 200px;">Item 4 (200px)</div>
+            <div class="demo-item" style="min-width: 200px;">Item 5 (200px)</div>
+        </div>
+        
+        <code>flex-wrap: nowrap;      /* 줄바꿈 안 함 (기본값) */
+flex-wrap: wrap;        /* 줄바꿈 허용 */
+flex-wrap: wrap-reverse; /* 줄바꿈 허용 (역순) */</code>
+    </section>
+
+    <section>
+        <h2>4. flex-flow (단축 속성)</h2>
+        <p>flex-direction과 flex-wrap을 한 번에 지정합니다.</p>
+        
+        <div class="demo-container flex-container" style="flex-flow: row wrap;">
+            <div class="demo-item" style="min-width: 200px;">Item 1</div>
+            <div class="demo-item" style="min-width: 200px;">Item 2</div>
+            <div class="demo-item" style="min-width: 200px;">Item 3</div>
+            <div class="demo-item" style="min-width: 200px;">Item 4</div>
+        </div>
+        
+        <code>flex-flow: row wrap;        /* direction wrap */
+flex-flow: column nowrap;
+flex-flow: row-reverse wrap;</code>
+    </section>
+
+    <section>
+        <h2>5. Flexbox 구조 이해</h2>
+        <div class="highlight">
+            <h3>주요 개념</h3>
+            <ul>
+                <li><strong>Flex Container (부모)</strong>: display: flex를 가진 요소</li>
+                <li><strong>Flex Item (자식)</strong>: Container의 직접 자식 요소</li>
+                <li><strong>Main Axis (주축)</strong>: 아이템이 배치되는 주요 방향</li>
+                <li><strong>Cross Axis (교차축)</strong>: 주축에 수직인 방향</li>
+            </ul>
+        </div>
+        
+        <div style="background-color: #e3f2fd; padding: 20px; border-radius: 8px; margin: 20px 0;">
+            <h3>시각화</h3>
+            <pre style="font-family: monospace; background-color: white; padding: 15px; border-radius: 5px;">
+┌─────────────────────────────────┐
+│      Flex Container (부모)      │
+│  ┌──────┐  ┌──────┐  ┌──────┐  │
+│  │Item 1│  │Item 2│  │Item 3│  │
+│  └──────┘  └──────┘  └──────┘  │
+│  Main Axis (주축) →              │
+│  ↑ Cross Axis (교차축)           │
+└─────────────────────────────────┘
+            </pre>
+        </div>
+    </section>
+</body>
+</html>
+
+

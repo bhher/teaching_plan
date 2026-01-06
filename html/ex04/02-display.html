@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Display 속성 예제">
+    <title>Display 속성 예제</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.8;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        section {
+            background-color: white;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        code {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            display: block;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+        
+        .demo-container {
+            border: 2px dashed #ccc;
+            padding: 15px;
+            margin: 15px 0;
+            background-color: #fafafa;
+        }
+        
+        /* Block 예제 */
+        .block-demo {
+            display: block;
+            background-color: #e3f2fd;
+            border: 2px solid #2196f3;
+            padding: 15px;
+            margin: 10px 0;
+        }
+        
+        /* Inline 예제 */
+        .inline-demo {
+            display: inline;
+            background-color: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 5px 10px;
+            margin: 0 5px;
+        }
+        
+        /* Inline-block 예제 */
+        .inline-block-demo {
+            display: inline-block;
+            background-color: #d4edda;
+            border: 2px solid #28a745;
+            padding: 15px;
+            margin: 10px;
+            width: 150px;
+            text-align: center;
+        }
+        
+        /* None 예제 */
+        .none-demo {
+            display: none;
+        }
+        
+        .visibility-demo {
+            visibility: hidden;
+        }
+        
+        /* 비교용 스타일 */
+        .comparison-box {
+            background-color: #ffebee;
+            border: 2px solid #e74c3c;
+            padding: 15px;
+            margin: 10px 0;
+        }
+        
+        .highlight {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        
+        .warning {
+            background-color: #f8d7da;
+            padding: 15px;
+            border-left: 4px solid #dc3545;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Display 속성 예제</h1>
+
+    <section>
+        <h2>1. Block (블록)</h2>
+        <p><strong>특징:</strong></p>
+        <ul>
+            <li>항상 새 줄에서 시작</li>
+            <li>너비는 부모 요소의 100% (기본값)</li>
+            <li>높이는 콘텐츠에 따라 결정</li>
+            <li>margin, padding, width, height 사용 가능</li>
+        </ul>
+        
+        <div class="demo-container">
+            <div class="block-demo">Block 요소 1</div>
+            <div class="block-demo">Block 요소 2</div>
+            <div class="block-demo">Block 요소 3</div>
+        </div>
+        
+        <code>div {
+    display: block;  /* 기본값 */
+    width: 200px;
+    height: 100px;
+    margin: 10px;
+    padding: 15px;
+}</code>
+        
+        <div class="highlight">
+            <strong>블록 요소 예시:</strong> &lt;div&gt;, &lt;p&gt;, &lt;h1&gt;~&lt;h6&gt;, 
+            &lt;section&gt;, &lt;article&gt;, &lt;ul&gt;, &lt;li&gt; 등
+        </div>
+    </section>
+
+    <section>
+        <h2>2. Inline (인라인)</h2>
+        <p><strong>특징:</strong></p>
+        <ul>
+            <li>같은 줄에 배치</li>
+            <li>너비와 높이는 콘텐츠에 따라 결정</li>
+            <li>width, height 사용 불가</li>
+            <li>상하 margin 사용 불가 (좌우만 가능)</li>
+        </ul>
+        
+        <div class="demo-container">
+            <span class="inline-demo">Inline 요소 1</span>
+            <span class="inline-demo">Inline 요소 2</span>
+            <span class="inline-demo">Inline 요소 3</span>
+            <span class="inline-demo">Inline 요소 4</span>
+        </div>
+        
+        <code>span {
+    display: inline;  /* 기본값 */
+    /* width, height 사용 불가 */
+    margin: 0 10px;  /* 좌우만 가능 */
+    padding: 5px 10px;  /* 가능하지만 위아래는 영향 없음 */
+}</code>
+        
+        <div class="warning">
+            <strong>주의:</strong> 인라인 요소에 width나 height를 설정해도 적용되지 않습니다.
+        </div>
+        
+        <div class="highlight">
+            <strong>인라인 요소 예시:</strong> &lt;span&gt;, &lt;a&gt;, &lt;strong&gt;, 
+            &lt;em&gt;, &lt;img&gt; 등
+        </div>
+    </section>
+
+    <section>
+        <h2>3. Inline-block (인라인 블록)</h2>
+        <p><strong>특징:</strong></p>
+        <ul>
+            <li>인라인처럼 같은 줄에 배치</li>
+            <li>블록처럼 width, height 사용 가능</li>
+            <li>margin, padding 모두 사용 가능</li>
+        </ul>
+        
+        <div class="demo-container">
+            <div class="inline-block-demo">Inline-block 1</div>
+            <div class="inline-block-demo">Inline-block 2</div>
+            <div class="inline-block-demo">Inline-block 3</div>
+        </div>
+        
+        <code>div {
+    display: inline-block;
+    width: 150px;
+    height: 80px;
+    margin: 10px;
+    padding: 15px;
+}</code>
+        
+        <div class="highlight">
+            <strong>사용 예시:</strong> 버튼을 가로로 나열, 카드 레이아웃, 네비게이션 메뉴
+        </div>
+    </section>
+
+    <section>
+        <h2>4. None vs Visibility: hidden</h2>
+        
+        <h3>display: none</h3>
+        <div class="demo-container">
+            <div class="comparison-box">보이는 요소</div>
+            <div class="comparison-box none-demo">숨겨진 요소 (display: none)</div>
+            <div class="comparison-box">다음 요소 (공간 차지 안 함)</div>
+        </div>
+        
+        <h3>visibility: hidden</h3>
+        <div class="demo-container">
+            <div class="comparison-box">보이는 요소</div>
+            <div class="comparison-box visibility-demo">숨겨진 요소 (visibility: hidden)</div>
+            <div class="comparison-box">다음 요소 (공간은 차지함)</div>
+        </div>
+        
+        <code>/* display: none */
+.hidden1 {
+    display: none;  /* 공간 차지 안 함, 레이아웃에 영향 없음 */
+}
+
+/* visibility: hidden */
+.hidden2 {
+    visibility: hidden;  /* 공간은 차지, 레이아웃에 영향 있음 */
+}</code>
+        
+        <div class="highlight">
+            <strong>차이점:</strong>
+            <ul>
+                <li><code>display: none</code>: 공간도 차지하지 않음</li>
+                <li><code>visibility: hidden</code>: 공간은 차지하지만 보이지 않음</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>5. Display 비교표</h2>
+        <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+            <thead>
+                <tr>
+                    <th style="border: 1px solid #ddd; padding: 10px; background-color: #3498db; color: white;">특징</th>
+                    <th style="border: 1px solid #ddd; padding: 10px; background-color: #3498db; color: white;">Block</th>
+                    <th style="border: 1px solid #ddd; padding: 10px; background-color: #3498db; color: white;">Inline</th>
+                    <th style="border: 1px solid #ddd; padding: 10px; background-color: #3498db; color: white;">Inline-block</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 10px;">줄 배치</td>
+                    <td style="border: 1px solid #ddd; padding: 10px;">새 줄</td>
+                    <td style="border: 1px solid #ddd; padding: 10px;">같은 줄</td>
+                    <td style="border: 1px solid #ddd; padding: 10px;">같은 줄</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 10px;">width/height</td>
+                    <td style="border: 1px solid #ddd; padding: 10px;">✅ 사용 가능</td>
+                    <td style="border: 1px solid #ddd; padding: 10px;">❌ 사용 불가</td>
+                    <td style="border: 1px solid #ddd; padding: 10px;">✅ 사용 가능</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 10px;">margin (상하)</td>
+                    <td style="border: 1px solid #ddd; padding: 10px;">✅ 사용 가능</td>
+                    <td style="border: 1px solid #ddd; padding: 10px;">❌ 사용 불가</td>
+                    <td style="border: 1px solid #ddd; padding: 10px;">✅ 사용 가능</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 10px;">padding</td>
+                    <td style="border: 1px solid #ddd; padding: 10px;">✅ 사용 가능</td>
+                    <td style="border: 1px solid #ddd; padding: 10px;">⚠️ 좌우만 효과</td>
+                    <td style="border: 1px solid #ddd; padding: 10px;">✅ 사용 가능</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section>
+        <h2>6. 실전 예제: 버튼 그룹</h2>
+        
+        <h3>Inline-block 사용 (권장)</h3>
+        <div class="demo-container" style="text-align: center;">
+            <button style="display: inline-block; padding: 10px 20px; margin: 5px; background-color: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer;">버튼 1</button>
+            <button style="display: inline-block; padding: 10px 20px; margin: 5px; background-color: #27ae60; color: white; border: none; border-radius: 5px; cursor: pointer;">버튼 2</button>
+            <button style="display: inline-block; padding: 10px 20px; margin: 5px; background-color: #e74c3c; color: white; border: none; border-radius: 5px; cursor: pointer;">버튼 3</button>
+        </div>
+        
+        <code>button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px;
+    width: 120px;  /* 가능! */
+    height: 40px;  /* 가능! */
+}</code>
+        
+        <h3>Inline 사용 (비권장)</h3>
+        <div class="demo-container" style="text-align: center;">
+            <button style="display: inline; padding: 10px 20px; margin: 0 5px; background-color: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer;">버튼 1</button>
+            <button style="display: inline; padding: 10px 20px; margin: 0 5px; background-color: #27ae60; color: white; border: none; border-radius: 5px; cursor: pointer;">버튼 2</button>
+            <button style="display: inline; padding: 10px 20px; margin: 0 5px; background-color: #e74c3c; color: white; border: none; border-radius: 5px; cursor: pointer;">버튼 3</button>
+        </div>
+        
+        <div class="warning">
+            <strong>주의:</strong> Inline은 width/height를 사용할 수 없어서 버튼 크기를 정확히 제어하기 어렵습니다.
+        </div>
+    </section>
+</body>
+</html>
+
+

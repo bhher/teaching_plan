@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="문서 구성 요소와 콘텐츠 마크업 종합 예제">
+    <title>문서 구성 요소 종합 예제 - 회원가입 폼</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        header h1 {
+            margin-bottom: 10px;
+        }
+        main {
+            padding: 40px;
+        }
+        section {
+            margin-bottom: 40px;
+        }
+        h2 {
+            color: #2c3e50;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        .required {
+            color: #e74c3c;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="tel"],
+        input[type="date"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        .checkbox-group,
+        .radio-group {
+            margin: 10px 0;
+        }
+        .checkbox-group label,
+        .radio-group label {
+            display: inline;
+            font-weight: normal;
+            margin-left: 5px;
+        }
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #667eea;
+            color: white;
+        }
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .help-text {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        .info-box {
+            background-color: #e8f4f8;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>회원가입</h1>
+            <p>새로운 계정을 만들어보세요</p>
+        </header>
+
+        <main>
+            <form action="#" method="POST" itemscope itemtype="https://schema.org/Person">
+                <section>
+                    <h2>기본 정보</h2>
+                    
+                    <div class="form-group">
+                        <label for="name">
+                            이름 <span class="required" aria-label="필수 항목">*</span>
+                        </label>
+                        <input type="text" 
+                               id="name" 
+                               name="name" 
+                               itemprop="name"
+                               required 
+                               aria-required="true"
+                               placeholder="이름을 입력하세요">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">
+                            이메일 <span class="required" aria-label="필수 항목">*</span>
+                        </label>
+                        <input type="email" 
+                               id="email" 
+                               name="email" 
+                               itemprop="email"
+                               required 
+                               aria-required="true"
+                               placeholder="example@email.com">
+                        <div class="help-text">이메일 형식으로 입력해주세요</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">
+                            비밀번호 <span class="required" aria-label="필수 항목">*</span>
+                        </label>
+                        <input type="password" 
+                               id="password" 
+                               name="password" 
+                               required 
+                               aria-required="true"
+                               minlength="8"
+                               aria-describedby="password-help">
+                        <div id="password-help" class="help-text">
+                            비밀번호는 8자 이상이어야 합니다
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">전화번호</label>
+                        <input type="tel" 
+                               id="phone" 
+                               name="phone" 
+                               itemprop="telephone"
+                               pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
+                               placeholder="010-1234-5678">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="birthday">생년월일</label>
+                        <input type="date" 
+                               id="birthday" 
+                               name="birthday">
+                    </div>
+                </section>
+
+                <section>
+                    <h2>추가 정보</h2>
+                    
+                    <div class="form-group">
+                        <label>성별 <span class="required" aria-label="필수 항목">*</span></label>
+                        <div class="radio-group">
+                            <input type="radio" 
+                                   id="male" 
+                                   name="gender" 
+                                   value="male" 
+                                   required
+                                   aria-required="true">
+                            <label for="male">남성</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" 
+                                   id="female" 
+                                   name="gender" 
+                                   value="female" 
+                                   required
+                                   aria-required="true">
+                            <label for="female">여성</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" 
+                                   id="other" 
+                                   name="gender" 
+                                   value="other" 
+                                   required
+                                   aria-required="true">
+                            <label for="other">기타</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="country">국가</label>
+                        <select id="country" name="country">
+                            <option value="">국가를 선택하세요</option>
+                            <option value="kr">한국</option>
+                            <option value="us">미국</option>
+                            <option value="jp">일본</option>
+                            <option value="cn">중국</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>관심 분야 (다중 선택 가능)</label>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="web" name="interest" value="web">
+                            <label for="web">웹 개발</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="mobile" name="interest" value="mobile">
+                            <label for="mobile">모바일 앱</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="ai" name="interest" value="ai">
+                            <label for="ai">인공지능</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="data" name="interest" value="data">
+                            <label for="data">데이터 분석</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">자기소개</label>
+                        <textarea id="message" 
+                                  name="message" 
+                                  rows="5" 
+                                  placeholder="간단한 자기소개를 입력해주세요"></textarea>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>이용약관</h2>
+                    <div class="info-box">
+                        <h3>약관 내용</h3>
+                        <ol>
+                            <li>개인정보는 안전하게 보호됩니다</li>
+                            <li>서비스 이용 시 약관에 동의한 것으로 간주됩니다</li>
+                            <li>부적절한 행위 시 계정이 정지될 수 있습니다</li>
+                        </ol>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" 
+                               id="agree" 
+                               name="agree" 
+                               required
+                               aria-required="true">
+                        <label for="agree">이용약관에 동의합니다 <span class="required">*</span></label>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>회원 등급 안내</h2>
+                    <table>
+                        <caption>회원 등급별 혜택</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col">등급</th>
+                                <th scope="col">조건</th>
+                                <th scope="col">혜택</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">일반</th>
+                                <td>신규 가입</td>
+                                <td>기본 서비스 이용</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">프리미엄</th>
+                                <td>월 구독</td>
+                                <td>모든 기능 이용</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">VIP</th>
+                                <td>연간 구독</td>
+                                <td>프리미엄 + 추가 혜택</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <button type="submit" aria-label="회원가입 완료">회원가입</button>
+            </form>
+        </main>
+
+        <footer itemscope itemtype="https://schema.org/Organization">
+            <p itemprop="name">웹 개발 교육 사이트</p>
+            <p>
+                문의: <a href="mailto:contact@example.com" itemprop="email">contact@example.com</a> |
+                <a href="tel:+821012345678" itemprop="telephone">010-1234-5678</a>
+            </p>
+            <p>&copy; 2024 All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
+
+

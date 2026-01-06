@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="폼 요소 및 유효성 검사 예제">
+    <title>폼 요소 예제</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        section {
+            margin: 30px 0;
+            padding: 25px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        form {
+            margin: 20px 0;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="number"],
+        input[type="date"],
+        input[type="tel"],
+        input[type="url"],
+        input[type="search"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+        }
+        input:invalid {
+            border-color: #e74c3c;
+        }
+        input:valid {
+            border-color: #27ae60;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        button[type="reset"] {
+            background-color: #95a5a6;
+        }
+        button[type="reset"]:hover {
+            background-color: #7f8c8d;
+        }
+        .required {
+            color: #e74c3c;
+        }
+        .help-text {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+        .checkbox-group,
+        .radio-group {
+            margin: 10px 0;
+        }
+        .checkbox-group label,
+        .radio-group label {
+            display: inline;
+            font-weight: normal;
+            margin-left: 5px;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        .note {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>폼 요소 및 유효성 검사 예제</h1>
+
+    <section>
+        <h2>1. 기본 텍스트 입력</h2>
+        <form>
+            <div class="form-group">
+                <label for="username">사용자 이름 <span class="required">*</span></label>
+                <input type="text" id="username" name="username" required 
+                       placeholder="사용자 이름을 입력하세요">
+                <div class="help-text">3자 이상 20자 이하로 입력하세요</div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">이메일 <span class="required">*</span></label>
+                <input type="email" id="email" name="email" required 
+                       placeholder="example@email.com">
+            </div>
+
+            <div class="form-group">
+                <label for="password">비밀번호 <span class="required">*</span></label>
+                <input type="password" id="password" name="password" required 
+                       minlength="8" placeholder="8자 이상 입력하세요">
+            </div>
+
+            <div class="form-group">
+                <label for="age">나이</label>
+                <input type="number" id="age" name="age" min="1" max="120" 
+                       placeholder="나이를 입력하세요">
+            </div>
+
+            <div class="form-group">
+                <label for="birthday">생년월일</label>
+                <input type="date" id="birthday" name="birthday">
+            </div>
+
+            <div class="form-group">
+                <label for="phone">전화번호</label>
+                <input type="tel" id="phone" name="phone" 
+                       pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
+                       placeholder="010-1234-5678">
+            </div>
+
+            <div class="form-group">
+                <label for="website">웹사이트</label>
+                <input type="url" id="website" name="website" 
+                       placeholder="https://example.com">
+            </div>
+
+            <div class="form-group">
+                <label for="search">검색</label>
+                <input type="search" id="search" name="search" 
+                       placeholder="검색어를 입력하세요">
+            </div>
+
+            <button type="submit">제출</button>
+            <button type="reset">초기화</button>
+        </form>
+    </section>
+
+    <section>
+        <h2>2. 체크박스와 라디오 버튼</h2>
+        
+        <form>
+            <div class="form-group">
+                <label>관심 분야 (다중 선택 가능)</label>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="web" name="interest" value="web">
+                    <label for="web">웹 개발</label>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="mobile" name="interest" value="mobile">
+                    <label for="mobile">모바일 앱</label>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="ai" name="interest" value="ai">
+                    <label for="ai">인공지능</label>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="data" name="interest" value="data">
+                    <label for="data">데이터 분석</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>성별 (단일 선택) <span class="required">*</span></label>
+                <div class="radio-group">
+                    <input type="radio" id="male" name="gender" value="male" required>
+                    <label for="male">남성</label>
+                </div>
+                <div class="radio-group">
+                    <input type="radio" id="female" name="gender" value="female" required>
+                    <label for="female">여성</label>
+                </div>
+                <div class="radio-group">
+                    <input type="radio" id="other" name="gender" value="other" required>
+                    <label for="other">기타</label>
+                </div>
+            </div>
+
+            <button type="submit">제출</button>
+        </form>
+    </section>
+
+    <section>
+        <h2>3. 선택 박스 (select)</h2>
+        
+        <form>
+            <div class="form-group">
+                <label for="country">국가 <span class="required">*</span></label>
+                <select id="country" name="country" required>
+                    <option value="">국가를 선택하세요</option>
+                    <option value="kr">한국</option>
+                    <option value="us">미국</option>
+                    <option value="jp">일본</option>
+                    <option value="cn">중국</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="languages">프로그래밍 언어 (다중 선택)</label>
+                <select id="languages" name="languages" multiple size="5">
+                    <option value="html">HTML</option>
+                    <option value="css">CSS</option>
+                    <option value="js">JavaScript</option>
+                    <option value="python">Python</option>
+                    <option value="java">Java</option>
+                </select>
+                <div class="help-text">Ctrl(또는 Cmd) 키를 누른 채로 여러 개 선택할 수 있습니다</div>
+            </div>
+
+            <div class="form-group">
+                <label for="food">음식 카테고리</label>
+                <select id="food" name="food">
+                    <optgroup label="한식">
+                        <option value="kimchi">김치</option>
+                        <option value="bulgogi">불고기</option>
+                        <option value="bibimbap">비빔밥</option>
+                    </optgroup>
+                    <optgroup label="양식">
+                        <option value="pasta">파스타</option>
+                        <option value="pizza">피자</option>
+                        <option value="steak">스테이크</option>
+                    </optgroup>
+                    <optgroup label="일식">
+                        <option value="sushi">초밥</option>
+                        <option value="ramen">라멘</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <button type="submit">제출</button>
+        </form>
+    </section>
+
+    <section>
+        <h2>4. 텍스트 영역 (textarea)</h2>
+        
+        <form>
+            <div class="form-group">
+                <label for="message">메시지 <span class="required">*</span></label>
+                <textarea id="message" name="message" rows="5" cols="50" 
+                          placeholder="메시지를 입력하세요" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="feedback">피드백</label>
+                <textarea id="feedback" name="feedback" rows="8" 
+                          placeholder="의견을 자유롭게 입력해주세요"></textarea>
+            </div>
+
+            <button type="submit">제출</button>
+        </form>
+    </section>
+
+    <section>
+        <h2>5. 버튼 (button)</h2>
+        
+        <form>
+            <div class="form-group">
+                <label for="test-input">테스트 입력</label>
+                <input type="text" id="test-input" name="test">
+            </div>
+
+            <button type="submit">제출 버튼</button>
+            <button type="reset">초기화 버튼</button>
+            <button type="button" onclick="alert('일반 버튼 클릭!')">일반 버튼</button>
+        </form>
+
+        <div class="note">
+            <strong>버튼 타입:</strong>
+            <ul>
+                <li><code>type="submit"</code>: 폼 제출 (기본값)</li>
+                <li><code>type="reset"</code>: 폼 초기화</li>
+                <li><code>type="button"</code>: 일반 버튼 (JavaScript와 함께 사용)</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>6. 유효성 검사 예제</h2>
+        
+        <form>
+            <div class="form-group">
+                <label for="required-field">필수 입력 필드 <span class="required">*</span></label>
+                <input type="text" id="required-field" name="required" required>
+                <div class="help-text">required 속성으로 필수 입력을 강제합니다</div>
+            </div>
+
+            <div class="form-group">
+                <label for="pattern-field">패턴 검사 (전화번호 형식)</label>
+                <input type="text" id="pattern-field" name="pattern" 
+                       pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
+                       placeholder="010-1234-5678">
+                <div class="help-text">정규식 패턴으로 형식을 검사합니다</div>
+            </div>
+
+            <div class="form-group">
+                <label for="length-field">길이 제한 (3-20자)</label>
+                <input type="text" id="length-field" name="length" 
+                       minlength="3" maxlength="20">
+                <div class="help-text">최소 3자, 최대 20자</div>
+            </div>
+
+            <div class="form-group">
+                <label for="number-range">숫자 범위 (1-100)</label>
+                <input type="number" id="number-range" name="range" 
+                       min="1" max="100" step="1">
+                <div class="help-text">1부터 100까지의 숫자만 입력 가능</div>
+            </div>
+
+            <button type="submit">제출</button>
+        </form>
+    </section>
+
+    <section>
+        <h2>7. 폼 접근성 체크리스트</h2>
+        <ul>
+            <li>✅ 모든 입력 필드에 <code>&lt;label&gt;</code> 연결</li>
+            <li>✅ <code>for</code> 속성과 <code>id</code> 속성 매칭</li>
+            <li>✅ 필수 필드에 <code>required</code> 속성 사용</li>
+            <li>✅ 필수 필드에 시각적 표시 (<span class="required">*</span>)</li>
+            <li>✅ 도움말 텍스트 제공</li>
+            <li>✅ 적절한 <code>input type</code> 사용</li>
+            <li>✅ 유효성 검사 메시지가 명확한가?</li>
+            <li>✅ 키보드만으로 모든 기능 사용 가능한가?</li>
+        </ul>
+    </section>
+</body>
+</html>
+
+

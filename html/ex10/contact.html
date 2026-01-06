@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="연락처 및 문의">
+    <title>포트폴리오 | 연락처</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">메인 콘텐츠로 건너뛰기</a>
+    
+    <!-- 헤더 -->
+    <header class="header">
+        <div class="header__container">
+            <div class="header__logo">
+                <a href="index.html">포트폴리오</a>
+            </div>
+            <button class="header__toggle" aria-label="메뉴 열기" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="header__nav" id="mainNav">
+                <ul class="nav__list">
+                    <li class="nav__item">
+                        <a href="index.html" class="nav__link">홈</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="projects.html" class="nav__link">프로젝트</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="contact.html" class="nav__link nav__link--active">연락처</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 메인 콘텐츠 -->
+    <main id="main-content">
+        <section class="contact">
+            <div class="container">
+                <h1 class="page-title">연락처</h1>
+                <p class="page-subtitle">문의사항이 있으시면 연락주세요.</p>
+                
+                <div class="contact__content">
+                    <div class="contact__info">
+                        <h2 class="contact__info-title">연락처 정보</h2>
+                        <ul class="contact__info-list">
+                            <li>
+                                <strong>이메일:</strong>
+                                <a href="mailto:example@email.com">example@email.com</a>
+                            </li>
+                            <li>
+                                <strong>전화:</strong>
+                                <a href="tel:010-1234-5678">010-1234-5678</a>
+                            </li>
+                            <li>
+                                <strong>주소:</strong>
+                                서울시 강남구
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <form class="contact-form" id="contactForm" novalidate>
+                        <div class="form-group">
+                            <label for="name" class="form-label">
+                                이름 <span class="form-label__required">*</span>
+                            </label>
+                            <input 
+                                type="text" 
+                                id="name" 
+                                name="name" 
+                                class="form-input"
+                                required
+                                aria-required="true"
+                                aria-describedby="nameError"
+                            >
+                            <span class="error-message" id="nameError" role="alert"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email" class="form-label">
+                                이메일 <span class="form-label__required">*</span>
+                            </label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                class="form-input"
+                                required
+                                aria-required="true"
+                                aria-describedby="emailError"
+                            >
+                            <span class="error-message" id="emailError" role="alert"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject" class="form-label">
+                                제목
+                            </label>
+                            <input 
+                                type="text" 
+                                id="subject" 
+                                name="subject" 
+                                class="form-input"
+                                aria-describedby="subjectError"
+                            >
+                            <span class="error-message" id="subjectError" role="alert"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message" class="form-label">
+                                메시지 <span class="form-label__required">*</span>
+                            </label>
+                            <textarea 
+                                id="message" 
+                                name="message" 
+                                class="form-input form-textarea"
+                                rows="5"
+                                required
+                                aria-required="true"
+                                aria-describedby="messageError"
+                            ></textarea>
+                            <span class="error-message" id="messageError" role="alert"></span>
+                        </div>
+                        
+                        <button type="submit" class="button button--primary button--large">
+                            전송
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 푸터 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__section">
+                    <h3 class="footer__title">포트폴리오</h3>
+                    <p class="footer__text">웹 개발자 포트폴리오 사이트</p>
+                </div>
+                <div class="footer__section">
+                    <h3 class="footer__title">빠른 링크</h3>
+                    <ul class="footer__links">
+                        <li><a href="index.html">홈</a></li>
+                        <li><a href="projects.html">프로젝트</a></li>
+                        <li><a href="contact.html">연락처</a></li>
+                    </ul>
+                </div>
+                <div class="footer__section">
+                    <h3 class="footer__title">연락처</h3>
+                    <ul class="footer__links">
+                        <li>이메일: example@email.com</li>
+                        <li>전화: 010-1234-5678</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>&copy; 2024 포트폴리오. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/form.js"></script>
+</body>
+</html>
+
+

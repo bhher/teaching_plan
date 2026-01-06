@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Float와 Clear 예제">
+    <title>Float와 Clear 예제</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.8;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        section {
+            background-color: white;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        code {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            display: block;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+        
+        /* Float 예제 */
+        .float-left {
+            float: left;
+            width: 200px;
+            background-color: #e3f2fd;
+            border: 2px solid #2196f3;
+            padding: 15px;
+            margin: 10px;
+        }
+        
+        .float-right {
+            float: right;
+            width: 200px;
+            background-color: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 15px;
+            margin: 10px;
+        }
+        
+        .text-content {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border: 1px solid #ddd;
+        }
+        
+        /* Float 문제 예제 */
+        .parent-collapsed {
+            border: 3px solid #e74c3c;
+            padding: 10px;
+            margin: 20px 0;
+        }
+        
+        .float-child {
+            float: left;
+            width: 150px;
+            background-color: #ffebee;
+            border: 2px solid #e74c3c;
+            padding: 15px;
+        }
+        
+        /* Clear 예제 */
+        .clear-left {
+            clear: left;
+            background-color: #d4edda;
+            border: 2px solid #28a745;
+            padding: 15px;
+            margin: 10px 0;
+        }
+        
+        .clear-right {
+            clear: right;
+            background-color: #d4edda;
+            border: 2px solid #28a745;
+            padding: 15px;
+            margin: 10px 0;
+        }
+        
+        .clear-both {
+            clear: both;
+            background-color: #d4edda;
+            border: 2px solid #28a745;
+            padding: 15px;
+            margin: 10px 0;
+        }
+        
+        /* Clearfix 예제 */
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+        
+        .clearfix-parent {
+            border: 3px solid #27ae60;
+            padding: 10px;
+            margin: 20px 0;
+        }
+        
+        .clearfix-child {
+            float: left;
+            width: 150px;
+            background-color: #e8f5e9;
+            border: 2px solid #27ae60;
+            padding: 15px;
+            margin: 10px;
+        }
+        
+        /* Overflow 해결법 */
+        .overflow-parent {
+            border: 3px solid #9b59b6;
+            padding: 10px;
+            margin: 20px 0;
+            overflow: auto;  /* 또는 hidden */
+        }
+        
+        .highlight {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        
+        .warning {
+            background-color: #f8d7da;
+            padding: 15px;
+            border-left: 4px solid #dc3545;
+            margin: 20px 0;
+        }
+        
+        .success {
+            background-color: #d4edda;
+            padding: 15px;
+            border-left: 4px solid #28a745;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Float와 Clear 예제</h1>
+
+    <section>
+        <h2>1. Float 기본 사용법</h2>
+        <p>Float는 원래 텍스트 주변에 이미지를 배치하기 위해 만들어졌습니다.</p>
+        
+        <h3>Float: left</h3>
+        <div class="text-content">
+            <div class="float-left">
+                Float: left<br>
+                (왼쪽으로 띄움)
+            </div>
+            <p>
+                이것은 Float의 원래 목적입니다. 텍스트가 이미지나 요소 주변으로 흐르게 합니다.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor 
+                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
+                nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </p>
+        </div>
+        
+        <h3>Float: right</h3>
+        <div class="text-content" style="margin-top: 20px;">
+            <div class="float-right">
+                Float: right<br>
+                (오른쪽으로 띄움)
+            </div>
+            <p>
+                오른쪽으로 띄우면 텍스트가 왼쪽에서 시작하여 요소 주변으로 흐릅니다.
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore 
+                eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, 
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+        </div>
+        
+        <code>img {
+    float: left;  /* 왼쪽으로 띄움 */
+}
+
+.sidebar {
+    float: right;  /* 오른쪽으로 띄움 */
+}</code>
+    </section>
+
+    <section>
+        <h2>2. Float 문제: 부모 높이 사라짐</h2>
+        <p>Float된 자식 요소가 있으면 부모 요소의 높이가 사라집니다.</p>
+        
+        <h3>문제 상황</h3>
+        <div class="parent-collapsed">
+            <div class="float-child">Float 자식</div>
+            <div class="float-child">Float 자식</div>
+            <div class="float-child">Float 자식</div>
+        </div>
+        <div class="warning">
+            <strong>문제:</strong> 부모 요소의 높이가 0이 되어 테두리가 보이지 않습니다.
+        </div>
+        
+        <h3>해결 방법 1: Clearfix (권장)</h3>
+        <div class="clearfix-parent clearfix">
+            <div class="clearfix-child">Float 자식</div>
+            <div class="clearfix-child">Float 자식</div>
+            <div class="clearfix-child">Float 자식</div>
+        </div>
+        
+        <code>/* Clearfix */
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}</code>
+        
+        <h3>해결 방법 2: Overflow</h3>
+        <div class="overflow-parent">
+            <div class="float-child">Float 자식</div>
+            <div class="float-child">Float 자식</div>
+            <div class="float-child">Float 자식</div>
+        </div>
+        
+        <code>.parent {
+    overflow: auto;  /* 또는 hidden */
+}</code>
+    </section>
+
+    <section>
+        <h2>3. Clear 속성</h2>
+        <p>Float의 영향을 제거합니다.</p>
+        
+        <div class="text-content">
+            <div class="float-left">Float: left</div>
+            <div class="float-right">Float: right</div>
+            <p>
+                Float 요소들이 위에 있습니다. Clear 속성을 사용하면 Float의 영향을 받지 않습니다.
+            </p>
+            <div class="clear-both">
+                clear: both;<br>
+                (양쪽 float 영향 제거)
+            </div>
+            <p>
+                Clear 요소 이후의 텍스트는 정상적으로 배치됩니다.
+            </p>
+        </div>
+        
+        <code>/* Clear 속성 */
+.clear-left {
+    clear: left;  /* 왼쪽 float 제거 */
+}
+
+.clear-right {
+    clear: right;  /* 오른쪽 float 제거 */
+}
+
+.clear-both {
+    clear: both;  /* 양쪽 float 제거 (가장 많이 사용) */
+}</code>
+    </section>
+
+    <section>
+        <h2>4. Float 레이아웃 (과거 방식)</h2>
+        <p>과거에는 Float를 사용하여 레이아웃을 만들었습니다.</p>
+        
+        <div style="border: 2px solid #333; padding: 10px; margin: 20px 0;">
+            <div style="float: left; width: 200px; background-color: #e3f2fd; padding: 15px; border: 2px solid #2196f3;">
+                Sidebar<br>
+                float: left<br>
+                width: 200px
+            </div>
+            <div style="margin-left: 220px; background-color: #fff3cd; padding: 15px; border: 2px solid #ffc107;">
+                Main Content<br>
+                margin-left: 220px
+            </div>
+            <div style="clear: both;"></div>
+        </div>
+        
+        <code>/* 과거 Float 레이아웃 */
+.sidebar {
+    float: left;
+    width: 200px;
+}
+
+.main {
+    margin-left: 220px;  /* sidebar 너비 + 간격 */
+}
+
+/* 또는 */
+.main {
+    float: right;
+    width: calc(100% - 200px);
+}</code>
+        
+        <div class="warning">
+            <strong>주의:</strong> Float는 레이아웃을 만들기 위한 도구가 아닙니다. 
+            현대적 웹 개발에서는 Flexbox나 Grid를 사용하는 것을 권장합니다.
+        </div>
+    </section>
+
+    <section>
+        <h2>5. 현대적 대체 방법</h2>
+        
+        <h3>Flexbox (권장)</h3>
+        <div style="display: flex; gap: 20px; border: 2px solid #333; padding: 10px; margin: 20px 0;">
+            <div style="width: 200px; background-color: #e3f2fd; padding: 15px; border: 2px solid #2196f3;">
+                Sidebar
+            </div>
+            <div style="flex: 1; background-color: #fff3cd; padding: 15px; border: 2px solid #ffc107;">
+                Main Content
+            </div>
+        </div>
+        
+        <code>/* Flexbox */
+.container {
+    display: flex;
+    gap: 20px;
+}
+
+.sidebar {
+    width: 200px;
+}
+
+.main {
+    flex: 1;  /* 남은 공간 모두 차지 */
+}</code>
+        
+        <h3>Grid (권장)</h3>
+        <div style="display: grid; grid-template-columns: 200px 1fr; gap: 20px; border: 2px solid #333; padding: 10px; margin: 20px 0;">
+            <div style="background-color: #e3f2fd; padding: 15px; border: 2px solid #2196f3;">
+                Sidebar
+            </div>
+            <div style="background-color: #fff3cd; padding: 15px; border: 2px solid #ffc107;">
+                Main Content
+            </div>
+        </div>
+        
+        <code>/* Grid */
+.container {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 20px;
+}</code>
+        
+        <div class="success">
+            <strong>권장:</strong> Flexbox와 Grid는 Float보다 훨씬 강력하고 예측 가능합니다.
+        </div>
+    </section>
+
+    <section>
+        <h2>6. Float 사용 권장 시기</h2>
+        
+        <div class="highlight">
+            <strong>✅ Float 사용 권장:</strong>
+            <ul>
+                <li>텍스트 주변에 이미지 배치 (원래 목적)</li>
+                <li>레거시 브라우저 지원 필요 시</li>
+            </ul>
+        </div>
+        
+        <div class="warning">
+            <strong>❌ Float 사용 비권장:</strong>
+            <ul>
+                <li>레이아웃 만들기 (Flexbox/Grid 사용)</li>
+                <li>현대적 웹 개발</li>
+            </ul>
+        </div>
+        
+        <h3>올바른 Float 사용 예시</h3>
+        <div class="text-content">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Crect fill='%233498db' width='150' height='150'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='white' font-size='14'%3E이미지%3C/text%3E%3C/svg%3E" 
+                 alt="예시 이미지" 
+                 style="float: left; margin: 0 15px 15px 0;">
+            <p>
+                이것이 Float의 올바른 사용법입니다. 이미지를 왼쪽에 배치하고 
+                텍스트가 주변으로 흐르게 합니다. Lorem ipsum dolor sit amet, 
+                consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut 
+                labore et dolore magna aliqua.
+            </p>
+        </div>
+        
+        <code>img {
+    float: left;
+    margin: 0 15px 15px 0;
+}</code>
+    </section>
+</body>
+</html>
+
+
