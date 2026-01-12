@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Franchise - Grid 레이아웃</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .section2 {
+            width: 1440px;
+            height: 700px;
+            border: 1px solid black;
+            margin: 0 auto;
+            padding: 50px 0;
+            text-align: center;
+        }
+        
+        .title {
+            padding-bottom: 50px;
+        }
+        
+        .title h2 {
+            font-size: 43px;
+            font-weight: bold;
+        }
+        
+        ul.list {
+            list-style: none;
+            width: 100%;
+            height: 430px;
+            
+            /* Grid 적용 */
+            display: grid;
+            grid-template-columns: repeat(4, 340px);  /* 4개의 열, 각 340px */
+            gap: 26.6px;  /* 행과 열 간격 */
+            justify-content: center;  /* 가운데 정렬 */
+        }
+        
+        ul.list li {
+            width: 340px;
+            height: 430px;
+            box-sizing: border-box;
+            /* padding 과 border 포함 크기가 같다 */
+            border: 1px solid black;
+            /* float: left; 제거 - Grid 사용 */
+            /* margin-right: 26.6px; 제거 - gap으로 대체 */
+            padding: 50px 0;
+        }
+        
+        /* 마지막 요소의 margin 제거 불필요 (gap 사용) */
+        /* ul.list li:nth-child(4) {
+            margin-right: 0;
+        } */
+        
+        .section2 .bottom1 {
+            padding: 40px 0;
+        }
+        
+        .bottom1 .txt5 {
+            margin-top: 30px;
+        }
+        
+        .bottom1 .txt5 a {
+            display: block;
+            width: 320px;
+            padding: 19px 10px;
+            background-color: #003b5a;
+            color: #fff;
+            text-decoration: none;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <section class="section2">
+        <div class="title">
+            <h2>Franchise</h2>
+            <p>브랜드 창업을 검토 하실 때 꼭 필요합니다.</p>
+        </div>
+        <ul class="list">
+            <li>
+                <div class="outline">
+                    <div class="pic">
+                        <img src="imgs/franchise_ico1.png" alt="icon1">
+                    </div>
+                    <div class="num">
+                        <span class="number">1</span>
+                    </div>
+                    <div class="txt">
+                        <p class="txt1"><strong>창업 설명회 & 개별상담</strong></p>
+                        <p class="txt2">가맹지원서 및 상권 조사표 작성</p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="outline">
+                    <div class="pic">
+                        <img src="imgs/franchise_ico2.png" alt="icon2">
+                    </div>
+                    <div class="num">
+                        <span class="number">2</span>
+                    </div>
+                    <div class="txt">
+                        <p class="txt1"><strong>타겟 입지</strong></p>
+                        <p class="txt2">브랜드는 주로 메인상권<br/> 지역에 개설됩니다.</p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="outline">
+                    <div class="pic">
+                        <img src="imgs/franchise_ico3.png" alt="icon3">
+                    </div>
+                    <div class="num">
+                        <span class="number">3</span>
+                    </div>
+                    <div class="txt">
+                        <p class="txt1"><strong>필요 면적</strong></p>
+                        <p class="txt2">브랜드는 지상 1층,<br/>
+                            전용면적 최소 50m2(15PY)/<br/>
+                            지상2층, 전용면적 최소 66m2(20PY)의<br/>
+                            공간이 필요합니다.</p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="outline">
+                    <div class="pic">
+                        <img src="imgs/franchise_ico4.png" alt="icon4">
+                    </div>
+                    <div class="num">
+                        <span class="number">4</span>
+                    </div>
+                    <div class="txt">
+                        <p class="txt1"><strong>창업 가능지역</strong></p>
+                        <p class="txt2">전국 상권 진행 가능(제주 제외),<br/>
+                            상권 상담은 창업문의에 남겨주세요.</p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div class="bottom1">
+            <p class="txt3">본사와 가맹점주가 상생할 수 있는</p>
+            <p class="txt4">지속성 있는 <strong>브랜드의 개발과 경영방침</strong>을 추구합니다.</p>
+            <p class="txt5"><a href="#">창업설명회 신청/문의</a></p>
+        </div>
+    </section>
+</body>
+</html>
+
+
+

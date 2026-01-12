@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>레이아웃 비교 - Float 방식</title>
+    <style>
+        /* 전체선택자 패딩 마진 0 */
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            padding: 20px;
+            font-family: 'Malgun Gothic', sans-serif;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-size: 22px;
+            text-align: center;
+            padding: 10px 0;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .layout-info {
+            background-color: #f0f0f0;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-left: 4px solid #ff6b6b;
+            border-radius: 5px;
+        }
+        
+        .layout-info h2 {
+            font-size: 18px;
+            color: #ff6b6b;
+            margin-bottom: 10px;
+        }
+        
+        .layout-info code {
+            background-color: #fff;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .skin {
+            width: 790px;
+            height: 300px;
+            border: 1px solid #333;
+            margin-left: auto;
+            margin-right: auto;
+            
+            /* Float 레이아웃 */
+            overflow: hidden;  /* float된 자식 요소를 감싸기 위해 필요 */
+        }
+        
+        .box {
+            width: 160px;
+            height: 280px;
+            float: left;  /* 왼쪽으로 띄워서 배치 */
+            margin-left: 30px;
+            margin-top: 10px;
+        }
+        
+        /* 첫 번째 박스는 왼쪽 마진 제거 */
+        .box:first-child {
+            margin-left: 0;
+        }
+        
+        .box .imgbox1 {
+            width: 160px;
+            height: 160px;
+            display: block;
+        }
+        
+        .imgbox1 img {
+            width: 160px;
+            height: 160px;
+            display: block;
+            background-color: #e0e0e0;
+        }
+        
+        .box .txt1 {
+            font-size: 14px;
+            padding: 2px 0;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            line-height: 1.4;
+            margin-top: 5px;
+        }
+        
+        .txt2 {
+            margin-top: 5px;
+        }
+        
+        .txt2 del {
+            font-size: 12px;
+            color: #a9a9a9;
+        }
+        
+        .txt2 span {
+            font-size: 14px;
+            color: #e02020;
+            font-weight: bold;
+        }
+        
+        .txt3 {
+            margin-top: 5px;
+        }
+        
+        .txt3 span {
+            display: inline-block;
+            padding: 1px 7px;
+            margin-right: 3px;
+        }
+        
+        .txt3 .sbox1 {
+            background-color: #f65c60;
+            color: #fff;
+            font-size: 12px;
+            text-align: center;
+            border-radius: 10px;
+        }
+        
+        .txt3 .sbox2 {
+            background-color: #6fcff7;
+            color: #fff;
+            font-size: 12px;
+            text-align: center;
+            border-radius: 10px;
+        }
+        
+        .txt3 .sbox3 {
+            background-color: #f374b7;
+            color: #fff;
+            font-size: 12px;
+            text-align: center;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>스킨 캐어에서 많이 본 상품이에요</h1>
+        
+        <div class="layout-info">
+            <h2>📌 Float 레이아웃</h2>
+            <p><strong>사용 속성:</strong> <code>float: left</code></p>
+            <p><strong>특징:</strong> 요소를 왼쪽으로 띄워서 배치, 부모 요소에 <code>overflow: hidden</code> 필요</p>
+        </div>
+        
+        <div class="skin">
+            <div class="box box1">
+                <span class="imgbox1">
+                    <img src="images/a1.jpg" alt="상품 이미지 1">
+                </span>
+                <p class="txt1">
+                    [2025 어워즈 1위] 토리든 다이브인 저분자 히알루론산 세럼 100ml 어워즈 한정기획
+                </p>
+                <p class="txt2">
+                    <del>50,000원</del><br>
+                    <span>35,000원</span>
+                </p>
+                <p class="txt3">
+                    <span class="sbox1">세일</span>
+                    <span class="sbox3">오늘드림</span>
+                </p>
+            </div>
+            <div class="box box2">
+                <span class="imgbox1">
+                    <img src="images/a2.jpg" alt="상품 이미지 2">
+                </span>
+                <p class="txt1">
+                    [2025 어워즈] 웰라쥬 리얼 히알루로닉 블루 100 앰플 75ml 더블 어워즈 한정기획
+                </p>
+                <p class="txt2">
+                    <del>50,000원</del><br>
+                    <span>32,900원</span>
+                </p>
+                <p class="txt3">
+                    <span class="sbox1">세일</span>
+                    <span class="sbox3">오늘드림</span>
+                </p>
+            </div>
+            <div class="box box3">
+                <span class="imgbox1">
+                    <img src="images/a3.png" alt="상품 이미지 3">
+                </span>
+                <p class="txt1">
+                    [2025 어워즈] 아누아 피디알엔 히알루론산 캡슐 100 세럼 30mL
+                </p>
+                <p class="txt2">
+                    <del>50,500원</del><br>
+                    <span>27,500원</span>
+                </p>
+                <p class="txt3">
+                    <span class="sbox1">세일</span>
+                    <span class="sbox3">오늘드림</span>
+                </p>
+            </div>
+            <div class="box box4">
+                <span class="imgbox1">
+                    <img src="images/a4.jpg" alt="상품 이미지 4">
+                </span>
+                <p class="txt1">
+                    [수분크림 본품증정] 메디큐브 에이지알 미니플러스 짱구 에디션(올영한정)/미니플러스
+                </p>
+                <p class="txt2">
+                    <del>126,000원</del><br>
+                    <span>122,500원</span>
+                </p>
+                <p class="txt3">
+                    <span class="sbox1">세일</span>
+                    <span class="sbox2">증정</span>
+                    <span class="sbox3">오늘드림</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+

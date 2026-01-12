@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>반응형 Grid 레이아웃</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+            font-size: 28px;
+        }
+        
+        .grid-container {
+            /* Grid 레이아웃 */
+            display: grid;
+            gap: 20px;
+            padding: 20px;
+            
+            /* 기본: 모바일 (1열) */
+            grid-template-columns: 1fr;
+        }
+        
+        .grid-item {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .grid-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .grid-item h3 {
+            color: #4a90e2;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .grid-item p {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        /* 태블릿: 2열 (768px 이상) */
+        @media (min-width: 768px) {
+            .grid-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            h1 {
+                font-size: 32px;
+            }
+        }
+        
+        /* 데스크톱: 3열 (1024px 이상) */
+        @media (min-width: 1024px) {
+            .grid-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            h1 {
+                font-size: 36px;
+            }
+        }
+        
+        /* 큰 화면: 4열 (1200px 이상) */
+        @media (min-width: 1200px) {
+            .grid-container {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        /* 정보 박스 */
+        .info-box {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        
+        .info-box h2 {
+            color: #2196F3;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .info-box p {
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .info-box code {
+            background-color: #fff;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>반응형 Grid 레이아웃</h1>
+        
+        <div class="info-box">
+            <h2>📱 반응형 브레이크포인트</h2>
+            <p>
+                <strong>모바일:</strong> 1열 (<code>grid-template-columns: 1fr</code>)<br>
+                <strong>태블릿 (768px 이상):</strong> 2열 (<code>repeat(2, 1fr)</code>)<br>
+                <strong>데스크톱 (1024px 이상):</strong> 3열 (<code>repeat(3, 1fr)</code>)<br>
+                <strong>큰 화면 (1200px 이상):</strong> 4열 (<code>repeat(4, 1fr)</code>)
+            </p>
+        </div>
+        
+        <div class="grid-container">
+            <div class="grid-item">
+                <h3>카드 1</h3>
+                <p>반응형 그리드 레이아웃 예제입니다. 화면 크기에 따라 열의 개수가 자동으로 조정됩니다.</p>
+            </div>
+            
+            <div class="grid-item">
+                <h3>카드 2</h3>
+                <p>모바일에서는 1열, 태블릿에서는 2열, 데스크톱에서는 3열, 큰 화면에서는 4열로 표시됩니다.</p>
+            </div>
+            
+            <div class="grid-item">
+                <h3>카드 3</h3>
+                <p>CSS Grid의 <code>grid-template-columns</code>와 미디어 쿼리를 사용하여 반응형 레이아웃을 구현했습니다.</p>
+            </div>
+            
+            <div class="grid-item">
+                <h3>카드 4</h3>
+                <p>각 카드는 동일한 크기로 배치되며, <code>gap</code> 속성으로 간격이 자동으로 조정됩니다.</p>
+            </div>
+            
+            <div class="grid-item">
+                <h3>카드 5</h3>
+                <p>호버 효과가 적용되어 마우스를 올리면 카드가 살짝 위로 올라갑니다.</p>
+            </div>
+            
+            <div class="grid-item">
+                <h3>카드 6</h3>
+                <p>반응형 디자인은 다양한 디바이스에서 최적의 사용자 경험을 제공합니다.</p>
+            </div>
+            
+            <div class="grid-item">
+                <h3>카드 7</h3>
+                <p>Grid 레이아웃은 Flexbox보다 2차원 레이아웃에 더 적합합니다.</p>
+            </div>
+            
+            <div class="grid-item">
+                <h3>카드 8</h3>
+                <p>미디어 쿼리를 사용하여 화면 크기에 따라 레이아웃을 변경할 수 있습니다.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+

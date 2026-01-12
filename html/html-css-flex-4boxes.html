@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML과 CSS 차이 - Flexbox 레이아웃</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .bigBox {
+            width: 700px;
+            border: 1px solid #333;
+            margin: 50px auto;
+            background-color: grey;
+            
+            /* Flexbox 적용 */
+            display: flex;
+            flex-direction: column;  /* h2와 box들을 세로로 배치 */
+            /* overflow: hidden; 제거 - flexbox에서는 불필요 */
+        }
+        
+        .bigBox h2 {
+            margin: 10px;
+            text-align: center;
+        }
+        
+        /* box들을 감싸는 컨테이너 */
+        .box-container {
+            display: flex;
+            flex-wrap: wrap;  /* 줄바꿈 허용 */
+            gap: 25px;  /* box 사이 간격 (좌우, 상하) */
+            padding: 0 25px 25px 25px;  /* 좌우 25px, 하단 25px */
+        }
+        
+        .box {
+            width: 300px;
+            height: 100px;
+            border: 1px solid #333;
+            padding: 5px;
+            /* float: left; 제거 - Flexbox 사용 */
+            /* margin-left: 25px; 제거 - gap으로 대체 */
+            /* margin-bottom: 25px; 제거 - gap으로 대체 */
+        }
+        
+        .box1 {
+            background-color: aquamarine;
+        }
+        
+        .box2 {
+            background-color: sienna;
+        }
+        
+        .box3 {
+            background-color: bisque;
+        }
+        
+        .box4 {
+            background-color: cadetblue;
+        }
+    </style>
+</head>
+<body>
+    <div class="bigBox">
+        <h2>Html과 Css 차이</h2>
+        <div class="box-container">
+            <div class="box box1">
+                <p>
+                    Html은 문서의 뼈대를 만든다.<br>
+                    html은 Hyper Text Markup Language 약자이다.<br>
+                    확장자는 html로 지정하면 웹브라우저에서 인식한다.
+                </p>
+            </div>
+            <div class="box box2">
+                <p>
+                    Css은 글꼴이나, 배경색,너비와 높이, 위치등을 지정한다.<br>
+                    css은 cascade style sheet 약자이다.<br>
+                    확장자는 css로 지정하면 웹브라우저에서 인식한다.
+                </p>
+            </div>
+            <div class="box box3">
+                <p>
+                    JavaScript는 웹 페이지에 동작을 부여한다.<br>
+                    버튼 클릭, 입력 처리, 화면 변경 등을 제어할 수 있다.<br>
+                    JavaScript는 웹 브라우저에서 실행되는 프로그래밍 언어이다.
+                </p>
+            </div>
+            <div class="box box4">
+                <p>
+                    jQuery는 JavaScript를 쉽게 사용하도록 도와주는 라이브러리이다.<br>
+                    복잡한 JavaScript 코드를 간단한 문법으로 작성할 수 있다.<br>
+                    DOM 제어와 이벤트 처리를 편리하게 할 수 있다.
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
