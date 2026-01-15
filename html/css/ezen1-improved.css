@@ -1,0 +1,318 @@
+/* 전체 초기화 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul li {
+    list-style: none;
+}
+
+a {
+    color: #000;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+}
+
+/* Header 스타일 */
+header {
+    width: 1000px;
+    height: 250px;
+    position: relative;
+    border: 1px solid #ddd;
+    margin: 0 auto;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    z-index: 5;
+}
+
+/* 로고 스타일 */
+.logo {
+    position: absolute;
+    width: 200px;
+    height: 90px;
+    left: 50%;
+    margin-left: -100px;
+    top: 50%;
+    margin-top: -45px;
+    transition: transform 0.3s ease;
+    z-index: 10;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+.logo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+/* SNS 아이콘 스타일 */
+.sns {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.sns li {
+    float: left;
+    margin-left: 10px;
+}
+
+.sns li:first-child {
+    margin-left: 0;
+}
+
+.sns li a {
+    display: block;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #fff;
+    padding: 6px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.sns li a:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    background-color: #e8f4f8;
+}
+
+.sns li a img {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* LNB (로그인, 회원가입, 장바구니) 스타일 */
+.lnb {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 5px;
+}
+
+.lnb li {
+    float: left;
+    padding: 0 15px;
+    background: url('../images/bar.png') no-repeat 100% 50%;
+    background-size: 1px 12px;
+}
+
+.lnb li:last-child {
+    background: none;
+}
+
+.lnb li a {
+    display: block;
+    padding: 8px 12px;
+    color: #555;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.lnb li a:hover {
+    color: #fff;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+}
+
+/* GNB (메인 메뉴) 스타일 */
+.gnb {
+    position: absolute;
+    top: 220px;
+    left: 0;
+    width: 100%;
+    display: flex;
+}
+
+.gnb > li {
+    flex: 1;
+    text-align: center;
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    position: relative;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.gnb > li:last-child {
+    border-right: none;
+}
+
+.gnb > li:hover {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.gnb li a {
+    display: block;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+.gnb > li > a:hover {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+/* 서브메뉴 스타일 */
+.gnb li ul {
+    background: rgba(255, 255, 255, 0.98);
+    position: absolute;
+    display: none;
+    width: 200px;
+    min-height: 100px;
+    padding: 10px 0;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    border-radius: 0 0 8px 8px;
+    top: 100%;
+    left: 0;
+    z-index: 100;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.gnb li:hover ul {
+    display: block;
+}
+
+.gnb li ul li {
+    width: 100%;
+    background: none;
+    border: none;
+}
+
+.gnb li ul li a {
+    display: block;
+    width: 100%;
+    height: 35px;
+    line-height: 35px;
+    color: #333;
+    font-weight: 400;
+    font-size: 13px;
+    padding: 0 20px;
+    text-align: left;
+    border-radius: 0;
+    transition: all 0.3s ease;
+}
+
+.gnb li ul li a:hover {
+    color: #667eea;
+    background-color: #f8f9ff;
+    padding-left: 25px;
+    font-weight: 500;
+}
+
+.gnb li ul li:first-child a {
+    border-radius: 0;
+}
+
+.gnb li ul li:last-child a {
+    border-radius: 0 0 8px 8px;
+}
+
+/* Clearfix */
+.cf::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Main Section 스타일 */
+section {
+    width: 1000px;
+    margin: 20px auto;
+}
+
+.main1 {
+    width: 1000px;
+    height: 600px;
+    position: relative;
+    border: 1px solid #ddd;
+    margin: 0 auto;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.main1:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.main1 img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.main1:hover img {
+    transform: scale(1.05);
+}
+
+/* 반응형 추가 스타일 */
+@media (max-width: 1024px) {
+    header,
+    section,
+    .main1 {
+        width: 100%;
+        max-width: 1000px;
+    }
+    
+    .main1 {
+        height: auto;
+        min-height: 400px;
+    }
+}
+
+/* 추가 애니메이션 효과 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+header {
+    animation: fadeIn 0.6s ease;
+}
+
