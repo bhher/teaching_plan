@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Flexbox Layout</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            padding: 60px 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* 헤더 섹션 */
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* Flexbox 컨테이너 */
+        .portfolio-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            align-items: stretch;
+        }
+
+        /* 카드 스타일 */
+        .card {
+            flex: 1 1 300px;
+            max-width: 350px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        /* 이미지 */
+        .card-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* 카드 내용 */
+        .card-content {
+            padding: 25px;
+            text-align: center;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .card-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+            text-transform: capitalize;
+        }
+
+        .card-description {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .header p {
+                font-size: 1rem;
+            }
+
+            .portfolio-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .card {
+                max-width: 100%;
+                width: 100%;
+            }
+
+            .card-image {
+                height: 200px;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .card {
+                flex: 1 1 calc(50% - 30px);
+                max-width: calc(50% - 30px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 헤더 -->
+        <div class="header">
+            <h1>Portfolio</h1>
+            <p>What we have created</p>
+        </div>
+
+        <!-- Portfolio 카드 컨테이너 -->
+        <div class="portfolio-container">
+            <!-- Paris 카드 -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=400&h=300&fit=crop" 
+                     alt="Paris - Eiffel Tower" 
+                     class="card-image">
+                <div class="card-content">
+                    <h2 class="card-title">Paris</h2>
+                    <p class="card-description">Yes, we built Paris</p>
+                </div>
+            </div>
+
+            <!-- New York 카드 -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=400&h=300&fit=crop" 
+                     alt="New York - Skyline" 
+                     class="card-image">
+                <div class="card-content">
+                    <h2 class="card-title">New york</h2>
+                    <p class="card-description">Yes, we built New york</p>
+                </div>
+            </div>
+
+            <!-- San Francisco 카드 -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=400&h=300&fit=crop" 
+                     alt="San Francisco - Golden Gate Bridge" 
+                     class="card-image">
+                <div class="card-content">
+                    <h2 class="card-title">Sanfran</h2>
+                    <p class="card-description">Yes, we built sanfran</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

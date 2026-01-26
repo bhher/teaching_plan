@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Float 웹사이트 - 디자인 3</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.8;
+            color: #1a1a1a;
+            background: #ffffff;
+        }
+
+        /* Clearfix 유틸리티 */
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* 헤더 - 상단 바 형태 */
+        header {
+            background: #1a1a1a;
+            color: white;
+            padding: 0.8rem 0;
+            border-bottom: 3px solid #ff6b6b;
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        .logo {
+            float: left;
+            font-size: 1.5rem;
+            font-weight: normal;
+            line-height: 2rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        nav {
+            float: right;
+        }
+
+        nav ul {
+            list-style: none;
+        }
+
+        nav ul li {
+            float: left;
+            margin-left: 35px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 400;
+            transition: color 0.3s;
+            display: block;
+            line-height: 2rem;
+            font-size: 0.95rem;
+        }
+
+        nav a:hover {
+            color: #ff6b6b;
+        }
+
+        /* 메인 레이아웃 - 사이드바 포함 */
+        .main-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        /* 사이드바 */
+        .sidebar {
+            float: left;
+            width: 280px;
+            background: #f8f8f8;
+            padding: 40px 30px;
+            min-height: calc(100vh - 200px);
+            border-right: 1px solid #e0e0e0;
+        }
+
+        .sidebar h3 {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            color: #1a1a1a;
+            border-bottom: 2px solid #ff6b6b;
+            padding-bottom: 10px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 15px;
+        }
+
+        .sidebar a {
+            color: #555;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: block;
+            padding: 8px 0;
+            border-left: 3px solid transparent;
+            padding-left: 15px;
+        }
+
+        .sidebar a:hover {
+            color: #ff6b6b;
+            border-left-color: #ff6b6b;
+            padding-left: 20px;
+        }
+
+        /* 메인 콘텐츠 영역 */
+        .content-area {
+            float: left;
+            width: calc(100% - 280px);
+            padding: 50px 50px;
+            background: white;
+        }
+
+        /* 히어로 섹션 - 왼쪽 정렬 */
+        .hero {
+            margin-bottom: 60px;
+            padding-bottom: 40px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+            font-weight: normal;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #1a1a1a;
+            color: white;
+            padding: 12px 35px;
+            text-decoration: none;
+            font-weight: normal;
+            transition: all 0.3s;
+            border: 2px solid #1a1a1a;
+        }
+
+        .btn:hover {
+            background: white;
+            color: #1a1a1a;
+        }
+
+        /* 섹션 제목 */
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 40px;
+            color: #1a1a1a;
+            font-weight: normal;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        /* 콘텐츠 그리드 - 2열 레이아웃 */
+        .content-grid {
+            margin-bottom: 60px;
+        }
+
+        .content-item {
+            float: left;
+            width: calc(50% - 25px);
+            margin-right: 50px;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .content-item:nth-child(2n) {
+            margin-right: 0;
+        }
+
+        .content-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #1a1a1a;
+            font-weight: normal;
+        }
+
+        .content-item p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .content-item .meta {
+            color: #999;
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+
+        /* 이미지 섹션 */
+        .image-section {
+            margin-bottom: 60px;
+            padding: 40px;
+            background: #f8f8f8;
+        }
+
+        .image-grid {
+            margin-top: 30px;
+        }
+
+        .image-item {
+            float: left;
+            width: calc(33.333% - 20px);
+            margin-right: 30px;
+            margin-bottom: 30px;
+            background: white;
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .image-item:nth-child(3n) {
+            margin-right: 0;
+        }
+
+        .image-item img {
+            width: 100%;
+            height: 200px;
+            background: #ddd;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .image-item h4 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+            font-weight: normal;
+        }
+
+        .image-item p {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* 푸터 */
+        footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 40px 30px;
+            margin-top: 80px;
+            clear: both;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-content {
+            float: left;
+            width: 70%;
+        }
+
+        .footer-content h4 {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            font-weight: normal;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #ff6b6b;
+        }
+
+        .footer-content p {
+            color: #999;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .footer-links {
+            float: right;
+            width: 25%;
+        }
+
+        .footer-links h4 {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            font-weight: normal;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #ff6b6b;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #999;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #ff6b6b;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+            color: #666;
+            clear: both;
+        }
+
+        /* 반응형 디자인 */
+        @media (max-width: 1200px) {
+            .sidebar {
+                width: 240px;
+            }
+
+            .content-area {
+                width: calc(100% - 240px);
+                padding: 40px 30px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .content-item {
+                width: 100%;
+                margin-right: 0;
+            }
+
+            .image-item {
+                width: calc(50% - 15px);
+            }
+
+            .image-item:nth-child(3n) {
+                margin-right: 30px;
+            }
+
+            .image-item:nth-child(2n) {
+                margin-right: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                float: none;
+                text-align: center;
+                margin-bottom: 15px;
+            }
+
+            nav {
+                float: none;
+            }
+
+            nav ul {
+                text-align: center;
+            }
+
+            nav ul li {
+                float: none;
+                display: inline-block;
+                margin: 5px 15px;
+            }
+
+            .sidebar {
+                float: none;
+                width: 100%;
+                min-height: auto;
+                border-right: none;
+                border-bottom: 1px solid #e0e0e0;
+            }
+
+            .content-area {
+                float: none;
+                width: 100%;
+                padding: 30px 20px;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .content-item {
+                width: 100%;
+            }
+
+            .image-item {
+                width: 100%;
+                margin-right: 0;
+            }
+
+            .footer-content,
+            .footer-links {
+                float: none;
+                width: 100%;
+                margin-bottom: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 헤더 -->
+    <header>
+        <div class="header-container clearfix">
+            <div class="logo">Minimal Design</div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#work">Work</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 메인 레이아웃 -->
+    <div class="main-wrapper clearfix">
+        <!-- 사이드바 -->
+        <aside class="sidebar">
+            <h3>카테고리</h3>
+            <ul>
+                <li><a href="#design">디자인</a></li>
+                <li><a href="#development">개발</a></li>
+                <li><a href="#marketing">마케팅</a></li>
+                <li><a href="#strategy">전략</a></li>
+                <li><a href="#consulting">컨설팅</a></li>
+            </ul>
+
+            <h3 style="margin-top: 40px;">최근 글</h3>
+            <ul>
+                <li><a href="#post1">웹 디자인 트렌드 2024</a></li>
+                <li><a href="#post2">반응형 디자인 가이드</a></li>
+                <li><a href="#post3">사용자 경험 개선하기</a></li>
+            </ul>
+        </aside>
+
+        <!-- 메인 콘텐츠 영역 -->
+        <main class="content-area">
+            <!-- 히어로 섹션 -->
+            <section class="hero">
+                <h1>미니멀하고<br>효율적인 디자인</h1>
+                <p>단순함 속에서 찾는 아름다움. 불필요한 것을 제거하고 본질에 집중하는 디자인 철학을 추구합니다.</p>
+                <a href="#work" class="btn">프로젝트 보기</a>
+            </section>
+
+            <!-- 콘텐츠 그리드 -->
+            <section>
+                <h2 class="section-title">최근 작업</h2>
+                <div class="content-grid clearfix">
+                    <div class="content-item">
+                        <h3>브랜드 아이덴티티 디자인</h3>
+                        <p>기업의 핵심 가치를 시각적으로 표현하는 브랜드 아이덴티티를 설계했습니다. 로고부터 색상 체계, 타이포그래피까지 일관된 디자인 시스템을 구축했습니다.</p>
+                        <p class="meta">2024년 1월 · 디자인</p>
+                    </div>
+
+                    <div class="content-item">
+                        <h3>웹사이트 리뉴얼 프로젝트</h3>
+                        <p>기존 웹사이트의 사용자 경험을 개선하고 현대적인 디자인으로 전면 리뉴얼했습니다. 모바일 최적화와 접근성을 고려한 설계를 적용했습니다.</p>
+                        <p class="meta">2024년 2월 · 개발</p>
+                    </div>
+
+                    <div class="content-item">
+                        <h3>모바일 앱 UI/UX 디자인</h3>
+                        <p>사용자 중심의 직관적인 인터페이스를 설계했습니다. 프로토타이핑부터 사용자 테스트까지 전 과정을 통해 최적의 사용자 경험을 제공합니다.</p>
+                        <p class="meta">2024년 3월 · 디자인</p>
+                    </div>
+
+                    <div class="content-item">
+                        <h3>디지털 마케팅 전략</h3>
+                        <p>데이터 기반의 마케팅 전략을 수립하고 실행했습니다. SEO, 소셜 미디어, 콘텐츠 마케팅을 통합하여 효과적인 브랜드 커뮤니케이션을 구현했습니다.</p>
+                        <p class="meta">2024년 4월 · 마케팅</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 이미지 섹션 -->
+            <section class="image-section">
+                <h2 class="section-title">포트폴리오</h2>
+                <div class="image-grid clearfix">
+                    <div class="image-item">
+                        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); height: 200px;"></div>
+                        <h4>E-commerce 플랫폼</h4>
+                        <p>온라인 쇼핑몰의 사용자 인터페이스와 체크아웃 프로세스를 설계했습니다.</p>
+                    </div>
+
+                    <div class="image-item">
+                        <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); height: 200px;"></div>
+                        <h4>교육 플랫폼</h4>
+                        <p>온라인 학습 경험을 향상시키는 인터랙티브한 교육 플랫폼을 개발했습니다.</p>
+                    </div>
+
+                    <div class="image-item">
+                        <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); height: 200px;"></div>
+                        <h4>헬스케어 앱</h4>
+                        <p>건강 관리를 위한 모바일 애플리케이션의 UI/UX를 설계했습니다.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- 푸터 -->
+    <footer>
+        <div class="footer-container clearfix">
+            <div class="footer-content">
+                <h4>About Us</h4>
+                <p>Minimal Design은 단순함과 기능성을 중시하는 디자인 스튜디오입니다. 고객의 비즈니스 목표를 달성하기 위해 최선을 다하겠습니다.</p>
+                <p>이메일: hello@minimaldesign.com | 전화: 02-1234-5678</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#work">Work</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 Minimal Design. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

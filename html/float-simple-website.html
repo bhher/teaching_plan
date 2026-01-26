@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Float 간단한 웹사이트</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Clearfix 유틸리티 */
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* 헤더 */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            float: left;
+            font-size: 1.8rem;
+            font-weight: bold;
+            line-height: 1.8rem;
+        }
+
+        nav {
+            float: right;
+        }
+
+        nav ul {
+            list-style: none;
+        }
+
+        nav ul li {
+            float: left;
+            margin-left: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+            display: block;
+            line-height: 1.8rem;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        /* 메인 콘텐츠 */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* 히어로 섹션 */
+        .hero {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 80px 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 60px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* 카드 섹션 */
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: #333;
+        }
+
+        .cards {
+            margin-bottom: 60px;
+            margin-left: -15px;
+            margin-right: -15px;
+        }
+
+        .card {
+            float: left;
+            width: calc(33.333% - 30px);
+            margin: 0 15px 30px 15px;
+            max-width: 350px;
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .card p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* 푸터 */
+        footer {
+            background: #333;
+            color: white;
+            padding: 40px 20px;
+            margin-top: 60px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-section {
+            float: left;
+            width: calc(25% - 30px);
+            margin: 0 15px;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #555;
+            color: #ccc;
+            clear: both;
+        }
+
+        /* 반응형 디자인 */
+        @media (max-width: 992px) {
+            .card {
+                width: calc(50% - 30px);
+            }
+
+            .footer-section {
+                width: calc(50% - 30px);
+                margin-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                float: none;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+            nav {
+                float: none;
+            }
+
+            nav ul {
+                text-align: center;
+            }
+
+            nav ul li {
+                float: none;
+                display: inline-block;
+                margin: 0 10px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .card {
+                width: 100%;
+                max-width: 100%;
+                margin-left: 0;
+                margin-right: 0;
+            }
+
+            .footer-section {
+                width: 100%;
+                margin-bottom: 30px;
+                float: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 헤더 -->
+    <header>
+        <div class="header-container clearfix">
+            <div class="logo">My Website</div>
+            <nav>
+                <ul>
+                    <li><a href="#home">홈</a></li>
+                    <li><a href="#about">소개</a></li>
+                    <li><a href="#services">서비스</a></li>
+                    <li><a href="#contact">연락처</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 메인 콘텐츠 -->
+    <main>
+        <!-- 히어로 섹션 -->
+        <section class="hero">
+            <h1>환영합니다!</h1>
+            <p>Float로 만든 현대적이고 반응형 웹사이트입니다.</p>
+            <a href="#services" class="btn">시작하기</a>
+        </section>
+
+        <!-- 카드 섹션 -->
+        <section>
+            <h2 class="section-title">주요 기능</h2>
+            <div class="cards clearfix">
+                <div class="card">
+                    <div class="card-icon">🎨</div>
+                    <h3>아름다운 디자인</h3>
+                    <p>현대적이고 세련된 디자인으로 사용자 경험을 향상시킵니다. 깔끔한 레이아웃과 직관적인 인터페이스를 제공합니다.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">📱</div>
+                    <h3>반응형 디자인</h3>
+                    <p>모든 기기에서 완벽하게 작동합니다. 데스크톱, 태블릿, 모바일 모든 화면 크기에 최적화되어 있습니다.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">⚡</div>
+                    <h3>빠른 성능</h3>
+                    <p>최적화된 코드로 빠른 로딩 속도를 제공합니다. 사용자에게 쾌적한 웹 경험을 선사합니다.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🔒</div>
+                    <h3>안전한 보안</h3>
+                    <p>최신 보안 기술을 적용하여 사용자 데이터를 안전하게 보호합니다. 신뢰할 수 있는 서비스를 제공합니다.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🌐</div>
+                    <h3>다국어 지원</h3>
+                    <p>전 세계 사용자를 위해 다양한 언어를 지원합니다. 글로벌 서비스를 제공할 수 있습니다.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">💡</div>
+                    <h3>사용하기 쉬움</h3>
+                    <p>직관적인 인터페이스로 누구나 쉽게 사용할 수 있습니다. 복잡한 설정 없이 바로 시작할 수 있습니다.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 푸터 -->
+    <footer>
+        <div class="footer-container clearfix">
+            <div class="footer-section">
+                <h4>회사 정보</h4>
+                <p>My Website는 최고의 웹 서비스를 제공하기 위해 노력하고 있습니다.</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>빠른 링크</h4>
+                <ul>
+                    <li><a href="#home">홈</a></li>
+                    <li><a href="#about">소개</a></li>
+                    <li><a href="#services">서비스</a></li>
+                    <li><a href="#contact">연락처</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>연락처</h4>
+                <ul>
+                    <li>이메일: info@mywebsite.com</li>
+                    <li>전화: 02-1234-5678</li>
+                    <li>주소: 서울시 강남구</li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>소셜 미디어</h4>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">LinkedIn</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 My Website. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

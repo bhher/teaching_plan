@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clearfix 설명 예제</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            color: #764ba2;
+            margin: 40px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #764ba2;
+        }
+
+        h3 {
+            color: #333;
+            margin: 30px 0 15px 0;
+        }
+
+        .section {
+            background: white;
+            padding: 30px;
+            margin-bottom: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 문제 상황 예제 */
+        .problem-box {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .problem-box h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .float-item {
+            float: left;
+            width: 200px;
+            height: 150px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 5px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* 문제: 부모 요소가 높이를 잃음 */
+        .parent-without-clearfix {
+            background: #e9ecef;
+            border: 3px dashed #dc3545;
+            padding: 10px;
+            margin: 20px 0;
+        }
+
+        /* 해결: Clearfix 적용 */
+        .parent-with-clearfix {
+            background: #d4edda;
+            border: 3px solid #28a745;
+            padding: 10px;
+            margin: 20px 0;
+        }
+
+        /* Clearfix 방법 1: ::after 가상 요소 */
+        .clearfix-1::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* Clearfix 방법 2: overflow 사용 */
+        .clearfix-2 {
+            overflow: auto;
+        }
+
+        /* Clearfix 방법 3: display: flow-root (최신 방법) */
+        .clearfix-3 {
+            display: flow-root;
+        }
+
+        /* Clearfix 방법 4: ::before와 ::after 함께 사용 */
+        .clearfix-4::before,
+        .clearfix-4::after {
+            content: "";
+            display: table;
+        }
+
+        .clearfix-4::after {
+            clear: both;
+        }
+
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #d63384;
+        }
+
+        .code-block {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .code-block .comment {
+            color: #5c6370;
+        }
+
+        .code-block .property {
+            color: #c678dd;
+        }
+
+        .code-block .value {
+            color: #98c379;
+        }
+
+        .code-block .selector {
+            color: #e06c75;
+        }
+
+        .explanation {
+            background: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .explanation h4 {
+            color: #1976D2;
+            margin-bottom: 10px;
+        }
+
+        .comparison {
+            display: flex;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .comparison-item {
+            flex: 1;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        .before {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+        }
+
+        .after {
+            background: #d4edda;
+            border: 2px solid #28a745;
+        }
+
+        .note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .note strong {
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 Clearfix 완벽 가이드</h1>
+
+        <!-- 문제 상황 설명 -->
+        <div class="section">
+            <h2>1. 문제 상황: Float의 부작용</h2>
+            
+            <div class="explanation">
+                <h4>왜 Clearfix가 필요한가요?</h4>
+                <p>요소에 <code>float: left</code> 또는 <code>float: right</code>를 적용하면, 해당 요소는 문서의 일반적인 흐름(normal flow)에서 벗어나게 됩니다. 이로 인해 부모 요소가 자식 요소의 높이를 인식하지 못하게 되어 레이아웃이 깨지는 문제가 발생합니다.</p>
+            </div>
+
+            <h3>❌ 문제 예제: Clearfix 없이 Float 사용</h3>
+            <div class="problem-box">
+                <h4>부모 요소가 자식의 높이를 인식하지 못함</h4>
+                <p>아래 박스의 테두리가 자식 요소를 감싸지 않고 위로 올라가는 것을 확인하세요!</p>
+            </div>
+
+            <div class="parent-without-clearfix">
+                <div class="float-item">Float Item 1</div>
+                <div class="float-item">Float Item 2</div>
+                <div class="float-item">Float Item 3</div>
+                <!-- 부모 요소가 높이를 잃어버림! -->
+            </div>
+            <p style="margin-top: 10px;"><strong>결과:</strong> 부모 요소의 배경색과 테두리가 보이지 않습니다. (높이가 0이 됨)</p>
+
+            <div class="code-block">
+<span class="comment">/* 문제가 있는 CSS */</span>
+<span class="selector">.parent</span> {
+    <span class="property">background</span>: <span class="value">#e9ecef</span>;
+    <span class="property">border</span>: <span class="value">3px dashed #dc3545</span>;
+}
+
+<span class="selector">.float-item</span> {
+    <span class="property">float</span>: <span class="value">left</span>;
+    <span class="property">width</span>: <span class="value">200px</span>;
+    <span class="property">height</span>: <span class="value">150px</span>;
+}
+<span class="comment">/* 부모 요소가 자식의 높이를 인식하지 못함! */</span>
+            </div>
+        </div>
+
+        <!-- 해결 방법 1 -->
+        <div class="section">
+            <h2>2. 해결 방법 1: ::after 가상 요소 (가장 일반적)</h2>
+
+            <h3>✅ 해결 예제: Clearfix 적용</h3>
+            <div class="parent-with-clearfix clearfix-1">
+                <div class="float-item">Float Item 1</div>
+                <div class="float-item">Float Item 2</div>
+                <div class="float-item">Float Item 3</div>
+            </div>
+            <p style="margin-top: 10px;"><strong>결과:</strong> 부모 요소가 자식 요소를 정상적으로 감쌉니다!</p>
+
+            <div class="code-block">
+<span class="comment">/* HTML */</span>
+&lt;<span class="selector">div</span> <span class="property">class</span>=<span class="value">"parent clearfix"</span>&gt;
+    &lt;<span class="selector">div</span> <span class="property">class</span>=<span class="value">"float-item"</span>&gt;Item 1&lt;/<span class="selector">div</span>&gt;
+    &lt;<span class="selector">div</span> <span class="property">class</span>=<span class="value">"float-item"</span>&gt;Item 2&lt;/<span class="selector">div</span>&gt;
+&lt;/<span class="selector">div</span>&gt;
+
+<span class="comment">/* CSS - Clearfix 방법 1 */</span>
+<span class="selector">.clearfix::after</span> {
+    <span class="property">content</span>: <span class="value">""</span>;
+    <span class="property">display</span>: <span class="value">table</span>;
+    <span class="property">clear</span>: <span class="value">both</span>;
+}
+            </div>
+
+            <div class="explanation">
+                <h4>작동 원리</h4>
+                <ul>
+                    <li><code>::after</code> 가상 요소를 사용하여 부모 요소의 끝에 보이지 않는 요소를 추가합니다.</li>
+                    <li><code>display: table</code>은 레이아웃을 위해 사용됩니다 (block도 가능).</li>
+                    <li><code>clear: both</code>는 왼쪽과 오른쪽의 float 요소 아래로 내려가도록 합니다.</li>
+                    <li>이로 인해 부모 요소가 자식 요소의 높이를 인식하게 됩니다.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 해결 방법 2 -->
+        <div class="section">
+            <h2>3. 해결 방법 2: overflow 속성 사용</h2>
+
+            <div class="parent-with-clearfix clearfix-2">
+                <div class="float-item">Float Item 1</div>
+                <div class="float-item">Float Item 2</div>
+                <div class="float-item">Float Item 3</div>
+            </div>
+
+            <div class="code-block">
+<span class="comment">/* CSS - Clearfix 방법 2 */</span>
+<span class="selector">.clearfix</span> {
+    <span class="property">overflow</span>: <span class="value">auto</span>; <span class="comment">/* 또는 hidden */</span>
+}
+            </div>
+
+            <div class="explanation">
+                <h4>장단점</h4>
+                <ul>
+                    <li><strong>장점:</strong> 간단하고 추가 HTML 요소나 가상 요소가 필요 없습니다.</li>
+                    <li><strong>단점:</strong> 내용이 넘칠 경우 스크롤바가 생기거나 잘릴 수 있습니다.</li>
+                    <li><code>overflow: hidden</code>을 사용하면 스크롤바 없이 잘립니다.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 해결 방법 3 -->
+        <div class="section">
+            <h2>4. 해결 방법 3: display: flow-root (최신 방법)</h2>
+
+            <div class="parent-with-clearfix clearfix-3">
+                <div class="float-item">Float Item 1</div>
+                <div class="float-item">Float Item 2</div>
+                <div class="float-item">Float Item 3</div>
+            </div>
+
+            <div class="code-block">
+<span class="comment">/* CSS - Clearfix 방법 3 (최신, 권장) */</span>
+<span class="selector">.clearfix</span> {
+    <span class="property">display</span>: <span class="value">flow-root</span>;
+}
+            </div>
+
+            <div class="explanation">
+                <h4>가장 현대적인 방법</h4>
+                <ul>
+                    <li><strong>장점:</strong> 가장 깔끔하고 명확한 방법입니다. float를 위한 특별한 컨텍스트를 생성합니다.</li>
+                    <li><strong>단점:</strong> 구형 브라우저에서는 지원되지 않을 수 있습니다 (IE 미지원).</li>
+                    <li>최신 브라우저에서는 이 방법을 가장 권장합니다!</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 해결 방법 4 -->
+        <div class="section">
+            <h2>5. 해결 방법 4: ::before와 ::after 함께 사용 (Micro Clearfix)</h2>
+
+            <div class="parent-with-clearfix clearfix-4">
+                <div class="float-item">Float Item 1</div>
+                <div class="float-item">Float Item 2</div>
+                <div class="float-item">Float Item 3</div>
+            </div>
+
+            <div class="code-block">
+<span class="comment">/* CSS - Clearfix 방법 4 (Micro Clearfix) */</span>
+<span class="selector">.clearfix::before</span>,
+<span class="selector">.clearfix::after</span> {
+    <span class="property">content</span>: <span class="value">""</span>;
+    <span class="property">display</span>: <span class="value">table</span>;
+}
+
+<span class="selector">.clearfix::after</span> {
+    <span class="property">clear</span>: <span class="value">both</span>;
+}
+            </div>
+
+            <div class="explanation">
+                <h4>왜 ::before도 필요한가요?</h4>
+                <ul>
+                    <li><code>::before</code>는 마진 상쇄(margin collapse) 문제를 방지합니다.</li>
+                    <li>더 안정적인 레이아웃을 보장합니다.</li>
+                    <li>Nicolas Gallagher가 제안한 "Micro Clearfix" 방법입니다.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 실제 사용 예제 -->
+        <div class="section">
+            <h2>6. 실제 사용 예제: 네비게이션 메뉴</h2>
+
+            <h3>문제 상황</h3>
+            <div class="comparison">
+                <div class="comparison-item before">
+                    <h4>❌ Clearfix 없음</h4>
+                    <div style="background: #fff3cd; border: 2px dashed #ffc107; padding: 10px; margin-top: 10px;">
+                        <div style="float: left; background: #667eea; color: white; padding: 10px 20px; margin: 5px;">홈</div>
+                        <div style="float: left; background: #667eea; color: white; padding: 10px 20px; margin: 5px;">소개</div>
+                        <div style="float: left; background: #667eea; color: white; padding: 10px 20px; margin: 5px;">서비스</div>
+                    </div>
+                    <p style="margin-top: 10px; font-size: 0.9em;">부모 요소의 배경이 보이지 않음</p>
+                </div>
+
+                <div class="comparison-item after">
+                    <h4>✅ Clearfix 적용</h4>
+                    <div style="background: #d4edda; border: 2px solid #28a745; padding: 10px; margin-top: 10px;" class="clearfix-1">
+                        <div style="float: left; background: #667eea; color: white; padding: 10px 20px; margin: 5px;">홈</div>
+                        <div style="float: left; background: #667eea; color: white; padding: 10px 20px; margin: 5px;">소개</div>
+                        <div style="float: left; background: #667eea; color: white; padding: 10px 20px; margin: 5px;">서비스</div>
+                    </div>
+                    <p style="margin-top: 10px; font-size: 0.9em;">부모 요소가 정상적으로 표시됨</p>
+                </div>
+            </div>
+
+            <div class="code-block">
+<span class="comment">/* HTML */</span>
+&lt;<span class="selector">nav</span> <span class="property">class</span>=<span class="value">"navigation clearfix"</span>&gt;
+    &lt;<span class="selector">a</span> <span class="property">href</span>=<span class="value">"#"</span>&gt;홈&lt;/<span class="selector">a</span>&gt;
+    &lt;<span class="selector">a</span> <span class="property">href</span>=<span class="value">"#"</span>&gt;소개&lt;/<span class="selector">a</span>&gt;
+    &lt;<span class="selector">a</span> <span class="property">href</span>=<span class="value">"#"</span>&gt;서비스&lt;/<span class="selector">a</span>&gt;
+&lt;/<span class="selector">nav</span>&gt;
+
+<span class="comment">/* CSS */</span>
+<span class="selector">.navigation</span> {
+    <span class="property">background</span>: <span class="value">#d4edda</span>;
+    <span class="property">border</span>: <span class="value">2px solid #28a745</span>;
+    <span class="property">padding</span>: <span class="value">10px</span>;
+}
+
+<span class="selector">.navigation a</span> {
+    <span class="property">float</span>: <span class="value">left</span>;
+    <span class="property">padding</span>: <span class="value">10px 20px</span>;
+    <span class="property">margin</span>: <span class="value">5px</span>;
+}
+
+<span class="selector">.clearfix::after</span> {
+    <span class="property">content</span>: <span class="value">""</span>;
+    <span class="property">display</span>: <span class="value">table</span>;
+    <span class="property">clear</span>: <span class="value">both</span>;
+}
+            </div>
+        </div>
+
+        <!-- 요약 -->
+        <div class="section">
+            <h2>7. 방법 비교 및 권장사항</h2>
+
+            <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                <thead>
+                    <tr style="background: #667eea; color: white;">
+                        <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">방법</th>
+                        <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">장점</th>
+                        <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">단점</th>
+                        <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">권장도</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><code>::after</code></td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">가장 널리 사용됨, 안정적</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">약간의 코드 필요</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">⭐⭐⭐⭐⭐</td>
+                    </tr>
+                    <tr style="background: #f9f9f9;">
+                        <td style="padding: 10px; border: 1px solid #ddd;"><code>overflow</code></td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">매우 간단함</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">내용 잘림 가능성</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">⭐⭐⭐</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><code>flow-root</code></td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">가장 현대적, 깔끔함</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">구형 브라우저 미지원</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">⭐⭐⭐⭐ (최신 브라우저)</td>
+                    </tr>
+                    <tr style="background: #f9f9f9;">
+                        <td style="padding: 10px; border: 1px solid #ddd;">Micro Clearfix</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">가장 안정적</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">코드가 약간 더 복잡</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">⭐⭐⭐⭐</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="note">
+                <strong>💡 권장사항:</strong>
+                <ul style="margin-top: 10px; margin-left: 20px;">
+                    <li><strong>일반적인 경우:</strong> <code>::after</code> 방법을 사용하세요. 가장 널리 사용되고 안정적입니다.</li>
+                    <li><strong>최신 브라우저만 지원:</strong> <code>display: flow-root</code>를 사용하세요. 가장 깔끔합니다.</li>
+                    <li><strong>내용이 넘칠 가능성이 없음:</strong> <code>overflow: auto</code> 또는 <code>overflow: hidden</code>을 사용할 수 있습니다.</li>
+                    <li><strong>완벽한 호환성 필요:</strong> Micro Clearfix (::before + ::after)를 사용하세요.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 실전 팁 -->
+        <div class="section">
+            <h2>8. 실전 팁</h2>
+
+            <div class="code-block">
+<span class="comment">/* 유틸리티 클래스로 만들어서 재사용하기 */</span>
+<span class="selector">.clearfix::after</span> {
+    <span class="property">content</span>: <span class="value">""</span>;
+    <span class="property">display</span>: <span class="value">table</span>;
+    <span class="property">clear</span>: <span class="value">both</span>;
+}
+
+<span class="comment">/* 사용 예시 */</span>
+&lt;<span class="selector">div</span> <span class="property">class</span>=<span class="value">"container clearfix"</span>&gt;
+    &lt;<span class="selector">div</span> <span class="property">class</span>=<span class="value">"float-left"</span>&gt;...&lt;/<span class="selector">div</span>&gt;
+    &lt;<span class="selector">div</span> <span class="property">class</span>=<span class="value">"float-right"</span>&gt;...&lt;/<span class="selector">div</span>&gt;
+&lt;/<span class="selector">div</span>&gt;
+            </div>
+
+            <div class="explanation">
+                <h4>기억할 점</h4>
+                <ul>
+                    <li>Float를 사용하는 부모 요소에는 반드시 clearfix를 적용해야 합니다.</li>
+                    <li>Clearfix는 부모 요소에 적용합니다 (자식 요소가 아니라).</li>
+                    <li>Flexbox나 Grid를 사용할 수 있다면 float 대신 그 방법을 사용하는 것이 더 좋습니다.</li>
+                    <li>하지만 레거시 코드나 특정 상황에서는 float와 clearfix가 여전히 유용합니다.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
