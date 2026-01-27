@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVG 로고 인트로 애니메이션</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+        }
+
+        /* SVG 컨테이너 */
+        .svg-container {
+            width: 400px;
+            height: 400px;
+            margin: 0 auto 50px;
+            position: relative;
+        }
+
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* 굴러오는 원 */
+        .rolling-circle {
+            fill: #fff;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+            animation: rollIn 2s ease-out forwards;
+            transform-origin: center;
+        }
+
+        @keyframes rollIn {
+            0% {
+                transform: translateX(-200px) rotate(0deg);
+            }
+            100% {
+                transform: translateX(0) rotate(720deg);
+            }
+        }
+
+        /* 직선 경로 애니메이션 */
+        .line-path {
+            fill: none;
+            stroke: #fff;
+            stroke-width: 8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            opacity: 0;
+        }
+
+        /* 수평선 (위) */
+        .line-top {
+            animation: drawLine 1s ease-out 2s forwards;
+        }
+
+        /* 수평선 (아래) */
+        .line-bottom {
+            animation: drawLine 1s ease-out 2.5s forwards;
+        }
+
+        /* 수직선 (왼쪽) */
+        .line-left {
+            animation: drawLine 1s ease-out 3s forwards;
+        }
+
+        /* 수직선 (오른쪽) */
+        .line-right {
+            animation: drawLine 1s ease-out 3.5s forwards;
+        }
+
+        /* 대각선 */
+        .line-diag1 {
+            animation: drawLine 1s ease-out 4s forwards;
+        }
+
+        .line-diag2 {
+            animation: drawLine 1s ease-out 4.5s forwards;
+        }
+
+        @keyframes drawLine {
+            0% {
+                stroke-dashoffset: 1000;
+                opacity: 0;
+            }
+            1% {
+                opacity: 1;
+            }
+            100% {
+                stroke-dashoffset: 0;
+                opacity: 1;
+            }
+        }
+
+        /* 텍스트 */
+        .logo-text {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: #fff;
+            margin-top: 30px;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 5s forwards;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .sub-text {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-top: 20px;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 5.5s forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 버튼 */
+        .button-group {
+            margin-top: 40px;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 6s forwards;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            font-size: 1rem;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            text-decoration: none;
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 반응형 */
+        @media (max-width: 768px) {
+            .svg-container {
+                width: 300px;
+                height: 300px;
+            }
+
+            .logo-text {
+                font-size: 2.5rem;
+            }
+
+            .button-group {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .btn {
+                width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="svg-container">
+            <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                <!-- 굴러오는 원 -->
+                <circle class="rolling-circle" cx="200" cy="200" r="50" />
+                
+                <!-- 직선들 -->
+                <!-- 위쪽 수평선 -->
+                <line class="line-path line-top" x1="100" y1="100" x2="300" y2="100" />
+                
+                <!-- 아래쪽 수평선 -->
+                <line class="line-path line-bottom" x1="100" y1="300" x2="300" y2="300" />
+                
+                <!-- 왼쪽 수직선 -->
+                <line class="line-path line-left" x1="100" y1="100" x2="100" y2="300" />
+                
+                <!-- 오른쪽 수직선 -->
+                <line class="line-path line-right" x1="300" y1="100" x2="300" y2="300" />
+                
+                <!-- 대각선 1 -->
+                <line class="line-path line-diag1" x1="100" y1="100" x2="300" y2="300" />
+                
+                <!-- 대각선 2 -->
+                <line class="line-path line-diag2" x1="300" y1="100" x2="100" y2="300" />
+            </svg>
+        </div>
+
+        <h1 class="logo-text">LOGO</h1>
+        <p class="sub-text">SVG 애니메이션으로 만든 로고</p>
+
+        <div class="button-group">
+            <a href="#" class="btn">시작하기</a>
+            <a href="#" class="btn">더 알아보기</a>
+        </div>
+    </div>
+
+    <script>
+        // 버튼 클릭 이벤트
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                // 페이지 새로고침으로 애니메이션 재시작
+                location.reload();
+            });
+        });
+    </script>
+</body>
+</html>

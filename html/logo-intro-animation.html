@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로고 인트로 애니메이션</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+        }
+
+        /* 로고 컨테이너 */
+        .logo-container {
+            width: 300px;
+            height: 300px;
+            margin: 0 auto 50px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 굴러오는 원 */
+        .rolling-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: #fff;
+            position: absolute;
+            left: -150px;
+            top: 50%;
+            transform: translateY(-50%);
+            animation: rollIn 2s ease-out forwards;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes rollIn {
+            0% {
+                left: -150px;
+                transform: translateY(-50%) rotate(0deg);
+            }
+            100% {
+                left: 100px;
+                transform: translateY(-50%) rotate(720deg); /* 2바퀴 회전 */
+            }
+        }
+
+        /* 직선들 */
+        .line {
+            position: absolute;
+            background: #fff;
+            opacity: 0;
+        }
+
+        /* 수평 직선 (위) */
+        .line-horizontal-top {
+            width: 0;
+            height: 8px;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: drawHorizontalTop 1s ease-out 2s forwards;
+        }
+
+        @keyframes drawHorizontalTop {
+            0% {
+                width: 0;
+                opacity: 0;
+            }
+            1% {
+                opacity: 1;
+            }
+            100% {
+                width: 200px;
+                opacity: 1;
+            }
+        }
+
+        /* 수평 직선 (아래) */
+        .line-horizontal-bottom {
+            width: 0;
+            height: 8px;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: drawHorizontalBottom 1s ease-out 2.5s forwards;
+        }
+
+        @keyframes drawHorizontalBottom {
+            0% {
+                width: 0;
+                opacity: 0;
+            }
+            1% {
+                opacity: 1;
+            }
+            100% {
+                width: 200px;
+                opacity: 1;
+            }
+        }
+
+        /* 수직 직선 (왼쪽) */
+        .line-vertical-left {
+            width: 8px;
+            height: 0;
+            left: 50px;
+            top: 50%;
+            transform: translateY(-50%);
+            animation: drawVerticalLeft 1s ease-out 3s forwards;
+        }
+
+        @keyframes drawVerticalLeft {
+            0% {
+                height: 0;
+                opacity: 0;
+            }
+            1% {
+                opacity: 1;
+            }
+            100% {
+                height: 200px;
+                opacity: 1;
+            }
+        }
+
+        /* 수직 직선 (오른쪽) */
+        .line-vertical-right {
+            width: 8px;
+            height: 0;
+            right: 50px;
+            top: 50%;
+            transform: translateY(-50%);
+            animation: drawVerticalRight 1s ease-out 3.5s forwards;
+        }
+
+        @keyframes drawVerticalRight {
+            0% {
+                height: 0;
+                opacity: 0;
+            }
+            1% {
+                opacity: 1;
+            }
+            100% {
+                height: 200px;
+                opacity: 1;
+            }
+        }
+
+        /* 대각선 */
+        .line-diagonal {
+            width: 0;
+            height: 8px;
+            top: 50%;
+            left: 50%;
+            transform-origin: left center;
+            opacity: 0;
+        }
+
+        .line-diagonal-1 {
+            transform: translate(-50%, -50%) rotate(45deg);
+            animation: drawDiagonal1 1s ease-out 4s forwards;
+        }
+
+        .line-diagonal-2 {
+            transform: translate(-50%, -50%) rotate(-45deg);
+            animation: drawDiagonal2 1s ease-out 4.5s forwards;
+        }
+
+        @keyframes drawDiagonal1 {
+            0% {
+                width: 0;
+                opacity: 0;
+            }
+            1% {
+                opacity: 1;
+            }
+            100% {
+                width: 150px;
+                opacity: 1;
+            }
+        }
+
+        @keyframes drawDiagonal2 {
+            0% {
+                width: 0;
+                opacity: 0;
+            }
+            1% {
+                opacity: 1;
+            }
+            100% {
+                width: 150px;
+                opacity: 1;
+            }
+        }
+
+        /* 최종 로고 텍스트 */
+        .logo-text {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #fff;
+            margin-top: 30px;
+            opacity: 0;
+            animation: fadeInText 1s ease-out 5s forwards;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes fadeInText {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 서브 텍스트 */
+        .sub-text {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-top: 20px;
+            opacity: 0;
+            animation: fadeInText 1s ease-out 5.5s forwards;
+        }
+
+        /* 버튼 */
+        .button-group {
+            margin-top: 40px;
+            opacity: 0;
+            animation: fadeInText 1s ease-out 6s forwards;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            font-size: 1rem;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            text-decoration: none;
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 반응형 */
+        @media (max-width: 768px) {
+            .logo-container {
+                width: 250px;
+                height: 250px;
+            }
+
+            .rolling-circle {
+                width: 80px;
+                height: 80px;
+            }
+
+            .logo-text {
+                font-size: 2rem;
+            }
+
+            .button-group {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .btn {
+                width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-container">
+            <!-- 굴러오는 원 -->
+            <div class="rolling-circle"></div>
+            
+            <!-- 직선들 -->
+            <div class="line line-horizontal-top"></div>
+            <div class="line line-horizontal-bottom"></div>
+            <div class="line line-vertical-left"></div>
+            <div class="line line-vertical-right"></div>
+            <div class="line line-diagonal line-diagonal-1"></div>
+            <div class="line line-diagonal line-diagonal-2"></div>
+        </div>
+
+        <h1 class="logo-text">LOGO</h1>
+        <p class="sub-text">애니메이션으로 만든 로고</p>
+
+        <div class="button-group">
+            <a href="#" class="btn">시작하기</a>
+            <a href="#" class="btn">더 알아보기</a>
+        </div>
+    </div>
+
+    <script>
+        // 버튼 클릭 이벤트
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                // 애니메이션 재시작 효과
+                const container = document.querySelector('.logo-container');
+                container.style.animation = 'none';
+                setTimeout(() => {
+                    container.style.animation = '';
+                }, 10);
+            });
+        });
+    </script>
+</body>
+</html>
