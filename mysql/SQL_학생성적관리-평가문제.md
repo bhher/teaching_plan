@@ -8,6 +8,87 @@
 
 다음과 같이 테이블을 정의하시오.
 
+#### 📊 테이블 구조 도식화
+
+```
+┌─────────────────────────────────────────────────┐
+│              student 테이블                      │
+├─────────────────────────────────────────────────┤
+│ PK │ student_no      │ INT AUTO_INCREMENT      │
+├────┼──────────────────┼─────────────────────────┤
+│    │ student_id      │ CHAR(20)                │
+│    │ name            │ CHAR(10)                │
+│    │ gender          │ CHAR(1)                 │
+│    │ age             │ INT                     │
+│    │ major           │ CHAR(30)               │
+│    │ phone           │ CHAR(20)               │
+│    │ email           │ CHAR(50)               │
+└─────────────────────────────────────────────────┘
+                    │
+                    │ 1:N 관계
+                    │ (한 학생은 여러 성적을 가짐)
+                    ▼
+┌─────────────────────────────────────────────────┐
+│              grade 테이블                        │
+├─────────────────────────────────────────────────┤
+│ PK │ grade_no        │ INT AUTO_INCREMENT      │
+├────┼──────────────────┼─────────────────────────┤
+│ FK │ student_id      │ CHAR(20)                │
+│    │ subject         │ CHAR(30)               │
+│    │ midterm         │ INT                    │
+│    │ final           │ INT                    │
+│    │ assignment      │ INT                    │
+└─────────────────────────────────────────────────┘
+```
+
+#### 테이블 상세 구조
+
+**student 테이블 (학생 정보)**
+
+| 컬럼명 | 데이터타입 | 제약조건 | 설명 |
+|--------|-----------|---------|------|
+| student_no | INT | PRIMARY KEY, AUTO_INCREMENT | 학생 번호 (자동 증가) |
+| student_id | CHAR(20) | | 학번 |
+| name | CHAR(10) | | 학생 이름 |
+| gender | CHAR(1) | | 성별 (M/F) |
+| age | INT | | 나이 |
+| major | CHAR(30) | | 전공 |
+| phone | CHAR(20) | | 전화번호 |
+| email | CHAR(50) | | 이메일 |
+
+**grade 테이블 (성적 정보)**
+
+| 컬럼명 | 데이터타입 | 제약조건 | 설명 |
+|--------|-----------|---------|------|
+| grade_no | INT | PRIMARY KEY, AUTO_INCREMENT | 성적 번호 (자동 증가) |
+| student_id | CHAR(20) | FOREIGN KEY | 학번 (student.student_id 참조) |
+| subject | CHAR(30) | | 과목명 |
+| midterm | INT | | 중간고사 점수 |
+| final | INT | | 기말고사 점수 |
+| assignment | INT | | 과제 점수 |
+
+#### 관계도 (ERD)
+
+```
+┌──────────────────────┐                    ┌──────────────────────┐
+│      student         │                    │       grade          │
+├──────────────────────┤                    ├──────────────────────┤
+│ PK student_no        │                    │ PK grade_no          │
+│    student_id ───────┼───────┐            │ FK student_id ───────┘
+│    name              │       │            │    subject            │
+│    gender            │       │            │    midterm            │
+│    age               │       │            │    final              │
+│    major             │       │            │    assignment         │
+│    phone             │       │            └──────────────────────┘
+│    email             │       │
+└──────────────────────┘       │
+                               │
+                        (1:N 관계)
+                        한 학생은 여러 성적을 가질 수 있음
+```
+
+#### 테이블 생성 SQL
+
 ```sql
 create table student(
 student_no int auto_increment primary key,

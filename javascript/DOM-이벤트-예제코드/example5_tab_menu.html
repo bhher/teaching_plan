@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>탭 메뉴 예제</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .tabs {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ddd;
+        }
+        .tab {
+            padding: 12px 24px;
+            background-color: #f8f9fa;
+            cursor: pointer;
+            border: none;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        .tab:hover {
+            background-color: #e9ecef;
+        }
+        .tab.active {
+            background-color: #007bff;
+            color: white;
+        }
+        .tab-content {
+            display: none;
+            padding: 30px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            min-height: 200px;
+        }
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>탭 메뉴</h1>
+    <div class="tabs">
+        <button class="tab active" data-tab="tab1">홈</button>
+        <button class="tab" data-tab="tab2">소개</button>
+        <button class="tab" data-tab="tab3">연락처</button>
+    </div>
+
+    <div id="tab1" class="tab-content active">
+        <h2>홈</h2>
+        <p>홈 페이지 내용입니다. 여기에 메인 콘텐츠를 작성할 수 있습니다.</p>
+    </div>
+
+    <div id="tab2" class="tab-content">
+        <h2>소개</h2>
+        <p>소개 페이지 내용입니다. 회사나 개인에 대한 정보를 작성할 수 있습니다.</p>
+    </div>
+
+    <div id="tab3" class="tab-content">
+        <h2>연락처</h2>
+        <p>연락처 페이지 내용입니다. 연락 방법을 안내할 수 있습니다.</p>
+    </div>
+
+    <script>
+        const tabs = document.querySelectorAll('.tab');
+        const contents = document.querySelectorAll('.tab-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                // 모든 탭과 콘텐츠에서 active 제거
+                tabs.forEach(t => t.classList.remove('active'));
+                contents.forEach(c => c.classList.remove('active'));
+
+                // 클릭한 탭에 active 추가
+                tab.classList.add('active');
+
+                // 해당 콘텐츠에 active 추가
+                const tabId = tab.getAttribute('data-tab');
+                const content = document.getElementById(tabId);
+                if (content) {
+                    content.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
