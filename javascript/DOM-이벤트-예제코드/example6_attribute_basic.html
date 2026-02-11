@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>getAttribute / setAttribute 기본 예제</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #4CAF50;
+            padding-bottom: 10px;
+        }
+        .example {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f9f9f9;
+            border-left: 4px solid #4CAF50;
+            border-radius: 5px;
+        }
+        .example h2 {
+            color: #4CAF50;
+            margin-top: 0;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .output {
+            margin-top: 15px;
+            padding: 15px;
+            background: #e8f5e9;
+            border-radius: 5px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+        img {
+            max-width: 200px;
+            margin: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+        }
+        input {
+            padding: 8px;
+            font-size: 14px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 5px;
+        }
+        .highlight {
+            background-color: #fff3cd;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>getAttribute / setAttribute 기본 예제</h1>
+        
+        <!-- 예제 1: 기본 속성 읽기/쓰기 -->
+        <div class="example">
+            <h2>예제 1: 기본 속성 읽기/쓰기</h2>
+            <p>이미지의 src, alt 속성을 읽고 변경합니다.</p>
+            
+            <img id="demoImage" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='150'%3E%3Crect width='200' height='150' fill='%234CAF50'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='18' fill='white' text-anchor='middle' dominant-baseline='middle'%3EImage 1%3C/text%3E%3C/svg%3E" 
+                 alt="데모 이미지 1" title="클릭해보세요">
+            
+            <div>
+                <button onclick="readAttributes()">속성 읽기</button>
+                <button onclick="changeImage()">이미지 변경</button>
+                <button onclick="changeAlt()">Alt 텍스트 변경</button>
+            </div>
+            
+            <div id="output1" class="output"></div>
+        </div>
+
+        <!-- 예제 2: 링크 속성 변경 -->
+        <div class="example">
+            <h2>예제 2: 링크 속성 변경</h2>
+            <p>링크의 href, target 속성을 동적으로 변경합니다.</p>
+            
+            <a id="demoLink" href="https://www.google.com" target="_blank">
+                구글로 이동 (현재 링크 확인)
+            </a>
+            
+            <div style="margin-top: 15px;">
+                <button onclick="readLinkAttributes()">링크 속성 읽기</button>
+                <button onclick="changeLinkToNaver()">네이버로 변경</button>
+                <button onclick="changeLinkToGoogle()">구글로 변경</button>
+                <button onclick="toggleTarget()">Target 토글</button>
+            </div>
+            
+            <div id="output2" class="output"></div>
+        </div>
+
+        <!-- 예제 3: 입력 필드 속성 제어 -->
+        <div class="example">
+            <h2>예제 3: 입력 필드 속성 제어</h2>
+            <p>입력 필드의 type, placeholder, disabled 속성을 변경합니다.</p>
+            
+            <input type="text" id="demoInput" placeholder="기본 텍스트 입력" value="테스트 값">
+            
+            <div style="margin-top: 15px;">
+                <button onclick="readInputAttributes()">입력 필드 속성 읽기</button>
+                <button onclick="changeToPassword()">비밀번호 타입으로 변경</button>
+                <button onclick="changeToEmail()">이메일 타입으로 변경</button>
+                <button onclick="toggleDisabled()">비활성화 토글</button>
+                <button onclick="changePlaceholder()">Placeholder 변경</button>
+            </div>
+            
+            <div id="output3" class="output"></div>
+        </div>
+
+        <!-- 예제 4: 사용자 정의 속성 -->
+        <div class="example">
+            <h2>예제 4: 사용자 정의 속성 (data-*)</h2>
+            <p>data-* 속성을 사용하여 커스텀 데이터를 저장하고 읽습니다.</p>
+            
+            <div id="customDiv" data-user-id="12345" data-role="admin" data-status="active">
+                사용자 정보 영역 (data 속성 확인)
+            </div>
+            
+            <div style="margin-top: 15px;">
+                <button onclick="readDataAttributes()">Data 속성 읽기</button>
+                <button onclick="updateUserRole()">역할 변경</button>
+                <button onclick="updateStatus()">상태 변경</button>
+                <button onclick="addCustomData()">커스텀 데이터 추가</button>
+            </div>
+            
+            <div id="output4" class="output"></div>
+        </div>
+
+        <!-- 예제 5: 속성 존재 확인 -->
+        <div class="example">
+            <h2>예제 5: 속성 존재 확인 및 제거</h2>
+            <p>hasAttribute, removeAttribute를 사용합니다.</p>
+            
+            <button id="demoButton" disabled title="이 버튼은 비활성화되어 있습니다">
+                테스트 버튼
+            </button>
+            
+            <div style="margin-top: 15px;">
+                <button onclick="checkAttributes()">속성 확인</button>
+                <button onclick="removeDisabled()">disabled 제거</button>
+                <button onclick="addDisabled()">disabled 추가</button>
+                <button onclick="removeTitle()">title 제거</button>
+            </div>
+            
+            <div id="output5" class="output"></div>
+        </div>
+    </div>
+
+    <script>
+        // 예제 1: 이미지 속성 읽기/쓰기
+        function readAttributes() {
+            const img = document.getElementById('demoImage');
+            const src = img.getAttribute('src');
+            const alt = img.getAttribute('alt');
+            const title = img.getAttribute('title');
+            
+            document.getElementById('output1').textContent = 
+                `src: ${src}\n` +
+                `alt: ${alt}\n` +
+                `title: ${title}`;
+        }
+
+        function changeImage() {
+            const img = document.getElementById('demoImage');
+            const currentAlt = img.getAttribute('alt');
+            
+            if (currentAlt.includes('1')) {
+                // Image 2로 변경 (파란색)
+                img.setAttribute('src', 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'150\'%3E%3Crect width=\'200\' height=\'150\' fill=\'%232196F3\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' font-family=\'Arial\' font-size=\'18\' fill=\'white\' text-anchor=\'middle\' dominant-baseline=\'middle\'%3EImage 2%3C/text%3E%3C/svg%3E');
+                img.setAttribute('alt', '데모 이미지 2');
+            } else {
+                // Image 1로 변경 (초록색)
+                img.setAttribute('src', 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'150\'%3E%3Crect width=\'200\' height=\'150\' fill=\'%234CAF50\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' font-family=\'Arial\' font-size=\'18\' fill=\'white\' text-anchor=\'middle\' dominant-baseline=\'middle\'%3EImage 1%3C/text%3E%3C/svg%3E');
+                img.setAttribute('alt', '데모 이미지 1');
+            }
+            
+            readAttributes();
+        }
+
+        function changeAlt() {
+            const img = document.getElementById('demoImage');
+            const newAlt = prompt('새로운 alt 텍스트를 입력하세요:', img.getAttribute('alt'));
+            if (newAlt !== null) {
+                img.setAttribute('alt', newAlt);
+                readAttributes();
+            }
+        }
+
+        // 예제 2: 링크 속성 변경
+        function readLinkAttributes() {
+            const link = document.getElementById('demoLink');
+            const href = link.getAttribute('href');
+            const target = link.getAttribute('target');
+            const text = link.textContent;
+            
+            document.getElementById('output2').textContent = 
+                `href: ${href}\n` +
+                `target: ${target}\n` +
+                `텍스트: ${text}`;
+        }
+
+        function changeLinkToNaver() {
+            const link = document.getElementById('demoLink');
+            link.setAttribute('href', 'https://www.naver.com');
+            link.textContent = '네이버로 이동 (현재 링크 확인)';
+            readLinkAttributes();
+        }
+
+        function changeLinkToGoogle() {
+            const link = document.getElementById('demoLink');
+            link.setAttribute('href', 'https://www.google.com');
+            link.textContent = '구글로 이동 (현재 링크 확인)';
+            readLinkAttributes();
+        }
+
+        function toggleTarget() {
+            const link = document.getElementById('demoLink');
+            const currentTarget = link.getAttribute('target');
+            
+            if (currentTarget === '_blank') {
+                link.setAttribute('target', '_self');
+            } else {
+                link.setAttribute('target', '_blank');
+            }
+            
+            readLinkAttributes();
+        }
+
+        // 예제 3: 입력 필드 속성 제어
+        function readInputAttributes() {
+            const input = document.getElementById('demoInput');
+            const type = input.getAttribute('type');
+            const placeholder = input.getAttribute('placeholder');
+            const disabled = input.getAttribute('disabled');
+            const value = input.value;
+            
+            document.getElementById('output3').textContent = 
+                `type: ${type}\n` +
+                `placeholder: ${placeholder}\n` +
+                `disabled: ${disabled}\n` +
+                `value: ${value}`;
+        }
+
+        function changeToPassword() {
+            const input = document.getElementById('demoInput');
+            input.setAttribute('type', 'password');
+            readInputAttributes();
+        }
+
+        function changeToEmail() {
+            const input = document.getElementById('demoInput');
+            input.setAttribute('type', 'email');
+            readInputAttributes();
+        }
+
+        function toggleDisabled() {
+            const input = document.getElementById('demoInput');
+            const isDisabled = input.hasAttribute('disabled');
+            
+            if (isDisabled) {
+                input.removeAttribute('disabled');
+            } else {
+                input.setAttribute('disabled', 'disabled');
+            }
+            
+            readInputAttributes();
+        }
+
+        function changePlaceholder() {
+            const input = document.getElementById('demoInput');
+            const newPlaceholder = prompt('새로운 placeholder를 입력하세요:', input.getAttribute('placeholder'));
+            if (newPlaceholder !== null) {
+                input.setAttribute('placeholder', newPlaceholder);
+                readInputAttributes();
+            }
+        }
+
+        // 예제 4: 사용자 정의 속성
+        function readDataAttributes() {
+            const div = document.getElementById('customDiv');
+            const userId = div.getAttribute('data-user-id');
+            const role = div.getAttribute('data-role');
+            const status = div.getAttribute('data-status');
+            const custom = div.getAttribute('data-custom');
+            
+            let output = `data-user-id: ${userId}\n` +
+                        `data-role: ${role}\n` +
+                        `data-status: ${status}`;
+            
+            if (custom) {
+                output += `\ndata-custom: ${custom}`;
+            }
+            
+            document.getElementById('output4').textContent = output;
+        }
+
+        function updateUserRole() {
+            const div = document.getElementById('customDiv');
+            const currentRole = div.getAttribute('data-role');
+            const newRole = currentRole === 'admin' ? 'user' : 'admin';
+            div.setAttribute('data-role', newRole);
+            readDataAttributes();
+        }
+
+        function updateStatus() {
+            const div = document.getElementById('customDiv');
+            const currentStatus = div.getAttribute('data-status');
+            const newStatus = currentStatus === 'active' ? 'inactive' : 'active';
+            div.setAttribute('data-status', newStatus);
+            readDataAttributes();
+        }
+
+        function addCustomData() {
+            const div = document.getElementById('customDiv');
+            const customValue = prompt('커스텀 데이터 값을 입력하세요:', 'custom-value');
+            if (customValue !== null) {
+                div.setAttribute('data-custom', customValue);
+                readDataAttributes();
+            }
+        }
+
+        // 예제 5: 속성 존재 확인 및 제거
+        function checkAttributes() {
+            const btn = document.getElementById('demoButton');
+            const hasDisabled = btn.hasAttribute('disabled');
+            const hasTitle = btn.hasAttribute('title');
+            const disabledValue = btn.getAttribute('disabled');
+            const titleValue = btn.getAttribute('title');
+            
+            document.getElementById('output5').textContent = 
+                `disabled 속성 존재: ${hasDisabled}\n` +
+                `disabled 값: ${disabledValue}\n` +
+                `title 속성 존재: ${hasTitle}\n` +
+                `title 값: ${titleValue}`;
+        }
+
+        function removeDisabled() {
+            const btn = document.getElementById('demoButton');
+            btn.removeAttribute('disabled');
+            checkAttributes();
+        }
+
+        function addDisabled() {
+            const btn = document.getElementById('demoButton');
+            btn.setAttribute('disabled', 'disabled');
+            checkAttributes();
+        }
+
+        function removeTitle() {
+            const btn = document.getElementById('demoButton');
+            btn.removeAttribute('title');
+            checkAttributes();
+        }
+
+        // 페이지 로드 시 초기 정보 표시
+        window.addEventListener('DOMContentLoaded', function() {
+            readAttributes();
+            readLinkAttributes();
+            readInputAttributes();
+            readDataAttributes();
+            checkAttributes();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data 속성 활용 예제</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #2196F3;
+            padding-bottom: 10px;
+        }
+        .product-card {
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            background: #f9f9f9;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+        .product-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .product-card.selected {
+            border-color: #2196F3;
+            background: #e3f2fd;
+        }
+        .product-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .product-price {
+            font-size: 18px;
+            color: #e91e63;
+            font-weight: bold;
+        }
+        .product-stock {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+        .product-stock.low {
+            color: #f44336;
+            font-weight: bold;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #2196F3;
+            color: white;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #1976D2;
+        }
+        .summary {
+            margin-top: 30px;
+            padding: 20px;
+            background: #e8f5e9;
+            border-radius: 8px;
+        }
+        .summary h2 {
+            color: #2e7d32;
+            margin-top: 0;
+        }
+        .cart-item {
+            padding: 10px;
+            margin: 5px 0;
+            background: white;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Data 속성 활용 예제 - 쇼핑몰</h1>
+        
+        <div id="productList">
+            <div class="product-card" 
+                 data-product-id="1" 
+                 data-product-name="노트북" 
+                 data-price="1200000" 
+                 data-stock="5"
+                 data-category="전자제품">
+                <div class="product-title">노트북</div>
+                <div class="product-price">1,200,000원</div>
+                <div class="product-stock">재고: 5개</div>
+            </div>
+            
+            <div class="product-card" 
+                 data-product-id="2" 
+                 data-product-name="마우스" 
+                 data-price="35000" 
+                 data-stock="20"
+                 data-category="전자제품">
+                <div class="product-title">마우스</div>
+                <div class="product-price">35,000원</div>
+                <div class="product-stock">재고: 20개</div>
+            </div>
+            
+            <div class="product-card" 
+                 data-product-id="3" 
+                 data-product-name="키보드" 
+                 data-price="85000" 
+                 data-stock="2"
+                 data-category="전자제품">
+                <div class="product-title">키보드</div>
+                <div class="product-price">85,000원</div>
+                <div class="product-stock">재고: 2개</div>
+            </div>
+            
+            <div class="product-card" 
+                 data-product-id="4" 
+                 data-product-name="모니터" 
+                 data-price="450000" 
+                 data-stock="8"
+                 data-category="전자제품">
+                <div class="product-title">모니터</div>
+                <div class="product-price">450,000원</div>
+                <div class="product-stock">재고: 8개</div>
+            </div>
+        </div>
+
+        <div style="margin-top: 30px;">
+            <button onclick="showProductInfo()">선택된 상품 정보 보기</button>
+            <button onclick="updateStock()">재고 업데이트</button>
+            <button onclick="addToCart()">장바구니에 추가</button>
+            <button onclick="showCart()">장바구니 보기</button>
+            <button onclick="clearCart()">장바구니 비우기</button>
+        </div>
+
+        <div id="output" class="summary" style="display: none;">
+            <h2>결과</h2>
+            <div id="outputContent"></div>
+        </div>
+    </div>
+
+    <script>
+        let selectedProduct = null;
+        let cart = [];
+
+        // 상품 카드 클릭 이벤트
+        document.addEventListener('DOMContentLoaded', function() {
+            const productCards = document.querySelectorAll('.product-card');
+            
+            productCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    // 이전 선택 제거
+                    productCards.forEach(c => c.classList.remove('selected'));
+                    
+                    // 현재 선택 추가
+                    this.classList.add('selected');
+                    selectedProduct = this;
+                    
+                    // 재고 상태에 따른 스타일 업데이트
+                    updateStockDisplay();
+                });
+            });
+            
+            // 초기 재고 상태 표시
+            updateStockDisplay();
+        });
+
+        // 재고 상태에 따른 스타일 업데이트
+        function updateStockDisplay() {
+            const productCards = document.querySelectorAll('.product-card');
+            
+            productCards.forEach(card => {
+                const stock = parseInt(card.getAttribute('data-stock'));
+                const stockElement = card.querySelector('.product-stock');
+                
+                if (stock < 5) {
+                    stockElement.classList.add('low');
+                } else {
+                    stockElement.classList.remove('low');
+                }
+            });
+        }
+
+        // 선택된 상품 정보 보기
+        function showProductInfo() {
+            if (!selectedProduct) {
+                alert('상품을 선택해주세요!');
+                return;
+            }
+
+            const productId = selectedProduct.getAttribute('data-product-id');
+            const productName = selectedProduct.getAttribute('data-product-name');
+            const price = selectedProduct.getAttribute('data-price');
+            const stock = selectedProduct.getAttribute('data-stock');
+            const category = selectedProduct.getAttribute('data-category');
+
+            const info = `
+                <strong>상품 정보:</strong><br>
+                ID: ${productId}<br>
+                이름: ${productName}<br>
+                가격: ${parseInt(price).toLocaleString()}원<br>
+                재고: ${stock}개<br>
+                카테고리: ${category}
+            `;
+
+            document.getElementById('outputContent').innerHTML = info;
+            document.getElementById('output').style.display = 'block';
+        }
+
+        // 재고 업데이트
+        function updateStock() {
+            if (!selectedProduct) {
+                alert('상품을 선택해주세요!');
+                return;
+            }
+
+            const currentStock = parseInt(selectedProduct.getAttribute('data-stock'));
+            const newStock = prompt(`현재 재고: ${currentStock}개\n새로운 재고를 입력하세요:`, currentStock);
+
+            if (newStock !== null && !isNaN(newStock) && newStock >= 0) {
+                // data-stock 속성 업데이트
+                selectedProduct.setAttribute('data-stock', newStock);
+                
+                // 화면에 표시된 재고 텍스트 업데이트
+                const stockElement = selectedProduct.querySelector('.product-stock');
+                stockElement.textContent = `재고: ${newStock}개`;
+                
+                // 재고 상태 스타일 업데이트
+                updateStockDisplay();
+                
+                document.getElementById('outputContent').innerHTML = 
+                    `<strong>재고가 업데이트되었습니다!</strong><br>${selectedProduct.getAttribute('data-product-name')}: ${newStock}개`;
+                document.getElementById('output').style.display = 'block';
+            }
+        }
+
+        // 장바구니에 추가
+        function addToCart() {
+            if (!selectedProduct) {
+                alert('상품을 선택해주세요!');
+                return;
+            }
+
+            const productId = selectedProduct.getAttribute('data-product-id');
+            const productName = selectedProduct.getAttribute('data-product-name');
+            const price = parseInt(selectedProduct.getAttribute('data-price'));
+            const stock = parseInt(selectedProduct.getAttribute('data-stock'));
+
+            if (stock === 0) {
+                alert('재고가 없습니다!');
+                return;
+            }
+
+            // 장바구니에 이미 있는지 확인
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: productId,
+                    name: productName,
+                    price: price,
+                    quantity: 1
+                });
+            }
+
+            // 재고 감소
+            const newStock = stock - 1;
+            selectedProduct.setAttribute('data-stock', newStock);
+            const stockElement = selectedProduct.querySelector('.product-stock');
+            stockElement.textContent = `재고: ${newStock}개`;
+            updateStockDisplay();
+
+            alert(`${productName}이(가) 장바구니에 추가되었습니다!`);
+        }
+
+        // 장바구니 보기
+        function showCart() {
+            if (cart.length === 0) {
+                document.getElementById('outputContent').innerHTML = '<strong>장바구니가 비어있습니다.</strong>';
+                document.getElementById('output').style.display = 'block';
+                return;
+            }
+
+            let cartHTML = '<strong>장바구니:</strong><br><br>';
+            let total = 0;
+
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                cartHTML += `
+                    <div class="cart-item">
+                        ${item.name} × ${item.quantity}개 = ${itemTotal.toLocaleString()}원
+                    </div>
+                `;
+            });
+
+            cartHTML += `<br><strong>총액: ${total.toLocaleString()}원</strong>`;
+
+            document.getElementById('outputContent').innerHTML = cartHTML;
+            document.getElementById('output').style.display = 'block';
+        }
+
+        // 장바구니 비우기
+        function clearCart() {
+            if (cart.length === 0) {
+                alert('장바구니가 이미 비어있습니다!');
+                return;
+            }
+
+            if (confirm('장바구니를 비우시겠습니까?')) {
+                cart = [];
+                document.getElementById('outputContent').innerHTML = '<strong>장바구니가 비워졌습니다.</strong>';
+                document.getElementById('output').style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>

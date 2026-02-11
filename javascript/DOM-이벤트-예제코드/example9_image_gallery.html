@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이미지 갤러리 (getAttribute/setAttribute 활용)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #e91e63;
+            padding-bottom: 10px;
+        }
+        .gallery {
+            display: flex;
+            gap: 15px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .thumbnail {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            cursor: pointer;
+            border: 3px solid #ddd;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        .thumbnail:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        .thumbnail.active {
+            border-color: #e91e63;
+            box-shadow: 0 0 10px rgba(233, 30, 99, 0.5);
+        }
+        .main-image-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .main-image {
+            max-width: 100%;
+            max-height: 500px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        .image-info {
+            margin-top: 15px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+        .controls {
+            text-align: center;
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #e91e63;
+            color: white;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #c2185b;
+        }
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        .image-counter {
+            margin-top: 10px;
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>이미지 갤러리</h1>
+        <p>getAttribute와 setAttribute를 사용하여 이미지의 src와 alt 속성을 동적으로 변경합니다.</p>
+
+        <div class="gallery">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Crect width='150' height='150' fill='%234CAF50'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='16' fill='white' text-anchor='middle' dominant-baseline='middle'%3EImage 1%3C/text%3E%3C/svg%3E" 
+                 alt="이미지 1 - 자연 풍경" 
+                 class="thumbnail active"
+                 data-full-image="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='500'%3E%3Crect width='800' height='500' fill='%234CAF50'/%3E%3Ctext x='50%25' y='45%25' font-family='Arial' font-size='48' fill='white' text-anchor='middle'%3ENatural%3C/text%3E%3Ctext x='50%25' y='60%25' font-family='Arial' font-size='48' fill='white' text-anchor='middle'%3ELandscape%3C/text%3E%3C/svg%3E"
+                 data-description="자연의 아름다운 풍경을 담은 이미지입니다."
+                 onclick="changeImage(this)">
+            
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Crect width='150' height='150' fill='%232196F3'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='16' fill='white' text-anchor='middle' dominant-baseline='middle'%3EImage 2%3C/text%3E%3C/svg%3E" 
+                 alt="이미지 2 - 도시 풍경" 
+                 class="thumbnail"
+                 data-full-image="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='500'%3E%3Crect width='800' height='500' fill='%232196F3'/%3E%3Ctext x='50%25' y='45%25' font-family='Arial' font-size='48' fill='white' text-anchor='middle'%3ECity%3C/text%3E%3Ctext x='50%25' y='60%25' font-family='Arial' font-size='48' fill='white' text-anchor='middle'%3EView%3C/text%3E%3C/svg%3E"
+                 data-description="현대적인 도시의 모습을 보여주는 이미지입니다."
+                 onclick="changeImage(this)">
+            
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Crect width='150' height='150' fill='%23FF9800'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='16' fill='white' text-anchor='middle' dominant-baseline='middle'%3EImage 3%3C/text%3E%3C/svg%3E" 
+                 alt="이미지 3 - 해변" 
+                 class="thumbnail"
+                 data-full-image="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='500'%3E%3Crect width='800' height='500' fill='%23FF9800'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='48' fill='white' text-anchor='middle' dominant-baseline='middle'%3EBeach%3C/text%3E%3C/svg%3E"
+                 data-description="평화로운 해변의 모습입니다."
+                 onclick="changeImage(this)">
+            
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Crect width='150' height='150' fill='%239C27B0'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='16' fill='white' text-anchor='middle' dominant-baseline='middle'%3EImage 4%3C/text%3E%3C/svg%3E" 
+                 alt="이미지 4 - 산" 
+                 class="thumbnail"
+                 data-full-image="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='500'%3E%3Crect width='800' height='500' fill='%239C27B0'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='48' fill='white' text-anchor='middle' dominant-baseline='middle'%3EMountain%3C/text%3E%3C/svg%3E"
+                 data-description="웅장한 산의 모습을 담은 이미지입니다."
+                 onclick="changeImage(this)">
+            
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Crect width='150' height='150' fill='%23F44336'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='16' fill='white' text-anchor='middle' dominant-baseline='middle'%3EImage 5%3C/text%3E%3C/svg%3E" 
+                 alt="이미지 5 - 숲" 
+                 class="thumbnail"
+                 data-full-image="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='500'%3E%3Crect width='800' height='500' fill='%23F44336'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='48' fill='white' text-anchor='middle' dominant-baseline='middle'%3EForest%3C/text%3E%3C/svg%3E"
+                 data-description="깊은 숲속의 신비로운 분위기를 보여줍니다."
+                 onclick="changeImage(this)">
+        </div>
+
+        <div class="main-image-container">
+            <img id="mainImage" 
+                 src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='500'%3E%3Crect width='800' height='500' fill='%234CAF50'/%3E%3Ctext x='50%25' y='45%25' font-family='Arial' font-size='48' fill='white' text-anchor='middle'%3ENatural%3C/text%3E%3Ctext x='50%25' y='60%25' font-family='Arial' font-size='48' fill='white' text-anchor='middle'%3ELandscape%3C/text%3E%3C/svg%3E" 
+                 alt="이미지 1 - 자연 풍경"
+                 class="main-image">
+            
+            <div class="image-info">
+                <div id="imageDescription">자연의 아름다운 풍경을 담은 이미지입니다.</div>
+                <div class="image-counter">
+                    <span id="currentIndex">1</span> / <span id="totalImages">5</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button onclick="previousImage()">이전</button>
+            <button onclick="nextImage()">다음</button>
+            <button onclick="showImageInfo()">이미지 정보 보기</button>
+            <button onclick="updateImageAlt()">Alt 텍스트 변경</button>
+        </div>
+
+        <div id="infoOutput" style="margin-top: 20px; padding: 15px; background: #e8f5e9; border-radius: 8px; display: none;">
+            <h3>이미지 정보</h3>
+            <div id="infoContent"></div>
+        </div>
+    </div>
+
+    <script>
+        let currentIndex = 0;
+        const thumbnails = document.querySelectorAll('.thumbnail');
+        const mainImage = document.getElementById('mainImage');
+        const totalImages = thumbnails.length;
+
+        // 총 이미지 수 표시
+        document.getElementById('totalImages').textContent = totalImages;
+
+        // 이미지 변경 함수
+        function changeImage(thumbnail) {
+            // 모든 썸네일에서 active 클래스 제거
+            thumbnails.forEach(thumb => thumb.classList.remove('active'));
+            
+            // 클릭한 썸네일에 active 클래스 추가
+            thumbnail.classList.add('active');
+            
+            // data-full-image 속성에서 전체 이미지 URL 읽기
+            const fullImageUrl = thumbnail.getAttribute('data-full-image');
+            const altText = thumbnail.getAttribute('alt');
+            const description = thumbnail.getAttribute('data-description');
+            
+            // 메인 이미지의 src와 alt 속성 변경
+            mainImage.setAttribute('src', fullImageUrl);
+            mainImage.setAttribute('alt', altText);
+            
+            // 설명 텍스트 업데이트
+            document.getElementById('imageDescription').textContent = description;
+            
+            // 현재 인덱스 업데이트
+            currentIndex = Array.from(thumbnails).indexOf(thumbnail);
+            document.getElementById('currentIndex').textContent = currentIndex + 1;
+        }
+
+        // 이전 이미지
+        function previousImage() {
+            currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+            const thumbnail = thumbnails[currentIndex];
+            changeImage(thumbnail);
+        }
+
+        // 다음 이미지
+        function nextImage() {
+            currentIndex = (currentIndex + 1) % totalImages;
+            const thumbnail = thumbnails[currentIndex];
+            changeImage(thumbnail);
+        }
+
+        // 이미지 정보 보기
+        function showImageInfo() {
+            const src = mainImage.getAttribute('src');
+            const alt = mainImage.getAttribute('alt');
+            const width = mainImage.naturalWidth || 'N/A';
+            const height = mainImage.naturalHeight || 'N/A';
+            
+            // 현재 활성화된 썸네일 찾기
+            const activeThumbnail = document.querySelector('.thumbnail.active');
+            const description = activeThumbnail ? activeThumbnail.getAttribute('data-description') : 'N/A';
+            
+            const info = `
+                <strong>이미지 정보:</strong><br>
+                <strong>src:</strong> ${src}<br>
+                <strong>alt:</strong> ${alt}<br>
+                <strong>설명:</strong> ${description}<br>
+                <strong>크기:</strong> ${width} × ${height}px<br>
+                <strong>현재 인덱스:</strong> ${currentIndex + 1} / ${totalImages}
+            `;
+            
+            document.getElementById('infoContent').innerHTML = info;
+            document.getElementById('infoOutput').style.display = 'block';
+        }
+
+        // Alt 텍스트 변경
+        function updateImageAlt() {
+            const currentAlt = mainImage.getAttribute('alt');
+            const newAlt = prompt('새로운 alt 텍스트를 입력하세요:', currentAlt);
+            
+            if (newAlt !== null && newAlt.trim() !== '') {
+                // 메인 이미지의 alt 속성 변경
+                mainImage.setAttribute('alt', newAlt);
+                
+                // 현재 활성화된 썸네일의 alt 속성도 변경
+                const activeThumbnail = document.querySelector('.thumbnail.active');
+                if (activeThumbnail) {
+                    activeThumbnail.setAttribute('alt', newAlt);
+                }
+                
+                alert('Alt 텍스트가 변경되었습니다!');
+                showImageInfo();
+            }
+        }
+
+        // 키보드 이벤트 (좌우 화살표 키)
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowLeft') {
+                previousImage();
+            } else if (event.key === 'ArrowRight') {
+                nextImage();
+            }
+        });
+
+        // 초기화: 첫 번째 이미지 정보 표시
+        window.addEventListener('DOMContentLoaded', function() {
+            const firstThumbnail = document.querySelector('.thumbnail.active');
+            if (firstThumbnail) {
+                const description = firstThumbnail.getAttribute('data-description');
+                document.getElementById('imageDescription').textContent = description;
+            }
+        });
+    </script>
+</body>
+</html>

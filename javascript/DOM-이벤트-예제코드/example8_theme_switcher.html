@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>테마 변경 예제 (data-theme 활용)</title>
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #333333;
+            --card-bg: #f5f5f5;
+            --border-color: #ddd;
+            --primary-color: #2196F3;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #1a1a1a;
+            --text-color: #ffffff;
+            --card-bg: #2d2d2d;
+            --border-color: #444;
+            --primary-color: #64B5F6;
+        }
+
+        [data-theme="blue"] {
+            --bg-color: #e3f2fd;
+            --text-color: #0d47a1;
+            --card-bg: #bbdefb;
+            --border-color: #90caf9;
+            --primary-color: #1976D2;
+        }
+
+        [data-theme="green"] {
+            --bg-color: #e8f5e9;
+            --text-color: #1b5e20;
+            --card-bg: #c8e6c9;
+            --border-color: #a5d6a7;
+            --primary-color: #388E3C;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border: 2px solid var(--border-color);
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+
+        .theme-selector {
+            display: flex;
+            gap: 15px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .theme-btn {
+            padding: 15px 25px;
+            font-size: 16px;
+            cursor: pointer;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            transition: all 0.3s;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .theme-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            border-color: var(--primary-color);
+        }
+
+        .theme-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .content-box {
+            margin: 20px 0;
+            padding: 20px;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+        }
+
+        .info-box {
+            margin-top: 20px;
+            padding: 15px;
+            background: var(--card-bg);
+            border-left: 4px solid var(--primary-color);
+            border-radius: 5px;
+        }
+
+        code {
+            background: var(--card-bg);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: var(--primary-color);
+        }
+
+        .current-theme {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>테마 변경 예제</h1>
+        
+        <p>data-theme 속성을 사용하여 페이지 테마를 동적으로 변경합니다.</p>
+
+        <div class="theme-selector">
+            <button class="theme-btn" data-theme-value="light" onclick="changeTheme('light')">
+                라이트 모드
+            </button>
+            <button class="theme-btn" data-theme-value="dark" onclick="changeTheme('dark')">
+                다크 모드
+            </button>
+            <button class="theme-btn" data-theme-value="blue" onclick="changeTheme('blue')">
+                블루 테마
+            </button>
+            <button class="theme-btn" data-theme-value="green" onclick="changeTheme('green')">
+                그린 테마
+            </button>
+        </div>
+
+        <div class="current-theme" id="currentTheme">
+            현재 테마: 라이트 모드
+        </div>
+
+        <div class="content-box">
+            <h2>콘텐츠 영역</h2>
+            <p>이 영역의 색상이 테마에 따라 변경됩니다.</p>
+            <p>CSS 변수와 <code>data-theme</code> 속성을 활용하여 구현했습니다.</p>
+        </div>
+
+        <div class="info-box">
+            <h3>구현 방법:</h3>
+            <ol>
+                <li><code>body</code> 요소에 <code>data-theme</code> 속성 설정</li>
+                <li>CSS에서 <code>[data-theme="값"]</code> 선택자로 스타일 정의</li>
+                <li>JavaScript의 <code>setAttribute()</code>로 테마 변경</li>
+                <li><code>getAttribute()</code>로 현재 테마 확인</li>
+            </ol>
+        </div>
+
+        <div class="info-box">
+            <h3>코드 예제:</h3>
+            <pre><code>// 테마 변경
+function changeTheme(theme) {
+    document.body.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+}
+
+// 현재 테마 읽기
+const currentTheme = document.body.getAttribute('data-theme');</code></pre>
+        </div>
+    </div>
+
+    <script>
+        // 테마 변경 함수
+        function changeTheme(theme) {
+            // body 요소에 data-theme 속성 설정
+            document.body.setAttribute('data-theme', theme);
+            
+            // 로컬 스토리지에 저장 (페이지 새로고침 후에도 유지)
+            localStorage.setItem('theme', theme);
+            
+            // 현재 테마 표시 업데이트
+            updateThemeDisplay(theme);
+            
+            // 활성 버튼 스타일 업데이트
+            updateActiveButton(theme);
+        }
+
+        // 현재 테마 표시 업데이트
+        function updateThemeDisplay(theme) {
+            const themeNames = {
+                'light': '라이트 모드',
+                'dark': '다크 모드',
+                'blue': '블루 테마',
+                'green': '그린 테마'
+            };
+            
+            document.getElementById('currentTheme').textContent = 
+                `현재 테마: ${themeNames[theme] || theme}`;
+        }
+
+        // 활성 버튼 스타일 업데이트
+        function updateActiveButton(theme) {
+            const buttons = document.querySelectorAll('.theme-btn');
+            buttons.forEach(btn => {
+                const btnTheme = btn.getAttribute('data-theme-value');
+                if (btnTheme === theme) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        }
+
+        // 현재 테마 읽기
+        function getCurrentTheme() {
+            // 로컬 스토리지에서 읽기
+            const savedTheme = localStorage.getItem('theme');
+            
+            // body의 data-theme 속성에서 읽기
+            const bodyTheme = document.body.getAttribute('data-theme');
+            
+            // 우선순위: 로컬 스토리지 > body 속성 > 기본값(light)
+            return savedTheme || bodyTheme || 'light';
+        }
+
+        // 페이지 로드 시 저장된 테마 적용
+        window.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = getCurrentTheme();
+            changeTheme(savedTheme);
+        });
+
+        // 테마 정보 출력 (디버깅용)
+        console.log('현재 테마:', document.body.getAttribute('data-theme'));
+    </script>
+</body>
+</html>
