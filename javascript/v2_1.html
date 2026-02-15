@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>수직 메뉴 - Active 클래스 방식</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: #333;
+        }
+        
+        .mobile_nav{
+            width: 200px;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        .mobile_nav > ul > li > a{
+            display: block;
+            height: 36px;
+            background-color: #390;
+            line-height: 36px;
+            border-top: 1px dotted #fff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        /* hover 효과 - js 대신 css 처리 */
+        .mobile_nav > ul > li > a:hover{
+            background-color: #2a7a00;
+        }
+
+        /* selected 클래스 - 선택된 메뉴 */
+        .mobile_nav > ul > li > a.selected{
+            background-color: #1a5a00;
+        }
+
+        /* 서브메뉴 초기 숨김 - 트랜지션: 높이 0 */
+        .mobile_nav .sub {
+            margin: 0;
+            background-color: #cf9;
+            height: 0;         /* 기본 높이 0 */
+            overflow: hidden;  /* 넘치는 내용 숨김 */
+            transition: height 0.3s ease; /* 높이 변화에 트랜지션 적용 */
+        }
+
+        /* 활성화된 서브메뉴 */
+        .mobile_nav .sub.active {
+            height: 108px;     /* 열렸을 때 높이 (36px * 3개 메뉴) */
+        }
+
+        .mobile_nav .sub li{
+            background-color: #cf9;
+        }
+        
+        .mobile_nav .sub li a{
+            display: block;
+            height: 36px;
+            line-height: 36px;
+            color: #222;
+            transition: background-color 0.2s ease;
+        }
+
+        .mobile_nav .sub li a:hover{
+            background-color: #9f9;
+        }
+    </style>
+    <script>
+        // DOM이 로드된 후 실행
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileNavLinks = document.querySelectorAll(".mobile_nav > ul > li > a");
+            const subMenus = document.querySelectorAll(".mobile_nav .sub");
+
+            mobileNavLinks.forEach((link, index) => {
+                link.addEventListener('click', (e) => {
+                    const targetSubMenu = subMenus[index];
+                    const isAlreadyOpen = targetSubMenu.classList.contains('active');
+
+                    // 1. 모든 링크와 서브메뉴의 활성화 클래스 제거 (초기화)
+                    mobileNavLinks.forEach(el => el.classList.remove('selected'));
+                    subMenus.forEach(el => el.classList.remove('active'));
+
+                    // 2. 클릭한 요소 다음에 있는 서브메뉴가 닫혀있었다면 열기
+                    if(!isAlreadyOpen){
+                        link.classList.add('selected');
+                        targetSubMenu.classList.add('active');
+                    }
+                    
+                    e.preventDefault();
+                    return false;
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <nav class="mobile_nav">
+        <ul>
+            <li>
+                <a href="#" class="selected">회사소개</a>
+                <ul class="sub active">
+                    <li><a href="#">submenu1</a></li>
+                    <li><a href="#">submenu2</a></li>
+                    <li><a href="#">submenu3</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">제품소개</a>
+                <ul class="sub">
+                    <li><a href="#">submenu1</a></li>
+                    <li><a href="#">submenu2</a></li>
+                    <li><a href="#">submenu3</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">커뮤니티</a>
+                <ul class="sub">
+                    <li><a href="#">submenu1</a></li>
+                    <li><a href="#">submenu2</a></li>
+                    <li><a href="#">submenu3</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">다운로드</a>
+                <ul class="sub">
+                    <li><a href="#">submenu1</a></li>
+                    <li><a href="#">submenu2</a></li>
+                    <li><a href="#">submenu3</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</body>
+</html>
