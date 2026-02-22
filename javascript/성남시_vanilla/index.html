@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>성남시 이미지 슬라이더 - Vanilla JS</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <section>
+        <article>
+            <ul class="slider" id="slider">
+                <li><img src="img/s1.png" alt=""></li>
+                <li><img src="img/s2.jpg" alt=""></li>
+                <li><img src="img/s3.png" alt=""></li>
+                <li><img src="img/s4.png" alt=""></li>
+                <li><img src="img/s5.png" alt=""></li>
+                <li><img src="img/s6.png" alt=""></li>
+                <li><img src="img/s7.jpg" alt=""></li>
+            </ul>
+        </article>
+        <div class="down">
+            <div class="count"><span id="currentSlide">1</span> &nbsp;/ <span id="totalSlides">7</span></div>
+            <div class="over-btn">
+                <span class="prev" id="prevBtn"></span>
+                <span class="stop" id="stopBtn"></span>
+                <span class="next" id="nextBtn"></span>
+            </div>
+        </div>
+    </section>
+    <script src="js/main.js"></script>
+</body>
+</html>
