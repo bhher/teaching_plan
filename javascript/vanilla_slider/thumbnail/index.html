@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>썸네일 슬라이더 - Vanilla JS</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="slider-container">
+        <!-- 메인 슬라이더 -->
+        <div class="main-slider-wrapper">
+            <div class="main-slider" id="mainSlider">
+                <div class="slide active">
+                    <div class="slide-bg slide-1">
+                        <div class="slide-number">Slide 1</div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="slide-bg slide-2">
+                        <div class="slide-number">Slide 2</div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="slide-bg slide-3">
+                        <div class="slide-number">Slide 3</div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="slide-bg slide-4">
+                        <div class="slide-number">Slide 4</div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="slide-bg slide-5">
+                        <div class="slide-number">Slide 5</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 썸네일 슬라이더 -->
+        <div class="thumbnail-wrapper">
+            <div class="thumbnail-slider" id="thumbnailSlider">
+                <div class="thumbnail active" data-index="0">
+                    <div class="thumbnail-bg thumbnail-1"></div>
+                </div>
+                <div class="thumbnail" data-index="1">
+                    <div class="thumbnail-bg thumbnail-2"></div>
+                </div>
+                <div class="thumbnail" data-index="2">
+                    <div class="thumbnail-bg thumbnail-3"></div>
+                </div>
+                <div class="thumbnail" data-index="3">
+                    <div class="thumbnail-bg thumbnail-4"></div>
+                </div>
+                <div class="thumbnail" data-index="4">
+                    <div class="thumbnail-bg thumbnail-5"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 네비게이션 버튼 -->
+        <button class="prev-btn" id="prevBtn">‹</button>
+        <button class="next-btn" id="nextBtn">›</button>
+    </div>
+    
+    <script src="js/main.js"></script>
+</body>
+</html>
