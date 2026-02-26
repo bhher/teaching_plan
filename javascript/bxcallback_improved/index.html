@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>bxSlider 개선 버전</title>
+  
+  <!-- CSS -->
+  <link rel="stylesheet" type="text/css" href="../bxcallback/css/jquery.bxslider.css"/>
+  <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  
+  <!-- JavaScript -->
+  <script type="text/javascript" src="http://code.jquery.com/jquery-3.1.1.js"></script>
+  <script src="../bxcallback/js/jquery.bxslider.js"></script>
+  <script src="js/main.js"></script>
+</head>
+<body>
+  <div id="img_slider">
+    <!-- 슬라이더 -->
+    <ul class="slider">
+      <li>
+        <a href="#"><img src="../bxcallback/images/01.JPG" alt="fashion style1"></a>
+        <h1 class="on">fashion style1</h1>
+      </li>
+      <li>
+        <a href="#"><img src="../bxcallback/images/02.JPG" alt="fashion style2"></a>
+        <h1>fashion style2</h1>
+      </li>
+      <li>
+        <a href="#"><img src="../bxcallback/images/03.JPG" alt="fashion style3"></a>
+        <h1>fashion style3</h1>
+      </li>
+      <li>
+        <a href="#"><img src="../bxcallback/images/04.JPG" alt="fashion style4"></a>
+        <h1>fashion style4</h1>
+      </li>
+      <li>
+        <a href="#"><img src="../bxcallback/images/05.JPG" alt="fashion style5"></a>
+        <h1>fashion style5</h1>
+      </li>
+      <li>
+        <a href="#"><img src="../bxcallback/images/06.JPG" alt="fashion style6"></a>
+        <h1>fashion style6</h1>
+      </li>
+      <li>
+        <a href="#"><img src="../bxcallback/images/07.JPG" alt="fashion style7"></a>
+        <h1>fashion style7</h1>
+      </li>
+    </ul>
+    
+    <!-- 네비게이션 버튼 -->
+    <div id="btn">
+      <p class="left_btn">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+      </p>
+      <p class="right_btn">
+        <i class="fa fa-arrow-right" aria-hidden="true"></i>
+      </p>
+    </div>
+    
+    <!-- 페이지네이션 -->
+    <div id="page">
+      <ul>
+        <li class="on"><a href="#">1번</a></li>
+        <li><a href="#">2번</a></li>
+        <li><a href="#">3번</a></li>
+        <li><a href="#">4번</a></li>
+        <li><a href="#">5번</a></li>
+        <li><a href="#">6번</a></li>
+        <li><a href="#">7번</a></li>
+        <div id="focus"></div>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

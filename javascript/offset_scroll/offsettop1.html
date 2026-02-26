@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="js/jquery.easing.1.3.js"></script>
+    <!-- 마우스휠에 이팩트 -->
+    <script src="js/jquery.mousewheel.min.js"></script>
+    <!-- 마우스 휠 기능 추가 -->
+    <script src="js/jquery-ui.js"></script>
+    <!-- 드래그 기능 -->
+     <script src="js/jquery.cookie.js"></script>
+     <!-- 쿠키 저장 -->
+</head>
+<style>
+    *{margin: 0; padding: 0;}
+    a{text-decoration: none;}
+    article{
+        width: 100%;
+        height: 100vh;
+    }
+    #article1{
+        background-color: burlywood;
+    }
+    #article2{
+        background-color: coral;
+    }
+    #article3{
+        background-color: darkcyan;
+    }
+    #article4{
+        background-color: darksalmon;
+    }
+    nav{
+        position: fixed;
+        top: 0;
+        height: 100px;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.5);
+    }
+    nav ul{
+        width: 1000px;
+        height: 100px;
+        margin: 0 auto;
+        list-style: none;
+    }
+
+    nav.on{
+        position: fixed;
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    nav.on ul li a{
+        color: #fff;
+    }
+
+    nav.on ul li.on a{
+        color: orange;
+        font-weight: bold;
+    }
+
+    nav ul li{
+        float: left;
+    }
+
+    nav ul li a{
+        display: block;
+        width: 250px;
+        height: 100px;
+        line-height: 100px;
+        font-size: 32px;
+        color: #000;
+        text-align: center;
+    }
+
+    nav ul li.on a{
+        color: orange;
+        font-weight: bold;
+    }
+
+    h2{
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        z-index: 100;
+    }
+
+    #floatdiv{
+        width: 70px;
+        height: 200px;
+        background-color: dimgray;
+        padding-top: 10px;
+        position: absolute;
+        /* position: fixed; */
+        right: 50px;
+        top: 250px;
+    }
+
+    #floatdiv ul li{
+        list-style: none;
+        width: 25px;
+        height: 25px;
+        border-radius: 13px;
+        background-color: #fff;
+        margin-left: 20px;
+        margin-top: 20px;
+        cursor: pointer;
+    }
+    #floatdiv ul li.on{
+        background-color: orange;
+    }
+
+    #popup{
+        width: 301px;
+        height: 351px;
+        position: absolute;
+        top: 210px;
+        left: 50px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        display: none;
+    }
+
+    #notice_wrap{
+        width: 301px;
+        position: absolute;
+        top: 210px;
+        left: 400px;
+        box-shadow: 0   0   8px #000;
+        font-size: 12px;
+    }
+
+    #notice_wrap img{float: left;}
+
+    .closeWrap{
+        background-color: #000;
+        color: #fff;
+        text-align: right;
+        padding: 5px 10px;
+    }
+
+    .closeWrap button{
+        margin-left: 20px; cursor: pointer;
+    }
+</style>
+<body>
+    <nav>
+        <ul>
+            <li class="on"><a href="#article1">회사소개</a></li>
+            <li><a href="#article2">제품소개</a></li>
+            <li><a href="#article3">커뮤니티</a></li>
+            <li><a href="#article4">다운로드</a></li>
+        </ul>
+    </nav>
+    <section>
+        <article id="article1"></article>
+        <article id="article2"></article>
+        <article id="article3"></article>
+        <article id="article4"></article>
+    </section>
+    <h2>현재 스크롤 위치 : <span id="sTop">000</span></h2>
+    <div id="floatdiv">
+        <ul>
+            <li class="on"><span id="btn1"></span></li>
+            <li><span id="btn2"></span></li>
+            <li><span id="btn3"></span></li>
+            <li><span id="btn4"></span></li>
+        </ul>
+    </div>
+    <div id="popup">
+        <img src="images/popup.jpg" usemap="#pop" alt="">
+        <map name="pop" id="pop">
+            <area shape="rect" coords="252,330, 295,348" href="#" alt="창닫기">
+            <area shape="rect" coords="95,330, 215,348" href="#" alt="하루">
+        </map>
+    </div>
+    <div id="notice_wrap">
+        <img src="images/popup1.jpg" alt="공지">
+        <p class="closeWrap">
+            <input type="checkbox" name="expiresChk" id="expiresChk">
+            <label for="expiresChk">3일 동안 이 창 열지않기</label>
+            <button class="closeBtn">닫기</button>
+        </p>
+    </div>
+</body>
+</html>
+<script>
+    $(function(){
+        let a0 = $('section > article').eq(0).offset().top;
+        let a1 = $('section > article').eq(1).offset().top;
+        let a2 = $('section > article').eq(2).offset().top;
+        let a3 = $('section > article').eq(3).offset().top;
+        let dTop = $('#floatdiv').offset().top;
+
+        $(window).scroll(function(){
+            let sct = $(this).scrollTop();
+            //스크롤 위치값
+            $('#sTop').text(sct);
+            $('#floatdiv').stop().animate({top:dTop+sct},500)
+
+            if(sct > 0){
+                $('nav').addClass('on');
+            } else {
+                $('nav').removeClass('on')
+            }
+
+            for(let i = 0; i < $('section > article').length; i++){
+                if(sct >= $('section > article').eq(i).offset().top){
+                    $('nav ul li').removeClass('on');
+                    $('nav ul li').eq(i).addClass('on');
+                    $('#floatdiv ul li').removeClass('on');
+                    $('#floatdiv ul li').eq(i).addClass('on');
+                }
+            }
+        })
+
+        $('#floatdiv ul li').click(function(){
+            let index = $(this).index();
+            let offset_t = $('section > article').eq(index).offset().top;
+            $('html, body').stop().animate({scrollTop:offset_t},1300)
+            $('nav ul li').removeClass('on');
+            $('nav ul li').eq(index).addClass('on');
+            return false;
+        })
+
+        $('nav ul li').click(function(){
+            let index = $(this).index();
+            let offset_t = $('section > article').eq(index).offset().top;
+            $('html, body').stop().animate({scrollTop:offset_t},1300)
+            $('nav ul li').removeClass('on');
+            $('nav ul li').eq(index).addClass('on');
+            return false;
+        })
+
+        $('#popup').draggable();
+        //드래그 기능
+
+        /*
+        $('section > article').mousewheel(function(event,d){
+            //휠 다운은 -1 휠 업은 +1
+
+            if(d > 0){
+                let preVal = $(this).prev().offset().top;
+                $('html, body').stop().animate({scrollTop:preVal},1300,easeOutBounce)
+            }
+
+            if(d < 0){
+                let nextVal = $(this).next().offset().top;
+                $('html, body').stop().animate({scrollTop:nextVal},1300)
+            }
+        })
+        */
+
+        if($.cookie('pop')!= 'no'){
+            //쿠키 pop 변수에 no란 값이 없다면 팝업을 보여준다
+            $('#popup').show()
+        }
+        $('#popup area:eq(0)').click(function(){
+            $('#popup').fadeOut('fast');
+            //hide한 효과
+        })
+        $('#popup area:eq(1)').click(function(){
+            $.cookie('pop','no',{expires:1});
+            //쿠키 pop변수에 no라는 값을 넣고 하루동안 기한을 준다
+            $('#popup').fadeOut('fast');
+        })
+
+        $('#notice_wrap').draggable();
+
+        if($.cookie('popup') == 'none'){
+            $('#notice_wrap').hide();
+        }
+
+        let chk = $('#expiresChk');
+        $('.closeBtn').on('click',closePop);
+        //함수가 행동을 할 시 적용
+
+        function closePop(){
+            if(chk.is(":checked")){
+                //input창에 체크되어 있을시
+                $.cookie('popup','none',{expires:3});
+                //쿠키 popup에 none을 가지고 3일의 기한을 가진다
+            }
+            $('#notice_wrap').fadeOut("fast")
+        }
+    })
+</script>

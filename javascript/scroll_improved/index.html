@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스크롤 애니메이션 웹사이트</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+</head>
+<body>
+    <!-- 상단 헤더 -->
+    <div class="header-top">
+        <div class="header-top-content">
+            <span>📞 02-1234-5678</span>
+            <span>✉️ info@example.com</span>
+        </div>
+    </div>
+
+    <!-- 로고 영역 -->
+    <div class="header-middle">
+        <h2><a href="#home">Logo</a></h2>
+    </div>
+
+    <!-- 네비게이션 메뉴 -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <ul class="navbar-menu">
+                <li class="navbar-item on"><a href="#section1">회사소개</a></li>
+                <li class="navbar-item"><a href="#section2">제품소개</a></li>
+                <li class="navbar-item"><a href="#section3">커뮤니티</a></li>
+                <li class="navbar-item"><a href="#section4">제품구매</a></li>
+                <li class="navbar-item"><a href="#section5">다운로드</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 스크롤 위치 표시 -->
+    <div class="scroll-indicator">
+        <span id="scrollPosition">0</span>px
+    </div>
+
+    <!-- 메인 콘텐츠 -->
+    <div class="container">
+        <!-- 섹션 1: Hero 섹션 -->
+        <section id="section1" class="section section-hero">
+            <div class="section-content">
+                <h1 class="hero-title">환영합니다</h1>
+                <p class="hero-subtitle">스크롤을 내려보세요</p>
+            </div>
+        </section>
+
+        <!-- 섹션 2: 제품 소개 (좌우 애니메이션) -->
+        <section id="section2" class="section section-product">
+            <div class="product-left">
+                <h1>맛있는 음식</h1>
+                <p>삼겹살</p>
+                <p class="product-desc">최고 품질의 삼겹살을 제공합니다</p>
+            </div>
+            <div class="product-right">
+                <h1>인기 메뉴</h1>
+                <p>치킨</p>
+                <p class="product-desc">바삭하고 맛있는 치킨을 만나보세요</p>
+            </div>
+        </section>
+
+        <!-- 섹션 3: 커뮤니티 -->
+        <section id="section3" class="section section-community">
+            <div class="section-content">
+                <h2 class="section-title">커뮤니티</h2>
+                <p>함께 소통하고 성장하는 공간입니다</p>
+            </div>
+        </section>
+
+        <!-- 섹션 4: 기술 스택 (순차 애니메이션) -->
+        <section id="section4" class="section section-skills">
+            <div class="skills-container">
+                <div class="skill-card">
+                    <div class="skill-icon">🌐</div>
+                    <h1>HTML</h1>
+                    <p>하면할수록 재미있다.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🎨</div>
+                    <h1>CSS</h1>
+                    <p>이제좀 알것 같다.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">⚡</div>
+                    <h1>JavaScript</h1>
+                    <p>뭔말인지 통 몰겠다.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🚀</div>
+                    <h1>jQuery</h1>
+                    <p>뭔가 되네! 신기하다.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 섹션 5: 다운로드 -->
+        <section id="section5" class="section section-download">
+            <div class="section-content">
+                <h2 class="section-title">다운로드</h2>
+                <p>최신 버전을 다운로드하세요</p>
+                <button class="download-btn">다운로드</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+</body>
+</html>

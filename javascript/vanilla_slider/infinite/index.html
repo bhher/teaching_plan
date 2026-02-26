@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>무한 루프 슬라이더 - Vanilla JS</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="slider-container">
+        <div class="slider-wrapper">
+            <div class="slider" id="slider">
+                <!-- 복제본이 자동으로 추가됨 -->
+                <div class="slide">
+                    <div class="slide-bg slide-1">
+                        <div class="slide-number">Slide 1</div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="slide-bg slide-2">
+                        <div class="slide-number">Slide 2</div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="slide-bg slide-3">
+                        <div class="slide-number">Slide 3</div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="slide-bg slide-4">
+                        <div class="slide-number">Slide 4</div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="slide-bg slide-5">
+                        <div class="slide-number">Slide 5</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <button class="prev-btn" id="prevBtn">‹</button>
+        <button class="next-btn" id="nextBtn">›</button>
+        
+        <div class="slide-counter">
+            <span id="currentSlide">1</span> / <span id="totalSlides">5</span>
+        </div>
+    </div>
+    
+    <script src="js/main.js"></script>
+</body>
+</html>

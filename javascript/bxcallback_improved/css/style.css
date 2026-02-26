@@ -1,0 +1,117 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+ul, li {
+  list-style: none;
+}
+
+/* 슬라이더 컨테이너 */
+#img_slider {
+  width: 640px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* 네비게이션 버튼 */
+#btn p {
+  position: absolute;
+  top: 40%;
+  cursor: pointer;
+}
+
+#btn p.left_btn {
+  left: 20px;
+}
+
+#btn p.right_btn {
+  right: 20px;
+}
+
+#btn p i {
+  font-size: 30px;
+  color: #000;
+  transition: color 0.3s;
+}
+
+#btn p i:hover {
+  color: #bbb;
+}
+
+/* 페이지네이션 */
+#page {
+  width: 640px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+#page ul {
+  position: relative;
+}
+
+#page ul:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+#page ul li {
+  float: left;
+  width: 14%;
+  height: 30px;
+  line-height: 30px;
+  box-sizing: border-box;
+  text-align: center;
+  cursor: pointer;
+}
+
+#page ul li a {
+  text-decoration: none;
+  color: #000;
+  font-weight: bold;
+  display: block;
+  transition: color 0.3s;
+}
+
+#page ul li.on a {
+  color: #bbb;
+}
+
+/* 포커스 인디케이터 */
+#page ul #focus {
+  position: absolute;
+  width: 14%;
+  top: 0;
+  left: 0;
+  border: 2px solid purple;
+  box-sizing: border-box;
+  height: 30px;
+  border-radius: 5px;
+  transition: left 0.6s ease;
+  pointer-events: none;
+}
+
+/* 슬라이드 텍스트 */
+.slider li {
+  position: relative;
+}
+
+.slider li h1 {
+  position: absolute;
+  left: 20px;
+  top: 60px;
+  opacity: 0;
+  transition: all 0.6s ease;
+  z-index: 999;
+  transform: translateY(60px);
+  color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.slider li h1.on {
+  opacity: 1;
+  transform: translateY(0);
+}

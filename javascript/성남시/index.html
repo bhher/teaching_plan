@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/jquery.bxslider.css">
+    <script src="http://code.jquery.com/jquery-3.1.1.js"></script>
+    <script src="js/jquery.bxslider.js"></script>
+</head>
+<style>
+    *{margin: 0; padding: 0;}
+    article{
+        width: 960px;
+        height: 420px;
+        position: relative;
+    }
+    .down{
+        padding-top: 10px;
+        width: 100%;
+        height: 30px;
+        display: flex;
+    }
+    .over-btn{
+        margin-left: 15px;
+    }
+    .over-btn span{
+        display: inline-block;
+        width: 20px;
+        height: 21px;
+        border: 1px solid #333;
+    }
+    .over-btn span.prev{
+        background: url(./img/slickButton.png) no-repeat 0 0;
+    }
+    .over-btn span.stop{
+        background: url(./img/slickButton.png) no-repeat -20px 0;
+    }
+
+    .over-btn span.stop.on{
+        background-position: -40px 0 ;
+    }
+
+    .over-btn span.next{
+        background: url(./img/slickButton.png) no-repeat -60px 0;
+    }
+</style>
+<script>
+    $(function(){
+        let slide = $('.bxup').bxSlider({
+            auto: true,
+            controls:false,
+            pager:false,
+            onSlideAfter:function($slideElement, oldIndex, newIndex){
+                $('.count span').text(newIndex + 1);
+            }
+        });
+        $('.prev').click(function(){
+            slide.goToPrevSlide()
+            return false;
+        })
+        $('.next').click(function(){
+            slide.goToNextSlide()
+            return false;
+        })
+        $('.stop').click(function (){
+            if($('.stop').hasClass('on') == false){
+                $(this).addClass('on');
+                slide.stopAuto();
+            } else {
+                $(this).removeClass('on');
+                slide.startAuto();
+            }
+        })
+    })
+</script>
+<body>
+    <section>
+        <article>
+            <ul class="bxup">
+                <li><img src="img/s1.png" alt=""></li>
+                <li><img src="img/s2.jpg" alt=""></li>
+                <li><img src="img/s3.png" alt=""></li>
+                <li><img src="img/s4.png" alt=""></li>
+                <li><img src="img/s5.png" alt=""></li>
+                <li><img src="img/s6.png" alt=""></li>
+                <li><img src="img/s7.jpg" alt=""></li>
+            </ul>
+        </article>
+        <div class="down">
+            <div class="count"><span>1</span> &nbsp;/ 7</div>
+            <div class="over-btn">
+                <span class="prev"></span>
+                <span class="stop"></span>
+                <span class="next"></span>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

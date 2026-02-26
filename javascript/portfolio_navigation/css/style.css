@@ -1,0 +1,368 @@
+/* ============================================
+   CSS Reset & Base Styles
+   ============================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-color: #667eea;
+  --secondary-color: #764ba2;
+  --text-color: #333;
+  --text-light: #666;
+  --bg-color: #fff;
+  --bg-alt: #f8f9fa;
+  --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+  --navbar-height: 70px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.6;
+  color: var(--text-color);
+  overflow-x: hidden;
+}
+
+/* ============================================
+   Navigation Styles
+   ============================================ */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--navbar-height);
+  background-color: transparent;
+  z-index: 1000;
+  transition: var(--transition);
+  transform: translateY(0);
+}
+
+/* 네비게이션 활성화 상태 (스크롤 후) */
+.navbar.active {
+  background-color: var(--bg-color);
+  box-shadow: var(--shadow);
+}
+
+/* 네비게이션 숨김 상태 (아래로 스크롤) */
+.navbar.hidden {
+  transform: translateY(-100%);
+}
+
+/* 네비게이션 컨테이너 - Flexbox */
+.navbar-container {
+  max-width: 1200px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* 로고 스타일 */
+.navbar-logo a {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--bg-color);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.navbar.active .navbar-logo a {
+  color: var(--primary-color);
+}
+
+/* 네비게이션 메뉴 - Flexbox */
+.navbar-menu {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+  align-items: center;
+}
+
+.navbar-link {
+  color: var(--bg-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: var(--transition);
+  position: relative;
+  padding: 5px 0;
+}
+
+.navbar.active .navbar-link {
+  color: var(--text-color);
+}
+
+.navbar-link:hover {
+  color: var(--primary-color);
+}
+
+/* 링크 밑줄 효과 */
+.navbar-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--primary-color);
+  transition: width 0.3s ease;
+}
+
+.navbar-link:hover::after {
+  width: 100%;
+}
+
+/* 모바일 메뉴 토글 버튼 */
+.navbar-toggle {
+  display: none;
+  flex-direction: column;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  gap: 5px;
+}
+
+.navbar-toggle-bar {
+  width: 25px;
+  height: 3px;
+  background-color: var(--bg-color);
+  transition: var(--transition);
+  border-radius: 2px;
+}
+
+.navbar.active .navbar-toggle-bar {
+  background-color: var(--text-color);
+}
+
+.navbar-toggle.active .navbar-toggle-bar:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.navbar-toggle.active .navbar-toggle-bar:nth-child(2) {
+  opacity: 0;
+}
+
+.navbar-toggle.active .navbar-toggle-bar:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -6px);
+}
+
+/* ============================================
+   Main Content Styles
+   ============================================ */
+.main-content {
+  margin-top: 0;
+}
+
+.section {
+  padding: 100px 20px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.section-alt {
+  background-color: var(--bg-alt);
+}
+
+.container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-size: 48px;
+  margin-bottom: 40px;
+  text-align: center;
+  color: var(--primary-color);
+}
+
+.section-content {
+  text-align: center;
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+.section-content p {
+  margin-bottom: 20px;
+}
+
+/* Hero 섹션 */
+.section-hero {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  color: var(--bg-color);
+  text-align: center;
+}
+
+.hero-title {
+  font-size: 64px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.hero-subtitle {
+  font-size: 24px;
+  margin-bottom: 40px;
+  opacity: 0.9;
+}
+
+.btn {
+  display: inline-block;
+  padding: 15px 30px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.btn-primary {
+  background-color: var(--bg-color);
+  color: var(--primary-color);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Projects 그리드 - Flexbox */
+.projects-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}
+
+.project-card {
+  flex: 1 1 300px;
+  max-width: 350px;
+  padding: 30px;
+  background-color: var(--bg-color);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+.project-card h3 {
+  margin-bottom: 15px;
+  color: var(--primary-color);
+}
+
+/* Skills 리스트 - Flexbox */
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.skill-item {
+  padding: 15px 30px;
+  background-color: var(--primary-color);
+  color: var(--bg-color);
+  border-radius: 25px;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.skill-item:hover {
+  background-color: var(--secondary-color);
+  transform: scale(1.05);
+}
+
+/* ============================================
+   Responsive Design
+   ============================================ */
+@media (max-width: 768px) {
+  :root {
+    --navbar-height: 60px;
+  }
+
+  .navbar-menu {
+    position: fixed;
+    top: var(--navbar-height);
+    left: -100%;
+    width: 100%;
+    height: calc(100vh - var(--navbar-height));
+    flex-direction: column;
+    background-color: var(--bg-color);
+    padding: 40px 20px;
+    transition: left 0.3s ease;
+    box-shadow: var(--shadow);
+    gap: 0;
+  }
+
+  .navbar-menu.active {
+    left: 0;
+  }
+
+  .navbar-item {
+    width: 100%;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+  }
+
+  .navbar-link {
+    color: var(--text-color);
+    display: block;
+    width: 100%;
+  }
+
+  .navbar.active .navbar-link {
+    color: var(--text-color);
+  }
+
+  .navbar-toggle {
+    display: flex;
+  }
+
+  .hero-title {
+    font-size: 36px;
+  }
+
+  .hero-subtitle {
+    font-size: 18px;
+  }
+
+  .section-title {
+    font-size: 36px;
+  }
+
+  .section {
+    padding: 60px 20px;
+  }
+
+  .projects-grid {
+    flex-direction: column;
+  }
+
+  .project-card {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 28px;
+  }
+
+  .section-title {
+    font-size: 28px;
+  }
+}

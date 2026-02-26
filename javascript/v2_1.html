@@ -1,4 +1,213 @@
 <!DOCTYPE html>
+<<<<<<< HEAD
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>햄버거모바일 - 심플 버전</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        ul { list-style: none; }
+        a { text-decoration: none; color: #333; display: block; }
+        
+        header {
+            width: 100%; height: 70px; position: relative;
+            background-color: skyblue; display: flex;
+            justify-content: center; align-items: center;
+        }
+        
+        header .ham {
+            position: absolute; width: 50px; height: 50px;
+            top: 10px; right: 10px; border: 1px solid #333;
+            text-indent: -9999px; cursor: pointer;
+            background: url(./images/ham.png) no-repeat 50% 50%;
+            z-index: 100;
+        }
+        /* 햄버거 버튼 활성화(X버튼) */
+        header .ham.on { background: url(./images/bar.png) no-repeat 50% 50%; }
+nav {
+    width: 200px;
+    background-color: lime;
+    position: fixed;
+    top: 70px;
+    right: -200px;
+    height: auto;
+    max-height: calc(100% - 70px);
+    overflow-y: auto;
+    transition: right 0.3s ease;
+    border-bottom-left-radius: 10px;
+    margin: 0;
+    padding: 0;
+}
+
+/* 메뉴 열림 상태 */
+nav.active { right: 0; }
+
+nav ul {
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li { 
+    margin: 0;
+    padding: 0;
+    line-height: 0; 
+    text-align: center; 
+    font-weight: bold; 
+    list-style: none; /* 점 제거 */
+}
+
+nav ul li > a.main-menu {
+    display: block;
+    height: 40px;
+    line-height: 40px;
+    background-color: #390;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+/* --- 서브메뉴 핵심 수정 부분 --- */
+nav .sub {
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+    background-color: #cf9;
+    margin: 0;
+    padding: 0;
+    transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+}
+
+nav .sub li { 
+    margin: 0;
+    padding: 0;
+}
+
+nav .sub li div {
+    margin: 0;
+    padding: 0;
+    line-height: 40px;
+    height: 40px;
+}
+
+nav .sub li a {
+    margin: 0;
+    padding: 0;
+    display: block;
+    line-height: 40px;
+    height: 40px;
+}
+
+nav .sub li:hover { background-color: #cf0; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>더조은</h1>
+        <p class="ham">메뉴바</p>
+    </header>
+    <nav>
+        <ul>
+            <li>
+                <a href="#" class="main-menu">회사소개</a>
+                <ul class="sub">
+                    <li><div><a href="#">submenu1</a></div></li>
+                    <li><div><a href="#">submenu2</a></div></li>
+                    <li><div><a href="#">submenu3</a></div></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" class="main-menu">제품소개</a>
+                <ul class="sub">
+                    <li><div><a href="#">submenu1</a></div></li>
+                    <li><div><a href="#">submenu2</a></div></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" class="main-menu">커뮤니티</a>
+                <ul class="sub">
+                    <li><div><a href="#">submenu1</a></div></li>
+                    <li><div><a href="#">submenu2</a></div></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const hamBtn = document.querySelector('.ham');
+            const nav = document.querySelector('nav');
+            const mainMenus = document.querySelectorAll('.main-menu');
+            const subMenus = document.querySelectorAll('.sub');
+
+            // 서브메뉴 슬라이드 다운 함수
+            function slideDown(element) {
+                element.style.height = '0px';
+                element.style.opacity = '0';
+                element.offsetHeight; // 리플로우 강제
+                const height = element.scrollHeight;
+                element.style.height = height + 'px';
+                element.style.opacity = '1';
+            }
+
+            // 서브메뉴 슬라이드 업 함수
+            function slideUp(element) {
+                element.style.height = element.scrollHeight + 'px';
+                element.offsetHeight; // 리플로우 강제
+                element.style.height = '0px';
+                element.style.opacity = '0';
+            }
+
+            // 서브메뉴가 열려있는지 확인하는 함수
+            function isSubMenuOpen(subMenu) {
+                return subMenu.style.height !== '0px' && subMenu.style.height !== '' && 
+                       window.getComputedStyle(subMenu).height !== '0px';
+            }
+
+            // 초기화: 모든 서브메뉴 닫기
+            subMenus.forEach(sub => {
+                sub.style.height = '0px';
+                sub.style.opacity = '0';
+            });
+
+            // 1. 햄버거 버튼 토글 (사이드바 열기/닫기)
+            hamBtn.addEventListener('click', () => {
+                const isOpen = nav.classList.toggle('active');
+                hamBtn.classList.toggle('on');
+
+                // 사이드바를 닫을 때 열려있던 모든 서브메뉴도 초기화
+                if (!isOpen) {
+                    subMenus.forEach(sub => {
+                        if (isSubMenuOpen(sub)) {
+                            slideUp(sub);
+                        }
+                    });
+                }
+            });
+
+            // 2. 메인 메뉴 클릭 (서브메뉴 아코디언)
+            mainMenus.forEach((menu) => {
+                menu.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const sub = menu.nextElementSibling;
+                    if (!sub) return;
+
+                    const isOpen = isSubMenuOpen(sub);
+
+                    // 다른 서브메뉴들 닫기
+                    subMenus.forEach(s => {
+                        if (isSubMenuOpen(s) && s !== sub) {
+                            slideUp(s);
+                        }
+                    });
+
+                    // 클릭한 메뉴가 닫혀있었다면 열기
+                    if (!isOpen) {
+                        slideDown(sub);
+                    } else {
+                        slideUp(sub);
+                    }
+=======
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -99,10 +308,15 @@
                     
                     e.preventDefault();
                     return false;
+>>>>>>> 4f877df2057848c6d284e3e2236653bff2d5a5b5
                 });
             });
         });
     </script>
+<<<<<<< HEAD
+</body>
+</html>
+=======
 </head>
 <body>
     <nav class="mobile_nav">
@@ -143,3 +357,4 @@
     </nav>
 </body>
 </html>
+>>>>>>> 4f877df2057848c6d284e3e2236653bff2d5a5b5

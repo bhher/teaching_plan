@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자동 재생 슬라이더 - Vanilla JS</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="slider-container">
+        <div class="slider-wrapper">
+            <div class="slider" id="slider">
+                <div class="slide">
+                    <div class="slide-bg slide-1"></div>
+                    <div class="slide-content">
+                        <h2>자동 재생 슬라이더</h2>
+                        <p>3초마다 자동으로 넘어갑니다</p>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="slide-bg slide-2"></div>
+                    <div class="slide-content">
+                        <h2>마우스 호버 시 일시 정지</h2>
+                        <p>마우스를 올리면 자동 재생이 멈춥니다</p>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="slide-bg slide-3"></div>
+                    <div class="slide-content">
+                        <h2>수동 제어 가능</h2>
+                        <p>버튼으로 직접 제어할 수 있습니다</p>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="slide-bg slide-4"></div>
+                    <div class="slide-content">
+                        <h2>무한 루프</h2>
+                        <p>끝없이 반복됩니다</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <button class="prev-btn" id="prevBtn">‹</button>
+        <button class="next-btn" id="nextBtn">›</button>
+        <button class="play-pause-btn" id="playPauseBtn">⏸</button>
+        
+        <div class="indicators" id="indicators">
+            <span class="indicator active" data-index="0"></span>
+            <span class="indicator" data-index="1"></span>
+            <span class="indicator" data-index="2"></span>
+            <span class="indicator" data-index="3"></span>
+        </div>
+    </div>
+    
+    <script src="js/main.js"></script>
+</body>
+</html>

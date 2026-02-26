@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>페이드 슬라이더 - Vanilla JS</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="slider-container">
+        <div class="slider-wrapper">
+            <div class="slider" id="slider">
+                <div class="slide active">
+                    <div class="slide-bg slide-1"></div>
+                    <div class="slide-content">
+                        <h2>페이드 효과 슬라이더</h2>
+                        <p>부드러운 페이드 인/아웃 효과</p>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="slide-bg slide-2"></div>
+                    <div class="slide-content">
+                        <h2>순수 JavaScript</h2>
+                        <p>jQuery 없이 구현한 슬라이더</p>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="slide-bg slide-3"></div>
+                    <div class="slide-content">
+                        <h2>반응형 디자인</h2>
+                        <p>모든 디바이스에서 완벽하게 작동</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <button class="prev-btn" id="prevBtn">‹</button>
+        <button class="next-btn" id="nextBtn">›</button>
+        
+        <div class="indicators" id="indicators">
+            <span class="indicator active" data-index="0"></span>
+            <span class="indicator" data-index="1"></span>
+            <span class="indicator" data-index="2"></span>
+        </div>
+    </div>
+    
+    <script src="js/main.js"></script>
+</body>
+</html>

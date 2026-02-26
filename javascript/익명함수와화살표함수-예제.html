@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>익명 함수와 화살표 함수 예제</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .example {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #333;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 10px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            background-color: #e8f5e9;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>JavaScript 익명 함수와 화살표 함수 예제</h1>
+
+    <!-- 예제 1: 기본 사용 -->
+    <div class="example">
+        <h2>예제 1: 기본 사용</h2>
+        <p><strong>익명 함수:</strong> <code>const add1 = function(a, b) { return a + b; }</code></p>
+        <p><strong>화살표 함수:</strong> <code>const add2 = (a, b) => a + b</code></p>
+        <button onclick="example1()">실행</button>
+        <div id="result1" class="result"></div>
+    </div>
+
+    <!-- 예제 2: 배열 메서드 -->
+    <div class="example">
+        <h2>예제 2: 배열 메서드 (map, filter)</h2>
+        <p>원본 배열: <code>[1, 2, 3, 4, 5]</code></p>
+        <button onclick="example2()">실행</button>
+        <div id="result2" class="result"></div>
+    </div>
+
+    <!-- 예제 3: 이벤트 리스너 -->
+    <div class="example">
+        <h2>예제 3: 이벤트 리스너</h2>
+        <p>버튼 클릭 시 this의 차이를 확인하세요.</p>
+        <button id="btn1">익명 함수 (this 사용)</button>
+        <button id="btn2">화살표 함수 (this 사용)</button>
+        <div id="result3" class="result"></div>
+    </div>
+
+    <!-- 예제 4: setTimeout -->
+    <div class="example">
+        <h2>예제 4: setTimeout</h2>
+        <button onclick="example4()">3초 후 메시지 출력</button>
+        <div id="result4" class="result"></div>
+    </div>
+
+    <!-- 예제 5: 객체 메서드 -->
+    <div class="example">
+        <h2>예제 5: 객체 메서드에서 this 차이</h2>
+        <button onclick="example5()">실행</button>
+        <div id="result5" class="result"></div>
+    </div>
+
+    <script>
+        // 예제 1: 기본 사용
+        function example1() {
+            // 익명 함수
+            const add1 = function(a, b) {
+                return a + b;
+            };
+
+            // 화살표 함수
+            const add2 = (a, b) => a + b;
+
+            const result = `
+                익명 함수: add1(3, 5) = ${add1(3, 5)}<br>
+                화살표 함수: add2(3, 5) = ${add2(3, 5)}
+            `;
+            document.getElementById('result1').innerHTML = result;
+        }
+
+        // 예제 2: 배열 메서드
+        function example2() {
+            const numbers = [1, 2, 3, 4, 5];
+
+            // 익명 함수 사용
+            const doubled1 = numbers.map(function(num) {
+                return num * 2;
+            });
+
+            // 화살표 함수 사용
+            const doubled2 = numbers.map(num => num * 2);
+
+            // 필터링
+            const evens = numbers.filter(num => num % 2 === 0);
+
+            const result = `
+                원본 배열: [${numbers.join(', ')}]<br>
+                익명 함수로 2배: [${doubled1.join(', ')}]<br>
+                화살표 함수로 2배: [${doubled2.join(', ')}]<br>
+                짝수만 필터링: [${evens.join(', ')}]
+            `;
+            document.getElementById('result2').innerHTML = result;
+        }
+
+        // 예제 3: 이벤트 리스너
+        document.addEventListener('DOMContentLoaded', function() {
+            const btn1 = document.getElementById('btn1');
+            const btn2 = document.getElementById('btn2');
+            const result3 = document.getElementById('result3');
+
+            // 익명 함수: this가 button 요소를 가리킴
+            btn1.addEventListener('click', function() {
+                result3.innerHTML = `
+                    <strong>익명 함수 사용:</strong><br>
+                    this = ${this}<br>
+                    this.textContent = "${this.textContent}"<br>
+                    this.id = "${this.id}"
+                `;
+            });
+
+            // 화살표 함수: this가 window를 가리킴
+            btn2.addEventListener('click', () => {
+                result3.innerHTML = `
+                    <strong>화살표 함수 사용:</strong><br>
+                    this = ${this}<br>
+                    this.textContent = "${this.textContent || 'undefined'}"<br>
+                    <span style="color: red;">this가 button을 가리키지 않습니다!</span>
+                `;
+            });
+        });
+
+        // 예제 4: setTimeout
+        function example4() {
+            const result4 = document.getElementById('result4');
+            result4.innerHTML = '3초를 기다리세요...';
+
+            // 화살표 함수 사용
+            setTimeout(() => {
+                result4.innerHTML = '✅ 3초가 지났습니다! (화살표 함수 사용)';
+            }, 3000);
+        }
+
+        // 예제 5: 객체 메서드에서 this 차이
+        function example5() {
+            const result5 = document.getElementById('result5');
+
+            // 익명 함수를 사용한 객체
+            const obj1 = {
+                name: "홍길동",
+                greet: function() {
+                    return "안녕하세요, " + this.name + "님!";
+                }
+            };
+
+            // 화살표 함수를 사용한 객체
+            const obj2 = {
+                name: "홍길동",
+                greet: () => {
+                    return "안녕하세요, " + this.name + "님!";
+                }
+            };
+
+            result5.innerHTML = `
+                <strong>익명 함수 사용:</strong><br>
+                obj1.greet() = "${obj1.greet()}"<br><br>
+                <strong>화살표 함수 사용:</strong><br>
+                obj2.greet() = "${obj2.greet()}"<br>
+                <span style="color: red;">this.name이 undefined입니다!</span>
+            `;
+        }
+    </script>
+</body>
+</html>
