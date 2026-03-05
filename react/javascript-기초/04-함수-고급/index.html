@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>함수 고급 예제</title>
+    <style>
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #333;
+            border-bottom: 2px solid #FF9800;
+            padding-bottom: 10px;
+            margin-top: 30px;
+        }
+        .example {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            border-left: 4px solid #FF9800;
+        }
+        .code {
+            background-color: #282c34;
+            color: #abb2bf;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            margin: 10px 0;
+        }
+        .result {
+            background-color: #fff3e0;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            color: #e65100;
+            white-space: pre-wrap;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #FF9800;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #F57C00;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>함수 고급 예제</h1>
+        <p>React에서 자주 사용하는 함수 개념들을 학습합니다!</p>
+        
+        <h2>1. 화살표 함수와 this</h2>
+        <div class="example">
+            <h3>this 바인딩 차이</h3>
+            <div class="code">
+// 일반 함수: this가 호출한 객체를 가리킴
+const obj1 = {
+    name: "객체1",
+    greet: function() {
+        console.log(this.name);
+    }
+};
+
+// 화살표 함수: this가 상위 스코프를 가리킴
+const obj2 = {
+    name: "객체2",
+    greet: () => {
+        console.log(this.name);  // undefined
+    }
+};
+            </div>
+            <button onclick="testThis()">테스트</button>
+            <div id="this-result" class="result"></div>
+        </div>
+        
+        <h2>2. 고차 함수 (Higher-Order Function)</h2>
+        <div class="example">
+            <h3>함수를 반환하는 함수</h3>
+            <div class="code">
+function multiplyBy(n) {
+    return function(x) {
+        return x * n;
+    };
+}
+
+const double = multiplyBy(2);
+const triple = multiplyBy(3);
+
+console.log(double(5));  // 10
+console.log(triple(5));  // 15
+            </div>
+            <button onclick="testHigherOrder()">테스트</button>
+            <div id="higher-order-result" class="result"></div>
+        </div>
+        
+        <h2>3. 클로저 (Closure)</h2>
+        <div class="example">
+            <h3>외부 변수에 접근하는 함수</h3>
+            <div class="code">
+function createCounter() {
+    let count = 0;
+    return function() {
+        count++;
+        return count;
+    };
+}
+
+const counter = createCounter();
+console.log(counter());  // 1
+console.log(counter());  // 2
+console.log(counter());  // 3
+            </div>
+            <button onclick="testClosure()">테스트</button>
+            <div id="closure-result" class="result"></div>
+        </div>
+        
+        <h2>4. 콜백 함수 (Callback Function)</h2>
+        <div class="example">
+            <h3>함수를 매개변수로 전달</h3>
+            <div class="code">
+function processData(data, callback) {
+    const result = data.map(item => item * 2);
+    callback(result);
+}
+
+processData([1, 2, 3], (result) => {
+    console.log("결과:", result);
+});
+            </div>
+            <button onclick="testCallback()">테스트</button>
+            <div id="callback-result" class="result"></div>
+        </div>
+        
+        <h2>5. 즉시 실행 함수 (IIFE)</h2>
+        <div class="example">
+            <h3>정의와 동시에 실행</h3>
+            <div class="code">
+(function() {
+    const message = "즉시 실행!";
+    console.log(message);
+})();
+
+// 화살표 함수 버전
+(() => {
+    console.log("화살표 함수로 즉시 실행!");
+})();
+            </div>
+            <button onclick="testIIFE()">테스트</button>
+            <div id="iife-result" class="result"></div>
+        </div>
+        
+        <h2>6. 함수 합성 (Function Composition)</h2>
+        <div class="example">
+            <h3>여러 함수를 조합</h3>
+            <div class="code">
+const add = x => x + 1;
+const multiply = x => x * 2;
+const square = x => x * x;
+
+// 함수 합성
+const compose = (f, g, h) => x => f(g(h(x)));
+const result = compose(square, multiply, add)(3);
+// add(3) = 4, multiply(4) = 8, square(8) = 64
+            </div>
+            <button onclick="testComposition()">테스트</button>
+            <div id="composition-result" class="result"></div>
+        </div>
+        
+        <h2>7. 커링 (Currying)</h2>
+        <div class="example">
+            <h3>여러 매개변수를 하나씩 받는 함수</h3>
+            <div class="code">
+// 일반 함수
+function add(a, b, c) {
+    return a + b + c;
+}
+
+// 커링 함수
+function addCurried(a) {
+    return function(b) {
+        return function(c) {
+            return a + b + c;
+        };
+    };
+}
+
+const result1 = add(1, 2, 3);
+const result2 = addCurried(1)(2)(3);
+            </div>
+            <button onclick="testCurrying()">테스트</button>
+            <div id="currying-result" class="result"></div>
+        </div>
+        
+        <h2>8. React에서 사용하는 패턴</h2>
+        <div class="example">
+            <h3>이벤트 핸들러</h3>
+            <div class="code">
+// React 컴포넌트 예시
+function Button() {
+    const handleClick = (e) => {
+        console.log("클릭됨!", e);
+    };
+    
+    return &lt;button onClick={handleClick}&gt;클릭&lt;/button&gt;;
+}
+
+// 매개변수 전달
+function Button() {
+    const handleClick = (id) => {
+        return (e) => {
+            console.log("ID:", id);
+        };
+    };
+    
+    return &lt;button onClick={handleClick(123)}&gt;클릭&lt;/button&gt;;
+}
+            </div>
+            <button onclick="testReactPattern()">테스트</button>
+            <div id="react-pattern-result" class="result"></div>
+        </div>
+    </div>
+    
+    <script src="main.js"></script>
+</body>
+</html>

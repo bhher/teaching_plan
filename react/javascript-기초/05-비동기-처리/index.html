@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비동기 처리 예제</title>
+    <style>
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #333;
+            border-bottom: 2px solid #00BCD4;
+            padding-bottom: 10px;
+            margin-top: 30px;
+        }
+        .example {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            border-left: 4px solid #00BCD4;
+        }
+        .code {
+            background-color: #282c34;
+            color: #abb2bf;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            margin: 10px 0;
+        }
+        .result {
+            background-color: #e0f7fa;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            color: #006064;
+            white-space: pre-wrap;
+            min-height: 50px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #00BCD4;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #0097A7;
+        }
+        .loading {
+            color: #00BCD4;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>비동기 처리 예제</h1>
+        <p>React에서 API 호출 시 필수적인 개념입니다!</p>
+        
+        <h2>1. Promise 기본</h2>
+        <div class="example">
+            <h3>Promise 생성 및 사용</h3>
+            <div class="code">
+const promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve("성공!");
+    }, 1000);
+});
+
+promise.then(result => {
+    console.log(result);  // "성공!"
+});
+            </div>
+            <button onclick="testPromise()">테스트</button>
+            <div id="promise-result" class="result"></div>
+        </div>
+        
+        <h2>2. Promise 체이닝</h2>
+        <div class="example">
+            <h3>여러 비동기 작업 순차 실행</h3>
+            <div class="code">
+fetchUser(1)
+    .then(user => fetchPosts(user.id))
+    .then(posts => console.log(posts))
+    .catch(error => console.error(error));
+            </div>
+            <button onclick="testPromiseChain()">테스트</button>
+            <div id="promise-chain-result" class="result"></div>
+        </div>
+        
+        <h2>3. async/await</h2>
+        <div class="example">
+            <h3>비동기 코드를 동기처럼 작성</h3>
+            <div class="code">
+async function fetchData() {
+    try {
+        const user = await fetchUser(1);
+        const posts = await fetchPosts(user.id);
+        return posts;
+    } catch (error) {
+        console.error(error);
+    }
+}
+            </div>
+            <button onclick="testAsyncAwait()">테스트</button>
+            <div id="async-await-result" class="result"></div>
+        </div>
+        
+        <h2>4. Promise.all()</h2>
+        <div class="example">
+            <h3>여러 Promise를 동시에 실행</h3>
+            <div class="code">
+const promises = [
+    fetchUser(1),
+    fetchUser(2),
+    fetchUser(3)
+];
+
+Promise.all(promises)
+    .then(users => {
+        console.log("모든 사용자:", users);
+    });
+            </div>
+            <button onclick="testPromiseAll()">테스트</button>
+            <div id="promise-all-result" class="result"></div>
+        </div>
+        
+        <h2>5. fetch API</h2>
+        <div class="example">
+            <h3>HTTP 요청 보내기</h3>
+            <div class="code">
+fetch('https://api.example.com/users')
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error(error));
+            </div>
+            <button onclick="testFetch()">테스트</button>
+            <div id="fetch-result" class="result"></div>
+        </div>
+        
+        <h2>6. React에서 사용하는 패턴</h2>
+        <div class="example">
+            <h3>useEffect에서 비동기 처리</h3>
+            <div class="code">
+// React 컴포넌트 예시
+function UserProfile({ userId }) {
+    const [user, setUser] = useState(null);
+    
+    useEffect(() => {
+        async function fetchUser() {
+            try {
+                const response = await fetch(`/api/users/${userId}`);
+                const data = await response.json();
+                setUser(data);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        fetchUser();
+    }, [userId]);
+    
+    return &lt;div&gt;{user?.name}&lt;/div&gt;;
+}
+            </div>
+            <button onclick="testReactPattern()">테스트</button>
+            <div id="react-pattern-result" class="result"></div>
+        </div>
+    </div>
+    
+    <script src="main.js"></script>
+</body>
+</html>

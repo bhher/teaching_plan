@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React를 위한 JavaScript 실전 예제</title>
+    <style>
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #333;
+            border-bottom: 2px solid #E91E63;
+            padding-bottom: 10px;
+            margin-top: 30px;
+        }
+        .example {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            border-left: 4px solid #E91E63;
+        }
+        .code {
+            background-color: #282c34;
+            color: #abb2bf;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            margin: 10px 0;
+        }
+        .result {
+            background-color: #fce4ec;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            color: #880e4f;
+            white-space: pre-wrap;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #E91E63;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #C2185B;
+        }
+        .todo-list {
+            list-style: none;
+            padding: 0;
+        }
+        .todo-item {
+            padding: 10px;
+            margin: 5px 0;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .todo-item.completed {
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>React를 위한 JavaScript 실전 예제</h1>
+        <p>React에서 실제로 사용하는 패턴들을 학습합니다!</p>
+        
+        <h2>예제 1: 할일 목록 (Todo List)</h2>
+        <div class="example">
+            <h3>배열 메서드와 상태 관리 패턴</h3>
+            <div class="code">
+// React에서 사용하는 방식
+const [todos, setTodos] = useState([]);
+
+// 추가
+const addTodo = (text) => {
+    setTodos([...todos, { id: Date.now(), text, done: false }]);
+};
+
+// 완료 처리
+const toggleTodo = (id) => {
+    setTodos(todos.map(todo => 
+        todo.id === id ? { ...todo, done: !todo.done } : todo
+    ));
+};
+
+// 삭제
+const deleteTodo = (id) => {
+    setTodos(todos.filter(todo => todo.id !== id));
+};
+            </div>
+            <div>
+                <input type="text" id="todo-input" placeholder="할일 입력" style="padding: 8px; width: 300px;">
+                <button onclick="addTodo()">추가</button>
+            </div>
+            <ul id="todo-list" class="todo-list"></ul>
+            <div id="todo-result" class="result"></div>
+        </div>
+        
+        <h2>예제 2: 사용자 목록 필터링</h2>
+        <div class="example">
+            <h3>filter와 map을 활용한 검색</h3>
+            <div class="code">
+const users = [
+    { id: 1, name: "홍길동", age: 25 },
+    { id: 2, name: "김철수", age: 30 },
+    { id: 3, name: "이영희", age: 28 }
+];
+
+// 나이가 27 이상인 사용자만 필터링
+const filtered = users
+    .filter(user => user.age >= 27)
+    .map(user => `${user.name} (${user.age}세)`);
+            </div>
+            <div>
+                <input type="number" id="age-filter" placeholder="나이 입력" value="27" style="padding: 8px; width: 150px;">
+                <button onclick="filterUsers()">필터링</button>
+            </div>
+            <div id="user-result" class="result"></div>
+        </div>
+        
+        <h2>예제 3: 폼 데이터 처리</h2>
+        <div class="example">
+            <h3>이벤트 핸들러와 상태 업데이트</h3>
+            <div class="code">
+// React에서 사용하는 방식
+const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    age: ""
+});
+
+const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+        ...prev,
+        [name]: value
+    }));
+};
+            </div>
+            <form id="user-form" onsubmit="handleSubmit(event)">
+                <div style="margin-bottom: 10px;">
+                    <input type="text" name="name" placeholder="이름" style="padding: 8px; width: 200px;">
+                </div>
+                <div style="margin-bottom: 10px;">
+                    <input type="email" name="email" placeholder="이메일" style="padding: 8px; width: 200px;">
+                </div>
+                <div style="margin-bottom: 10px;">
+                    <input type="number" name="age" placeholder="나이" style="padding: 8px; width: 200px;">
+                </div>
+                <button type="submit">제출</button>
+            </form>
+            <div id="form-result" class="result"></div>
+        </div>
+        
+        <h2>예제 4: API 데이터 처리</h2>
+        <div class="example">
+            <h3>비동기 데이터 로딩 패턴</h3>
+            <div class="code">
+// React에서 사용하는 방식
+useEffect(() => {
+    async function fetchData() {
+        const response = await fetch('/api/users');
+        const data = await response.json();
+        setUsers(data);
+    }
+    fetchData();
+}, []);
+            </div>
+            <button onclick="loadUsers()">사용자 데이터 로드</button>
+            <div id="api-result" class="result"></div>
+        </div>
+        
+        <h2>예제 5: 조건부 렌더링 패턴</h2>
+        <div class="example">
+            <h3>삼항 연산자와 논리 연산자</h3>
+            <div class="code">
+// React JSX에서 사용하는 방식
+{isLoading ? (
+    &lt;div&gt;로딩 중...&lt;/div&gt;
+) : (
+    &lt;div&gt;데이터 표시&lt;/div&gt;
+)}
+
+{user && &lt;div&gt;{user.name}&lt;/div&gt;}
+{items.length > 0 && &lt;ul&gt;{items.map(...)}&lt;/ul&gt;}
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" id="loading-check" onchange="toggleLoading()">
+                    로딩 중 표시
+                </label>
+            </div>
+            <div id="conditional-result" class="result"></div>
+        </div>
+    </div>
+    
+    <script src="main.js"></script>
+</body>
+</html>
