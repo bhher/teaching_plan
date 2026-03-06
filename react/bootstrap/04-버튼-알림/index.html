@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap 버튼과 알림</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    
+    <style>
+        body {
+            padding: 40px 0;
+            background-color: #f8f9fa;
+        }
+        .section {
+            margin-bottom: 50px;
+        }
+        .btn-demo {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mb-5">
+            <i class="bi bi-cursor-fill me-2"></i>
+            Bootstrap 버튼과 알림 예제
+        </h1>
+        
+        <!-- 버튼 스타일 -->
+        <div class="section">
+            <h2 class="mb-4">1. 버튼 스타일</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>기본 버튼</h4>
+                    <button type="button" class="btn btn-primary btn-demo">Primary</button>
+                    <button type="button" class="btn btn-secondary btn-demo">Secondary</button>
+                    <button type="button" class="btn btn-success btn-demo">Success</button>
+                    <button type="button" class="btn btn-danger btn-demo">Danger</button>
+                    <button type="button" class="btn btn-warning btn-demo">Warning</button>
+                    <button type="button" class="btn btn-info btn-demo">Info</button>
+                    <button type="button" class="btn btn-light btn-demo">Light</button>
+                    <button type="button" class="btn btn-dark btn-demo">Dark</button>
+                </div>
+                
+                <div class="col-md-6">
+                    <h4>아웃라인 버튼</h4>
+                    <button type="button" class="btn btn-outline-primary btn-demo">Primary</button>
+                    <button type="button" class="btn btn-outline-secondary btn-demo">Secondary</button>
+                    <button type="button" class="btn btn-outline-success btn-demo">Success</button>
+                    <button type="button" class="btn btn-outline-danger btn-demo">Danger</button>
+                    <button type="button" class="btn btn-outline-warning btn-demo">Warning</button>
+                    <button type="button" class="btn btn-outline-info btn-demo">Info</button>
+                    <button type="button" class="btn btn-outline-dark btn-demo">Dark</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 버튼 크기 -->
+        <div class="section">
+            <h2 class="mb-4">2. 버튼 크기</h2>
+            <button type="button" class="btn btn-primary btn-lg">Large</button>
+            <button type="button" class="btn btn-primary">Default</button>
+            <button type="button" class="btn btn-primary btn-sm">Small</button>
+        </div>
+        
+        <!-- 아이콘 버튼 -->
+        <div class="section">
+            <h2 class="mb-4">3. 아이콘 버튼</h2>
+            <button type="button" class="btn btn-primary btn-demo">
+                <i class="bi bi-heart me-2"></i>좋아요
+            </button>
+            <button type="button" class="btn btn-success btn-demo">
+                <i class="bi bi-check-circle me-2"></i>확인
+            </button>
+            <button type="button" class="btn btn-danger btn-demo">
+                <i class="bi bi-trash me-2"></i>삭제
+            </button>
+            <button type="button" class="btn btn-info btn-demo">
+                <i class="bi bi-download me-2"></i>다운로드
+            </button>
+            <button type="button" class="btn btn-warning btn-demo">
+                <i class="bi bi-star me-2"></i>즐겨찾기
+            </button>
+        </div>
+        
+        <!-- 버튼 그룹 -->
+        <div class="section">
+            <h2 class="mb-4">4. 버튼 그룹</h2>
+            <div class="btn-group mb-3" role="group">
+                <button type="button" class="btn btn-primary">왼쪽</button>
+                <button type="button" class="btn btn-primary">가운데</button>
+                <button type="button" class="btn btn-primary">오른쪽</button>
+            </div>
+            
+            <div class="btn-group mb-3" role="group">
+                <button type="button" class="btn btn-outline-primary">
+                    <i class="bi bi-list"></i>
+                </button>
+                <button type="button" class="btn btn-outline-primary">
+                    <i class="bi bi-grid"></i>
+                </button>
+                <button type="button" class="btn btn-outline-primary">
+                    <i class="bi bi-three-dots"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- 알림 (Alert) -->
+        <div class="section">
+            <h2 class="mb-4">5. 알림 (Alert)</h2>
+            
+            <div class="alert alert-primary" role="alert">
+                <i class="bi bi-info-circle me-2"></i>
+                <strong>정보:</strong> 이것은 기본 알림 메시지입니다.
+            </div>
+            
+            <div class="alert alert-success" role="alert">
+                <i class="bi bi-check-circle me-2"></i>
+                <strong>성공!</strong> 작업이 완료되었습니다.
+            </div>
+            
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <i class="bi bi-exclamation-triangle me-2"></i>
+                <strong>경고!</strong> 이것은 닫을 수 있는 알림입니다.
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            
+            <div class="alert alert-danger" role="alert">
+                <i class="bi bi-x-circle me-2"></i>
+                <strong>오류!</strong> 문제가 발생했습니다.
+            </div>
+            
+            <div class="alert alert-info" role="alert">
+                <i class="bi bi-lightbulb me-2"></i>
+                <strong>팁:</strong> 유용한 정보를 제공합니다.
+            </div>
+        </div>
+        
+        <!-- 동적 알림 생성 -->
+        <div class="section">
+            <h2 class="mb-4">6. 동적 알림 생성</h2>
+            <div class="mb-3">
+                <button type="button" class="btn btn-success" onclick="showAlert('success')">
+                    성공 알림
+                </button>
+                <button type="button" class="btn btn-danger" onclick="showAlert('danger')">
+                    오류 알림
+                </button>
+                <button type="button" class="btn btn-warning" onclick="showAlert('warning')">
+                    경고 알림
+                </button>
+                <button type="button" class="btn btn-info" onclick="showAlert('info')">
+                    정보 알림
+                </button>
+            </div>
+            <div id="alertContainer"></div>
+        </div>
+        
+        <!-- 배지 (Badge) -->
+        <div class="section">
+            <h2 class="mb-4">7. 배지 (Badge)</h2>
+            <h3>
+                알림 
+                <span class="badge bg-primary">5</span>
+            </h3>
+            <h3>
+                메시지 
+                <span class="badge bg-success rounded-pill">12</span>
+            </h3>
+            
+            <button type="button" class="btn btn-primary">
+                알림 
+                <span class="badge bg-light text-dark">3</span>
+            </button>
+            
+            <button type="button" class="btn btn-outline-secondary">
+                프로필 
+                <span class="badge bg-danger">New</span>
+            </button>
+        </div>
+        
+        <!-- 스피너 -->
+        <div class="section">
+            <h2 class="mb-4">8. 스피너 (로딩)</h2>
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <div class="spinner-border text-success" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <div class="spinner-grow text-danger" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            
+            <div class="mt-3">
+                <button class="btn btn-primary" type="button" disabled>
+                    <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+                    로딩 중...
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        function showAlert(type) {
+            const alertContainer = document.getElementById('alertContainer');
+            const messages = {
+                success: { icon: 'check-circle', text: '작업이 성공적으로 완료되었습니다!' },
+                danger: { icon: 'x-circle', text: '오류가 발생했습니다!' },
+                warning: { icon: 'exclamation-triangle', text: '경고: 주의가 필요합니다!' },
+                info: { icon: 'info-circle', text: '정보: 참고하세요!' }
+            };
+            
+            const msg = messages[type];
+            const alertId = 'alert-' + Date.now();
+            
+            const alertHTML = `
+                <div class="alert alert-${type} alert-dismissible fade show" role="alert" id="${alertId}">
+                    <i class="bi bi-${msg.icon} me-2"></i>
+                    <strong>${msg.text}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            `;
+            
+            alertContainer.innerHTML = alertHTML;
+            
+            // 3초 후 자동 제거
+            setTimeout(() => {
+                const alertElement = document.getElementById(alertId);
+                if (alertElement) {
+                    const bsAlert = new bootstrap.Alert(alertElement);
+                    bsAlert.close();
+                }
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

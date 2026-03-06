@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap 카드 컴포넌트</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding: 40px 0;
+        }
+        .card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-bottom: 30px;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+        .icon-large {
+            font-size: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mb-5">
+            <i class="bi bi-card-heading me-2"></i>
+            Bootstrap 카드 컴포넌트 예제
+        </h1>
+        
+        <!-- 기본 카드 -->
+        <div class="row mb-5">
+            <div class="col-md-12">
+                <h2 class="mb-4">1. 기본 카드</h2>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">카드 제목</h5>
+                        <p class="card-text">
+                            이것은 기본 카드입니다. 간단한 텍스트와 제목을 포함할 수 있습니다.
+                        </p>
+                        <a href="#" class="btn btn-primary">자세히 보기</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="bi bi-star-fill text-warning me-2"></i>
+                            아이콘 카드
+                        </h5>
+                        <p class="card-text">
+                            아이콘과 함께 사용할 수 있는 카드입니다.
+                        </p>
+                        <a href="#" class="btn btn-outline-primary">더보기</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card border-success">
+                    <div class="card-body">
+                        <h5 class="card-title text-success">테두리 색상</h5>
+                        <p class="card-text">
+                            테두리 색상을 변경할 수 있습니다.
+                        </p>
+                        <a href="#" class="btn btn-success">확인</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 이미지 카드 -->
+        <div class="row mb-5">
+            <div class="col-md-12">
+                <h2 class="mb-4">2. 이미지 카드</h2>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img 
+                        src="https://via.placeholder.com/400x200/667eea/ffffff?text=Card+Image" 
+                        class="card-img-top" 
+                        alt="카드 이미지"
+                    >
+                    <div class="card-body">
+                        <h5 class="card-title">이미지 카드</h5>
+                        <p class="card-text">
+                            이미지가 포함된 카드입니다.
+                        </p>
+                        <a href="#" class="btn btn-primary">자세히</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card">
+                    <img 
+                        src="https://via.placeholder.com/400x200/764ba2/ffffff?text=Overlay" 
+                        class="card-img-top" 
+                        alt="오버레이"
+                    >
+                    <div class="card-img-overlay text-white">
+                        <h5 class="card-title">오버레이 카드</h5>
+                        <p class="card-text">
+                            이미지 위에 텍스트를 올릴 수 있습니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <i class="bi bi-heart-fill icon-large text-danger mb-3"></i>
+                        <h5 class="card-title">아이콘 카드</h5>
+                        <p class="card-text">
+                            아이콘을 사용한 카드입니다.
+                        </p>
+                        <a href="#" class="btn btn-danger">좋아요</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 헤더와 푸터가 있는 카드 -->
+        <div class="row mb-5">
+            <div class="col-md-12">
+                <h2 class="mb-4">3. 헤더/푸터 카드</h2>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">
+                            <i class="bi bi-info-circle me-2"></i>
+                            카드 헤더
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            헤더가 있는 카드입니다. 중요한 정보를 표시할 때 유용합니다.
+                        </p>
+                    </div>
+                    <div class="card-footer text-muted">
+                        <small>2시간 전</small>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0">
+                            <i class="bi bi-check-circle me-2"></i>
+                            성공 메시지
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            작업이 성공적으로 완료되었습니다!
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-success btn-sm">확인</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 그룹 카드 -->
+        <div class="row mb-5">
+            <div class="col-md-12">
+                <h2 class="mb-4">4. 카드 그룹</h2>
+            </div>
+            <div class="col-md-12">
+                <div class="card-group">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <i class="bi bi-lightning-charge-fill icon-large text-warning mb-3"></i>
+                            <h5 class="card-title">빠름</h5>
+                            <p class="card-text">빠른 성능</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <i class="bi bi-shield-check-fill icon-large text-success mb-3"></i>
+                            <h5 class="card-title">안전</h5>
+                            <p class="card-text">보안 강화</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <i class="bi bi-phone-fill icon-large text-info mb-3"></i>
+                            <h5 class="card-title">반응형</h5>
+                            <p class="card-text">모든 기기 지원</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 리스트 그룹 카드 -->
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="mb-4">5. 리스트 그룹 카드</h2>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">기능 목록</h5>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <i class="bi bi-check-circle-fill text-success me-2"></i>
+                            기능 1
+                        </li>
+                        <li class="list-group-item">
+                            <i class="bi bi-check-circle-fill text-success me-2"></i>
+                            기능 2
+                        </li>
+                        <li class="list-group-item">
+                            <i class="bi bi-x-circle-fill text-danger me-2"></i>
+                            기능 3 (비활성)
+                        </li>
+                    </ul>
+                    <div class="card-footer">
+                        <button class="btn btn-primary">업그레이드</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-dark text-white">
+                        <h5 class="mb-0">
+                            <i class="bi bi-list-ul me-2"></i>
+                            메뉴
+                        </h5>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <a href="#" class="text-decoration-none">
+                                <i class="bi bi-house me-2"></i>홈
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="#" class="text-decoration-none">
+                                <i class="bi bi-person me-2"></i>프로필
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="#" class="text-decoration-none">
+                                <i class="bi bi-gear me-2"></i>설정
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap 로그인 폼</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .login-container {
+            max-width: 400px;
+            width: 100%;
+        }
+        .login-card {
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        .login-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px 15px 0 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="login-container">
+            <!-- 기본 로그인 폼 -->
+            <div class="card login-card mb-4">
+                <div class="card-header login-header text-center py-4">
+                    <h3 class="mb-0">
+                        <i class="bi bi-person-circle me-2"></i>
+                        로그인
+                    </h3>
+                </div>
+                <div class="card-body p-4">
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">
+                                <i class="bi bi-person me-2"></i>사용자 이름
+                            </label>
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                id="username" 
+                                placeholder="사용자 이름을 입력하세요"
+                                required
+                            >
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="password" class="form-label">
+                                <i class="bi bi-lock me-2"></i>비밀번호
+                            </label>
+                            <input 
+                                type="password" 
+                                class="form-control" 
+                                id="password" 
+                                placeholder="비밀번호를 입력하세요"
+                                required
+                            >
+                        </div>
+                        
+                        <div class="mb-3 form-check">
+                            <input 
+                                type="checkbox" 
+                                class="form-check-input" 
+                                id="rememberMe"
+                            >
+                            <label class="form-check-label" for="rememberMe">
+                                로그인 상태 유지
+                            </label>
+                        </div>
+                        
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="bi bi-box-arrow-in-right me-2"></i>
+                                로그인
+                            </button>
+                        </div>
+                        
+                        <div class="text-center mt-3">
+                            <a href="#" class="text-decoration-none">비밀번호를 잊으셨나요?</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- 결과 표시 영역 -->
+            <div id="result" class="alert alert-info d-none" role="alert"></div>
+        </div>
+    </div>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // 폼 제출 처리
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const rememberMe = document.getElementById('rememberMe').checked;
+            
+            const resultDiv = document.getElementById('result');
+            resultDiv.classList.remove('d-none', 'alert-danger', 'alert-success');
+            
+            // 간단한 검증 (실제로는 서버와 통신)
+            if (username && password) {
+                resultDiv.classList.add('alert-success');
+                resultDiv.innerHTML = `
+                    <i class="bi bi-check-circle me-2"></i>
+                    <strong>로그인 성공!</strong><br>
+                    사용자: ${username}<br>
+                    로그인 상태 유지: ${rememberMe ? '예' : '아니오'}
+                `;
+            } else {
+                resultDiv.classList.add('alert-danger');
+                resultDiv.innerHTML = `
+                    <i class="bi bi-exclamation-triangle me-2"></i>
+                    <strong>오류!</strong> 사용자 이름과 비밀번호를 입력하세요.
+                `;
+            }
+        });
+    </script>
+</body>
+</html>

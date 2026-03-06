@@ -26,6 +26,21 @@ CREATE TABLE IF NOT EXISTS member_hobbies (
     INDEX idx_member_id (member_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='회원 취미 테이블';
 
+-- 회원 활동 로그 테이블
+CREATE TABLE IF NOT EXISTS member_logs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    member_id INT NOT NULL COMMENT '회원 ID',
+    action_type VARCHAR(50) NOT NULL COMMENT '활동 유형 (LOGIN, LOGOUT, UPDATE_PROFILE, CHANGE_PASSWORD 등)',
+    ip_address VARCHAR(50) COMMENT 'IP 주소',
+    user_agent VARCHAR(255) COMMENT '사용자 에이전트',
+    action_date DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '활동 일시',
+    description TEXT COMMENT '상세 설명',
+    FOREIGN KEY (member_id) REFERENCES members(id) ON DELETE CASCADE,
+    INDEX idx_member_id (member_id),
+    INDEX idx_action_type (action_type),
+    INDEX idx_action_date (action_date)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='회원 활동 로그 테이블';
+
 -- 테스트 데이터 (선택사항)
 -- INSERT INTO members (user_id, password, name, email, gender, city) 
 -- VALUES ('admin', '1234', '관리자', 'admin@test.com', '남', '서울');
