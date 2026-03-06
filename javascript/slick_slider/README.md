@@ -94,6 +94,42 @@ $(document).ready(function(){
 }
 ```
 
+### 🔧 화살표(Prev/Next)가 안 보일 때
+
+Slick 기본 화살표는 슬라이더 바깥쪽으로 약간 나가도록(`left: -25px`, `right: -25px`) 되어 있어서,
+슬라이더에 `overflow: hidden;` 이 걸려 있으면 **화살표가 잘려서 안 보이는 문제**가 자주 발생합니다.
+
+이럴 때는 아래 둘 중 하나를 적용하면 됩니다.
+
+1. **`overflow: hidden;` 제거**
+   ```css
+   .slider-basic {
+       min-height: 300px;
+       background: #fff;
+       border-radius: 8px;
+       /* overflow: hidden;  // 화살표 잘리면 이 줄을 빼 주세요 */
+   }
+   ```
+
+2. **화살표를 안쪽으로 위치 조정** (추천)
+   ```css
+   .slider .slick-prev {
+       left: 10px;           /* 기본 -25px → 안쪽으로 */
+       z-index: 20;
+   }
+   .slider .slick-next {
+       right: 10px;          /* 기본 -25px → 안쪽으로 */
+       z-index: 20;
+   }
+   .slider .slick-prev:before,
+   .slider .slick-next:before {
+       color: #333;          /* 배경 위에서 잘 보이게 색 지정 */
+       font-size: 30px;
+   }
+   ```
+
+위 CSS를 추가하면, 예제 `index.html` 처럼 여러 슬라이더를 쓸 때도 화살표가 안정적으로 보입니다.
+
 ---
 
 ## 주요 옵션
