@@ -603,3 +603,405 @@ ${name}  <!-- 이제 접근 가능 -->
 ---
 
 **이 예제를 완료하면 JSTL과 EL을 마스터할 수 있습니다! 💪**
+
+---
+
+## 🚀 JSTL-EL 3.0 버전 (고급)
+
+### 📌 JSTL 3.0 개요
+
+JSTL 3.0은 Jakarta EE 8 기반의 최신 버전으로, EL 3.0의 강력한 기능들을 지원합니다.
+
+### 주요 변경사항
+
+1. **네임스페이스 변경**
+   - `javax.servlet.*` → `jakarta.servlet.*`
+   - `javax.servlet.jsp.*` → `jakarta.servlet.jsp.*`
+
+2. **EL 3.0 지원**
+   - 람다 표현식
+   - 스트림 API
+   - 새로운 연산자
+   - 함수형 프로그래밍 스타일
+
+---
+
+## 📋 EL 3.0 주요 기능
+
+### 1. 람다 표현식 (Lambda Expressions)
+
+**기본 문법:**
+```jsp
+${(x) -> x * 2}
+```
+
+**사용 예시:**
+```jsp
+<c:set var="double" value="${(x) -> x * 2}" />
+${double(5)}  <!-- 결과: 10 -->
+```
+
+**복잡한 람다:**
+```jsp
+<!-- 두 개의 매개변수 -->
+${(x, y) -> x + y}
+
+<!-- 조건부 람다 -->
+${(x) -> x > 0 ? x : -x}
+```
+
+---
+
+### 2. 스트림 API
+
+**리스트 필터링:**
+```jsp
+<c:set var="numbers" value="${[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}" />
+
+<!-- 짝수만 필터링 -->
+${numbers.stream().filter(x -> x % 2 == 0).toList()}
+<!-- 결과: [2, 4, 6, 8, 10] -->
+```
+
+**리스트 변환 (map):**
+```jsp
+<!-- 각 요소를 2배로 -->
+${numbers.stream().map(x -> x * 2).toList()}
+<!-- 결과: [2, 4, 6, 8, 10, 12, 14, 16, 18, 20] -->
+```
+
+**리스트 집계:**
+```jsp
+<!-- 합계 -->
+${numbers.stream().sum()}
+<!-- 결과: 55 -->
+
+<!-- 최대값 -->
+${numbers.stream().max().get()}
+<!-- 결과: 10 -->
+
+<!-- 최소값 -->
+${numbers.stream().min().get()}
+<!-- 결과: 1 -->
+
+<!-- 평균 -->
+${numbers.stream().average().get()}
+<!-- 결과: 5.5 -->
+```
+
+---
+
+### 3. 문자열 스트림
+
+**문자열 처리:**
+```jsp
+<c:set var="text" value="Hello World Java JSP" />
+
+<!-- 단어로 분리 -->
+${text.split(' ').stream().toList()}
+<!-- 결과: [Hello, World, Java, JSP] -->
+
+<!-- 대문자로 변환 -->
+${text.split(' ').stream().map(s -> s.toUpperCase()).toList()}
+<!-- 결과: [HELLO, WORLD, JAVA, JSP] -->
+
+<!-- 길이가 4 이상인 단어만 -->
+${text.split(' ').stream().filter(s -> s.length() >= 4).toList()}
+<!-- 결과: [Hello, World, Java] -->
+```
+
+---
+
+### 4. 컬렉션 스트림
+
+**리스트 처리:**
+```jsp
+<%
+    List<String> fruits = Arrays.asList("apple", "banana", "cherry", "date");
+    request.setAttribute("fruits", fruits);
+%>
+
+<!-- 대문자로 변환 -->
+${fruits.stream().map(f -> f.toUpperCase()).toList()}
+<!-- 결과: [APPLE, BANANA, CHERRY, DATE] -->
+
+<!-- 'a'가 포함된 과일만 -->
+${fruits.stream().filter(f -> f.contains("a")).toList()}
+<!-- 결과: [apple, banana, date] -->
+
+<!-- 길이 순으로 정렬 -->
+${fruits.stream().sorted((a, b) -> a.length() - b.length()).toList()}
+<!-- 결과: [date, apple, banana, cherry] -->
+```
+
+---
+
+### 5. 조건부 필터링
+
+**복잡한 조건:**
+```jsp
+<c:set var="ages" value="${[15, 20, 25, 30, 35, 40]}" />
+
+<!-- 20세 이상 35세 이하 -->
+${ages.stream().filter(age -> age >= 20 && age <= 35).toList()}
+<!-- 결과: [20, 25, 30, 35] -->
+```
+
+---
+
+### 6. 중첩 스트림
+
+**2차원 리스트 처리:**
+```jsp
+<%
+    List<List<Integer>> matrix = Arrays.asList(
+        Arrays.asList(1, 2, 3),
+        Arrays.asList(4, 5, 6),
+        Arrays.asList(7, 8, 9)
+    );
+    request.setAttribute("matrix", matrix);
+%>
+
+<!-- 평탄화 (flatten) -->
+${matrix.stream().flatMap(row -> row.stream()).toList()}
+<!-- 결과: [1, 2, 3, 4, 5, 6, 7, 8, 9] -->
+
+<!-- 각 행의 합계 -->
+${matrix.stream().map(row -> row.stream().sum()).toList()}
+<!-- 결과: [6, 15, 24] -->
+```
+
+---
+
+### 7. 집계 함수
+
+**통계 계산:**
+```jsp
+<c:set var="scores" value="${[85, 92, 78, 96, 88]}" />
+
+<!-- 합계 -->
+합계: ${scores.stream().sum()}
+
+<!-- 평균 -->
+평균: ${scores.stream().average().get()}
+
+<!-- 최고점 -->
+최고점: ${scores.stream().max().get()}
+
+<!-- 최저점 -->
+최저점: ${scores.stream().min().get()}
+
+<!-- 개수 -->
+개수: ${scores.stream().count()}
+```
+
+---
+
+### 8. 문자열 템플릿
+
+**문자열 보간:**
+```jsp
+<c:set var="name" value="홍길동" />
+<c:set var="age" value="25" />
+
+<!-- EL 3.0 문자열 템플릿 (일부 구현) -->
+${"이름: " + name + ", 나이: " + age}
+```
+
+---
+
+### 9. 함수 참조
+
+**메서드 참조:**
+```jsp
+<c:set var="numbers" value="${['1', '2', '3', '4', '5']}" />
+
+<!-- 문자열을 정수로 변환 -->
+${numbers.stream().map(Integer::parseInt).toList()}
+<!-- 또는 -->
+${numbers.stream().map(s -> Integer.parseInt(s)).toList()}
+```
+
+---
+
+### 10. 실전 예제: 사용자 목록 필터링
+
+```jsp
+<%
+    List<Map<String, Object>> users = new ArrayList<>();
+    Map<String, Object> user1 = new HashMap<>();
+    user1.put("name", "홍길동");
+    user1.put("age", 25);
+    user1.put("city", "서울");
+    users.add(user1);
+    
+    Map<String, Object> user2 = new HashMap<>();
+    user2.put("name", "김철수");
+    user2.put("age", 30);
+    user2.put("city", "부산");
+    users.add(user2);
+    
+    Map<String, Object> user3 = new HashMap<>();
+    user3.put("name", "이영희");
+    user3.put("age", 22);
+    user3.put("city", "서울");
+    users.add(user3);
+    
+    request.setAttribute("users", users);
+%>
+
+<!-- 서울 거주자만 필터링 -->
+<c:forEach var="user" items="${users.stream().filter(u -> u.city == '서울').toList()}">
+    <p>${user.name} (${user.age}세) - ${user.city}</p>
+</c:forEach>
+
+<!-- 25세 이상만 필터링 -->
+<c:forEach var="user" items="${users.stream().filter(u -> u.age >= 25).toList()}">
+    <p>${user.name} (${user.age}세)</p>
+</c:forEach>
+
+<!-- 나이순으로 정렬 -->
+<c:forEach var="user" items="${users.stream().sorted((a, b) -> a.age - b.age).toList()}">
+    <p>${user.name}: ${user.age}세</p>
+</c:forEach>
+```
+
+---
+
+## 🔄 JSTL 1.2 vs JSTL 3.0 비교
+
+### 네임스페이스 변경
+
+**JSTL 1.2:**
+```jsp
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+```
+
+**JSTL 3.0:**
+```jsp
+<%@ taglib prefix="c" uri="https://jakarta.ee/xml/ns/jakartaee/jsp/jstl/core" %>
+```
+
+### 의존성 변경
+
+**JSTL 1.2:**
+```xml
+<dependency>
+    <groupId>javax.servlet</groupId>
+    <artifactId>jstl</artifactId>
+    <version>1.2</version>
+</dependency>
+```
+
+**JSTL 3.0:**
+```xml
+<dependency>
+    <groupId>jakarta.servlet.jsp.jstl</groupId>
+    <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+    <version>3.0.0</version>
+</dependency>
+<dependency>
+    <groupId>org.glassfish.web</groupId>
+    <artifactId>jakarta.servlet.jsp.jstl</artifactId>
+    <version>3.0.0</version>
+</dependency>
+```
+
+---
+
+## 💡 EL 3.0 활용 팁
+
+### 팁 1: 복잡한 데이터 변환
+
+```jsp
+<!-- 사용자 목록에서 이름만 추출 -->
+${users.stream().map(u -> u.name).toList()}
+
+<!-- 나이의 평균 계산 -->
+${users.stream().map(u -> u.age).average().get()}
+```
+
+### 팁 2: 중복 제거
+
+```jsp
+<c:set var="duplicates" value="${[1, 2, 2, 3, 3, 3, 4]}" />
+
+<!-- 중복 제거 -->
+${duplicates.stream().distinct().toList()}
+<!-- 결과: [1, 2, 3, 4] -->
+```
+
+### 팁 3: 제한 (Limit)
+
+```jsp
+<!-- 처음 3개만 -->
+${numbers.stream().limit(3).toList()}
+
+<!-- 처음 5개 제외 -->
+${numbers.stream().skip(5).toList()}
+```
+
+### 팁 4: 매칭 (Matching)
+
+```jsp
+<!-- 모든 요소가 조건을 만족하는지 -->
+${numbers.stream().allMatch(x -> x > 0)}  <!-- 모두 양수인가? -->
+
+<!-- 하나라도 조건을 만족하는지 -->
+${numbers.stream().anyMatch(x -> x > 5)}  <!-- 5보다 큰 수가 있는가? -->
+
+<!-- 조건을 만족하는 요소가 없는지 -->
+${numbers.stream().noneMatch(x -> x < 0)}  <!-- 음수가 없는가? -->
+```
+
+---
+
+## ⚠️ 주의사항
+
+### 1. 호환성
+- JSTL 3.0은 Jakarta EE 8 이상에서만 동작
+- 기존 Java EE 8 프로젝트는 마이그레이션 필요
+- Tomcat 9.0 이상 필요
+
+### 2. 성능
+- 스트림 연산은 메모리를 사용
+- 큰 데이터셋에서는 주의 필요
+- 필요시 인덱스 기반 접근 고려
+
+### 3. 브라우저 호환성
+- EL 3.0은 서버 측에서 처리
+- 브라우저와 무관
+- 모든 브라우저에서 동일하게 동작
+
+---
+
+## 📚 학습 순서
+
+1. **기본 JSTL 1.2** (현재 파일)
+   - 기본 태그 사용법
+   - EL 기본 표현식
+
+2. **EL 3.0 기초**
+   - 람다 표현식
+   - 스트림 기본
+
+3. **EL 3.0 고급**
+   - 복잡한 스트림 연산
+   - 실전 활용
+
+---
+
+## ✅ EL 3.0 체크리스트
+
+- [ ] 람다 표현식 사용 가능
+- [ ] 스트림 API 사용 가능
+- [ ] 필터링 (filter) 사용 가능
+- [ ] 변환 (map) 사용 가능
+- [ ] 집계 함수 (sum, average, max, min) 사용 가능
+- [ ] 정렬 (sorted) 사용 가능
+- [ ] 중복 제거 (distinct) 사용 가능
+- [ ] 매칭 함수 (allMatch, anyMatch, noneMatch) 사용 가능
+
+---
+
+**JSTL-EL 3.0을 마스터하면 현대적인 JSP 개발이 가능합니다! 🚀**
