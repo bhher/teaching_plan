@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>날씨 정보 - OpenWeatherMap API</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 2em;
+        }
+        
+        .city-selector {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .city-selector select {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            background: white;
+            cursor: pointer;
+            outline: none;
+        }
+        
+        .city-selector select:hover {
+            border-color: #764ba2;
+        }
+        
+        .weather-info {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .weather-icon {
+            width: 120px;
+            height: 120px;
+            margin: 20px auto;
+        }
+        
+        .temperature {
+            font-size: 4em;
+            font-weight: bold;
+            color: #333;
+            margin: 20px 0;
+        }
+        
+        .description {
+            font-size: 1.5em;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .detail-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .detail-label {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .detail-value {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .json-viewer {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .error {
+            background: #fee;
+            color: #c33;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .note {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #1976d2;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌤️ 날씨 정보</h1>
+        
+        <div class="city-selector">
+            <select id="citySelect" onchange="changeCity()">
+                <option value="1897007" selected>하남</option>
+                <option value="1835848">서울</option>
+                <option value="1841610">부산</option>
+                <option value="1843561">인천</option>
+                <option value="1846266">대구</option>
+            </select>
+        </div>
+        
+        <div id="errorMessage" class="error" style="display: none;"></div>
+        
+        <div id="loadingMessage" class="loading">날씨 정보를 불러오는 중...</div>
+        
+        <div id="weatherInfo" class="weather-info" style="display: none;">
+            <p style="font-size: 1.2em; margin-bottom: 20px;">
+                <strong id="cityName">하남</strong> 날씨
+            </p>
+            
+            <div class="note">
+                <strong>참고:</strong> 실제 날씨 정보를 표시하려면 JSON 파싱이 필요합니다.<br>
+                현재는 API 응답 JSON만 표시합니다.
+            </div>
+            
+            <div class="json-viewer" id="jsonViewer"></div>
+        </div>
+        
+        <div class="note">
+            <strong>사용 방법:</strong><br>
+            1. API 키를 본인의 키로 변경<br>
+            2. JSON 파싱 코드 추가하여 날씨 정보 추출<br>
+            3. 온도, 날씨 설명, 아이콘 등을 화면에 표시<br>
+            4. CORS 문제가 발생할 수 있으므로 프록시 서버 사용 권장
+        </div>
+    </div>
+    
+    <script>
+        // API 설정
+        var apiKey = "cd63accc133fc76e1f94a3f270442688";
+        
+        // 도시 정보
+        var cities = {
+            '1897007': '하남',
+            '1835848': '서울',
+            '1841610': '부산',
+            '1843561': '인천',
+            '1846266': '대구'
+        };
+        
+        // URL에서 파라미터 가져오기
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+        
+        // 날씨 정보 가져오기
+        function loadWeather(cityId) {
+            var cityName = cities[cityId] || '하남';
+            if (!cityId) {
+                cityId = '1897007'; // 기본값: 하남
+            }
+            
+            // 로딩 표시
+            document.getElementById('loadingMessage').style.display = 'block';
+            document.getElementById('weatherInfo').style.display = 'none';
+            document.getElementById('errorMessage').style.display = 'none';
+            
+            // API 호출
+            var url = 'https://api.openweathermap.org/data/2.5/weather?id=' + cityId + '&appid=' + apiKey + '&units=metric';
+            
+            fetch(url)
+                .then(function(response) {
+                    if (!response.ok) {
+                        throw new Error('날씨 정보를 가져올 수 없습니다. (상태 코드: ' + response.status + ')');
+                    }
+                    return response.text();
+                })
+                .then(function(jsonText) {
+                    // JSON 표시
+                    displayJson(jsonText, cityName);
+                })
+                .catch(function(error) {
+                    // 에러 표시
+                    showError('날씨 정보를 가져오는 중 오류가 발생했습니다: ' + error.message);
+                });
+        }
+        
+        // JSON 표시
+        function displayJson(jsonText, cityName) {
+            document.getElementById('loadingMessage').style.display = 'none';
+            document.getElementById('errorMessage').style.display = 'none';
+            document.getElementById('weatherInfo').style.display = 'block';
+            
+            document.getElementById('cityName').textContent = cityName;
+            
+            // JSON 포맷팅
+            try {
+                var jsonObj = JSON.parse(jsonText);
+                var formattedJson = JSON.stringify(jsonObj, null, 2);
+                document.getElementById('jsonViewer').textContent = formattedJson;
+            } catch (e) {
+                document.getElementById('jsonViewer').textContent = jsonText;
+            }
+        }
+        
+        // 에러 표시
+        function showError(message) {
+            document.getElementById('loadingMessage').style.display = 'none';
+            document.getElementById('weatherInfo').style.display = 'none';
+            document.getElementById('errorMessage').style.display = 'block';
+            document.getElementById('errorMessage').innerHTML = '<p>' + message + '</p><p style="margin-top: 10px; font-size: 0.9em;">API 키와 도시 코드를 확인해주세요.</p>';
+        }
+        
+        // 도시 변경
+        function changeCity() {
+            var select = document.getElementById('citySelect');
+            var cityId = select.value;
+            loadWeather(cityId);
+            
+            // URL 업데이트
+            var newUrl = window.location.pathname + '?cityId=' + cityId;
+            window.history.pushState({}, '', newUrl);
+        }
+        
+        // 페이지 로드 시 날씨 정보 가져오기
+        window.addEventListener('DOMContentLoaded', function() {
+            var cityId = getUrlParameter('cityId');
+            if (!cityId) {
+                cityId = '1897007'; // 기본값: 하남
+            }
+            
+            // 셀렉트 박스 설정
+            var select = document.getElementById('citySelect');
+            select.value = cityId;
+            
+            // 날씨 정보 로드
+            loadWeather(cityId);
+        });
+    </script>
+</body>
+</html>

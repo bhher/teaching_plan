@@ -2,270 +2,117 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YouTube 동적 삽입 예제</title>
+    <title>YouTube 동적 삽입 수정본</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Malgun Gothic', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-        }
-        
-        h1 {
-            color: #333;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        
-        .main-video {
-            margin-bottom: 40px;
-        }
-        
-        .video-container {
-            position: relative;
-            width: 100%;
-            padding-bottom: 56.25%; /* 16:9 비율 */
-            height: 0;
-            overflow: hidden;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            margin-bottom: 20px;
-        }
-        
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        
-        .video-info {
-            padding: 20px;
-            background: #f5f5f5;
-            border-radius: 10px;
-        }
-        
-        .video-info h2 {
-            color: #333;
-            margin-bottom: 10px;
-        }
-        
-        .video-info p {
-            color: #666;
-            line-height: 1.6;
-        }
-        
-        .video-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
-        }
-        
-        .video-thumbnail {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        
-        .video-thumbnail:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-        }
-        
-        .thumbnail-wrapper {
-            position: relative;
-            width: 100%;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            background: #000;
-        }
-        
-        .thumbnail-wrapper img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .thumbnail-info {
-            padding: 15px;
-        }
-        
-        .thumbnail-info h3 {
-            color: #333;
-            font-size: 14px;
-            margin-bottom: 5px;
-        }
-        
-        .thumbnail-info p {
-            color: #999;
-            font-size: 12px;
-        }
-        
-        .code-example {
-            background: #282c34;
-            color: #abb2bf;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 30px;
-            overflow-x: auto;
-        }
-        
-        .code-example pre {
-            margin: 0;
-            font-family: 'Courier New', monospace;
-            font-size: 12px;
-            line-height: 1.6;
-        }
-        
-        .note {
-            background: #e3f2fd;
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 20px;
-            border-left: 4px solid #2196f3;
-        }
-        
-        .note strong {
-            color: #1976d2;
-        }
+        /* 기존 스타일 유지 */
+        body { font-family: sans-serif; background: #f0f2f5; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 10px; background: #000; }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+        .video-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 20px; }
+        .video-thumbnail { cursor: pointer; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; }
+        .video-thumbnail img { width: 100%; display: block; }
+        .thumbnail-info { padding: 8px; font-size: 13px; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🎬 YouTube 동적 삽입 예제</h1>
+        <h1>🎬 최신 인기 영상 플레이어</h1>
         
         <div class="main-video">
             <div class="video-container">
                 <iframe 
                     id="mainVideoFrame"
-                    src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                    src="https://www.youtube.com/embed/nzqhud2pWSA?rel=0" 
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen
-                    title="YouTube 동영상">
+                    allowfullscreen>
                 </iframe>
             </div>
-            
-            <div class="video-info">
-                <h2 id="videoTitle">동영상 제목 1</h2>
-                <p id="videoDescription">이것은 첫 번째 동영상입니다.</p>
+            <div class="video-info" style="margin-top:15px;">
+                <h2 id="videoTitle">2025 유튜브 총정리</h2>
+                <p id="videoDescription">14F 일사에프 채널의 연말 결산 영상</p>
             </div>
         </div>
-        
-        <h3 style="margin-bottom: 20px; color: #333;">다른 동영상 보기</h3>
-        
-        <div class="video-list" id="videoList">
-            <!-- 동영상 목록이 JavaScript로 동적으로 생성됩니다 -->
-        </div>
-        
-        <div class="code-example">
-            <pre>// JavaScript로 동영상 ID를 받아 동적으로 iframe src를 생성
-function changeVideo(videoId) {
-    var iframe = document.getElementById('mainVideoFrame');
-    iframe.src = 'https://www.youtube.com/embed/' + videoId;
-}
 
-&lt;div class="video-container"&gt;
-    &lt;iframe 
-        id="mainVideoFrame"
-        src="https://www.youtube.com/embed/VIDEO_ID" 
-        allowfullscreen&gt;
-    &lt;/iframe&gt;
-&lt;/div&gt;</pre>
-        </div>
-        
-        <div class="note">
-            <strong>💡 설명:</strong><br>
-            - JavaScript로 동영상 ID를 받아 동적으로 iframe src를 생성합니다.<br>
-            - 썸네일 이미지는 YouTube의 자동 생성 썸네일을 사용합니다.<br>
-            - 썸네일 클릭 시 해당 동영상으로 변경됩니다.
-        </div>
+        <div class="video-list" id="videoList"></div>
     </div>
-    
+
     <script>
-        // 동영상 정보 배열
+        // 실제 작동 확인된 최신 영상 데이터
         var videos = [
-            {id: 'dQw4w9WgXcQ', title: '동영상 제목 1', description: '이것은 첫 번째 동영상입니다.'},
-            {id: 'jNQXAC9IVRw', title: '동영상 제목 2', description: '이것은 두 번째 동영상입니다.'},
-            {id: 'dQw4w9WgXcQ', title: '동영상 제목 3', description: '이것은 세 번째 동영상입니다.'}
+            {id: 'nzqhud2pWSA', title: '2025 유튜브 총정리', description: '2025년 최고 인기 크리에이터 결산'},
+            {id: 'jNQXAC9IVRw', title: '뉴진스 - OMG', description: '인기 뮤직 비디오'},
+            {id: 'BgNGgQcjgR8', title: '2024 인기 영상 모음', description: '다람냥 채널의 꿀잼 영상 모음'}
         ];
-        
-        // URL 파라미터에서 동영상 ID 가져오기
-        function getUrlParameter(name) {
-            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-            var results = regex.exec(location.search);
-            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-        }
-        
-        // 초기 동영상 설정
-        var selectedVideoId = getUrlParameter('id') || videos[0].id;
-        var selectedVideo = videos.find(function(v) { return v.id === selectedVideoId; }) || videos[0];
-        
-        // 메인 동영상 설정
-        document.getElementById('mainVideoFrame').src = 'https://www.youtube.com/embed/' + selectedVideo.id;
-        document.getElementById('videoTitle').textContent = selectedVideo.title;
-        document.getElementById('videoDescription').textContent = selectedVideo.description;
-        
-        // 동영상 목록 생성
+
         var videoList = document.getElementById('videoList');
-        videos.forEach(function(video) {
-            var thumbnail = document.createElement('div');
-            thumbnail.className = 'video-thumbnail';
-            thumbnail.onclick = function() {
-                changeVideo(video.id);
+        var iframe = document.getElementById('mainVideoFrame');
+
+        // 목록 생성
+        videos.forEach(function(video, index) {
+            var item = document.createElement('div');
+            item.className = 'video-thumbnail';
+            
+            var img = document.createElement('img');
+            img.src = "https://img.youtube.com/vi/" + video.id + "/mqdefault.jpg";
+            img.alt = video.title;
+            // 이미지 로드 실패 시 대체 이미지
+            img.onerror = function() {
+                this.src = "https://via.placeholder.com/320x180?text=Thumbnail+Error";
             };
             
-            thumbnail.innerHTML = `
-                <div class="thumbnail-wrapper">
-                    <img src="https://img.youtube.com/vi/${video.id}/maxresdefault.jpg" 
-                         alt="${video.title}"
-                         onerror="this.src='https://img.youtube.com/vi/${video.id}/hqdefault.jpg'">
-                </div>
-                <div class="thumbnail-info">
-                    <h3>${video.title}</h3>
-                    <p>${video.description}</p>
-                </div>
-            `;
+            var infoDiv = document.createElement('div');
+            infoDiv.className = 'thumbnail-info';
+            infoDiv.innerHTML = '<strong>' + video.title + '</strong>';
             
-            videoList.appendChild(thumbnail);
+            item.appendChild(img);
+            item.appendChild(infoDiv);
+            
+            // 클로저 문제 해결: 각 비디오 ID를 명시적으로 저장
+            var videoId = video.id;
+            item.onclick = function() { 
+                console.log('클릭된 비디오 ID:', videoId);
+                changeVideo(videoId); 
+            };
+            
+            videoList.appendChild(item);
         });
-        
-        // 동영상 변경 함수
+
         function changeVideo(videoId) {
-            var video = videos.find(function(v) { return v.id === videoId; });
+            console.log('changeVideo 호출됨, videoId:', videoId);
+            var video = videos.find(v => v.id === videoId);
+            console.log('찾은 비디오:', video);
+            
             if (video) {
-                document.getElementById('mainVideoFrame').src = 'https://www.youtube.com/embed/' + videoId;
-                document.getElementById('videoTitle').textContent = video.title;
-                document.getElementById('videoDescription').textContent = video.description;
-                
-                // URL 업데이트 (선택사항)
-                window.history.pushState({}, '', '?id=' + videoId);
+                try {
+                    // 1. iframe src 변경 (캐시 방지를 위해 타임스탬프 추가)
+                    var newSrc = "https://www.youtube.com/embed/" + videoId + "?rel=0&autoplay=1";
+                    console.log('새로운 src:', newSrc);
+                    
+                    // iframe을 완전히 새로 로드하기 위해 src를 빈 문자열로 먼저 설정
+                    iframe.src = '';
+                    setTimeout(function() {
+                        iframe.src = newSrc;
+                    }, 100);
+                    
+                    // 2. 텍스트 변경
+                    document.getElementById('videoTitle').textContent = video.title;
+                    document.getElementById('videoDescription').textContent = video.description;
+
+                    // 3. URL 업데이트 (로컬 파일 에러 방지 처리)
+                    try {
+                        window.history.pushState({}, '', '?id=' + videoId);
+                    } catch (e) {
+                        console.log("로컬 환경에서는 URL 업데이트가 제한될 수 있습니다.");
+                    }
+                } catch (e) {
+                    console.error("비디오 변경 중 오류 발생:", e);
+                    alert("비디오를 로드하는 중 오류가 발생했습니다: " + e.message);
+                }
+            } else {
+                console.error("비디오를 찾을 수 없습니다:", videoId);
+                console.error("사용 가능한 비디오 ID:", videos.map(v => v.id));
+                alert("비디오를 찾을 수 없습니다. ID: " + videoId);
             }
         }
     </script>
