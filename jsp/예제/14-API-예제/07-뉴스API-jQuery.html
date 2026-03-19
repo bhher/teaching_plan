@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>뉴스 API - jQuery 예제</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .search-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .search-box input {
+            flex: 1;
+            padding: 12px 20px;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+        
+        .search-box button {
+            padding: 12px 30px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .search-box button:hover {
+            background: #764ba2;
+        }
+        
+        .category-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .category-btn {
+            padding: 8px 20px;
+            background: #f5f7fa;
+            border: 2px solid #667eea;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .category-btn:hover,
+        .category-btn.active {
+            background: #667eea;
+            color: white;
+        }
+        
+        .news-list {
+            display: grid;
+            gap: 20px;
+        }
+        
+        .news-item {
+            background: #f5f7fa;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .news-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .news-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .news-title a {
+            color: #333;
+            text-decoration: none;
+        }
+        
+        .news-title a:hover {
+            color: #667eea;
+        }
+        
+        .news-description {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .news-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9em;
+            color: #999;
+        }
+        
+        .news-source {
+            font-weight: bold;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+        
+        .error {
+            background: #fee;
+            color: #c33;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📰 뉴스 API - jQuery 예제</h1>
+        
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="검색어를 입력하세요" 
+                   onkeypress="if(event.key === 'Enter') searchNews()">
+            <button onclick="searchNews()">검색</button>
+        </div>
+        
+        <div class="category-buttons">
+            <button class="category-btn active" onclick="loadNewsByCategory('general')">일반</button>
+            <button class="category-btn" onclick="loadNewsByCategory('technology')">기술</button>
+            <button class="category-btn" onclick="loadNewsByCategory('business')">비즈니스</button>
+            <button class="category-btn" onclick="loadNewsByCategory('sports')">스포츠</button>
+            <button class="category-btn" onclick="loadNewsByCategory('entertainment')">엔터테인먼트</button>
+        </div>
+        
+        <div id="loading" class="loading">뉴스를 불러오는 중...</div>
+        <div id="error" class="error" style="display:none;"></div>
+        <div id="newsList" class="news-list"></div>
+    </div>
+    
+    <script>
+        // NewsAPI 키 (실제 사용 시 본인의 키로 변경)
+        // 무료로 발급받을 수 있습니다: https://newsapi.org/
+        var apiKey = "YOUR_NEWSAPI_KEY";
+        var currentCategory = 'general';
+        
+        function loadNewsByCategory(category) {
+            currentCategory = category;
+            
+            // 카테고리 버튼 활성화 상태 변경
+            $('.category-btn').removeClass('active');
+            $('.category-btn').each(function() {
+                if ($(this).text() === getCategoryName(category)) {
+                    $(this).addClass('active');
+                }
+            });
+            
+            loadNews('category=' + category);
+        }
+        
+        function getCategoryName(category) {
+            var names = {
+                'general': '일반',
+                'technology': '기술',
+                'business': '비즈니스',
+                'sports': '스포츠',
+                'entertainment': '엔터테인먼트'
+            };
+            return names[category] || category;
+        }
+        
+        function searchNews() {
+            var query = $('#searchInput').val();
+            if (!query || query.trim() === '') {
+                alert('검색어를 입력하세요.');
+                return;
+            }
+            
+            loadNews('q=' + encodeURIComponent(query));
+        }
+        
+        function loadNews(params) {
+            // API 키가 없으면 안내 메시지 표시
+            if (apiKey === "YOUR_NEWSAPI_KEY") {
+                $('#loading').hide();
+                $('#error').show().html(
+                    '<p>⚠️ NewsAPI 키가 필요합니다.</p>' +
+                    '<p style="margin-top:10px; font-size:0.9em;">' +
+                    '1. https://newsapi.org/ 접속<br>' +
+                    '2. Sign Up으로 계정 생성<br>' +
+                    '3. API 키 발급<br>' +
+                    '4. 코드의 apiKey 변수에 키 입력</p>' +
+                    '<p style="margin-top:10px; font-size:0.9em; color:#999;">' +
+                    '참고: 개발 환경에서는 localhost에서만 작동합니다.</p>'
+                );
+                $('#newsList').empty();
+                return;
+            }
+            
+            $('#loading').show();
+            $('#error').hide();
+            $('#newsList').empty();
+            
+            // NewsAPI는 개발 환경에서만 작동 (localhost)
+            // 실제 배포 시에는 서버 사이드에서 호출해야 합니다
+            var url = 'https://newsapi.org/v2/top-headlines?' + params + '&country=kr&apiKey=' + apiKey;
+            
+            $.ajax({
+                url: url,
+                method: 'GET',
+                success: function(data) {
+                    $('#loading').hide();
+                    
+                    if (data.articles && data.articles.length > 0) {
+                        data.articles.forEach(function(article) {
+                            if (article.title && article.title !== '[Removed]') {
+                                var newsItem = $('<div>').addClass('news-item');
+                                
+                                var title = $('<div>').addClass('news-title');
+                                if (article.url) {
+                                    title.append($('<a>').attr('href', article.url).attr('target', '_blank').text(article.title));
+                                } else {
+                                    title.text(article.title);
+                                }
+                                
+                                var description = $('<div>').addClass('news-description').text(
+                                    article.description || '설명이 없습니다.'
+                                );
+                                
+                                var meta = $('<div>').addClass('news-meta');
+                                meta.append($('<span>').addClass('news-source').text(article.source.name || '알 수 없음'));
+                                
+                                if (article.publishedAt) {
+                                    var date = new Date(article.publishedAt);
+                                    meta.append($('<span>').text(date.toLocaleDateString('ko-KR')));
+                                }
+                                
+                                newsItem.append(title).append(description).append(meta);
+                                $('#newsList').append(newsItem);
+                            }
+                        });
+                    } else {
+                        $('#newsList').html('<div style="text-align:center; padding:40px;">뉴스가 없습니다.</div>');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    $('#loading').hide();
+                    var errorMsg = '뉴스를 불러오는 중 오류가 발생했습니다.';
+                    
+                    if (xhr.status === 401) {
+                        errorMsg = 'API 키가 유효하지 않습니다.';
+                    } else if (xhr.status === 429) {
+                        errorMsg = 'API 사용량을 초과했습니다. 잠시 후 다시 시도해주세요.';
+                    } else if (xhr.status === 0) {
+                        errorMsg = 'CORS 오류가 발생했습니다. 서버를 통해 실행하거나 NewsAPI의 CORS 정책을 확인하세요.';
+                    }
+                    
+                    $('#error').show().text(errorMsg);
+                }
+            });
+        }
+        
+        // 초기 로드
+        $(document).ready(function() {
+            loadNewsByCategory('general');
+        });
+    </script>
+</body>
+</html>

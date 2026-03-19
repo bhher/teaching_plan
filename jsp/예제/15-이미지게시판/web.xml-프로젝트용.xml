@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
+         https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+         version="6.0">
+
+    <display-name>Image Board</display-name>
+    
+    <!-- ✅ 파일 업로드 처리 JSP에 multipart 설정 추가 -->
+    <servlet>
+        <servlet-name>BoardWriteProcess</servlet-name>
+        <jsp-file>/board_write_process.jsp</jsp-file>
+        <multipart-config>
+            <!-- 최대 파일 크기: 10MB -->
+            <max-file-size>10485760</max-file-size>
+            <!-- 최대 요청 크기: 10MB -->
+            <max-request-size>10485760</max-request-size>
+            <!-- 파일 크기 임계값: 0 (모든 파일을 디스크에 저장) -->
+            <file-size-threshold>0</file-size-threshold>
+        </multipart-config>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>BoardWriteProcess</servlet-name>
+        <url-pattern>/board_write_process.jsp</url-pattern>
+    </servlet-mapping>
+    
+    <!-- 인코딩 필터 -->
+    <filter>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+    
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
+    <!-- 세션 타임아웃 설정 -->
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
+    
+    <!-- 웰컴 파일 설정 (선택사항) -->
+    <welcome-file-list>
+        <welcome-file>board_write.jsp</welcome-file>
+    </welcome-file-list>
+    
+</web-app>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이미지 API - Unsplash 예제</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .search-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .search-box input {
+            flex: 1;
+            padding: 12px 20px;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+        
+        .search-box button {
+            padding: 12px 30px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .image-card {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .image-card:hover {
+            transform: scale(1.05);
+        }
+        
+        .image-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .image-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 15px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .image-card:hover .image-info {
+            opacity: 1;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📸 이미지 API - Unsplash 예제</h1>
+        
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="검색어를 입력하세요 (예: nature, city, food)" 
+                   onkeypress="if(event.key === 'Enter') searchImages()">
+            <button onclick="searchImages()">검색</button>
+        </div>
+        
+        <div id="loading" class="loading" style="display:none;">이미지를 불러오는 중...</div>
+        <div id="imageGrid" class="image-grid"></div>
+    </div>
+    
+    <script>
+        // Unsplash Access Key (실제 사용 시 본인의 키로 변경)
+        // 무료로 발급받을 수 있습니다: https://unsplash.com/developers
+        var accessKey = "YOUR_UNSPLASH_ACCESS_KEY";
+        
+        function searchImages(query) {
+            if (!query) {
+                query = document.getElementById('searchInput').value || 'nature';
+            }
+            
+            // Access Key가 없으면 안내 메시지 표시
+            if (accessKey === "YOUR_UNSPLASH_ACCESS_KEY") {
+                document.getElementById('imageGrid').innerHTML = 
+                    '<div style="text-align:center; padding:40px; color:#666;">' +
+                    '<p>⚠️ Unsplash Access Key가 필요합니다.</p>' +
+                    '<p style="margin-top:10px; font-size:0.9em;">' +
+                    '1. https://unsplash.com/developers 접속<br>' +
+                    '2. 앱 등록 후 Access Key 발급<br>' +
+                    '3. 코드의 accessKey 변수에 키 입력</p>' +
+                    '</div>';
+                return;
+            }
+            
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('imageGrid').innerHTML = '';
+            
+            fetch('https://api.unsplash.com/search/photos?query=' + encodeURIComponent(query) + '&per_page=12&client_id=' + accessKey)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('loading').style.display = 'none';
+                    
+                    var grid = document.getElementById('imageGrid');
+                    if (data.results && data.results.length > 0) {
+                        data.results.forEach(function(photo) {
+                            var card = document.createElement('div');
+                            card.className = 'image-card';
+                            card.innerHTML = `
+                                <img src="${photo.urls.small}" alt="${photo.alt_description || 'Image'}">
+                                <div class="image-info">
+                                    <div>${photo.user.name}</div>
+                                    <div style="font-size:0.9em; margin-top:5px;">${photo.description || photo.alt_description || ''}</div>
+                                </div>
+                            `;
+                            card.onclick = function() {
+                                window.open(photo.links.html, '_blank');
+                            };
+                            grid.appendChild(card);
+                        });
+                    } else {
+                        grid.innerHTML = '<div style="text-align:center; padding:40px;">검색 결과가 없습니다.</div>';
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('loading').style.display = 'none';
+                    document.getElementById('imageGrid').innerHTML = 
+                        '<div style="text-align:center; padding:40px; color:#c33;">이미지를 불러오는 중 오류가 발생했습니다.</div>';
+                });
+        }
+        
+        // 초기 로드
+        window.addEventListener('DOMContentLoaded', function() {
+            searchImages('nature');
+        });
+    </script>
+</body>
+</html>

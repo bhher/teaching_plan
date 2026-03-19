@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>인용구 API 예제</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 700px;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .quote-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .quote-text {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-style: italic;
+        }
+        
+        .quote-author {
+            font-size: 1.2em;
+            color: #666;
+            text-align: right;
+        }
+        
+        .quote-tags {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+        
+        .controls {
+            text-align: center;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+        
+        .btn:hover {
+            background: #764ba2;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💬 인용구 API 예제</h1>
+        
+        <div id="loading" class="loading">인용구를 불러오는 중...</div>
+        
+        <div id="quoteCard" class="quote-card" style="display:none;">
+            <div class="quote-text" id="quoteText"></div>
+            <div class="quote-author" id="quoteAuthor"></div>
+            <div class="quote-tags" id="quoteTags"></div>
+        </div>
+        
+        <div class="controls">
+            <button class="btn" onclick="loadQuote()">새로운 인용구</button>
+            <button class="btn" onclick="loadRandomQuote()">랜덤 인용구</button>
+        </div>
+    </div>
+    
+    <script>
+        function loadQuote() {
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('quoteCard').style.display = 'none';
+            
+            fetch('https://api.quotable.io/random')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('loading').style.display = 'none';
+                    document.getElementById('quoteCard').style.display = 'flex';
+                    
+                    document.getElementById('quoteText').textContent = '"' + data.content + '"';
+                    document.getElementById('quoteAuthor').textContent = '- ' + data.author;
+                    
+                    var tagsDiv = document.getElementById('quoteTags');
+                    tagsDiv.innerHTML = '';
+                    data.tags.forEach(function(tag) {
+                        var tagSpan = document.createElement('span');
+                        tagSpan.className = 'tag';
+                        tagSpan.textContent = tag;
+                        tagsDiv.appendChild(tagSpan);
+                    });
+                })
+                .catch(error => {
+                    document.getElementById('loading').style.display = 'none';
+                    alert('인용구를 불러오는 중 오류가 발생했습니다.');
+                });
+        }
+        
+        function loadRandomQuote() {
+            var tags = ['inspirational', 'success', 'wisdom', 'life', 'motivational'];
+            var randomTag = tags[Math.floor(Math.random() * tags.length)];
+            
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('quoteCard').style.display = 'none';
+            
+            fetch('https://api.quotable.io/random?tags=' + randomTag)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('loading').style.display = 'none';
+                    document.getElementById('quoteCard').style.display = 'flex';
+                    
+                    document.getElementById('quoteText').textContent = '"' + data.content + '"';
+                    document.getElementById('quoteAuthor').textContent = '- ' + data.author;
+                    
+                    var tagsDiv = document.getElementById('quoteTags');
+                    tagsDiv.innerHTML = '';
+                    data.tags.forEach(function(tag) {
+                        var tagSpan = document.createElement('span');
+                        tagSpan.className = 'tag';
+                        tagSpan.textContent = tag;
+                        tagsDiv.appendChild(tagSpan);
+                    });
+                })
+                .catch(error => {
+                    document.getElementById('loading').style.display = 'none';
+                    alert('인용구를 불러오는 중 오류가 발생했습니다.');
+                });
+        }
+        
+        // 초기 로드
+        window.addEventListener('DOMContentLoaded', function() {
+            loadQuote();
+        });
+    </script>
+</body>
+</html>

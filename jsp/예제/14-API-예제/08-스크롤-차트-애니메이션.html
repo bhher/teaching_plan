@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스크롤 차트 애니메이션</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+        
+        .intro-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .intro-section h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        
+        .intro-section p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .chart-section {
+            background: white;
+            margin: 20px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 40px;
+            max-width: 900px;
+            width: 100%;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .chart-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .chart-section h2 {
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 2em;
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin-bottom: 20px;
+        }
+        
+        .chart-description {
+            background: #f5f7fa;
+            padding: 20px;
+            border-radius: 10px;
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .scroll-indicator {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 1.2em;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 인트로 섹션 -->
+    <div class="section intro-section">
+        <h1>📊 스크롤 차트 애니메이션</h1>
+        <p>아래로 스크롤하면 차트가 나타납니다</p>
+        <div class="scroll-indicator">⬇ 스크롤하세요 ⬇</div>
+    </div>
+    
+    <!-- 막대 그래프 섹션 -->
+    <div class="section">
+        <div class="chart-section" id="barChartSection">
+            <h2>📊 막대 그래프 (Bar Chart)</h2>
+            <div class="chart-container">
+                <canvas id="barChart"></canvas>
+            </div>
+            <div class="chart-description">
+                <strong>막대 그래프란?</strong><br>
+                막대 그래프는 범주형 데이터를 수평 또는 수직 막대로 표현하는 차트입니다. 
+                각 막대의 길이는 해당 값의 크기를 나타냅니다. 
+                여러 항목의 값을 비교하거나 시간에 따른 변화를 보여줄 때 유용합니다.
+            </div>
+        </div>
+    </div>
+    
+    <!-- 원형 그래프 섹션 -->
+    <div class="section">
+        <div class="chart-section" id="pieChartSection">
+            <h2>🥧 원형 그래프 (Pie Chart)</h2>
+            <div class="chart-container">
+                <canvas id="pieChart"></canvas>
+            </div>
+            <div class="chart-description">
+                <strong>원형 그래프란?</strong><br>
+                원형 그래프는 전체에 대한 각 부분의 비율을 원의 조각으로 표현하는 차트입니다. 
+                전체 대비 각 항목의 비율을 한눈에 파악하기 쉽습니다. 
+                구성 비율을 보여주거나 분포를 시각화할 때 주로 사용됩니다.
+            </div>
+        </div>
+    </div>
+    
+    <!-- 추가 섹션 (여러 차트 예제) -->
+    <div class="section">
+        <div class="chart-section" id="lineChartSection">
+            <h2>📈 선 그래프 (Line Chart)</h2>
+            <div class="chart-container">
+                <canvas id="lineChart"></canvas>
+            </div>
+            <div class="chart-description">
+                <strong>선 그래프란?</strong><br>
+                선 그래프는 시간에 따른 데이터의 변화 추이를 선으로 연결하여 표현하는 차트입니다. 
+                추세를 파악하거나 여러 데이터 시리즈를 비교할 때 유용합니다.
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 차트 객체들을 저장할 변수
+        var barChart = null;
+        var pieChart = null;
+        var lineChart = null;
+        
+        // Intersection Observer를 사용하여 스크롤 감지
+        var observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.3  // 차트가 30% 보이면 트리거
+        };
+        
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    // 차트 섹션이 보이면 애니메이션 클래스 추가
+                    entry.target.classList.add('visible');
+                    
+                    // 해당 차트가 아직 생성되지 않았다면 생성
+                    if (entry.target.id === 'barChartSection' && !barChart) {
+                        createBarChart();
+                    } else if (entry.target.id === 'pieChartSection' && !pieChart) {
+                        createPieChart();
+                    } else if (entry.target.id === 'lineChartSection' && !lineChart) {
+                        createLineChart();
+                    }
+                }
+            });
+        }, observerOptions);
+        
+        // 각 차트 섹션을 관찰 대상으로 등록
+        document.addEventListener('DOMContentLoaded', function() {
+            observer.observe(document.getElementById('barChartSection'));
+            observer.observe(document.getElementById('pieChartSection'));
+            observer.observe(document.getElementById('lineChartSection'));
+        });
+        
+        // 막대 그래프 생성 함수
+        function createBarChart() {
+            var ctx = document.getElementById('barChart').getContext('2d');
+            
+            barChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['1월', '2월', '3월', '4월', '5월', '6월'],
+                    datasets: [{
+                        label: '매출액 (만원)',
+                        data: [120, 190, 300, 250, 280, 350],
+                        backgroundColor: [
+                            'rgba(102, 126, 234, 0.8)',
+                            'rgba(118, 75, 162, 0.8)',
+                            'rgba(102, 126, 234, 0.8)',
+                            'rgba(118, 75, 162, 0.8)',
+                            'rgba(102, 126, 234, 0.8)',
+                            'rgba(118, 75, 162, 0.8)'
+                        ],
+                        borderColor: [
+                            'rgba(102, 126, 234, 1)',
+                            'rgba(118, 75, 162, 1)',
+                            'rgba(102, 126, 234, 1)',
+                            'rgba(118, 75, 162, 1)',
+                            'rgba(102, 126, 234, 1)',
+                            'rgba(118, 75, 162, 1)'
+                        ],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: {
+                        duration: 2000,  // 애니메이션 지속 시간 (2초)
+                        easing: 'easeOutQuart'  // 애니메이션 이징
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        },
+                        title: {
+                            display: true,
+                            text: '월별 매출 현황'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '만원';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // 원형 그래프 생성 함수
+        function createPieChart() {
+            var ctx = document.getElementById('pieChart').getContext('2d');
+            
+            pieChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['웹 개발', '모바일 앱', '데이터 분석', '디자인', '기타'],
+                    datasets: [{
+                        data: [35, 25, 20, 15, 5],
+                        backgroundColor: [
+                            'rgba(102, 126, 234, 0.8)',
+                            'rgba(118, 75, 162, 0.8)',
+                            'rgba(255, 99, 132, 0.8)',
+                            'rgba(54, 162, 235, 0.8)',
+                            'rgba(255, 206, 86, 0.8)'
+                        ],
+                        borderColor: [
+                            'rgba(102, 126, 234, 1)',
+                            'rgba(118, 75, 162, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)'
+                        ],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: {
+                        duration: 2000,
+                        animateRotate: true,  // 회전 애니메이션
+                        animateScale: true    // 크기 애니메이션
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'right'
+                        },
+                        title: {
+                            display: true,
+                            text: '프로젝트 유형별 비율'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    var label = context.label || '';
+                                    var value = context.parsed || 0;
+                                    var total = context.dataset.data.reduce(function(a, b) { return a + b; }, 0);
+                                    var percentage = ((value / total) * 100).toFixed(1);
+                                    return label + ': ' + value + '% (' + percentage + '%)';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // 선 그래프 생성 함수
+        function createLineChart() {
+            var ctx = document.getElementById('lineChart').getContext('2d');
+            
+            lineChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['월', '화', '수', '목', '금', '토', '일'],
+                    datasets: [{
+                        label: '방문자 수',
+                        data: [120, 190, 300, 250, 280, 350, 400],
+                        borderColor: 'rgba(102, 126, 234, 1)',
+                        backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4  // 곡선 정도
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: {
+                        duration: 2000,
+                        easing: 'easeInOutQuart'
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        },
+                        title: {
+                            display: true,
+                            text: '주간 방문자 추이'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

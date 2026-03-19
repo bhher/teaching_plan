@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>세계 시간 API 예제</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .time-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .time-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .city-name {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .time-display {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+            margin: 15px 0;
+        }
+        
+        .date-display {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+        
+        .timezone-info {
+            color: #999;
+            font-size: 0.8em;
+            margin-top: 10px;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌍 세계 시간 API 예제</h1>
+        
+        <div id="loading" class="loading">시간 정보를 불러오는 중...</div>
+        <div id="timeGrid" class="time-grid"></div>
+    </div>
+    
+    <script>
+        var cities = [
+            {name: '서울', timezone: 'Asia/Seoul'},
+            {name: '뉴욕', timezone: 'America/New_York'},
+            {name: '런던', timezone: 'Europe/London'},
+            {name: '도쿄', timezone: 'Asia/Tokyo'},
+            {name: '파리', timezone: 'Europe/Paris'},
+            {name: '시드니', timezone: 'Australia/Sydney'}
+        ];
+        
+        function loadWorldTime() {
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('timeGrid').innerHTML = '';
+            
+            var promises = cities.map(function(city) {
+                return fetch('https://worldtimeapi.org/api/timezone/' + city.timezone)
+                    .then(response => response.json())
+                    .then(data => {
+                        return {
+                            city: city.name,
+                            datetime: data.datetime,
+                            timezone: data.timezone,
+                            abbreviation: data.abbreviation
+                        };
+                    });
+            });
+            
+            Promise.all(promises)
+                .then(function(results) {
+                    document.getElementById('loading').style.display = 'none';
+                    
+                    var grid = document.getElementById('timeGrid');
+                    results.forEach(function(data) {
+                        var date = new Date(data.datetime);
+                        var timeStr = date.toLocaleTimeString('ko-KR', {hour: '2-digit', minute: '2-digit', second: '2-digit'});
+                        var dateStr = date.toLocaleDateString('ko-KR', {year: 'numeric', month: 'long', day: 'numeric', weekday: 'long'});
+                        
+                        var card = document.createElement('div');
+                        card.className = 'time-card';
+                        card.innerHTML = `
+                            <div class="city-name">${data.city}</div>
+                            <div class="time-display">${timeStr}</div>
+                            <div class="date-display">${dateStr}</div>
+                            <div class="timezone-info">${data.abbreviation}</div>
+                        `;
+                        grid.appendChild(card);
+                    });
+                })
+                .catch(function(error) {
+                    document.getElementById('loading').style.display = 'none';
+                    document.getElementById('timeGrid').innerHTML = 
+                        '<div style="text-align:center; padding:40px; color:#c33;">시간 정보를 불러오는 중 오류가 발생했습니다.</div>';
+                });
+        }
+        
+        // 초기 로드
+        window.addEventListener('DOMContentLoaded', function() {
+            loadWorldTime();
+            
+            // 1초마다 업데이트
+            setInterval(loadWorldTime, 1000);
+        });
+    </script>
+</body>
+</html>

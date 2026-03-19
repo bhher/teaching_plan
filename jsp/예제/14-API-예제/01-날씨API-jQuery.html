@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>날씨 API - jQuery 예제</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .city-selector {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .city-selector select {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        
+        .weather-info {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+        }
+        
+        .weather-icon {
+            width: 120px;
+            height: 120px;
+            margin: 20px auto;
+        }
+        
+        .temperature {
+            font-size: 4em;
+            font-weight: bold;
+            color: #333;
+            margin: 20px 0;
+        }
+        
+        .details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .detail-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+        
+        .error {
+            background: #fee;
+            color: #c33;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌤️ 날씨 정보 (jQuery)</h1>
+        
+        <div class="city-selector">
+            <select id="citySelect">
+                <option value="1897007">하남</option>
+                <option value="1835848">서울</option>
+                <option value="1841610">부산</option>
+            </select>
+        </div>
+        
+        <div id="loading" class="loading">날씨 정보를 불러오는 중...</div>
+        <div id="error" class="error" style="display:none;"></div>
+        <div id="weatherInfo" class="weather-info" style="display:none;">
+            <div class="city-name" id="cityName"></div>
+            <img id="weatherIcon" src="" alt="" class="weather-icon">
+            <div class="temperature" id="temperature"></div>
+            <div class="description" id="description"></div>
+            <div class="details">
+                <div class="detail-item">
+                    <div>체감 온도</div>
+                    <div id="feelsLike"></div>
+                </div>
+                <div class="detail-item">
+                    <div>습도</div>
+                    <div id="humidity"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        var apiKey = "cd63accc133fc76e1f94a3f270442688";
+        var cities = {
+            '1897007': '하남',
+            '1835848': '서울',
+            '1841610': '부산'
+        };
+        
+        function loadWeather(cityId) {
+            var cityName = cities[cityId] || '하남';
+            
+            $('#loading').show();
+            $('#weatherInfo').hide();
+            $('#error').hide();
+            
+            $.ajax({
+                url: 'https://api.openweathermap.org/data/2.5/weather',
+                method: 'GET',
+                data: {
+                    id: cityId,
+                    appid: apiKey,
+                    units: 'metric'
+                },
+                success: function(data) {
+                    $('#loading').hide();
+                    $('#weatherInfo').show();
+                    
+                    $('#cityName').text(cityName);
+                    $('#temperature').text(Math.round(data.main.temp) + '°C');
+                    $('#description').text(data.weather[0].description);
+                    $('#feelsLike').text(Math.round(data.main.feels_like) + '°C');
+                    $('#humidity').text(data.main.humidity + '%');
+                    $('#weatherIcon').attr('src', 'https://openweathermap.org/img/wn/' + data.weather[0].icon + '@2x.png');
+                },
+                error: function(xhr, status, error) {
+                    $('#loading').hide();
+                    $('#error').show().text('날씨 정보를 가져오는 중 오류가 발생했습니다.');
+                }
+            });
+        }
+        
+        $(document).ready(function() {
+            $('#citySelect').on('change', function() {
+                loadWeather($(this).val());
+            });
+            
+            loadWeather('1897007');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>랜덤 사용자 API 예제</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .controls {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+        
+        .btn:hover {
+            background: #764ba2;
+        }
+        
+        .user-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .user-card {
+            background: #f5f7fa;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .user-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            border: 4px solid #667eea;
+        }
+        
+        .user-name {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .user-info {
+            color: #666;
+            font-size: 0.9em;
+            margin: 5px 0;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>👥 랜덤 사용자 API 예제</h1>
+        
+        <div class="controls">
+            <button class="btn" onclick="loadUsers(1)">사용자 1명</button>
+            <button class="btn" onclick="loadUsers(5)">사용자 5명</button>
+            <button class="btn" onclick="loadUsers(10)">사용자 10명</button>
+        </div>
+        
+        <div id="loading" class="loading" style="display:none;">사용자 정보를 불러오는 중...</div>
+        <div id="userGrid" class="user-grid"></div>
+    </div>
+    
+    <script>
+        function loadUsers(count) {
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('userGrid').innerHTML = '';
+            
+            fetch('https://randomuser.me/api/?results=' + count + '&nat=us,gb,kr')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('loading').style.display = 'none';
+                    
+                    var grid = document.getElementById('userGrid');
+                    data.results.forEach(function(user) {
+                        var card = document.createElement('div');
+                        card.className = 'user-card';
+                        card.innerHTML = `
+                            <img src="${user.picture.large}" alt="${user.name.first}" class="user-avatar">
+                            <div class="user-name">${user.name.first} ${user.name.last}</div>
+                            <div class="user-info">📧 ${user.email}</div>
+                            <div class="user-info">📱 ${user.phone}</div>
+                            <div class="user-info">📍 ${user.location.city}, ${user.location.country}</div>
+                        `;
+                        grid.appendChild(card);
+                    });
+                })
+                .catch(error => {
+                    document.getElementById('loading').style.display = 'none';
+                    document.getElementById('userGrid').innerHTML = '<div class="error">사용자 정보를 불러오는 중 오류가 발생했습니다.</div>';
+                });
+        }
+        
+        // 초기 로드
+        window.addEventListener('DOMContentLoaded', function() {
+            loadUsers(5);
+        });
+    </script>
+</body>
+</html>

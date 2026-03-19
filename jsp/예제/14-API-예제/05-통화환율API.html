@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>통화 환율 API 예제</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .converter {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .input-group {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+        }
+        
+        .input-group input,
+        .input-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+        
+        .exchange-rate {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .rate-display {
+            font-size: 2em;
+            font-weight: bold;
+            color: #333;
+            margin: 20px 0;
+        }
+        
+        .currency-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .currency-item {
+            background: #f5f7fa;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .currency-code {
+            font-weight: bold;
+            color: #333;
+            font-size: 1.2em;
+        }
+        
+        .currency-rate {
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .btn:hover {
+            background: #764ba2;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💱 통화 환율 API 예제</h1>
+        
+        <div class="converter">
+            <div class="input-group">
+                <label>금액</label>
+                <input type="number" id="amount" value="1" oninput="convertCurrency()">
+            </div>
+            <div class="input-group">
+                <label>기준 통화</label>
+                <select id="fromCurrency" onchange="loadExchangeRates()">
+                    <option value="USD">USD (미국 달러)</option>
+                    <option value="KRW" selected>KRW (한국 원)</option>
+                    <option value="EUR">EUR (유로)</option>
+                    <option value="JPY">JPY (일본 엔)</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>변환 통화</label>
+                <select id="toCurrency" onchange="convertCurrency()">
+                    <option value="USD" selected>USD (미국 달러)</option>
+                    <option value="KRW">KRW (한국 원)</option>
+                    <option value="EUR">EUR (유로)</option>
+                    <option value="JPY">JPY (일본 엔)</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="exchange-rate">
+            <div id="loading" class="loading">환율 정보를 불러오는 중...</div>
+            <div id="result" style="display:none;">
+                <div class="rate-display" id="convertedAmount"></div>
+                <div style="color:#666;">1 <span id="fromCode"></span> = <span id="exchangeRate"></span> <span id="toCode"></span></div>
+            </div>
+        </div>
+        
+        <div>
+            <h2 style="margin-bottom:20px; text-align:center;">주요 통화 환율</h2>
+            <div id="currencyList" class="currency-list"></div>
+        </div>
+    </div>
+    
+    <script>
+        var exchangeRates = {};
+        var baseCurrency = 'KRW';
+        
+        function loadExchangeRates() {
+            baseCurrency = document.getElementById('fromCurrency').value;
+            
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('result').style.display = 'none';
+            
+            // ExchangeRate-API 사용 (무료, API 키 불필요)
+            fetch('https://api.exchangerate-api.com/v4/latest/' + baseCurrency)
+                .then(response => response.json())
+                .then(data => {
+                    exchangeRates = data.rates;
+                    document.getElementById('loading').style.display = 'none';
+                    document.getElementById('result').style.display = 'block';
+                    
+                    convertCurrency();
+                    displayCurrencyList();
+                })
+                .catch(error => {
+                    document.getElementById('loading').style.display = 'none';
+                    alert('환율 정보를 불러오는 중 오류가 발생했습니다.');
+                });
+        }
+        
+        function convertCurrency() {
+            var amount = parseFloat(document.getElementById('amount').value) || 1;
+            var toCurrency = document.getElementById('toCurrency').value;
+            
+            if (exchangeRates[toCurrency]) {
+                var rate = exchangeRates[toCurrency];
+                var converted = (amount * rate).toFixed(2);
+                
+                document.getElementById('convertedAmount').textContent = converted + ' ' + toCurrency;
+                document.getElementById('exchangeRate').textContent = rate.toFixed(4);
+                document.getElementById('fromCode').textContent = baseCurrency;
+                document.getElementById('toCode').textContent = toCurrency;
+            }
+        }
+        
+        function displayCurrencyList() {
+            var currencies = ['USD', 'EUR', 'JPY', 'GBP', 'CNY', 'AUD'];
+            var listDiv = document.getElementById('currencyList');
+            listDiv.innerHTML = '';
+            
+            currencies.forEach(function(code) {
+                if (exchangeRates[code] && code !== baseCurrency) {
+                    var item = document.createElement('div');
+                    item.className = 'currency-item';
+                    item.innerHTML = `
+                        <div class="currency-code">${code}</div>
+                        <div class="currency-rate">1 ${baseCurrency} = ${exchangeRates[code].toFixed(4)} ${code}</div>
+                    `;
+                    listDiv.appendChild(item);
+                }
+            });
+        }
+        
+        // 초기 로드
+        window.addEventListener('DOMContentLoaded', function() {
+            loadExchangeRates();
+        });
+    </script>
+</body>
+</html>
