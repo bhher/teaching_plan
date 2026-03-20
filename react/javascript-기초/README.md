@@ -47,7 +47,15 @@ javascript-기초/
 
 ## 📖 각 섹션별 설명
 
-각 폴더의 `index.html`을 브라우저에서 열어서 실행해보세요!
+### 실행 방법 (Vite)
+
+```bash
+cd 폴더명
+npm install
+npm run dev
+```
+
+또는 `index.html`을 브라우저에서 직접 열어서 실행할 수 있습니다.
 
 ---
 
