@@ -4,6 +4,7 @@ function Example2() {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
+    console.log('예제2: count 변경됨 →', count);
     document.title = `카운트: ${count}`;
   }, [count]);
 
