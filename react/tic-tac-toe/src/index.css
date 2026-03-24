@@ -1,0 +1,148 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.5;
+  background: linear-gradient(135deg, #f6fbff, #edf3ff);
+  color: #18233f;
+}
+
+.app {
+  width: min(94vw, 840px);
+  margin: 2.5rem auto;
+  padding: 2rem;
+  border-radius: 1.1rem;
+  background-color: #fff;
+  box-shadow: 0 14px 40px rgba(35, 60, 110, 0.14);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1rem;
+}
+
+.app h1 {
+  margin: 0;
+  font-size: clamp(1.3rem, 2.8vw, 1.8rem);
+}
+
+.guide {
+  margin: 0;
+  color: #4d5a78;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.toolbar button {
+  padding: 0.55rem 0.9rem;
+  border: 0;
+  border-radius: 0.65rem;
+  background: #2d4bba;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.toolbar button.active {
+  background: #1f8a44;
+}
+
+.status {
+  margin: 0;
+  font-weight: 700;
+  color: #3f4f75;
+}
+
+.card-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1rem;
+}
+
+.flash-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.card-inner {
+  position: relative;
+  height: 180px;
+  border: 0;
+  border-radius: 0.85rem;
+  background: transparent;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease;
+  padding: 0;
+}
+
+.card-inner.flipped {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  text-align: center;
+  font-size: 1rem;
+  line-height: 1.45;
+  backface-visibility: hidden;
+  box-shadow: inset 0 0 0 1px #d4dfff, 0 8px 20px rgba(65, 95, 180, 0.16);
+}
+
+.card-front {
+  background: #f6f8ff;
+  color: #1f3f9e;
+  font-weight: 800;
+}
+
+.card-back {
+  background: #243d96;
+  color: #fff;
+  transform: rotateY(180deg);
+}
+
+.card-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.card-actions button {
+  flex: 1;
+  padding: 0.55rem 0.75rem;
+  border: 0;
+  border-radius: 0.6rem;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+}
+
+.known {
+  background: #22834a;
+}
+
+.unknown {
+  background: #cc3f53;
+}
+
+.empty {
+  margin: 0;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  background: #f5f8ff;
+  color: #3f4f75;
+  font-weight: 600;
+}
