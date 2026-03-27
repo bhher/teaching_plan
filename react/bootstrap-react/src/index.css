@@ -1,0 +1,116 @@
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+/* 01 로그인 */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.login-container {
+  max-width: 400px;
+  width: 100%;
+}
+
+.login-card {
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.login-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 15px 15px 0 0;
+}
+
+/* 02 네비게이션 데모 본문 */
+.nav-demo-body {
+  padding-top: 56px;
+}
+
+.nav-demo-body .navbar-brand {
+  font-weight: bold;
+}
+
+.nav-demo-body .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+}
+
+.nav-demo-body .dropdown-menu {
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.content-section {
+  padding: 60px 0;
+  min-height: 500px;
+}
+
+/* 03 카드 */
+.cards-demo .card {
+  transition: transform 0.3s, box-shadow 0.3s;
+  margin-bottom: 30px;
+}
+
+.cards-demo .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.cards-demo .card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
+
+.cards-demo .icon-large {
+  font-size: 3rem;
+}
+
+/* 공통 섹션 */
+.section {
+  margin-bottom: 50px;
+}
+
+.btn-demo {
+  margin: 5px;
+}
+
+.form-section {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 그리드 데모 */
+.grid-demo .grid-item {
+  background-color: #667eea;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.grid-demo .grid-item-alt {
+  background-color: #764ba2;
+}
+
+.grid-demo .demo-box {
+  background-color: #e9ecef;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.page-shell {
+  padding-bottom: 3rem;
+}
