@@ -1,0 +1,21 @@
+@use '../../styles/variables' as *;
+
+.wrapper {
+  padding: 1rem 1.25rem;
+  background: #fff;
+  border-radius: $radius;
+  border: 1px dashed $primary;
+}
+
+.title {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  color: #0f766e;
+}
+
+.note {
+  margin: 0;
+  font-size: 0.9rem;
+  color: $muted;
+  line-height: 1.5;
+}

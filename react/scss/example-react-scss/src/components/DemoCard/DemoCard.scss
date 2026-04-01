@@ -1,0 +1,25 @@
+@use '../../styles/variables' as *;
+
+.demo-card {
+  padding: 1rem 1.25rem;
+  background: #fff;
+  border-radius: $radius;
+  border: 1px solid #e2e8f0;
+  transition: box-shadow 0.2s;
+
+  &:hover {
+    box-shadow: 0 4px 14px rgb(15 23 42 / 0.08);
+  }
+
+  &__heading {
+    margin: 0 0 0.5rem;
+    font-size: 1rem;
+    color: $primary;
+  }
+
+  &__text {
+    margin: 0;
+    font-size: 0.9rem;
+    color: $muted;
+  }
+}
