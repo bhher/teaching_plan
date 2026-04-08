@@ -10,10 +10,12 @@ import { pool } from './db.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const UPLOAD_DIR = join(__dirname, 'uploads');
+/** 서버 기동 시 업로드 디렉터리가 없으면 생성 */
 if (!fs.existsSync(UPLOAD_DIR)) {
   fs.mkdirSync(UPLOAD_DIR, { recursive: true });
 }
 
+/** multer: 디스크에 저장할 경로·파일명 규칙 (타임스탬프 + 랜덤 + 확장자) */
 const storage = multer.diskStorage({
   destination: (_req, _file, cb) => cb(null, UPLOAD_DIR),
   filename: (_req, file, cb) => {
@@ -22,6 +24,7 @@ const storage = multer.diskStorage({
   },
 });
 
+/** multer 인스턴스: 단일 이미지 필드, 5MB 제한, JPEG/PNG/GIF/WebP만 허용 */
 const upload = multer({
   storage,
   limits: { fileSize: 5 * 1024 * 1024 },
@@ -39,6 +42,7 @@ const app = express();
 
 app.set('trust proxy', 1);
 
+/** CORS(자격 증명), JSON 파싱, /uploads 정적 파일, 쿠키 세션(7일) */
 app.use(
   cors({
     origin: CLIENT_ORIGIN,
@@ -62,7 +66,10 @@ app.use(
   })
 );
 
-/** DB에는 파일명만 저장 (예: 1730-abc.jpg) */
+/**
+ * 업로드 폴더에서 이미지 파일 삭제 (교체·삭제·글 삭제 시).
+ * DB에는 파일명만 저장 (예: 1730-abc.jpg). 경로 조작 방지 후 unlink.
+ */
 async function unlinkImageFilename(filename) {
   if (!filename || typeof filename !== 'string') return;
   if (filename.includes('..') || /[/\\]/.test(filename)) return;
@@ -74,6 +81,7 @@ async function unlinkImageFilename(filename) {
   }
 }
 
+/** DB member 행을 API 응답용 객체로 변환 (비밀번호 등 제외) */
 function mapMemberRow(row) {
   if (!row) return null;
   return {
@@ -85,6 +93,7 @@ function mapMemberRow(row) {
   };
 }
 
+/** 세션에 로그인(memberId) 없으면 401, 있으면 다음 미들웨어로 */
 function requireAuth(req, res, next) {
   if (!req.session.memberId) {
     res.status(401).json({ error: 'Login required.' });
@@ -94,6 +103,8 @@ function requireAuth(req, res, next) {
 }
 
 /** ---------- categories ---------- */
+
+/** GET: 카테고리 전체 목록 (정렬 순서대로, 필터·네비용) */
 app.get('/api/categories', async (_req, res) => {
   try {
     const [rows] = await pool.query(
@@ -106,15 +117,19 @@ app.get('/api/categories', async (_req, res) => {
   }
 });
 
+/** 게시글 목록 API용 SELECT 컬럼 (JOIN 결과 필드명 정리) */
 const POST_SELECT_LIST = `p.id, p.category_id AS categoryId, p.member_id AS memberId, p.title, p.content,
         p.image_filename AS imageFilename, p.view_count AS viewCount, p.created_at AS createdAt, p.updated_at AS updatedAt,
         m.name AS memberName, c.name_en AS categoryName, c.icon AS categoryIcon`;
 
+/** 상세·편집용 SELECT (목록보다 작성자 nationality 등 추가) */
 const POST_SELECT_DETAIL = `p.id, p.category_id AS categoryId, p.member_id AS memberId, p.title, p.content,
       p.image_filename AS imageFilename, p.view_count AS viewCount, p.created_at AS createdAt, p.updated_at AS updatedAt,
       m.name AS memberName, m.nationality, c.name_en AS categoryName, c.icon AS categoryIcon`;
 
 /** ---------- posts list ---------- */
+
+/** GET: 게시글 목록 (카테고리 필터·페이지네이션, 글+작성자명+카테고리 JOIN) */
 app.get('/api/posts', async (req, res) => {
   try {
     const categoryId = Number(req.query.categoryId) || 0;
@@ -161,6 +176,7 @@ app.get('/api/posts', async (req, res) => {
   }
 });
 
+/** 게시글 ID 한 건: 상세 컬럼으로 JOIN 조회, 없으면 null */
 async function loadPostRow(id) {
   const [rows] = await pool.query(
     `SELECT ${POST_SELECT_DETAIL}
@@ -170,7 +186,7 @@ async function loadPostRow(id) {
   return rows[0] ?? null;
 }
 
-/** 편집 폼용: 조회수 증가 없음 */
+/** GET: 편집 폼용 데이터 (본인 글만, 조회수 증가 없음) */
 app.get('/api/posts/:id/edit', requireAuth, async (req, res) => {
   try {
     const id = Number(req.params.id);
@@ -224,6 +240,7 @@ app.get('/api/posts/:id', async (req, res) => {
   }
 });
 
+/** POST: 게시글 작성 (multipart: 이미지 선택 시 업로드 후 DB insert, 세션 회원) */
 app.post('/api/posts', requireAuth, (req, res, next) => {
   upload.single('image')(req, res, (err) => {
     if (err) {
@@ -319,6 +336,7 @@ app.patch('/api/posts/:id', requireAuth, (req, res, next) => {
   }
 });
 
+/** DELETE: 본인 글 삭제 (첨부 이미지 파일도 함께 삭제) */
 app.delete('/api/posts/:id', requireAuth, async (req, res) => {
   try {
     const id = Number(req.params.id);
@@ -345,6 +363,8 @@ app.delete('/api/posts/:id', requireAuth, async (req, res) => {
 });
 
 /** ---------- comments ---------- */
+
+/** POST: 특정 글에 댓글 추가 (로그인 사용자) */
 app.post('/api/posts/:id/comments', requireAuth, async (req, res) => {
   try {
     const postId = Number(req.params.id);
@@ -365,6 +385,8 @@ app.post('/api/posts/:id/comments', requireAuth, async (req, res) => {
 });
 
 /** ---------- auth ---------- */
+
+/** GET: 현재 세션 기준 로그인 여부·회원 정보 (비로그인 시 member: null) */
 app.get('/api/auth/me', async (req, res) => {
   try {
     if (!req.session.memberId) {
@@ -382,6 +404,7 @@ app.get('/api/auth/me', async (req, res) => {
   }
 });
 
+/** POST: 이메일·비밀번호로 로그인, 세션에 memberId 저장 */
 app.post('/api/auth/login', async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -406,6 +429,7 @@ app.post('/api/auth/login', async (req, res) => {
   }
 });
 
+/** POST: 세션 파기·쿠키 제거로 로그아웃 */
 app.post('/api/auth/logout', (req, res) => {
   req.session.destroy((err) => {
     if (err) {
@@ -417,6 +441,7 @@ app.post('/api/auth/logout', (req, res) => {
   });
 });
 
+/** POST: 회원가입 (이메일 중복 검사 후 insert, 성공 시 자동 로그인) */
 app.post('/api/auth/join', async (req, res) => {
   try {
     const { email, password, name, nationality, language } = req.body;
@@ -445,6 +470,7 @@ app.post('/api/auth/join', async (req, res) => {
   }
 });
 
+/** HTTP 서버 기동 */
 app.listen(PORT, () => {
   console.log(`K-Culture Platform 1 API (이미지 업로드) http://localhost:${PORT}`);
 });
