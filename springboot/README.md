@@ -15,6 +15,8 @@
 
 **주제만 바꿔 재사용:** [주제-템플릿.md](./주제-템플릿.md) (회원가입·로그인·게시판 CRUD 등 한 줄 복사용)
 
+**start.spring.io:** [Maven](./Spring-Initializr-의존성-선택-가이드.md) · [Gradle](./Spring-Initializr-의존성-선택-가이드-Gradle.md) (의존성·ZIP·IntelliJ)
+
 ---
 
 ## 선행 지식

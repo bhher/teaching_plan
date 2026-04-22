@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>글 목록</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<main class="wrap">
+    <h1>글 목록</h1>
+    <p><a th:href="@{/}">← 홈</a></p>
+    <ul class="post-list">
+        <li th:each="p : ${posts}">
+            <a th:href="@{/posts/{id}(id=${p.id})}" th:text="${p.title}">제목</a>
+        </li>
+    </ul>
+    <p th:if="${posts.isEmpty()}" class="hint">글이 없습니다.</p>
+</main>
+</body>
+</html>

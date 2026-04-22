@@ -121,4 +121,6 @@ demo/
 | `pom.xml` / `build.gradle` | 의존성·빌드 |
 | `DemoApplication.java` | 앱 시작 |
 
+**start.spring.io — 의존성·ZIP·IntelliJ:** [Maven](./Spring-Initializr-의존성-선택-가이드.md) · [Gradle](./Spring-Initializr-의존성-선택-가이드-Gradle.md)
+
 다음 챕터: **URL 한 줄로 요청을 받고 JSON을 돌려주는 코드**를 작성합니다.

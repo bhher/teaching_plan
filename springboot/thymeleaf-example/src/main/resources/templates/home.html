@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${title}">제목</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<main class="wrap">
+    <h1 th:text="'안녕하세요, ' + ${title} + ' 입니다'">환영 메시지</h1>
+    <p class="hint">아래 링크는 <code>th:href="@{/posts}"</code> 로 연결했습니다.</p>
+    <p><a th:href="@{/posts}">글 목록 보기</a></p>
+    <p class="hint">JSON API 예: <a href="/api/hello">/api/hello</a></p>
+</main>
+</body>
+</html>

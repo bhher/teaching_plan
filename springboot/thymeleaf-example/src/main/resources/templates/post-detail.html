@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${post.title}">글 제목</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<main class="wrap">
+    <article>
+        <h1 th:text="${post.title}">제목</h1>
+        <p class="meta">id: <span th:text="${post.id}">0</span></p>
+        <div class="body" th:text="${post.body}">본문</div>
+    </article>
+    <p><a th:href="@{/posts}">← 목록</a></p>
+</main>
+</body>
+</html>

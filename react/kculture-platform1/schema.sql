@@ -1,13 +1,5 @@
--- =============================================================================
--- K-Culture Platform 1 — 전체 스키마 (신규 DB 한 번에 적용)
--- 기존 jsp/17-Kculture-Platform/schema.sql + 게시글 이미지(image_filename) 포함
--- 사용법: mysql -u root -p < schema_full_kculture_platform1.sql
--- =============================================================================
-
-CREATE DATABASE IF NOT EXISTS kculture_platform
-  DEFAULT CHARACTER SET utf8mb4
-  COLLATE utf8mb4_unicode_ci;
-
+-- K-컬쳐 외국인 관광객 커뮤니티 플랫폼
+CREATE DATABASE IF NOT EXISTS kculture_platform DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE kculture_platform;
 
 -- 회원 (외국인 관광객)
@@ -16,12 +8,12 @@ CREATE TABLE member (
     email VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(100) NOT NULL,
     name VARCHAR(50) NOT NULL,
-    nationality VARCHAR(50) DEFAULT NULL,
-    language VARCHAR(20) DEFAULT 'en',
+    nationality VARCHAR(50) DEFAULT NULL,    -- 국적
+    language VARCHAR(20) DEFAULT 'en',       -- 선호 언어
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
--- K-컬쳐 카테고리
+-- K-컬쳐 카테고리 (다각화)
 CREATE TABLE category (
     id INT AUTO_INCREMENT PRIMARY KEY,
     code VARCHAR(30) NOT NULL UNIQUE,
@@ -31,6 +23,7 @@ CREATE TABLE category (
     sort_order INT DEFAULT 0
 );
 
+-- K-컬쳐 카테고리 (다각화 확장)
 INSERT INTO category (code, name_en, name_ko, icon, sort_order) VALUES
 ('k-food', 'K-Food', '한식', '🍜', 1),
 ('k-pop', 'K-Pop', '케이팝', '🎵', 2),
@@ -47,15 +40,13 @@ INSERT INTO category (code, name_en, name_ko, icon, sort_order) VALUES
 ('k-gaming', 'K-Gaming', '게임/e스포츠', '🎮', 13),
 ('tips', 'Tips', '팁&정보', '💡', 14);
 
--- 게시글 (kculture-platform1: 서버 uploads 폴더 내 파일명만 저장)
+-- 게시글
 CREATE TABLE post (
     id INT AUTO_INCREMENT PRIMARY KEY,
     category_id INT NOT NULL,
     member_id INT NOT NULL,
     title VARCHAR(200) NOT NULL,
     content TEXT,
-    image_filename VARCHAR(255) NULL DEFAULT NULL
-        COMMENT 'uploads 폴더 내 파일명 예: 1730-abc.jpg',
     view_count INT DEFAULT 0,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
