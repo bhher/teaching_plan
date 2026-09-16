@@ -31,7 +31,7 @@ OpenWeatherMap은 무료 날씨 API를 제공하는 서비스입니다. JSP 프�
 ### 2.1 도시 검색 방법
 
 1. 메인 화면의 **돋보기(검색창)** 클릭
-2. **"weather in your city"** placeholder 부분에 도시명 입력
+2. **"Search city"** placeholder 부분에 도시명 입력
    - 예: `Hanam` (하남)
    - 예: `Seoul` (서울)
 3. 검색된 도시 클릭

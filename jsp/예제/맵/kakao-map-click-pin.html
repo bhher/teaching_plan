@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카카오맵 - 클릭하면 핀 꽂기</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 20px;
+            padding: 36px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 { text-align: center; color: #333; margin-bottom: 8px; }
+        .subtitle { text-align: center; color: #666; margin-bottom: 20px; }
+        .toolbar { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
+        .btn {
+            padding: 10px 18px; border: none; border-radius: 8px;
+            background: #667eea; color: #fff; cursor: pointer; font-size: 14px;
+        }
+        .btn:hover { background: #764ba2; }
+        .btn.gray { background: #888; }
+        #map {
+            width: 100%; height: 480px; border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+        .info {
+            margin-top: 16px; background: #f5f5f5; border-radius: 10px; padding: 16px;
+            line-height: 1.7; color: #444;
+        }
+        .tip { margin-top: 12px; padding: 12px; background: #fff8e6; border-left: 4px solid #ffc107; border-radius: 6px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📍 클릭하면 핀 꽂기</h1>
+        <p class="subtitle">지도를 클릭하면 그 위치에 마커가 생기고, 위·경도가 표시됩니다.</p>
+        <div class="toolbar">
+            <button class="btn gray" onclick="clearPins()">마커 모두 지우기</button>
+        </div>
+        <div id="map"></div>
+        <div class="info">
+            <strong>마지막 클릭 좌표</strong><br>
+            위도: <span id="lat">-</span> / 경도: <span id="lng">-</span>
+            <div class="tip">수업 포인트: <code>kakao.maps.event.addListener(map, 'click', ...)</code> 로 클릭 좌표를 받습니다.</div>
+        </div>
+    </div>
+
+    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=bceccd594bb478b5533d7d2ec63f8bb0"></script>
+    <script>
+        var map = new kakao.maps.Map(document.getElementById('map'), {
+            center: new kakao.maps.LatLng(37.5665, 126.9780),
+            level: 4
+        });
+        var markers = [];
+
+        kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
+            var latlng = mouseEvent.latLng;
+            document.getElementById('lat').textContent = latlng.getLat().toFixed(6);
+            document.getElementById('lng').textContent = latlng.getLng().toFixed(6);
+
+            var marker = new kakao.maps.Marker({
+                position: latlng,
+                map: map
+            });
+            markers.push(marker);
+        });
+
+        function clearPins() {
+            markers.forEach(function (m) { m.setMap(null); });
+            markers = [];
+            document.getElementById('lat').textContent = '-';
+            document.getElementById('lng').textContent = '-';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>실습3 — 이미지 갤러리</title>
+  <style>
+    body { font-family: sans-serif; max-width: 520px; margin: 40px auto; text-align: center; }
+    #big {
+      width: 100%; max-width: 480px; height: 280px; object-fit: cover;
+      border-radius: 8px; background: #eee;
+    }
+    .thumbs { display: flex; gap: 8px; justify-content: center; margin-top: 12px; }
+    .thumb {
+      width: 80px; height: 60px; object-fit: cover; cursor: pointer;
+      border: 3px solid transparent; border-radius: 4px;
+    }
+    .thumb.active { border-color: #2563eb; }
+  </style>
+</head>
+<body>
+  <h1>이미지 갤러리</h1>
+  <img id="big" src="https://picsum.photos/id/10/800/500" alt="큰 사진" />
+  <div class="thumbs">
+    <img class="thumb active" src="https://picsum.photos/id/10/200/150" alt="1" />
+    <img class="thumb" src="https://picsum.photos/id/20/200/150" alt="2" />
+    <img class="thumb" src="https://picsum.photos/id/30/200/150" alt="3" />
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script>
+    $(function () {
+      $(".thumb").on("click", function () {
+        // 큰 이미지는 같은 id의 고해상도 URL로 (간단히 썸네일 src 사용)
+        var src = $(this).attr("src").replace("/200/150", "/800/500");
+        $("#big").attr("src", src);
+        $(".thumb").removeClass("active");
+        $(this).addClass("active");
+      });
+    });
+  </script>
+</body>
+</html>

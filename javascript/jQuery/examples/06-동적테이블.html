@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>실습6 — 동적 테이블</title>
+  <style>
+    body { font-family: sans-serif; max-width: 480px; margin: 40px auto; }
+    .row { display: flex; gap: 8px; margin-bottom: 12px; }
+    input { flex: 1; padding: 8px; }
+    button { padding: 8px 12px; cursor: pointer; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+    th { background: #f5f5f5; }
+  </style>
+</head>
+<body>
+  <h1>학생 추가</h1>
+  <div class="row">
+    <input type="text" id="name" placeholder="이름" />
+    <input type="number" id="score" placeholder="점수" />
+    <button type="button" id="addBtn">추가</button>
+  </div>
+  <table>
+    <thead>
+      <tr><th>이름</th><th>점수</th><th></th></tr>
+    </thead>
+    <tbody id="tbody"></tbody>
+  </table>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script>
+    $(function () {
+      $("#addBtn").on("click", function () {
+        var name = $("#name").val().trim();
+        var score = $("#score").val().trim();
+        if (!name || !score) {
+          alert("이름과 점수를 입력하세요");
+          return;
+        }
+        $("#tbody").append(
+          "<tr><td>" + name + "</td><td>" + score +
+          "</td><td><button type='button' class='del'>삭제</button></td></tr>"
+        );
+        $("#name").val("");
+        $("#score").val("");
+      });
+
+      // 이벤트 위임 — 나중에 생긴 삭제 버튼에도 동작
+      $("#tbody").on("click", ".del", function () {
+        $(this).closest("tr").remove();
+      });
+    });
+  </script>
+</body>
+</html>

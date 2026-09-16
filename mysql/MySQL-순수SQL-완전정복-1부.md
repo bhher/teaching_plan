@@ -272,6 +272,9 @@ CREATE TABLE student (
 );
 ```
 
+**더미 데이터(20명):** [sql/student-더미데이터.sql](./sql/student-더미데이터.sql)  
+Workbench에서 파일 전체 실행 → `school_db.student` 생성 및 삽입
+
 ### 3-2. 데이터 타입
 
 #### 숫자 타입
