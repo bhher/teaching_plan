@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap 핵심 — 예제 목록</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body class="bg-light">
+
+  <header class="bg-dark text-white py-4 mb-4">
+    <div class="container">
+      <h1 class="h3 mb-1">
+        <i class="bi bi-bootstrap me-2"></i>Bootstrap 핵심 정리
+      </h1>
+      <p class="mb-0 text-white-50">Grid · Utility · Component — v5.3.8</p>
+    </div>
+  </header>
+
+  <main class="container pb-5">
+
+    <div class="alert alert-primary">
+      정리 문서:
+      <a href="Bootstrap-핵심정리.md" class="alert-link">Bootstrap-핵심정리.md</a>
+      ·
+      <a href="Bootstrap-5-핵심클래스-정리.md" class="alert-link">핵심 클래스 정리</a>
+      · 핵심 3축 =
+      <strong>Grid</strong> + <strong>Utility</strong> + <strong>Component</strong>
+    </div>
+
+    <div class="row g-3">
+
+      <div class="col-md-6 col-lg-4">
+        <a href="examples/01-시작하기.html" class="card h-100 text-decoration-none text-dark shadow-sm">
+          <div class="card-body">
+            <span class="badge text-bg-secondary mb-2">01</span>
+            <h2 class="h5">시작하기 (CDN)</h2>
+            <p class="card-text text-muted mb-0">Hello Bootstrap · btn</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <a href="examples/02-grid.html" class="card h-100 text-decoration-none text-dark shadow-sm">
+          <div class="card-body">
+            <span class="badge text-bg-danger mb-2">02 ⭐</span>
+            <h2 class="h5">Grid · Breakpoint</h2>
+            <p class="card-text text-muted mb-0">12칸 · col-md-4 · 반응형</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <a href="examples/03-유틸리티.html" class="card h-100 text-decoration-none text-dark shadow-sm">
+          <div class="card-body">
+            <span class="badge text-bg-warning text-dark mb-2">03 ⭐</span>
+            <h2 class="h5">Utility</h2>
+            <p class="card-text text-muted mb-0">Color · Spacing · Flex</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <a href="examples/04-컴포넌트.html" class="card h-100 text-decoration-none text-dark shadow-sm">
+          <div class="card-body">
+            <span class="badge text-bg-success mb-2">04</span>
+            <h2 class="h5">Component</h2>
+            <p class="card-text text-muted mb-0">Button · Card · Form · Alert · Table</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <a href="examples/05-navbar-modal-carousel.html" class="card h-100 text-decoration-none text-dark shadow-sm">
+          <div class="card-body">
+            <span class="badge text-bg-info text-dark mb-2">05</span>
+            <h2 class="h5">Navbar · Modal · Carousel</h2>
+            <p class="card-text text-muted mb-0">JS 컴포넌트</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <a href="examples/06-쇼핑몰.html" class="card h-100 text-decoration-none text-dark shadow-sm border-primary">
+          <div class="card-body">
+            <span class="badge text-bg-primary mb-2">06 종합</span>
+            <h2 class="h5">MyShop 쇼핑몰</h2>
+            <p class="card-text text-muted mb-0">Navbar + Grid + Card×6 + Modal</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <a href="examples/07-카드9장.html" class="card h-100 text-decoration-none text-dark shadow-sm border-dark">
+          <div class="card-body">
+            <span class="badge text-bg-dark mb-2">07</span>
+            <h2 class="h5">카드 9장</h2>
+            <p class="card-text text-muted mb-0">3×3 Grid · Card Hover</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <a href="examples/08-카드6장.html" class="card h-100 text-decoration-none text-dark shadow-sm border-success">
+          <div class="card-body">
+            <span class="badge text-bg-success mb-2">08</span>
+            <h2 class="h5">카드 6장 (사진)</h2>
+            <p class="card-text text-muted mb-0">card-img-top · 3×2</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <a href="layout.html" class="card h-100 text-decoration-none text-dark shadow-sm">
+          <div class="card-body">
+            <span class="badge text-bg-dark mb-2">Layout</span>
+            <h2 class="h5">Header · Nav · Card 3 · Footer</h2>
+            <p class="card-text text-muted mb-0">기본 레이아웃 한 화면</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <a href="portfolio/index.html" class="card h-100 text-decoration-none text-dark shadow-sm border-success">
+          <div class="card-body">
+            <span class="badge text-bg-success mb-2">Portfolio</span>
+            <h2 class="h5">HAEUN 포트폴리오</h2>
+            <p class="card-text text-muted mb-0">Hero · Work · About · Contact</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <a href="onepage-portfolio/index.html" class="card h-100 text-decoration-none text-dark shadow-sm border-info">
+          <div class="card-body">
+            <span class="badge text-bg-info text-dark mb-2">One Page</span>
+            <h2 class="h5">SEOJIN 원페이지</h2>
+            <p class="card-text text-muted mb-0">Nav · Slide · Tab · Accordion</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <a href="company/index1.html" class="card h-100 text-decoration-none text-dark shadow-sm border-warning">
+          <div class="card-body">
+            <span class="badge text-bg-warning text-dark mb-2">Company</span>
+            <h2 class="h5">Company index1</h2>
+            <p class="card-text text-muted mb-0">Hover · Modal · FAQ · Offcanvas</p>
+          </div>
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="border-top py-3 text-center text-muted">
+    <small>Bootstrap 5.3.8 · 수업용 예제</small>
+  </footer>
+
+</body>
+</html>

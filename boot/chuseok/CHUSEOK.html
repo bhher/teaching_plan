@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="한가위 보름달처럼, 풍성하고 따뜻한 추석 되세요.">
+  <meta property="og:title" content="추석 인사 — 한가위 보름달">
+  <meta property="og:description" content="한가위 보름달처럼, 풍성하고 따뜻한 추석 되세요.">
+  <title>추석 인사</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --night: #0a1628;
+      --night-mid: #132a45;
+      --gold: #e8c872;
+      --gold-soft: #f3e2a8;
+      --ink: #f5f0e6;
+      --hill-1: #1a3d32;
+      --hill-2: #0f2a22;
+      --lantern: #c45a2c;
+      --font-display: "Nanum Myeongjo", serif;
+      --font-body: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      margin: 0; height: 100%; overflow: hidden;
+      background: var(--night); font-family: var(--font-body);
+      -webkit-tap-highlight-color: transparent;
+    }
+    .card-stage {
+      position: relative; width: 100%; height: 100%; height: 100dvh;
+      max-width: 480px; margin: 0 auto; overflow: hidden; color: var(--ink);
+    }
+    .sky {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 45% at 50% 28%, #2a4a6e 0%, transparent 55%),
+        linear-gradient(180deg, #07101c 0%, var(--night-mid) 45%, #0d2438 70%, #0a1a14 100%);
+    }
+    .stars {
+      position: absolute; inset: 0;
+      background-image:
+        radial-gradient(1.5px 1.5px at 12% 18%, rgba(255,255,255,.9), transparent),
+        radial-gradient(1px 1px at 28% 12%, rgba(255,255,255,.7), transparent),
+        radial-gradient(1.5px 1.5px at 72% 22%, rgba(255,255,255,.85), transparent),
+        radial-gradient(1px 1px at 88% 14%, rgba(255,255,255,.6), transparent),
+        radial-gradient(1px 1px at 45% 8%, rgba(255,255,255,.75), transparent),
+        radial-gradient(1.5px 1.5px at 60% 30%, rgba(255,255,255,.5), transparent),
+        radial-gradient(1px 1px at 18% 35%, rgba(255,255,255,.55), transparent),
+        radial-gradient(1px 1px at 80% 38%, rgba(255,255,255,.45), transparent);
+      animation: twinkle 4s ease-in-out infinite alternate;
+    }
+    @keyframes twinkle { from { opacity: .55; } to { opacity: 1; } }
+    .moon {
+      position: absolute; top: 12%; left: 50%;
+      width: clamp(88px, 26vw, 120px); height: clamp(88px, 26vw, 120px);
+      margin-left: calc(clamp(88px, 26vw, 120px) / -2);
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #fff8e0 0%, var(--gold-soft) 40%, var(--gold) 100%);
+      box-shadow: 0 0 40px 12px rgba(232,200,114,.35), 0 0 80px 28px rgba(232,200,114,.15);
+      animation: moon-rise 2.2s ease-out both, moon-pulse 5s ease-in-out 2.2s infinite;
+      z-index: 2;
+    }
+    .moon-glow {
+      position: absolute; inset: -30%; border-radius: 50%;
+      background: radial-gradient(circle, rgba(243,226,168,.25) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    @keyframes moon-rise {
+      from { opacity: 0; transform: translateY(40px) scale(.85); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @keyframes moon-pulse {
+      0%, 100% { box-shadow: 0 0 40px 12px rgba(232,200,114,.35), 0 0 80px 28px rgba(232,200,114,.15); }
+      50% { box-shadow: 0 0 55px 18px rgba(232,200,114,.45), 0 0 100px 36px rgba(232,200,114,.2); }
+    }
+    .hill {
+      position: absolute; left: -10%; right: -10%; bottom: 0;
+      border-radius: 50% 50% 0 0; z-index: 1;
+    }
+    .hill-back { height: 38%; background: var(--hill-1); opacity: .85; transform: scaleX(1.1); }
+    .hill-front { height: 26%; background: var(--hill-2); animation: hill-breathe 8s ease-in-out infinite; }
+    @keyframes hill-breathe {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+    .lantern {
+      position: absolute; bottom: 28%; width: 14px; height: 22px;
+      background: linear-gradient(180deg, #e8a060, var(--lantern));
+      border-radius: 4px 4px 6px 6px; z-index: 2;
+      animation: sway 3.5s ease-in-out infinite;
+    }
+    .lantern::before {
+      content: ""; position: absolute; top: -10px; left: 50%;
+      width: 1px; height: 10px; background: rgba(232,200,114,.5);
+      transform: translateX(-50%);
+    }
+    .lantern::after {
+      content: ""; position: absolute; bottom: -6px; left: 50%;
+      width: 8px; height: 6px; margin-left: -4px;
+      background: rgba(196,90,44,.7); border-radius: 0 0 4px 4px;
+    }
+    .lantern-l { left: 18%; }
+    .lantern-r { right: 16%; left: auto; animation-delay: .8s; height: 18px; width: 12px; }
+    @keyframes sway {
+      0%, 100% { transform: rotate(-4deg); }
+      50% { transform: rotate(5deg); }
+    }
+    .greeting {
+      position: relative; z-index: 3; height: 100%;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding-bottom: max(3.5rem, 12vh); padding-top: 2rem; text-align: center;
+    }
+    .brand {
+      font-family: var(--font-display); font-weight: 800;
+      font-size: clamp(1.1rem, 4vw, 1.35rem); letter-spacing: .35em;
+      color: var(--gold); margin: 0 0 .75rem; text-indent: .35em;
+    }
+    .title {
+      font-family: var(--font-display); font-weight: 800;
+      font-size: clamp(2.1rem, 9vw, 2.75rem); line-height: 1.35;
+      margin: 0 0 1.1rem; color: var(--ink);
+      text-shadow: 0 2px 24px rgba(0,0,0,.35);
+    }
+    .lead {
+      font-size: clamp(1.1rem, 4vw, 1.25rem); line-height: 1.75;
+      opacity: .88; margin: 0 0 1.5rem;
+    }
+    .from {
+      font-family: var(--font-body); font-weight: 500;
+      font-size: clamp(1.05rem, 3.8vw, 1.2rem);
+      color: var(--gold-soft); opacity: .85; margin: 0; letter-spacing: .04em;
+    }
+    .fade-up {
+      opacity: 0; transform: translateY(18px);
+      animation: fade-up .9s ease forwards;
+    }
+    .delay-1 { animation-delay: .35s; }
+    .delay-2 { animation-delay: .65s; }
+    .delay-3 { animation-delay: .95s; }
+    @keyframes fade-up {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .stars, .moon, .hill-front, .lantern, .fade-up { animation: none !important; }
+      .fade-up, .moon { opacity: 1; transform: none; }
+    }
+    @media (min-width: 481px) {
+      body {
+        display: flex; align-items: center; justify-content: center;
+        min-height: 100vh; background: #050b14;
+      }
+      .card-stage {
+        height: min(780px, 95vh); border-radius: 16px;
+        box-shadow: 0 24px 60px rgba(0,0,0,.45);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="card-stage">
+    <div class="sky" aria-hidden="true">
+      <div class="stars"></div>
+      <div class="moon"><span class="moon-glow"></span></div>
+      <div class="hill hill-back"></div>
+      <div class="hill hill-front"></div>
+      <div class="lantern lantern-l"></div>
+      <div class="lantern lantern-r"></div>
+    </div>
+
+    <div class="container greeting">
+      <p class="brand fade-up">한가위</p>
+      <h1 class="title fade-up delay-1">추석<br>잘 보내세요</h1>
+      <p class="lead fade-up delay-2">
+        보름달처럼 밝고<br>
+        풍성한 명절 되시길 바랍니다.
+      </p>
+      <!-- 보내는 사람 이름만 바꾸세요 -->
+      <p class="from fade-up delay-3">허범회 드림</p>
+    </div>
+  </main>
+</body>
+</html>

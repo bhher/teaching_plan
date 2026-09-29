@@ -519,6 +519,11 @@ export default PostCard;
 
 ## 6. 실습 과제
 
+**결과물 폴더 (실행: 각 폴더에서 `npm install` → `npm run dev`)**
+- [props-과제1-프로필카드](./props-과제1-프로필카드/)
+- [props-과제2-상품카드](./props-과제2-상품카드/)
+- [props-과제3-버튼](./props-과제3-버튼/)
+
 ### 과제 1: 프로필 카드 컴포넌트
 
 **요구사항:**

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>08. Bootstrap 카드 6장 (사진)</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <style>
+    .card-img-top {
+      height: 180px;
+      object-fit: cover;
+    }
+    .card {
+      transition: 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12) !important;
+    }
+  </style>
+</head>
+<body class="bg-light">
+
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="../index.html">← Bootstrap 예제</a>
+      <span class="navbar-text text-white-50">Card × 6 · 사진 포함</span>
+    </div>
+  </nav>
+
+  <main class="container py-5">
+    <div class="text-center mb-4">
+      <h1 class="h3 fw-bold">Bootstrap 카드 6장 (사진)</h1>
+      <p class="text-muted mb-0">
+        <code>card-img-top</code> + <code>col-12 col-md-6 col-lg-4</code> → PC 3열 × 2행
+      </p>
+    </div>
+
+    <div class="row g-4">
+
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm border-0">
+          <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&q=80" class="card-img-top" alt="웹 개발">
+          <div class="card-body">
+            <h5 class="card-title">웹 개발</h5>
+            <p class="card-text text-muted small">HTML · CSS · Bootstrap으로 반응형 사이트를 만듭니다.</p>
+            <a href="#" class="btn btn-outline-primary btn-sm">자세히</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm border-0">
+          <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&q=80" class="card-img-top" alt="모바일">
+          <div class="card-body">
+            <h5 class="card-title">모바일 UI</h5>
+            <p class="card-text text-muted small">작은 화면 우선 Mobile First 레이아웃.</p>
+            <a href="#" class="btn btn-outline-success btn-sm">자세히</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm border-0">
+          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80" class="card-img-top" alt="쇼핑몰">
+          <div class="card-body">
+            <h5 class="card-title">쇼핑몰</h5>
+            <p class="card-text text-muted small">상품 카드 · Modal · Navbar 구성 예제.</p>
+            <a href="#" class="btn btn-outline-danger btn-sm">자세히</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm border-0">
+          <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=600&q=80" class="card-img-top" alt="포트폴리오">
+          <div class="card-body">
+            <h5 class="card-title">포트폴리오</h5>
+            <p class="card-text text-muted small">원페이지 · 탭 · 아코디언 활용.</p>
+            <a href="#" class="btn btn-outline-secondary btn-sm">자세히</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm border-0">
+          <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&q=80" class="card-img-top" alt="JavaScript">
+          <div class="card-body">
+            <h5 class="card-title">JavaScript</h5>
+            <p class="card-text text-muted small">이벤트 · DOM · 인터랙션 기초.</p>
+            <a href="#" class="btn btn-outline-warning btn-sm">자세히</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm border-0">
+          <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=600&q=80" class="card-img-top" alt="React">
+          <div class="card-body">
+            <h5 class="card-title">React</h5>
+            <p class="card-text text-muted small">컴포넌트 · Props · map 렌더링.</p>
+            <a href="#" class="btn btn-outline-info btn-sm">자세히</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

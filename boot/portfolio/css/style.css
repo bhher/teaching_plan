@@ -1,0 +1,393 @@
+/* HAEUN Portfolio — Bootstrap + custom */
+
+:root {
+  --ink: #0b1c1f;
+  --ink-soft: #1a3338;
+  --paper: #e8eef0;
+  --mist: #c5d4d8;
+  --accent: #0f9f8a;
+  --accent-deep: #0a7a6a;
+  --white: #f7fafb;
+  --font-display: "Syne", sans-serif;
+  --font-body: "Instrument Sans", sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--ink);
+  background:
+    radial-gradient(ellipse 80% 50% at 10% 0%, #d4e8e4 0%, transparent 55%),
+    radial-gradient(ellipse 60% 40% at 100% 20%, #c8dce8 0%, transparent 50%),
+    var(--paper);
+  line-height: 1.6;
+}
+
+/* ----- Nav ----- */
+.site-nav {
+  background: transparent;
+  padding-top: 0.85rem;
+  padding-bottom: 0.85rem;
+  transition: background 0.35s ease, box-shadow 0.35s ease, padding 0.35s ease;
+}
+
+.site-nav.is-scrolled {
+  background: rgba(11, 28, 31, 0.92);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06);
+  padding-top: 0.55rem;
+  padding-bottom: 0.55rem;
+}
+
+.site-nav .navbar-brand {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--white) !important;
+  font-size: 1rem;
+}
+
+.site-nav .nav-link {
+  color: rgba(247, 250, 251, 0.82) !important;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.site-nav .nav-link:hover {
+  color: var(--white) !important;
+}
+
+.site-nav .navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.site-nav .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28247, 250, 251, 0.9%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* ----- Hero ----- */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  color: var(--white);
+}
+
+.hero-media {
+  position: absolute;
+  inset: 0;
+  background:
+    url("https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=2000&q=80")
+    center / cover no-repeat;
+  transform: scale(1.08);
+  animation: hero-zoom 18s ease-out forwards;
+}
+
+@keyframes hero-zoom {
+  to {
+    transform: scale(1);
+  }
+}
+
+.hero-shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(11, 28, 31, 0.45) 0%,
+      rgba(11, 28, 31, 0.25) 40%,
+      rgba(11, 28, 31, 0.88) 100%
+    );
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  padding-bottom: clamp(3rem, 10vh, 5.5rem);
+  padding-top: 6rem;
+}
+
+.hero-brand {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.8rem, 9vw, 5.5rem);
+  letter-spacing: 0.04em;
+  line-height: 0.95;
+  margin: 0 0 1rem;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 4.2vw, 2.6rem);
+  line-height: 1.2;
+  max-width: 14ch;
+  margin: 0 0 1rem;
+}
+
+.hero-lead {
+  font-size: 1.05rem;
+  opacity: 0.88;
+  max-width: 36ch;
+  margin: 0 0 1.75rem;
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.btn-hero {
+  --bs-btn-bg: var(--accent);
+  --bs-btn-border-color: var(--accent);
+  --bs-btn-hover-bg: var(--accent-deep);
+  --bs-btn-hover-border-color: var(--accent-deep);
+  --bs-btn-color: #fff;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-active-bg: var(--accent-deep);
+  --bs-btn-active-border-color: var(--accent-deep);
+  --bs-btn-padding-x: 1.4rem;
+  --bs-btn-padding-y: 0.7rem;
+  font-weight: 600;
+  border-radius: 0.35rem;
+}
+
+.btn-hero-ghost {
+  --bs-btn-color: var(--white);
+  --bs-btn-border-color: rgba(247, 250, 251, 0.55);
+  --bs-btn-hover-bg: rgba(247, 250, 251, 0.12);
+  --bs-btn-hover-border-color: var(--white);
+  --bs-btn-hover-color: var(--white);
+  --bs-btn-padding-x: 1.4rem;
+  --bs-btn-padding-y: 0.7rem;
+  font-weight: 600;
+  border-radius: 0.35rem;
+  border-width: 1px;
+  background: transparent;
+}
+
+/* ----- Sections ----- */
+.section {
+  padding: clamp(4rem, 10vw, 7rem) 0;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.75rem, 3.5vw, 2.25rem);
+  margin-bottom: 0.5rem;
+}
+
+.section-desc {
+  color: var(--ink-soft);
+  opacity: 0.75;
+  margin-bottom: 2.5rem;
+  max-width: 40ch;
+}
+
+/* ----- Work (interactive project links — card-like OK) ----- */
+.section-work {
+  background: linear-gradient(180deg, transparent 0%, rgba(197, 212, 216, 0.35) 100%);
+}
+
+.project-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+  transition: transform 0.35s ease;
+}
+
+.project-link:hover {
+  transform: translateY(-6px);
+  color: inherit;
+}
+
+.project-thumb {
+  aspect-ratio: 4 / 3;
+  border-radius: 0.4rem;
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 1rem;
+  transition: filter 0.4s ease;
+}
+
+.project-link:hover .project-thumb {
+  filter: brightness(1.05) saturate(1.05);
+}
+
+.project-thumb-a {
+  background-color: #1a4a5c;
+  background-image: url("https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80");
+}
+
+.project-thumb-b {
+  background-color: #3d5a4a;
+  background-image: url("https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80");
+}
+
+.project-thumb-c {
+  background-color: #2a3a5c;
+  background-image: url("https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80");
+}
+
+.project-meta h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem;
+}
+
+.project-meta p {
+  margin: 0;
+  color: var(--ink-soft);
+  opacity: 0.7;
+  font-size: 0.95rem;
+}
+
+/* ----- About ----- */
+.section-about {
+  background:
+    linear-gradient(135deg, #dfe9ec 0%, #e8eef0 45%, #d2e4e0 100%);
+}
+
+.about-photo {
+  aspect-ratio: 4 / 5;
+  border-radius: 0.4rem;
+  background:
+    url("https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=900&q=80")
+    center / cover no-repeat;
+  box-shadow: 0 20px 40px rgba(11, 28, 31, 0.12);
+}
+
+.about-text {
+  font-size: 1.1rem;
+  max-width: 38ch;
+  margin-bottom: 1.5rem;
+  color: var(--ink-soft);
+}
+
+.skill-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.skill-list li {
+  font-weight: 600;
+  padding-left: 1rem;
+  border-left: 3px solid var(--accent);
+}
+
+/* ----- Contact ----- */
+.section-contact {
+  background: var(--ink);
+  color: var(--white);
+}
+
+.section-contact .section-title,
+.section-contact .section-desc {
+  color: var(--white);
+}
+
+.section-contact .section-desc {
+  opacity: 0.7;
+}
+
+.contact-form {
+  max-width: 640px;
+}
+
+.contact-form .form-label {
+  color: rgba(247, 250, 251, 0.75);
+  font-size: 0.9rem;
+}
+
+.contact-form .form-control {
+  background: rgba(247, 250, 251, 0.06);
+  border: 1px solid rgba(247, 250, 251, 0.2);
+  color: var(--white);
+  border-radius: 0.35rem;
+  padding: 0.7rem 0.9rem;
+}
+
+.contact-form .form-control:focus {
+  background: rgba(247, 250, 251, 0.1);
+  border-color: var(--accent);
+  color: var(--white);
+  box-shadow: 0 0 0 0.2rem rgba(15, 159, 138, 0.25);
+}
+
+.contact-form .form-control::placeholder {
+  color: rgba(247, 250, 251, 0.35);
+}
+
+/* ----- Footer ----- */
+.site-footer {
+  background: #061214;
+  color: rgba(247, 250, 251, 0.55);
+  padding: 1.5rem 0;
+  font-size: 0.9rem;
+}
+
+.footer-brand {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--white);
+}
+
+/* ----- Reveal motion ----- */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 {
+  transition-delay: 0.12s;
+}
+
+.reveal-delay-2 {
+  transition-delay: 0.24s;
+}
+
+.reveal-delay-3 {
+  transition-delay: 0.36s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-media {
+    animation: none;
+    transform: none;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

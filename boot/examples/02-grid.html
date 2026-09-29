@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>02. Bootstrap Grid</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .demo {
+      background: #1e3a5f;
+      color: #fff;
+      padding: 1rem;
+      text-align: center;
+      border-radius: .375rem;
+      margin-bottom: .75rem;
+    }
+    .demo-alt { background: #3d6b9a; }
+  </style>
+</head>
+<body class="bg-light">
+
+  <div class="container py-5">
+    <p class="mb-3"><a href="../index.html" class="text-decoration-none">← 목록</a></p>
+    <h1 class="mb-4">Grid 시스템 (12칸)</h1>
+
+    <h2 class="h5 mb-3">1) 4 + 4 + 4</h2>
+    <div class="row mb-4">
+      <div class="col-4"><div class="demo">col-4</div></div>
+      <div class="col-4"><div class="demo demo-alt">col-4</div></div>
+      <div class="col-4"><div class="demo">col-4</div></div>
+    </div>
+
+    <h2 class="h5 mb-3">2) 6 + 6</h2>
+    <div class="row mb-4">
+      <div class="col-6"><div class="demo">col-6 왼쪽</div></div>
+      <div class="col-6"><div class="demo demo-alt">col-6 오른쪽</div></div>
+    </div>
+
+    <h2 class="h5 mb-3">3) 3 + 9</h2>
+    <div class="row mb-4">
+      <div class="col-3"><div class="demo">메뉴 col-3</div></div>
+      <div class="col-9"><div class="demo demo-alt">본문 col-9</div></div>
+    </div>
+
+    <h2 class="h5 mb-3">4) 반응형 — col-12 col-md-6 col-lg-4</h2>
+    <p class="text-muted small mb-3">창 크기를 줄여 보세요. 모바일 1열 → 태블릿 2열 → PC 3열</p>
+    <div class="row">
+      <div class="col-12 col-md-6 col-lg-4"><div class="demo">상품 1</div></div>
+      <div class="col-12 col-md-6 col-lg-4"><div class="demo demo-alt">상품 2</div></div>
+      <div class="col-12 col-md-6 col-lg-4"><div class="demo">상품 3</div></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
