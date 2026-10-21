@@ -1,0 +1,11 @@
+<%!
+    // 이미지: http(s)면 그대로, 아니면 /uploads/파일명
+    String imgUrl(javax.servlet.http.HttpServletRequest req, String image) {
+        if (image == null || image.trim().isEmpty()) {
+            return "https://placehold.co/600x400?text=No+Image";
+        }
+        String v = image.trim();
+        if (v.startsWith("http://") || v.startsWith("https://")) return v;
+        return req.getContextPath() + "/uploads/" + v;
+    }
+%>

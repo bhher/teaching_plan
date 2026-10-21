@@ -1,0 +1,284 @@
+:root {
+  --bg: #0c1b2a;
+  --panel: #132a40;
+  --text: #e8f1f8;
+  --muted: #8aa4b8;
+  --accent: #3db8ff;
+  --warn: #ff8a65;
+  --radius: 14px;
+  font-family: "Pretendard", "Noto Sans KR", sans-serif;
+  color: var(--text);
+  background: radial-gradient(1200px 600px at 20% -10%, #1a3a55, var(--bg));
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+.app {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3rem;
+}
+
+.hero h1 {
+  margin: 0.2rem 0 0.4rem;
+  font-size: 1.8rem;
+}
+
+.brand {
+  margin: 0;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  color: var(--accent);
+}
+
+.lead {
+  color: var(--muted);
+  margin: 0 0 1.2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.badge {
+  font-size: 0.75rem;
+  background: #254a66;
+  color: #9fd4ff;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+}
+
+.search-form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.search-form input {
+  flex: 1;
+  border: 1px solid #2a4a66;
+  background: #0a1622;
+  color: var(--text);
+  border-radius: 10px;
+  padding: 0.75rem 0.9rem;
+  font-size: 1rem;
+}
+
+.search-form button {
+  border: 0;
+  background: var(--accent);
+  color: #041018;
+  font-weight: 700;
+  border-radius: 10px;
+  padding: 0 1.1rem;
+  cursor: pointer;
+}
+
+.search-form button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.suggestions {
+  list-style: none;
+  margin: 0.6rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.suggestions button {
+  border: 1px solid #2a4a66;
+  background: transparent;
+  color: var(--text);
+  border-radius: 999px;
+  padding: 0.3rem 0.7rem;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.panel {
+  background: color-mix(in srgb, var(--panel) 92%, black);
+  border: 1px solid #243f58;
+  border-radius: var(--radius);
+  padding: 1.1rem 1.2rem;
+  margin-top: 1rem;
+}
+
+.current-main {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.temp {
+  font-size: 2.6rem;
+  margin: 0;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.desc {
+  margin: 0.25rem 0 0;
+  color: var(--muted);
+  text-transform: capitalize;
+}
+
+.meta {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.clothes h3,
+.panel > h3 {
+  margin: 0 0 0.75rem;
+  font-size: 1rem;
+}
+
+.clothes {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #243f58;
+}
+
+.clothes ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.clothes li {
+  background: #1c3d58;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+}
+
+.scroll-row {
+  display: flex;
+  gap: 0.6rem;
+  overflow-x: auto;
+  padding-bottom: 0.25rem;
+}
+
+.chip {
+  min-width: 72px;
+  background: #0e2030;
+  border-radius: 12px;
+  padding: 0.55rem 0.4rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.chip-time {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.daily-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.daily-list li {
+  display: grid;
+  grid-template-columns: 110px 40px 1fr auto;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 0.45rem 0;
+  border-bottom: 1px solid #1e354a;
+  font-size: 0.92rem;
+}
+
+.daily-list .desc {
+  color: var(--muted);
+  margin: 0;
+}
+
+.daily-list .range {
+  font-weight: 600;
+}
+
+.toolbar {
+  margin-top: 1rem;
+}
+
+.fav-btn {
+  border: 1px solid #3a5f7d;
+  background: transparent;
+  color: var(--text);
+  border-radius: 999px;
+  padding: 0.4rem 0.9rem;
+  cursor: pointer;
+}
+
+.favorites ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.favorites li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.35rem 0;
+  border-bottom: 1px solid #1e354a;
+}
+
+.linkish {
+  border: 0;
+  background: none;
+  color: var(--accent);
+  cursor: pointer;
+  padding: 0;
+  font-size: 0.95rem;
+}
+
+.remove {
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.error {
+  background: #3a1f1f;
+  color: #ffb4a8;
+  border: 1px solid #6b3030;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  margin-top: 1rem;
+}
+
+.loading {
+  color: var(--muted);
+  margin-top: 1rem;
+}
+
+.foot {
+  margin-top: 2rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
