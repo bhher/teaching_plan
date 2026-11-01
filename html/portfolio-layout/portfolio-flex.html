@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio - Flexbox</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f7f4ef;
+      color: #2c2c2c;
+      line-height: 1.6;
+    }
+
+    .badge {
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 6px 14px;
+      background: #fff;
+      border: 1px solid #ece7df;
+      border-radius: 999px;
+      color: #c47a4a;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+    .layout-label {
+      max-width: 1100px;
+      margin: 24px auto 0;
+      padding: 0 24px;
+      color: #888;
+      font-size: 13px;
+    }
+
+    /* ========== FLEX: 섹션 헤더 ========== */
+    .portfolio {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    .portfolio-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+
+    .portfolio-header h2 {
+      font-size: 42px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      line-height: 1.1;
+    }
+
+    .portfolio-header p {
+      max-width: 420px;
+      color: #6b6b6b;
+      font-size: 15px;
+    }
+
+    /* ========== FLEX: 카드 목록 ========== */
+    .card-list {
+      display: flex;
+      gap: 28px;
+    }
+
+    .card {
+      flex: 1;
+      background: #fff;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    .card img {
+      display: block;
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .card-body {
+      padding: 22px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .tags span {
+      color: #9a9a9a;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .card p {
+      color: #777;
+      font-size: 14px;
+    }
+
+    @media (max-width: 800px) {
+      .portfolio-header {
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .card-list {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <p class="layout-label">레이아웃 방식: <strong>Flexbox</strong></p>
+
+  <section class="portfolio">
+    <header class="portfolio-header">
+      <div>
+        <span class="badge">SELECTED WORKS</span>
+        <h2>PORTFOLIO</h2>
+      </div>
+      <p>
+        A collection of projects that showcase my passion for building clean,
+        functional, and user-centric digital products.
+      </p>
+    </header>
+
+    <div class="card-list">
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80" alt="AI Chat Platform">
+        <div class="card-body">
+          <div class="tags">
+            <span>REACT</span>
+            <span>TYPESCRIPT</span>
+            <span>GEMINI API</span>
+            <span>TAILWIND</span>
+          </div>
+          <h3>AI Chat Platform</h3>
+          <p>An intelligent conversational AI platform featuring real-time streaming, multimodal inputs, and a custom RAG pipeline.</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80" alt="E-commerce Dashboard">
+        <div class="card-body">
+          <div class="tags">
+            <span>NEXT.JS</span>
+            <span>RECHARTS</span>
+            <span>PRISMA</span>
+            <span>POSTGRESQL</span>
+          </div>
+          <h3>E-commerce Dashboard</h3>
+          <p>A comprehensive admin dashboard with real-time analytics, inventory management, and sales reporting.</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80" alt="Travel Planner App">
+        <div class="card-body">
+          <div class="tags">
+            <span>REACT</span>
+            <span>GOOGLE MAPS API</span>
+            <span>FIREBASE</span>
+          </div>
+          <h3>Travel Planner App</h3>
+          <p>A collaborative trip planning application with interactive maps, itinerary building, and real-time sync.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+</body>
+</html>

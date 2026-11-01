@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카카오맵 - 두 점 사이 거리</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1100px; margin: 0 auto; background: #fff;
+            border-radius: 20px; padding: 36px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 { text-align: center; color: #333; margin-bottom: 8px; }
+        .subtitle { text-align: center; color: #666; margin-bottom: 16px; }
+        .toolbar { margin-bottom: 14px; }
+        .btn {
+            padding: 10px 18px; border: none; border-radius: 8px;
+            background: #888; color: #fff; cursor: pointer;
+        }
+        .btn:hover { background: #666; }
+        #map {
+            width: 100%; height: 480px; border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+        .board {
+            margin-top: 16px; display: grid; grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .box {
+            background: #f5f5f5; border-radius: 10px; padding: 14px; line-height: 1.6;
+        }
+        .dist {
+            grid-column: 1 / -1;
+            background: #eef2ff; border: 1px solid #c7d2fe; text-align: center;
+            font-size: 22px; font-weight: bold; color: #3730a3; padding: 18px;
+            border-radius: 12px;
+        }
+        .tip { margin-top: 12px; padding: 12px; background: #fff8e6; border-left: 4px solid #ffc107; border-radius: 6px; }
+        @media (max-width: 640px) { .board { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📏 두 점 사이 거리 재기</h1>
+        <p class="subtitle">지도를 <b>두 번</b> 클릭하세요. 출발 → 도착 직선 거리를 계산합니다.</p>
+        <div class="toolbar">
+            <button class="btn" onclick="resetMeasure()">다시 측정</button>
+        </div>
+        <div id="map"></div>
+        <div class="board">
+            <div class="box"><b>① 출발</b><br><span id="p1">지도를 클릭하세요</span></div>
+            <div class="box"><b>② 도착</b><br><span id="p2">-</span></div>
+            <div class="dist" id="distance">거리: -</div>
+        </div>
+        <div class="tip">
+            수업 포인트: 카카오맵 <code>Polyline</code> 으로 선을 그리고,
+            위·경도 두 점으로 직선거리(하버사인)를 구합니다. (도로 길찾기 거리와는 다름)
+        </div>
+    </div>
+
+    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=bceccd594bb478b5533d7d2ec63f8bb0"></script>
+    <script>
+        var map = new kakao.maps.Map(document.getElementById('map'), {
+            center: new kakao.maps.LatLng(37.5665, 126.9780),
+            level: 5
+        });
+
+        var points = [];
+        var markers = [];
+        var line = null;
+
+        function haversine(lat1, lng1, lat2, lng2) {
+            var R = 6371000; // m
+            var toRad = Math.PI / 180;
+            var dLat = (lat2 - lat1) * toRad;
+            var dLng = (lng2 - lng1) * toRad;
+            var a =
+                Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(lat1 * toRad) * Math.cos(lat2 * toRad) *
+                Math.sin(dLng / 2) * Math.sin(dLng / 2);
+            return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        }
+
+        function formatDist(m) {
+            if (m >= 1000) return (m / 1000).toFixed(2) + ' km';
+            return Math.round(m) + ' m';
+        }
+
+        function resetMeasure() {
+            points = [];
+            markers.forEach(function (m) { m.setMap(null); });
+            markers = [];
+            if (line) { line.setMap(null); line = null; }
+            document.getElementById('p1').textContent = '지도를 클릭하세요';
+            document.getElementById('p2').textContent = '-';
+            document.getElementById('distance').textContent = '거리: -';
+        }
+
+        kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
+            if (points.length >= 2) resetMeasure();
+
+            var latlng = mouseEvent.latLng;
+            points.push(latlng);
+
+            var marker = new kakao.maps.Marker({ map: map, position: latlng });
+            markers.push(marker);
+
+            var text = latlng.getLat().toFixed(5) + ', ' + latlng.getLng().toFixed(5);
+
+            if (points.length === 1) {
+                document.getElementById('p1').textContent = text;
+            } else {
+                document.getElementById('p2').textContent = text;
+
+                line = new kakao.maps.Polyline({
+                    path: points,
+                    strokeWeight: 4,
+                    strokeColor: '#6366f1',
+                    strokeOpacity: 0.9,
+                    strokeStyle: 'solid'
+                });
+                line.setMap(map);
+
+                var m = haversine(
+                    points[0].getLat(), points[0].getLng(),
+                    points[1].getLat(), points[1].getLng()
+                );
+                document.getElementById('distance').textContent = '직선 거리: ' + formatDist(m);
+            }
+        });
+    </script>
+</body>
+</html>

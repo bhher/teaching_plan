@@ -1,0 +1,177 @@
+/* company index1 — style1.css */
+/* 기존 style.css 기반 + Card Hover · Offcanvas 보강 */
+
+.navbar {
+  background-color: #f4511e;
+  color: #fff;
+}
+
+.nav-link {
+  color: #fff;
+}
+
+.nav-link:hover {
+  color: #ffe8df !important;
+}
+
+.nav-link.active {
+  background-color: #fff;
+  color: #f4511e !important;
+}
+
+.header {
+  background-color: #f4511e;
+  color: #fff;
+}
+
+.py-7 {
+  padding-top: 5rem !important;
+  padding-bottom: 5rem !important;
+}
+
+.graph {
+  color: #f4511e !important;
+  font-size: 160px !important;
+}
+
+.logo-small {
+  color: #f4511e !important;
+  font-size: 60px !important;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: transparent;
+  background-size: 100% 100%;
+  width: 2rem;
+  height: 2rem;
+  filter: invert(36%) sepia(85%) saturate(2216%) hue-rotate(204deg) brightness(95%) contrast(102%);
+}
+
+.carousel-indicators [data-bs-target] {
+  background-color: #333;
+}
+
+.carousel-indicators .active {
+  background-color: #000;
+}
+
+.card-header {
+  color: #fff;
+  background-color: #f4511e !important;
+}
+
+.my-btn {
+  background-color: #f4511e;
+  color: #fff;
+}
+
+.my-btn:hover {
+  background-color: #fff;
+  color: #f4511e;
+  border: 1px solid #f4511e;
+}
+
+.slideanim {
+  visibility: hidden;
+}
+
+.slide {
+  visibility: visible;
+  animation: slide 1s;
+}
+
+@keyframes slide {
+  0% {
+    opacity: 0;
+    transform: translateY(70%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
+
+/* ========== 1. Card Hover ⭐ ========== */
+/* transition: 속성이 바뀔 때 부드럽게 */
+/* transform: 위치/크기 변형 */
+/* :hover: 마우스 올렸을 때 */
+
+.portfolio-card {
+  width: 80%;
+  margin: 0 auto;
+  transition: 0.3s;
+}
+
+.portfolio-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Pricing 카드에도 동일 효과 */
+#pricing .card {
+  transition: 0.3s;
+}
+
+#pricing .card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* ========== Offcanvas 메뉴 ========== */
+.offcanvas-company {
+  background-color: #f4511e;
+  color: #fff;
+}
+
+.offcanvas-company .offcanvas-title {
+  color: #fff;
+  font-weight: 700;
+}
+
+.offcanvas-company .btn-close {
+  filter: invert(1);
+}
+
+.offcanvas-company .nav-link {
+  color: #fff;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.offcanvas-company .nav-link:hover,
+.offcanvas-company .nav-link.active {
+  background: transparent;
+  color: #fff !important;
+  opacity: 0.9;
+}
+
+/* Navbar toggler (흰색 아이콘) */
+.navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.9%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* FAQ */
+#faq .accordion-button:not(.collapsed) {
+  background-color: rgba(244, 81, 30, 0.12);
+  color: #f4511e;
+  box-shadow: none;
+}
+
+#faq .accordion-button:focus {
+  box-shadow: none;
+  border-color: rgba(244, 81, 30, 0.3);
+}
+
+.modal-header {
+  background-color: #f4511e;
+  color: #fff;
+}
+
+.modal-header .btn-close {
+  filter: invert(1);
+}

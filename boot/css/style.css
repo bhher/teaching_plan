@@ -1,0 +1,29 @@
+/* boot 레이아웃 기본 스타일 */
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f7fa;
+}
+
+.site-header {
+  background: #1e3a5f;
+}
+
+.site-footer {
+  background: #1e3a5f;
+}
+
+.card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.12) !important;
+}
+
+main {
+  flex: 1;
+}

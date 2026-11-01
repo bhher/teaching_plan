@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>실습8 — AJAX 게시판</title>
+  <style>
+    body { font-family: sans-serif; max-width: 560px; margin: 40px auto; }
+    #msg { color: #64748b; margin-bottom: 8px; }
+    #list { list-style: none; padding: 0; margin: 0; }
+    #list li {
+      padding: 10px 12px; border: 1px solid #e2e8f0; margin-bottom: 6px;
+      cursor: pointer; border-radius: 6px;
+    }
+    #list li:hover { background: #f8fafc; }
+    #detail {
+      margin-top: 16px; padding: 16px; background: #f1f5f9; border-radius: 8px;
+      min-height: 60px;
+    }
+    small { color: #94a3b8; }
+  </style>
+</head>
+<body>
+  <h1>AJAX 게시판</h1>
+  <p><small>JSONPlaceholder API (Spring Boot 대신 연습용)</small></p>
+  <div id="msg">불러오는 중…</div>
+  <ul id="list"></ul>
+  <div id="detail">글을 클릭하면 본문이 표시됩니다.</div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script>
+    $(function () {
+      $.ajax({
+        url: "https://jsonplaceholder.typicode.com/posts?_limit=5",
+        type: "GET",
+        dataType: "json",
+        success: function (data) {
+          $("#msg").text("");
+          $.each(data, function (i, post) {
+            $("#list").append(
+              "<li data-id='" + post.id + "'>" + post.title + "</li>"
+            );
+          });
+        },
+        error: function () {
+          $("#msg").text("오류가 발생했습니다. 네트워크를 확인하세요.");
+        }
+      });
+
+      $("#list").on("click", "li", function () {
+        var id = $(this).data("id");
+        $("#detail").text("불러오는 중…");
+        $.getJSON(
+          "https://jsonplaceholder.typicode.com/posts/" + id,
+          function (post) {
+            $("#detail").html(
+              "<h3>" + post.title + "</h3><p>" + post.body + "</p>"
+            );
+          }
+        );
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+/* 가로 스크롤 예제 */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: "Segoe UI", sans-serif;
+  background: #f1f5f9;
+  padding: 48px 16px;
+  color: #334155;
+}
+
+.page {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.page h1 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.page p {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin-bottom: 20px;
+}
+
+/* 스크롤 박스 */
+.scroll-box {
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.scroll-x {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
+}
+
+.scroll-x::-webkit-scrollbar { height: 4px; }
+.scroll-x::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 99px;
+}
+
+/* 카드 */
+.item {
+  flex: 0 0 120px;
+  height: 80px;
+  border-radius: 8px;
+  scroll-snap-align: start;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.item:hover { opacity: 0.9; }
+.item.on {
+  opacity: 1;
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+  transform: scale(1.03);
+}
+
+.item:nth-child(1) { background: #6366f1; }
+.item:nth-child(2) { background: #ec4899; }
+.item:nth-child(3) { background: #0ea5e9; }
+.item:nth-child(4) { background: #10b981; }
+.item:nth-child(5) { background: #f59e0b; }
+.item:nth-child(6) { background: #8b5cf6; }
+.item:nth-child(7) { background: #ef4444; }
+
+/* 핵심 코드 안내 */
+.tip {
+  margin-top: 20px;
+  padding: 12px 14px;
+  background: #1e293b;
+  color: #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  line-height: 1.7;
+  overflow-x: auto;
+}
+
+.tip code { color: #7dd3fc; }

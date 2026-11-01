@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Step 아코디언 (dl/dt/dd)</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; border: 0; }
+    body { background-color: #252422; }
+    dl { width: 800px; margin: 50px auto 0; max-width: 95%; }
+    dt {
+      line-height: 35px;
+      font-size: large;
+      text-indent: 3em;
+      font-weight: bold;
+      color: #fff;
+      height: 35px;
+      background-color: #555;
+    }
+    dt.over {
+      background-color: #777;
+      cursor: pointer;
+    }
+    dt.selected {
+      background-color: #1d4ed8;
+      cursor: pointer;
+    }
+    dd {
+      margin: 0;
+      height: 300px;
+      background-color: #d4d0c8;
+      overflow: auto;
+    }
+    dd p {
+      margin: 0;
+      text-indent: 1em;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <dl>
+    <dt>Step.1</dt>
+    <dd>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis neque urna, molestie id cursus non,
+        bibendum nec magna. Mauris consequat faucibus ante sollicitudin ullamcorper. Proin et felis orci.</p>
+    </dd>
+    <dt>Step.2</dt>
+    <dd>
+      <p>Integer rhoncus felis mauris. Donec massa nisi, posuere vel posuere vel, suscipit sed magna.
+        Sed congue scelerisque odio, faucibus tempor nisl posuere condimentum.</p>
+    </dd>
+    <dt>Step.3</dt>
+    <dd>
+      <p>Integer pretium porttitor lectus at tempor. Donec nec cursus elit. Maecenas ornare malesuada urna vitae
+        lobortis. Sed vulputate sapien quis purus cursus consectetur.</p>
+    </dd>
+  </dl>
+
+  <script>
+    $("dd").hide();
+    $("dd").eq(0).show();
+    $("dt").eq(0).addClass("selected");
+
+    $("dl dt").click(function () {
+      if ($(this).next("dd").css("display") === "none") {
+        $("dd").slideUp("slow");
+        $(this).next().slideDown("slow");
+        $("dl dt").removeClass("selected");
+        $(this).addClass("selected");
+      }
+    });
+
+    $("dl dt").mouseover(function () {
+      $(this).addClass("over");
+    });
+    $("dl dt").mouseout(function () {
+      $(this).removeClass("over");
+    });
+  </script>
+</body>
+</html>

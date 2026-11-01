@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>가로 스크롤</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="page">
+    <h1>가로 스크롤</h1>
+    <p>좌우로 드래그 · 카드 클릭 시 선택</p>
+
+    <div class="scroll-box">
+      <div class="scroll-x">
+        <div class="item on">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+        <div class="item">4</div>
+        <div class="item">5</div>
+        <div class="item">6</div>
+        <div class="item">7</div>
+      </div>
+    </div>
+
+    <pre class="tip"><code>.scroll-x {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;        /* 가로 스크롤 */
+  scroll-snap-type: x mandatory;
+}
+.item { flex: 0 0 120px; scroll-snap-align: start; }</code></pre>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

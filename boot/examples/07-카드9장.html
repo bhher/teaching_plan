@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>07. Bootstrap 카드 9장</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <style>
+    .card-thumb {
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.25rem;
+      color: #fff;
+    }
+    .card {
+      transition: 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12) !important;
+    }
+  </style>
+</head>
+<body class="bg-light">
+
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="../index.html">← Bootstrap 예제</a>
+      <span class="navbar-text text-white-50">Card × 9 · col-lg-4</span>
+    </div>
+  </nav>
+
+  <main class="container py-5">
+    <div class="text-center mb-4">
+      <h1 class="h3 fw-bold">Bootstrap 카드 9장</h1>
+      <p class="text-muted mb-0">
+        <code>row</code> + <code>col-12 col-md-6 col-lg-4</code> → 모바일 1열 · 태블릿 2열 · PC 3열 (3×3)
+      </p>
+    </div>
+
+    <div class="row g-4">
+
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm border-0">
+          <div class="card-thumb bg-primary"><i class="bi bi-laptop"></i></div>
+          <div class="card-body">
+            <h5 class="card-title">웹 개발</h5>
+            <p class="card-text text-muted small">HTML · CSS · Bootstrap 반응형 레이아웃</p>
+            <a href="#" class="btn btn-outline-primary btn-sm">자세히</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm border-0">
+          <div class="card-thumb bg-success"><i class="bi bi-phone"></i></div>
+          <div class="card-body">
+            <h5 class="card-title">모바일 UI</h5>
+            <p class="card-text text-muted small">작은 화면 우선 Mobile First 설계</p>
+            <a href="#" class="btn btn-outline-success btn-sm">자세히</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm border-0">
+          <div class="card-thumb bg-info"><i class="bi bi-grid-3x3-gap"></i></div>
+          <div class="card-body">
+            <h5 class="card-title">그리드</h5>
+            <p class="card-text text-muted small">12칸 시스템으로 카드·레이아웃 배치</p>
+            <a href="#" class="btn btn-outline-info btn-sm">자세히</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm border-0">
+          <div class="card-thumb bg-warning"><i class="bi bi-palette"></i></div>
+          <div class="card-body">
+            <h5 class="card-title">디자인</h5>
+            <p class="card-text text-muted small">색상 · 타이포 · 여백 Utility 활용</p>
+            <a href="#" class="btn btn-outline-warning btn-sm">자세히</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm border-0">
+          <div class="card-thumb bg-danger"><i class="bi bi-shop"></i></div>
+          <div class="card-body">
+            <h5 class="card-title">쇼핑몰</h5>
+            <p class="card-text text-muted small">상품 카드 · Modal · Navbar 구성</p>
+            <a href="#" class="btn btn-outline-danger btn-sm">자세히</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm border-0">
+          <div class="card-thumb bg-secondary"><i class="bi bi-person-badge"></i></div>
+          <div class="card-body">
+            <h5 class="card-title">포트폴리오</h5>
+            <p class="card-text text-muted small">원페이지 · 탭 · 아코디언 활용</p>
+            <a href="#" class="btn btn-outline-secondary btn-sm">자세히</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm border-0">
+          <div class="card-thumb bg-dark"><i class="bi bi-database"></i></div>
+          <div class="card-body">
+            <h5 class="card-title">데이터베이스</h5>
+            <p class="card-text text-muted small">MySQL · JOIN · 서브쿼리 연동 준비</p>
+            <a href="#" class="btn btn-outline-dark btn-sm">자세히</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm border-0">
+          <div class="card-thumb" style="background:#0d9488"><i class="bi bi-code-slash"></i></div>
+          <div class="card-body">
+            <h5 class="card-title">JavaScript</h5>
+            <p class="card-text text-muted small">이벤트 · DOM · 인터랙션 기초</p>
+            <a href="#" class="btn btn-sm" style="border-color:#0d9488;color:#0d9488">자세히</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm border-0">
+          <div class="card-thumb" style="background:#6366f1"><i class="bi bi-react"></i></div>
+          <div class="card-body">
+            <h5 class="card-title">React</h5>
+            <p class="card-text text-muted small">컴포넌트 · Props · map 렌더링</p>
+            <a href="#" class="btn btn-sm" style="border-color:#6366f1;color:#6366f1">자세히</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

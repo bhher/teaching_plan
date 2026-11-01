@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>실습1 — 탭 메뉴</title>
+  <style>
+    body { font-family: sans-serif; max-width: 480px; margin: 40px auto; }
+    .tabs { display: flex; gap: 4px; }
+    .tab {
+      flex: 1; padding: 10px; border: 1px solid #ccc; background: #f5f5f5;
+      cursor: pointer; text-align: center;
+    }
+    .tab.active { background: #2563eb; color: #fff; border-color: #2563eb; }
+    .panel {
+      border: 1px solid #ccc; border-top: none; padding: 16px; min-height: 80px;
+    }
+  </style>
+</head>
+<body>
+  <h1>탭 메뉴</h1>
+  <div class="tabs">
+    <div class="tab">공지사항</div>
+    <div class="tab">자료실</div>
+    <div class="tab">Q&amp;A</div>
+  </div>
+  <div class="panel">공지사항 내용입니다.</div>
+  <div class="panel">자료실 내용입니다.</div>
+  <div class="panel">Q&amp;A 내용입니다.</div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script>
+    $(function () {
+      $(".panel").hide().eq(0).show();
+      $(".tab").eq(0).addClass("active");
+
+      $(".tab").on("click", function () {
+        var i = $(this).index();
+        $(".tab").removeClass("active");
+        $(this).addClass("active");
+        $(".panel").hide().eq(i).show();
+      });
+    });
+  </script>
+</body>
+</html>

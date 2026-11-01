@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>실습4 — 롤링 배너</title>
+  <style>
+    body { font-family: sans-serif; max-width: 400px; margin: 40px auto; }
+    .viewport { overflow: hidden; width: 100%; border-radius: 8px; }
+    #slide {
+      display: flex; width: 100%; margin: 0; padding: 0; list-style: none;
+    }
+    #slide li {
+      flex: 0 0 100%; height: 180px; display: flex;
+      align-items: center; justify-content: center;
+      color: #fff; font-size: 24px; font-weight: bold;
+    }
+    #slide li:nth-child(1) { background: #2563eb; }
+    #slide li:nth-child(2) { background: #059669; }
+    #slide li:nth-child(3) { background: #d97706; }
+    #slide li:nth-child(4) { background: #dc2626; }
+  </style>
+</head>
+<body>
+  <h1>롤링 배너</h1>
+  <div class="viewport">
+    <ul id="slide">
+      <li>Banner 1</li>
+      <li>Banner 2</li>
+      <li>Banner 3</li>
+      <li>Banner 4</li>
+    </ul>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script>
+    $(function () {
+      setInterval(function () {
+        $("#slide").animate({ marginLeft: "-100%" }, 500, function () {
+          $(this).append($(this).children().first());
+          $(this).css("marginLeft", 0);
+        });
+      }, 2500);
+    });
+  </script>
+</body>
+</html>

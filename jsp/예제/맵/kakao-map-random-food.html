@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카카오맵 - 오늘 뭐 먹지?</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1100px; margin: 0 auto; background: #fff;
+            border-radius: 20px; padding: 36px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 { text-align: center; color: #333; margin-bottom: 8px; }
+        .subtitle { text-align: center; color: #666; margin-bottom: 20px; }
+        .search-row { display: flex; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
+        .search-row input {
+            flex: 1; min-width: 200px; padding: 12px 14px;
+            border: 2px solid #ddd; border-radius: 8px; font-size: 15px;
+        }
+        .btn {
+            padding: 12px 20px; border: none; border-radius: 8px;
+            background: #667eea; color: #fff; cursor: pointer; font-size: 15px;
+        }
+        .btn:hover { background: #764ba2; }
+        .btn.orange { background: #f97316; }
+        .btn.orange:hover { background: #ea580c; }
+        .quick { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+        .chip {
+            padding: 8px 14px; border: none; border-radius: 20px;
+            background: #f0f0f0; cursor: pointer; font-size: 13px;
+        }
+        .chip:hover { background: #667eea; color: #fff; }
+        #map {
+            width: 100%; height: 460px; border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+        .card {
+            margin-top: 16px; padding: 18px; border-radius: 12px;
+            background: linear-gradient(135deg, #fff7ed, #ffedd5);
+            border: 1px solid #fdba74; display: none;
+        }
+        .card h3 { margin-bottom: 8px; color: #9a3412; }
+        .card p { color: #444; line-height: 1.6; margin-bottom: 6px; }
+        .card a { color: #c2410c; font-weight: bold; }
+        .tip { margin-top: 12px; padding: 12px; background: #f5f5f5; border-radius: 8px; line-height: 1.6; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🍜 오늘 뭐 먹지?</h1>
+        <p class="subtitle">키워드로 맛집을 검색한 뒤, 그중 하나를 랜덤으로 추천합니다.</p>
+
+        <div class="search-row">
+            <input type="text" id="keyword" value="강남 맛집" placeholder="예: 홍대 카페, 판교 점심">
+            <button class="btn" onclick="searchFood()">검색</button>
+            <button class="btn orange" onclick="pickRandom()">랜덤 추천!</button>
+        </div>
+        <div class="quick">
+            <button class="chip" onclick="quick('이태원 맛집')">이태원 맛집</button>
+            <button class="chip" onclick="quick('홍대 카페')">홍대 카페</button>
+            <button class="chip" onclick="quick('명동 디저트')">명동 디저트</button>
+            <button class="chip" onclick="quick('판교 점심')">판교 점심</button>
+        </div>
+
+        <div id="map"></div>
+        <div class="card" id="pickCard">
+            <h3 id="pickName">-</h3>
+            <p id="pickAddr">-</p>
+            <p id="pickPhone">-</p>
+            <p><a id="pickLink" href="#" target="_blank">카카오맵에서 보기</a></p>
+        </div>
+        <div class="tip">
+            수업 포인트: <code>Places.keywordSearch</code> 결과 배열에서
+            <code>Math.floor(Math.random() * length)</code> 로 하나를 고릅니다.
+        </div>
+    </div>
+
+    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=bceccd594bb478b5533d7d2ec63f8bb0&libraries=services"></script>
+    <script>
+        var map = new kakao.maps.Map(document.getElementById('map'), {
+            center: new kakao.maps.LatLng(37.4979, 127.0276),
+            level: 5
+        });
+        var places = new kakao.maps.services.Places();
+        var markers = [];
+        var results = [];
+        var pickMarker = null;
+        var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
+
+        function quick(q) {
+            document.getElementById('keyword').value = q;
+            searchFood();
+        }
+
+        function clearMarkers() {
+            markers.forEach(function (m) { m.setMap(null); });
+            markers = [];
+            if (pickMarker) { pickMarker.setMap(null); pickMarker = null; }
+            infowindow.close();
+        }
+
+        function searchFood() {
+            var keyword = document.getElementById('keyword').value.trim();
+            if (!keyword) {
+                alert('검색어를 입력하세요.');
+                return;
+            }
+
+            places.keywordSearch(keyword, function (data, status) {
+                clearMarkers();
+                document.getElementById('pickCard').style.display = 'none';
+
+                if (status !== kakao.maps.services.Status.OK || !data.length) {
+                    alert('검색 결과가 없습니다.');
+                    results = [];
+                    return;
+                }
+
+                results = data;
+                var bounds = new kakao.maps.LatLngBounds();
+
+                data.forEach(function (place) {
+                    var pos = new kakao.maps.LatLng(place.y, place.x);
+                    var marker = new kakao.maps.Marker({ map: map, position: pos });
+                    markers.push(marker);
+                    bounds.extend(pos);
+
+                    kakao.maps.event.addListener(marker, 'click', function () {
+                        infowindow.setContent(
+                            '<div style="padding:8px;font-size:13px;">' + place.place_name + '</div>'
+                        );
+                        infowindow.open(map, marker);
+                    });
+                });
+
+                map.setBounds(bounds);
+            });
+        }
+
+        function pickRandom() {
+            if (!results.length) {
+                alert('먼저 검색하세요!');
+                return;
+            }
+
+            var place = results[Math.floor(Math.random() * results.length)];
+            var pos = new kakao.maps.LatLng(place.y, place.x);
+
+            if (pickMarker) pickMarker.setMap(null);
+            pickMarker = new kakao.maps.Marker({ map: map, position: pos });
+            map.setCenter(pos);
+            map.setLevel(3);
+
+            infowindow.setContent(
+                '<div style="padding:10px;font-size:13px;"><b>🎲 ' + place.place_name + '</b></div>'
+            );
+            infowindow.open(map, pickMarker);
+
+            document.getElementById('pickName').textContent = '🎲 ' + place.place_name;
+            document.getElementById('pickAddr').textContent =
+                place.road_address_name || place.address_name || '';
+            document.getElementById('pickPhone').textContent =
+                place.phone ? ('전화: ' + place.phone) : '전화 정보 없음';
+            document.getElementById('pickLink').href =
+                'https://map.kakao.com/link/map/' + encodeURIComponent(place.place_name) +
+                ',' + place.y + ',' + place.x;
+            document.getElementById('pickCard').style.display = 'block';
+        }
+
+        searchFood();
+    </script>
+</body>
+</html>

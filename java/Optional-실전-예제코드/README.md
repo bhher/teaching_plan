@@ -6,10 +6,12 @@ Optional을 사용한 실전 개선 예제 코드입니다.
 
 ```
 Optional-실전-예제코드/
-├── MemberServiceExample.java  # MemberService 개선 예제
-└── README.md                  # 이 파일
+├── MemberServiceExample.java       # MemberService 개선 예제
+├── MemberServiceExample-설명.md    # 코드 상세 설명
+└── README.md
 ```
 
+상세 설명: [MemberServiceExample-설명.md](./MemberServiceExample-설명.md)
 ## 컴파일 및 실행
 
 ### 1. 컴파일
@@ -70,7 +72,7 @@ java optional.MemberServiceExample
 2. 기본값 제공 (orElse):
 -------------------
   결과: 이름없음
-  길이: 3
+  길이: 4
 
 3. 예외 던지기 (orElseThrow):
 -------------------

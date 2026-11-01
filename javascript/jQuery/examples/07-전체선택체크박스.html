@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>실습7 — 전체 선택 체크박스</title>
+  <style>
+    body { font-family: sans-serif; max-width: 360px; margin: 40px auto; }
+    label { display: block; margin: 8px 0; cursor: pointer; }
+    #allWrap { border-bottom: 1px solid #ddd; padding-bottom: 8px; margin-bottom: 8px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>관심 기술</h1>
+  <div id="allWrap">
+    <label><input type="checkbox" id="all" /> 전체 선택</label>
+  </div>
+  <label><input type="checkbox" name="hobby" value="Java" /> Java</label>
+  <label><input type="checkbox" name="hobby" value="Spring" /> Spring</label>
+  <label><input type="checkbox" name="hobby" value="React" /> React</label>
+  <label><input type="checkbox" name="hobby" value="Docker" /> Docker</label>
+  <p>선택: <span id="result">없음</span></p>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script>
+    $(function () {
+      function updateResult() {
+        var arr = [];
+        $("input[name=hobby]:checked").each(function () {
+          arr.push($(this).val());
+        });
+        $("#result").text(arr.length ? arr.join(", ") : "없음");
+      }
+
+      $("#all").on("click", function () {
+        $("input[name=hobby]").prop("checked", this.checked);
+        updateResult();
+      });
+
+      $("input[name=hobby]").on("click", function () {
+        var all = $("input[name=hobby]").length;
+        var checked = $("input[name=hobby]:checked").length;
+        $("#all").prop("checked", all === checked);
+        updateResult();
+      });
+    });
+  </script>
+</body>
+</html>

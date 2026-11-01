@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>박스 가로 정렬 - Float / Flex / Grid</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f5f5f5;
+      padding: 30px;
+      line-height: 1.5;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+      color: #222;
+    }
+
+    h2 {
+      margin: 40px 0 12px;
+      color: #333;
+      font-size: 18px;
+    }
+
+    code {
+      background: #eee;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+
+    .box {
+      height: 100px;
+      background: #4a90d9;
+      color: #fff;
+      font-weight: bold;
+      text-align: center;
+      line-height: 100px;
+      border-radius: 8px;
+    }
+
+    .box:nth-child(2) { background: #5cb85c; }
+    .box:nth-child(3) { background: #f0ad4e; }
+
+    /* ========== 1. FLOAT ========== */
+    .content.float {
+      /* 자식 float을 감싸기 위한 clearfix */
+    }
+
+    .content.float::after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    .content.float .box {
+      float: left;
+      width: 33.333%;
+      /* 간격이 필요하면 width를 줄이고 margin 사용 */
+      /* width: calc(33.333% - 10px); margin-right: 10px; */
+    }
+
+    /* ========== 2. FLEX ========== */
+    .content.flex {
+      display: flex;
+      gap: 12px; /* 박스 사이 간격 */
+    }
+
+    .content.flex .box {
+      flex: 1; /* 동일한 너비로 늘어남 */
+      /* 또는 flex: 1 1 300px; */
+    }
+
+    /* ========== 3. GRID ========== */
+    .content.grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* 3열 동일 너비 */
+      gap: 12px;
+    }
+
+    /* 공통 컨테이너 여백 */
+    .content {
+      margin-bottom: 10px;
+      background: #fff;
+      padding: 16px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    .note {
+      margin-top: 8px;
+      color: #666;
+      font-size: 14px;
+    }
+
+    /* ========== aside 참고 ========== */
+    .aside-demo {
+      display: flex;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .aside-demo main {
+      flex: 1;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+    }
+
+    .aside-demo aside {
+      width: 220px;
+      background: #fff3e0;
+      padding: 20px;
+      border-radius: 8px;
+      border: 1px solid #ffe0b2;
+    }
+  </style>
+</head>
+<body>
+  <h1>박스 3개 가로 정렬 + aside 설명</h1>
+
+  <!-- ========== FLOAT ========== -->
+  <h2>1) Float</h2>
+  <div class="content float">
+    <div class="box">박스1</div>
+    <div class="box">박스2</div>
+    <div class="box">박스3</div>
+  </div>
+  <p class="note">
+    핵심: <code>float: left;</code> + <code>width: 33.333%;</code> + 부모에 <code>clearfix</code>
+  </p>
+
+  <!-- ========== FLEX ========== -->
+  <h2>2) Flex</h2>
+  <div class="content flex">
+    <div class="box">박스1</div>
+    <div class="box">박스2</div>
+    <div class="box">박스3</div>
+  </div>
+  <p class="note">
+    핵심: <code>display: flex;</code> + <code>flex: 1;</code> (또는 <code>flex: 1 1 300px;</code>)
+  </p>
+
+  <!-- ========== GRID ========== -->
+  <h2>3) Grid</h2>
+  <div class="content grid">
+    <div class="box">박스1</div>
+    <div class="box">박스2</div>
+    <div class="box">박스3</div>
+  </div>
+  <p class="note">
+    핵심: <code>display: grid;</code> + <code>grid-template-columns: repeat(3, 1fr);</code>
+  </p>
+
+  <!-- ========== ASIDE ========== -->
+  <h2>참고) aside란?</h2>
+  <p class="note">
+    <code>&lt;aside&gt;</code>는 본문과 관련은 있지만 <strong>보조적인 내용</strong>을 담는 시맨틱 태그입니다.<br>
+    예: 사이드바, 광고, 관련 링크, 부가 설명
+  </p>
+  <div class="aside-demo">
+    <main>
+      <strong>main</strong><br>
+      페이지의 핵심 본문 내용
+    </main>
+    <aside>
+      <strong>aside</strong><br>
+      관련 링크 / 사이드바
+    </aside>
+  </div>
+</body>
+</html>

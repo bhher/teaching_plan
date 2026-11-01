@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Transition · Animation 정답 예제</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f4f6f8;
+      color: #222;
+      line-height: 1.6;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 40px;
+    }
+
+    .section {
+      max-width: 900px;
+      margin: 0 auto 32px;
+      background: #fff;
+      border-radius: 12px;
+      padding: 28px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+    }
+
+    .section h2 {
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+      color: #2c3e50;
+      border-bottom: 2px solid #3498db;
+      padding-bottom: 8px;
+    }
+
+    .section p.desc {
+      color: #666;
+      font-size: 0.92rem;
+      margin-bottom: 20px;
+    }
+
+    .demo-area {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      align-items: center;
+      min-height: 100px;
+    }
+
+    code {
+      display: block;
+      margin-top: 16px;
+      padding: 12px 14px;
+      background: #f0f3f6;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      white-space: pre-wrap;
+      color: #333;
+    }
+
+    /* ========== 16번. 버튼 hover ========== */
+    .btn {
+      display: inline-block;
+      padding: 12px 28px;
+      background: #333;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .btn:hover {
+      background: #e74c3c;
+      transform: translateY(-4px);
+    }
+
+    /* ========== 17번. 카드 확대 ========== */
+    .card {
+      width: 220px;
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-img {
+      height: 120px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+    }
+
+    .card-body {
+      padding: 16px;
+    }
+
+    .card-body h3 {
+      font-size: 1rem;
+      margin-bottom: 6px;
+    }
+
+    .card-body p {
+      font-size: 0.85rem;
+      color: #777;
+    }
+
+    /* ========== 18번. 로딩 스피너 ========== */
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .spinner {
+      width: 48px;
+      height: 48px;
+      border: 5px solid #e0e0e0;
+      border-top-color: #3498db;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    /* ========== 11번. rotate ========== */
+    .box-rotate {
+      width: 80px;
+      height: 80px;
+      background: #9b59b6;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: transform 0.4s ease;
+    }
+
+    .box-rotate:hover {
+      transform: rotate(45deg);
+    }
+
+    /* ========== 15번. translateX ========== */
+    .box-move {
+      width: 80px;
+      height: 80px;
+      background: #1abc9c;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: transform 0.4s ease;
+    }
+
+    .box-move:hover {
+      transform: translateX(50px);
+    }
+
+    /* ========== 4번. translateY(-10px) ========== */
+    .box-up {
+      width: 80px;
+      height: 80px;
+      background: #e67e22;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: transform 0.3s ease;
+    }
+
+    .box-up:hover {
+      transform: translateY(-10px);
+    }
+
+    /* ========== 7번. fadeIn ========== */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .box-fade {
+      width: 120px;
+      height: 80px;
+      background: #3498db;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      font-weight: bold;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    /* ========== bounce ========== */
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .box-bounce {
+      width: 80px;
+      height: 80px;
+      background: #e74c3c;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      font-weight: bold;
+      animation: bounce 2s ease infinite;
+    }
+
+    /* ========== 여러 transform ========== */
+    .box-multi {
+      width: 80px;
+      height: 80px;
+      background: #2c3e50;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: transform 0.4s ease;
+    }
+
+    .box-multi:hover {
+      transform: translateX(10px) scale(1.1);
+    }
+
+    .hint {
+      font-size: 0.85rem;
+      color: #888;
+      margin-top: 8px;
+    }
+
+    .answer-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    .answer-table th,
+    .answer-table td {
+      border: 1px solid #e0e0e0;
+      padding: 8px 12px;
+      text-align: left;
+    }
+
+    .answer-table th {
+      background: #ecf0f1;
+    }
+  </style>
+</head>
+<body>
+  <h1>CSS Transition · Animation 정답 예제</h1>
+  <p class="subtitle">마우스를 올려보거나, 자동 애니메이션을 확인해 보세요.</p>
+
+  <!-- 객관식 / OX 요약 -->
+  <section class="section">
+    <h2>객관식 · OX 정답 요약</h2>
+    <p class="desc">이론 문제 정답입니다.</p>
+    <table class="answer-table">
+      <tr><th>문제</th><th>정답</th><th>문제</th><th>정답</th></tr>
+      <tr><td>1</td><td>②</td><td>12</td><td>all</td></tr>
+      <tr><td>2</td><td>②</td><td>13</td><td>bounce</td></tr>
+      <tr><td>3</td><td>②</td><td>14</td><td>forwards</td></tr>
+      <tr><td>4</td><td>②</td><td>15</td><td>translateX</td></tr>
+      <tr><td>5</td><td>③</td><td>19</td><td>X</td></tr>
+      <tr><td>6</td><td>①</td><td>20</td><td>O</td></tr>
+      <tr><td>7</td><td>①</td><td>21</td><td>X</td></tr>
+      <tr><td>8</td><td>②</td><td>22</td><td>X</td></tr>
+      <tr><td>9</td><td>②</td><td>10</td><td>③</td></tr>
+      <tr><td>11</td><td>rotate</td><td></td><td></td></tr>
+    </table>
+  </section>
+
+  <!-- 16번 -->
+  <section class="section">
+    <h2>16번. 버튼 hover</h2>
+    <p class="desc">배경색 변경 + 위로 4px 이동 (0.3s ease)</p>
+    <div class="demo-area">
+      <button class="btn">Hover Me</button>
+    </div>
+    <p class="hint">마우스를 올리면 빨간색으로 바뀌며 위로 뜹니다.</p>
+    <code>.btn {
+  background: #333;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.btn:hover {
+  background: #e74c3c;
+  transform: translateY(-4px);
+}</code>
+  </section>
+
+  <!-- 17번 -->
+  <section class="section">
+    <h2>17번. 카드 확대</h2>
+    <p class="desc">hover 시 scale(1.05) + 그림자</p>
+    <div class="demo-area">
+      <article class="card">
+        <div class="card-img"></div>
+        <div class="card-body">
+          <h3>카드 제목</h3>
+          <p>마우스를 올리면 살짝 커집니다.</p>
+        </div>
+      </article>
+    </div>
+    <code>.card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+}</code>
+  </section>
+
+  <!-- 18번 -->
+  <section class="section">
+    <h2>18번. 로딩 스피너</h2>
+    <p class="desc">animation: spin 1s linear infinite</p>
+    <div class="demo-area">
+      <div class="spinner"></div>
+    </div>
+    <code>@keyframes spin {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.spinner {
+  animation: spin 1s linear infinite;
+}</code>
+  </section>
+
+  <!-- 11번 rotate -->
+  <section class="section">
+    <h2>11번. rotate(45deg)</h2>
+    <p class="desc">hover 시 45도 회전</p>
+    <div class="demo-area">
+      <div class="box-rotate">45°</div>
+    </div>
+    <code>transform: rotate(45deg);</code>
+  </section>
+
+  <!-- 15번 translateX -->
+  <section class="section">
+    <h2>15번. translateX(50px)</h2>
+    <p class="desc">hover 시 오른쪽으로 50px 이동</p>
+    <div class="demo-area">
+      <div class="box-move">→</div>
+    </div>
+    <code>transform: translateX(50px);</code>
+  </section>
+
+  <!-- 4번 translateY -->
+  <section class="section">
+    <h2>4번. translateY(-10px)</h2>
+    <p class="desc">hover 시 위로 10px 이동</p>
+    <div class="demo-area">
+      <div class="box-up">↑</div>
+    </div>
+    <code>transform: translateY(-10px);</code>
+  </section>
+
+  <!-- 7번 fadeIn -->
+  <section class="section">
+    <h2>7번. fadeIn (forwards)</h2>
+    <p class="desc">페이지 로드 시 1초 동안 나타남</p>
+    <div class="demo-area">
+      <div class="box-fade">Fade In</div>
+    </div>
+    <code>@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.box {
+  animation: fadeIn 1s ease forwards;
+}</code>
+  </section>
+
+  <!-- bounce -->
+  <section class="section">
+    <h2>13번. bounce 애니메이션</h2>
+    <p class="desc">animation: bounce 2s (무한 반복 데모)</p>
+    <div class="demo-area">
+      <div class="box-bounce">Bounce</div>
+    </div>
+    <code>@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-20px); }
+}
+.box {
+  animation: bounce 2s ease infinite;
+}</code>
+  </section>
+
+  <!-- 여러 transform -->
+  <section class="section">
+    <h2>20번. 여러 transform 한 줄</h2>
+    <p class="desc">translateX + scale 함께 사용</p>
+    <div class="demo-area">
+      <div class="box-multi">Multi</div>
+    </div>
+    <code>transform: translateX(10px) scale(1.1);</code>
+  </section>
+</body>
+</html>

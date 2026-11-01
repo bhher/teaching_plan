@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카카오맵 - 학원 찾아오기</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1100px; margin: 0 auto; background: #fff;
+            border-radius: 20px; padding: 36px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 { text-align: center; color: #333; margin-bottom: 8px; }
+        .subtitle { text-align: center; color: #666; margin-bottom: 20px; }
+        .panel {
+            display: grid; grid-template-columns: 280px 1fr; gap: 16px; margin-bottom: 16px;
+        }
+        .side {
+            background: #f8fafc; border-radius: 12px; padding: 18px; line-height: 1.7;
+        }
+        .side h3 { margin-bottom: 10px; color: #333; }
+        .side p { color: #555; font-size: 14px; margin-bottom: 8px; }
+        .btns { display: flex; flex-direction: column; gap: 8px; margin-top: 14px; }
+        .btn {
+            padding: 12px; border: none; border-radius: 8px;
+            background: #667eea; color: #fff; cursor: pointer; font-size: 14px; text-decoration: none;
+            text-align: center;
+        }
+        .btn:hover { background: #764ba2; }
+        .btn.green { background: #16a34a; }
+        .btn.green:hover { background: #15803d; }
+        #map {
+            width: 100%; height: 480px; border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+        .tip { margin-top: 14px; padding: 12px; background: #fff8e6; border-left: 4px solid #ffc107; border-radius: 6px; }
+        @media (max-width: 800px) { .panel { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏫 학원 찾아오기</h1>
+        <p class="subtitle">학원 위치를 지도에 표시하고, 카카오맵 길찾기로 연결합니다.</p>
+
+        <div class="panel">
+            <div class="side">
+                <h3>TJ 컴퓨터학원 (예시)</h3>
+                <p>서울특별시 중구 세종대로 110</p>
+                <p>위도 37.5665 / 경도 126.9780</p>
+                <p style="font-size:12px;color:#888;">※ 실제 주소로 바꿔 수업하세요.</p>
+                <div class="btns">
+                    <button class="btn" onclick="focusAcademy()">지도에서 보기</button>
+                    <a class="btn green" id="navLink" href="#" target="_blank">카카오맵 길찾기</a>
+                    <a class="btn" id="mapLink" href="#" target="_blank">카카오맵에서 크게 보기</a>
+                </div>
+            </div>
+            <div id="map"></div>
+        </div>
+
+        <div class="tip">
+            수업 포인트: SDK로 지도·마커를 띄우고,
+            <code>https://map.kakao.com/link/to/이름,위도,경도</code> 링크로 길찾기를 연결합니다.
+            (앱 설치 없이도 PC/모바일 카카오맵으로 이동)
+        </div>
+    </div>
+
+    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=bceccd594bb478b5533d7d2ec63f8bb0"></script>
+    <script>
+        // 학원 정보 (수업 때 여기만 바꾸면 됨)
+        var academy = {
+            name: 'TJ 컴퓨터학원',
+            lat: 37.5665,
+            lng: 126.9780,
+            address: '서울특별시 중구 세종대로 110'
+        };
+
+        var map = new kakao.maps.Map(document.getElementById('map'), {
+            center: new kakao.maps.LatLng(academy.lat, academy.lng),
+            level: 3
+        });
+
+        var marker = new kakao.maps.Marker({
+            map: map,
+            position: new kakao.maps.LatLng(academy.lat, academy.lng),
+            title: academy.name
+        });
+
+        var infowindow = new kakao.maps.InfoWindow({
+            content:
+                '<div style="padding:12px;min-width:180px;">' +
+                '<b>' + academy.name + '</b><br>' +
+                '<span style="font-size:12px;color:#555;">' + academy.address + '</span>' +
+                '</div>'
+        });
+        infowindow.open(map, marker);
+
+        document.getElementById('navLink').href =
+            'https://map.kakao.com/link/to/' +
+            encodeURIComponent(academy.name) + ',' + academy.lat + ',' + academy.lng;
+
+        document.getElementById('mapLink').href =
+            'https://map.kakao.com/link/map/' +
+            encodeURIComponent(academy.name) + ',' + academy.lat + ',' + academy.lng;
+
+        function focusAcademy() {
+            var pos = new kakao.maps.LatLng(academy.lat, academy.lng);
+            map.setCenter(pos);
+            map.setLevel(3);
+            infowindow.open(map, marker);
+        }
+    </script>
+</body>
+</html>

@@ -2,12 +2,138 @@
 
 ## 📋 목차
 
+0. [개발 환경 설치](#0-개발-환경-설치)
 1. [JSP 기초](#1-jsp-기초)
 2. [JSP 문법](#2-jsp-문법)
 3. [JSP 내장 객체](#3-jsp-내장-객체)
 4. [JSTL과 EL](#4-jstl과-el)
 5. [실전 예제](#5-실전-예제)
 6. [참고 자료](#6-참고-자료)
+
+---
+
+## 0. 개발 환경 설치
+
+JSP/Servlet 실습을 하려면 **JDK → Eclipse → Tomcat → Workspace** 순으로 준비합니다.
+
+```
+JDK
+ ↓
+Eclipse
+ ↓
+Tomcat
+ ↓
+JSP / Servlet
+```
+
+### 0.1 JDK 확인
+
+JSP/Servlet을 하려면 **JDK**가 먼저 설치되어 있어야 합니다.
+
+PowerShell 또는 CMD에서:
+
+```bash
+java -version
+javac -version
+```
+
+둘 다 정상적으로 버전이 나오면 됩니다.
+
+예:
+
+```text
+java version "17..."
+javac 17...
+```
+
+**수업 권장:** JSP/Servlet 수업 및 이후 **Spring Boot**까지 이어갈 경우 **JDK 17** 환경으로 통일하면 관리가 편합니다.
+
+### 0.2 Eclipse 다운로드
+
+[Eclipse 공식 다운로드](https://www.eclipse.org/downloads/)에서 받는 것을 권장합니다.
+
+| 패키지 | 용도 |
+|--------|------|
+| **Eclipse IDE for Enterprise Java and Web Developers** | JSP/Servlet · 웹 개발 (권장) |
+| Eclipse IDE for Java Developers | 일반 Java만 (웹 실습에는 부적합할 수 있음) |
+
+### 0.3 설치 위치 · 폴더 구조
+
+Eclipse는 경로를 짧게 두는 것이 좋습니다.
+
+- Eclipse: `C:\eclipse` 또는 `D:\eclipse`
+- Workspace: Eclipse와 **별도** — 예: `D:\workspace`
+
+예시 구조:
+
+```text
+D:\
+ ├─ eclipse
+ │
+ └─ workspace
+     ├─ jsp01
+     ├─ servlet01
+     └─ ...
+```
+
+### 0.4 Eclipse 실행 후 Workspace 설정
+
+처음 실행 시 **Workspace** 경로를 묻습니다. 예: `D:\workspace`
+
+**Use this as the default and do not ask again** 을 체크해도 됩니다.
+
+> 기존 Eclipse를 재설치할 때 **workspace 폴더는 삭제하지 마세요.** 프로젝트와 설정이 들어 있습니다.
+
+### 0.5 Tomcat
+
+Eclipse만 설치해도 JSP는 **실행되지 않습니다.** WAS로 **Tomcat**이 필요합니다.
+
+| 구성 요소 | 예시 |
+|-----------|------|
+| JDK | 17 |
+| Eclipse | Enterprise Java and Web Developers |
+| Tomcat | 9 또는 10 (아래 표 참고) |
+
+**Tomcat 버전과 import 패키지** (교재·기존 코드와 맞출 것):
+
+| Tomcat | Servlet API import |
+|--------|-------------------|
+| **9 계열** | `import javax.servlet.*;` |
+| **10 계열** | `import jakarta.servlet.*;` |
+
+- 기존 교재·학생 코드가 `javax.servlet` 기준이면 **Tomcat 9**가 편합니다.
+- 새 환경을 처음부터 잡는다면 **Jakarta(Tomcat 10)** 로 통일할 수 있습니다.
+
+Eclipse에서: **Window → Preferences → Server → Runtime Environments** 에 Tomcat 경로를 등록합니다.
+
+### 0.6 추천 수업 환경 (통합)
+
+JSP → Servlet → MVC → Spring으로 이어갈 때 **처음부터 버전을 통일**하는 것을 권장합니다.
+
+```text
+Windows
+│
+├── JDK 17
+│
+├── Eclipse IDE (Enterprise Java and Web Developers)
+│
+├── Tomcat (9 또는 10 — javax / jakarta 정책에 맞게)
+│
+└── Workspace (D:\workspace 등)
+      │
+      ├── JSP 실습
+      ├── Servlet 실습
+      └── MVC 실습
+```
+
+### 0.7 설치 체크리스트
+
+- [ ] `java -version` / `javac -version` (JDK 17 권장)
+- [ ] Eclipse Enterprise Java and Web Developers 설치
+- [ ] Workspace 경로 지정 (`D:\workspace` 등)
+- [ ] Tomcat 다운로드 및 Eclipse Runtime 등록
+- [ ] Tomcat 버전과 `javax` / `jakarta` import 정책 수업과 일치 확인
+- [ ] Dynamic Web Project에서 JSP 실행(브라우저) 테스트
 
 ---
 
@@ -777,6 +903,13 @@ ${표현식}
 ---
 
 ## 📝 연습 문제
+
+### 기초 문제 (권장 시작)
+
+→ **[JSP-기초문제.md](./JSP-기초문제.md)**  
+개념 5문항 + 실습 ①~⑧ (Hello, 구구단, 학점, 폼, include 등)
+
+### 응용 연습
 
 1. **간단한 계산기 만들기**
    - 두 숫자를 입력받아 사칙연산 결과 출력

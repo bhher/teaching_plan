@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HAEUN — Frontend Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Nav (보조) -->
+  <nav class="navbar navbar-expand-lg site-nav fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#top">HAEUN</a>
+      <button class="navbar-toggler" type="button"
+              data-bs-toggle="collapse" data-bs-target="#pfNav"
+              aria-controls="pfNav" aria-expanded="false" aria-label="메뉴">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="pfNav">
+        <ul class="navbar-nav ms-auto gap-lg-3">
+          <li class="nav-item"><a class="nav-link" href="#work">Work</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero: brand + headline + sentence + CTA + full-bleed image -->
+  <header class="hero" id="top">
+    <div class="hero-media" aria-hidden="true"></div>
+    <div class="hero-shade" aria-hidden="true"></div>
+    <div class="container hero-content">
+      <p class="hero-brand reveal">HAEUN</p>
+      <h1 class="hero-title reveal reveal-delay-1">
+        화면으로<br>이야기를 만듭니다
+      </h1>
+      <p class="hero-lead reveal reveal-delay-2">
+        프론트엔드 개발 · 반응형 UI · Bootstrap &amp; React
+      </p>
+      <div class="hero-cta reveal reveal-delay-3">
+        <a href="#work" class="btn btn-hero">작업 보기</a>
+        <a href="#contact" class="btn btn-hero-ghost">문의하기</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Work -->
+  <section class="section section-work" id="work">
+    <div class="container">
+      <h2 class="section-title reveal">Selected Work</h2>
+      <p class="section-desc reveal">최근 프로젝트 세 가지입니다.</p>
+
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4 reveal">
+          <a href="#" class="project-link">
+            <div class="project-thumb project-thumb-a"></div>
+            <div class="project-meta">
+              <h3>MyShop</h3>
+              <p>Bootstrap 쇼핑몰 · Grid · Modal</p>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-6 col-lg-4 reveal reveal-delay-1">
+          <a href="#" class="project-link">
+            <div class="project-thumb project-thumb-b"></div>
+            <div class="project-meta">
+              <h3>Resort UI</h3>
+              <p>반응형 랜딩 · 미디어 쿼리</p>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-6 col-lg-4 reveal reveal-delay-2">
+          <a href="#" class="project-link">
+            <div class="project-thumb project-thumb-c"></div>
+            <div class="project-meta">
+              <h3>Dashboard</h3>
+              <p>데이터 화면 · 컴포넌트 설계</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="section section-about" id="about">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-5 reveal">
+          <div class="about-photo" role="img" aria-label="작업 공간"></div>
+        </div>
+        <div class="col-lg-7 reveal reveal-delay-1">
+          <h2 class="section-title">About</h2>
+          <p class="about-text">
+            김하은입니다. 사용자가 바로 이해할 수 있는 레이아웃과
+            가벼운 인터랙션을 만드는 일을 합니다.
+            HTML · CSS · Bootstrap · JavaScript · React를 중심으로 작업합니다.
+          </p>
+          <ul class="skill-list">
+            <li>HTML / CSS / Bootstrap</li>
+            <li>JavaScript / React</li>
+            <li>Responsive Layout</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section section-contact" id="contact">
+    <div class="container">
+      <h2 class="section-title reveal">Contact</h2>
+      <p class="section-desc reveal">프로젝트 문의는 아래로 보내 주세요.</p>
+
+      <form class="contact-form reveal" action="#" method="get">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label" for="name">이름</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label" for="email">이메일</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+          </div>
+          <div class="col-12">
+            <label class="form-label" for="message">메시지</label>
+            <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+          </div>
+          <div class="col-12">
+            <button type="submit" class="btn btn-hero">보내기</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container d-flex flex-wrap justify-content-between align-items-center gap-2">
+      <span class="footer-brand">HAEUN</span>
+      <span class="footer-copy">© 2026 Kim Haeun</span>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

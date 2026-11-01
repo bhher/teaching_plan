@@ -1,0 +1,174 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', 'Malgun Gothic', sans-serif;
+  background: #f0f3f2;
+  color: #1c2b26;
+  line-height: 1.55;
+}
+
+code {
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.9em;
+  background: rgba(0, 0, 0, 0.06);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+}
+
+.app {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 28px 16px 56px;
+}
+
+.hero {
+  margin-bottom: 32px;
+}
+
+.eyebrow {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #0f766e;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.hero h1 {
+  font-size: 1.85rem;
+  margin-bottom: 10px;
+}
+
+.hero h1 span {
+  color: #0f766e;
+}
+
+.lead {
+  color: #4d635c;
+  max-width: 40rem;
+}
+
+.compare {
+  margin-bottom: 28px;
+}
+
+.compare h2 {
+  font-size: 1.15rem;
+  margin-bottom: 12px;
+}
+
+.cols {
+  display: grid;
+  gap: 14px;
+}
+
+@media (min-width: 720px) {
+  .cols {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.panel {
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #d8e3df;
+  padding: 16px;
+}
+
+.panel h3 {
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+}
+
+.panel.jsx h3 {
+  color: #b45309;
+}
+
+.panel.tsx h3 {
+  color: #1d4ed8;
+}
+
+.code {
+  font-size: 0.75rem;
+  background: #f7faf9;
+  border: 1px solid #e2ebe7;
+  border-radius: 8px;
+  padding: 10px;
+  overflow-x: auto;
+  margin-bottom: 12px;
+  white-space: pre-wrap;
+  color: #334;
+}
+
+.demo-box {
+  border: 1px dashed #b7c9c2;
+  border-radius: 10px;
+  padding: 12px;
+  background: #fafcfb;
+}
+
+.demo-label {
+  font-size: 0.8rem;
+  color: #5a6f68;
+  margin-bottom: 6px;
+}
+
+.demo-value {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.demo-box button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 8px;
+  background: #0f766e;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.demo-box button:hover {
+  background: #0d9488;
+}
+
+.muted {
+  font-size: 0.9rem;
+  color: #5a6f68;
+}
+
+.summary {
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #d8e3df;
+  padding: 18px;
+}
+
+.summary h2 {
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+th,
+td {
+  border-bottom: 1px solid #e8efec;
+  padding: 10px 8px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  color: #5a6f68;
+  font-weight: 600;
+}

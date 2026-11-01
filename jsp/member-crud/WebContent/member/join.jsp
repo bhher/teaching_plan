@@ -1,0 +1,50 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+    if (session.getAttribute("loginId") != null) {
+        response.sendRedirect(request.getContextPath() + "/member/list.jsp");
+        return;
+    }
+%>
+<%@ include file="/include/header.jsp" %>
+
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card shadow-sm">
+      <div class="card-body p-4">
+        <h1 class="h4 mb-3">회원가입</h1>
+<%
+    String err = request.getParameter("error");
+    if ("dup".equals(err)) {
+%>
+        <div class="alert alert-warning py-2">이미 사용 중인 아이디입니다.</div>
+<% } else if ("empty".equals(err)) { %>
+        <div class="alert alert-danger py-2">아이디·비밀번호·이름은 필수입니다.</div>
+<% } %>
+        <form method="post" action="joinProcess.jsp">
+          <div class="mb-3">
+            <label class="form-label">아이디 <span class="text-danger">*</span></label>
+            <input type="text" name="id" class="form-control" required maxlength="50">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">비밀번호 <span class="text-danger">*</span></label>
+            <input type="password" name="password" class="form-control" required maxlength="100">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">이름 <span class="text-danger">*</span></label>
+            <input type="text" name="name" class="form-control" required maxlength="50">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">이메일</label>
+            <input type="email" name="email" class="form-control" maxlength="100">
+          </div>
+          <button type="submit" class="btn btn-primary w-100">가입하기</button>
+        </form>
+        <p class="mt-3 mb-0 small text-center">
+          이미 계정이 있나요? <a href="login.jsp">로그인</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%@ include file="/include/footer.jsp" %>

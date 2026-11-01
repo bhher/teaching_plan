@@ -1,564 +1,82 @@
-# C언어 작업형 평가 문제 정답
+# C언어 작업형 평가 문제 정답 (10문제)
+
+문제: [C언어-작업형-문제.md](./C언어-작업형-문제.md)
 
 ---
 
-## 문제 1: 배열의 최댓값과 최솟값 찾기 정답
-
-### 📁 problem1.c
-
-```c
-#include <stdio.h>
-
-int main() {
-    int arr[5];
-    int i;
-    int max, min;
-    
-    // 5개의 정수 입력받기
-    for (i = 0; i < 5; i++) {
-        scanf("%d", &arr[i]);
-    }
-    
-    // 첫 번째 값을 최댓값과 최솟값의 초기값으로 설정
-    max = arr[0];
-    min = arr[0];
-    
-    // 나머지 값들과 비교하여 최댓값과 최솟값 찾기
-    for (i = 1; i < 5; i++) {
-        if (arr[i] > max) {
-            max = arr[i];
-        }
-        if (arr[i] < min) {
-            min = arr[i];
-        }
-    }
-    
-    // 결과 출력
-    printf("최댓값: %d\n", max);
-    printf("최솟값: %d\n", min);
-    
-    return 0;
-}
-```
-
----
-
-### 🔍 코드 설명
-
-#### 1. 변수 선언
-```c
-int arr[5];    // 5개의 정수를 저장할 배열
-int i;         // 반복문에 사용할 변수
-int max, min;  // 최댓값과 최솟값을 저장할 변수
-```
-
-#### 2. 입력 처리
-```c
-for (i = 0; i < 5; i++) {
-    scanf("%d", &arr[i]);
-}
-```
-- 반복문으로 5개의 정수를 배열에 저장
-- `&arr[i]`: 배열의 i번째 요소의 주소
-
-#### 3. 최댓값과 최솟값 찾기
-```c
-max = arr[0];  // 첫 번째 값을 최댓값으로 초기화
-min = arr[0];  // 첫 번째 값을 최솟값으로 초기화
-
-for (i = 1; i < 5; i++) {
-    if (arr[i] > max) {  // 현재 값이 최댓값보다 크면
-        max = arr[i];    // 최댓값 갱신
-    }
-    if (arr[i] < min) {  // 현재 값이 최솟값보다 작으면
-        min = arr[i];    // 최솟값 갱신
-    }
-}
-```
-
-**동작 순서:**
-1. 첫 번째 값을 최댓값과 최솟값의 초기값으로 설정
-2. 두 번째 값부터 마지막까지 순회하며 비교
-3. 더 큰 값을 찾으면 최댓값 갱신
-4. 더 작은 값을 찾으면 최솟값 갱신
-
----
-
-### 📊 실행 흐름 예시
-
-```
-입력: 10 5 20 8 15
-
-초기값: max = 10, min = 10
-
-i=1: arr[1]=5
-  - 5 > 10? 아니오 → max 유지
-  - 5 < 10? 예 → min = 5
-
-i=2: arr[2]=20
-  - 20 > 10? 예 → max = 20
-  - 20 < 5? 아니오 → min 유지
-
-i=3: arr[3]=8
-  - 8 > 20? 아니오 → max 유지
-  - 8 < 5? 아니오 → min 유지
-
-i=4: arr[4]=15
-  - 15 > 20? 아니오 → max 유지
-  - 15 < 5? 아니오 → min 유지
-
-결과: max = 20, min = 5
-```
-
----
-
-## 문제 2: 평균 이상인 값의 개수 정답
-
-### 📁 problem2.c
-
-```c
-#include <stdio.h>
-
-int main() {
-    int arr[10];
-    int i;
-    int sum = 0;
-    float average;
-    int count = 0;
-    
-    // 10개의 정수 입력받기
-    for (i = 0; i < 10; i++) {
-        scanf("%d", &arr[i]);
-    }
-    
-    // 합계 계산
-    for (i = 0; i < 10; i++) {
-        sum += arr[i];
-    }
-    
-    // 평균 계산 (형변환 필요)
-    average = (float)sum / 10;
-    
-    // 평균 이상인 값의 개수 세기
-    for (i = 0; i < 10; i++) {
-        if (arr[i] >= average) {
-            count++;
-        }
-    }
-    
-    // 결과 출력
-    printf("평균: %.2f\n", average);
-    printf("평균 이상인 값의 개수: %d\n", count);
-    
-    return 0;
-}
-```
-
----
-
-### 🔍 코드 설명
-
-#### 1. 변수 선언
-```c
-int arr[10];      // 10개의 정수를 저장할 배열
-int i;            // 반복문에 사용할 변수
-int sum = 0;      // 합계를 저장할 변수 (초기값 0)
-float average;    // 평균을 저장할 변수 (실수형)
-int count = 0;    // 평균 이상인 값의 개수 (초기값 0)
-```
-
-#### 2. 합계 계산
-```c
-for (i = 0; i < 10; i++) {
-    sum += arr[i];  // 각 요소를 합계에 누적
-}
-```
-
-#### 3. 평균 계산
-```c
-average = (float)sum / 10;
-```
-- `(float)sum`: 정수를 실수로 형변환
-- 실수 나눗셈을 위해 형변환 필수
-- 정수 나눗셈(`sum / 10`)을 하면 소수점이 버려짐
-
-#### 4. 평균 이상인 값의 개수 세기
-```c
-for (i = 0; i < 10; i++) {
-    if (arr[i] >= average) {  // 평균 이상이면
-        count++;              // 카운터 증가
-    }
-}
-```
-
----
-
-### 📊 실행 흐름 예시
-
-```
-입력: 85 90 75 60 95 80 70 65 88 92
-
-합계 계산:
-sum = 85 + 90 + 75 + 60 + 95 + 80 + 70 + 65 + 88 + 92 = 800
-
-평균 계산:
-average = (float)800 / 10 = 80.0
-
-평균 이상인 값 확인:
-85 >= 80.0 ✓ → count = 1
-90 >= 80.0 ✓ → count = 2
-75 >= 80.0 ✗
-60 >= 80.0 ✗
-95 >= 80.0 ✓ → count = 3
-80 >= 80.0 ✓ → count = 4
-70 >= 80.0 ✗
-65 >= 80.0 ✗
-88 >= 80.0 ✓ → count = 5
-92 >= 80.0 ✓ → count = 6
-
-결과: 평균 80.00, 평균 이상인 값의 개수 5
-```
-
----
-
-## 문제 3: 문자열에서 특정 문자 개수 세기 정답
-
-### 📁 problem3.c
-
-```c
-#include <stdio.h>
-#include <string.h>
-
-int main() {
-    char str[101];
-    char ch;
-    int i;
-    int count = 0;
-    int len;
-    
-    // 문자열 입력받기
-    fgets(str, 101, stdin);
-    
-    // fgets는 \n도 포함하므로 제거
-    len = strlen(str);
-    if (len > 0 && str[len - 1] == '\n') {
-        str[len - 1] = '\0';
-        len--;
-    }
-    
-    // 찾을 문자 입력받기
-    scanf(" %c", &ch);  // 공백 주의!
-    
-    // 문자열에서 특정 문자 개수 세기
-    for (i = 0; i < len; i++) {
-        if (str[i] == ch) {
-            count++;
-        }
-    }
-    
-    // 결과 출력
-    printf("%c가 나타나는 횟수: %d\n", ch, count);
-    
-    return 0;
-}
-```
-
----
-
-### 🔍 코드 설명
-
-#### 1. 변수 선언
-```c
-char str[101];   // 문자열을 저장할 배열 (최대 100자 + \0)
-char ch;         // 찾을 문자
-int i;           // 반복문에 사용할 변수
-int count = 0;    // 문자 개수 카운터
-int len;         // 문자열 길이
-```
-
-#### 2. 문자열 입력
-```c
-fgets(str, 101, stdin);
-```
-- `fgets()`: 공백을 포함한 문자열 입력 가능
-- `scanf("%s")`는 공백 전까지만 입력됨
-- `fgets()`는 `\n`(엔터)도 포함하므로 제거 필요
-
-#### 3. 개행 문자 제거
-```c
-len = strlen(str);
-if (len > 0 && str[len - 1] == '\n') {
-    str[len - 1] = '\0';
-    len--;
-}
-```
-- `fgets()`로 입력받으면 마지막에 `\n`이 포함됨
-- `\n`을 `\0`으로 교체하여 제거
-
-#### 4. 문자 입력
-```c
-scanf(" %c", &ch);  // 공백 주의!
-```
-- 공백을 넣어야 이전 입력의 `\n`을 무시함
-- `scanf(" %c")`에서 앞의 공백이 중요
-
-#### 5. 문자 개수 세기
-```c
-for (i = 0; i < len; i++) {
-    if (str[i] == ch) {
-        count++;
-    }
-}
-```
-- 문자열의 모든 문자를 순회
-- 찾는 문자와 같으면 카운터 증가
-
----
-
-### 📊 실행 흐름 예시
-
-```
-입력:
-Hello World
-l
-
-문자열 처리:
-str = "Hello World\0"
-len = 11
-
-문자 개수 세기:
-i=0: str[0]='H' == 'l'? 아니오
-i=1: str[1]='e' == 'l'? 아니오
-i=2: str[2]='l' == 'l'? 예 → count = 1
-i=3: str[3]='l' == 'l'? 예 → count = 2
-i=4: str[4]='o' == 'l'? 아니오
-i=5: str[5]=' ' == 'l'? 아니오
-i=6: str[6]='W' == 'l'? 아니오
-i=7: str[7]='o' == 'l'? 아니오
-i=8: str[8]='r' == 'l'? 아니오
-i=9: str[9]='l' == 'l'? 예 → count = 3
-i=10: str[10]='d' == 'l'? 아니오
-
-결과: l가 나타나는 횟수: 3
-```
-
----
-
-## 문제 4: 배열에서 짝수와 홀수 분리하기 정답
-
-### 📁 problem4.c
-
-```c
-#include <stdio.h>
-
-int main() {
-    int arr[8];
-    int i;
-    int even[8], odd[8];  // 짝수와 홀수를 저장할 배열
-    int evenCount = 0, oddCount = 0;  // 짝수와 홀수의 개수
-    
-    // 8개의 정수 입력받기
-    for (i = 0; i < 8; i++) {
-        scanf("%d", &arr[i]);
-    }
-    
-    // 짝수와 홀수 분리
-    for (i = 0; i < 8; i++) {
-        if (arr[i] % 2 == 0) {           // 짝수인 경우
-            even[evenCount] = arr[i];
-            evenCount++;
-        } else {                         // 홀수인 경우
-            odd[oddCount] = arr[i];
-            oddCount++;
-        }
-    }
-    
-    // 짝수 출력
-    printf("짝수: ");
-    if (evenCount == 0) {
-        printf("없음\n");
-    } else {
-        for (i = 0; i < evenCount; i++) {
-            printf("%d", even[i]);
-            if (i < evenCount - 1) {     // 마지막이 아니면 공백 출력
-                printf(" ");
-            }
-        }
-        printf("\n");
-    }
-    
-    // 홀수 출력
-    printf("홀수: ");
-    if (oddCount == 0) {
-        printf("없음\n");
-    } else {
-        for (i = 0; i < oddCount; i++) {
-            printf("%d", odd[i]);
-            if (i < oddCount - 1) {      // 마지막이 아니면 공백 출력
-                printf(" ");
-            }
-        }
-        printf("\n");
-    }
-    
-    return 0;
-}
-```
-
----
-
-### 🔍 코드 설명
-
-#### 1. 변수 선언
-```c
-int arr[8];              // 입력받을 8개의 정수 배열
-int even[8], odd[8];     // 짝수와 홀수를 저장할 배열
-int evenCount = 0;       // 짝수의 개수
-int oddCount = 0;        // 홀수의 개수
-```
-
-#### 2. 짝수와 홀수 분리
-```c
-for (i = 0; i < 8; i++) {
-    if (arr[i] % 2 == 0) {        // 나머지가 0이면 짝수
-        even[evenCount] = arr[i];
-        evenCount++;
-    } else {                     // 나머지가 1이면 홀수
-        odd[oddCount] = arr[i];
-        oddCount++;
-    }
-}
-```
-
-**나머지 연산자(`%`) 사용:**
-- `arr[i] % 2 == 0`: 짝수 (2로 나눈 나머지가 0)
-- `arr[i] % 2 == 1` 또는 `arr[i] % 2 != 0`: 홀수 (2로 나눈 나머지가 1)
-
-#### 3. 출력 형식 처리
-```c
-if (evenCount == 0) {
-    printf("없음\n");
-} else {
-    for (i = 0; i < evenCount; i++) {
-        printf("%d", even[i]);
-        if (i < evenCount - 1) {  // 마지막이 아니면 공백
-            printf(" ");
-        }
-    }
-    printf("\n");
-}
-```
-
-**출력 형식 주의사항:**
-- 마지막 숫자 뒤에는 공백이 없어야 함
-- `i < evenCount - 1` 조건으로 마지막 요소가 아닐 때만 공백 출력
-
----
-
-### 📊 실행 흐름 예시
-
-#### 예시 1
-```
-입력: 1 2 3 4 5 6 7 8
-
-분리 과정:
-arr[0]=1: 1 % 2 = 1 → 홀수 → odd[0]=1, oddCount=1
-arr[1]=2: 2 % 2 = 0 → 짝수 → even[0]=2, evenCount=1
-arr[2]=3: 3 % 2 = 1 → 홀수 → odd[1]=3, oddCount=2
-arr[3]=4: 4 % 2 = 0 → 짝수 → even[1]=4, evenCount=2
-arr[4]=5: 5 % 2 = 1 → 홀수 → odd[2]=5, oddCount=3
-arr[5]=6: 6 % 2 = 0 → 짝수 → even[2]=6, evenCount=3
-arr[6]=7: 7 % 2 = 1 → 홀수 → odd[3]=7, oddCount=4
-arr[7]=8: 8 % 2 = 0 → 짝수 → even[3]=8, evenCount=4
-
-결과:
-짝수: 2 4 6 8
-홀수: 1 3 5 7
-```
-
-#### 예시 2
-```
-입력: 1 3 5 7 9 11 13 15
-
-분리 과정:
-모든 값이 홀수 → evenCount=0, oddCount=8
-
-결과:
-짝수: 없음
-홀수: 1 3 5 7 9 11 13 15
-```
-
----
-
-## 전체 실행 파일 (통합 테스트용)
+## 문제 1: 배열의 최댓값과 최솟값 찾기
 
 ### problem1.c
+
 ```c
 #include <stdio.h>
 
 int main() {
     int arr[5];
-    int i;
-    int max, min;
-    
+    int i, max, min;
+
     for (i = 0; i < 5; i++) {
         scanf("%d", &arr[i]);
     }
-    
+
     max = arr[0];
     min = arr[0];
-    
+
     for (i = 1; i < 5; i++) {
-        if (arr[i] > max) {
-            max = arr[i];
-        }
-        if (arr[i] < min) {
-            min = arr[i];
-        }
+        if (arr[i] > max) max = arr[i];
+        if (arr[i] < min) min = arr[i];
     }
-    
+
     printf("최댓값: %d\n", max);
     printf("최솟값: %d\n", min);
-    
+
     return 0;
 }
 ```
 
+**실행 예:** `10 5 20 8 15` → 최댓값 20, 최솟값 5
+
+---
+
+## 문제 2: 평균 이상인 값의 개수
+
 ### problem2.c
+
 ```c
 #include <stdio.h>
 
 int main() {
     int arr[10];
-    int i;
-    int sum = 0;
-    float average;
-    int count = 0;
-    
+    int i, sum = 0, count = 0;
+    float avg;
+
     for (i = 0; i < 10; i++) {
         scanf("%d", &arr[i]);
-    }
-    
-    for (i = 0; i < 10; i++) {
         sum += arr[i];
     }
-    
-    average = (float)sum / 10;
-    
+
+    avg = (float)sum / 10;
+
     for (i = 0; i < 10; i++) {
-        if (arr[i] >= average) {
-            count++;
-        }
+        if (arr[i] >= avg) count++;
     }
-    
-    printf("평균: %.2f\n", average);
+
+    printf("평균: %.2f\n", avg);
     printf("평균 이상인 값의 개수: %d\n", count);
-    
+
     return 0;
 }
 ```
 
+**실행 예:** 평균 80.00, 개수 5  
+(85,90,95,88,92 → 5개)
+
+---
+
+## 문제 3: 문자열에서 특정 문자 개수 세기
+
 ### problem3.c
+
 ```c
 #include <stdio.h>
 #include <string.h>
@@ -566,164 +84,297 @@ int main() {
 int main() {
     char str[101];
     char ch;
-    int i;
-    int count = 0;
-    int len;
-    
-    fgets(str, 101, stdin);
-    
+    int i, len, count = 0;
+
+    fgets(str, 101, stdin);   /* 공백 포함 한 줄 */
+
+    /* fgets가 읽은 끝의 \n 제거 */
     len = strlen(str);
     if (len > 0 && str[len - 1] == '\n') {
         str[len - 1] = '\0';
         len--;
     }
-    
-    scanf(" %c", &ch);
-    
+
+    scanf(" %c", &ch);        /* 앞 공백/개행 무시 */
+
     for (i = 0; i < len; i++) {
-        if (str[i] == ch) {
-            count++;
-        }
+        if (str[i] == ch) count++;
     }
-    
+
     printf("%c가 나타나는 횟수: %d\n", ch, count);
-    
+
     return 0;
 }
 ```
 
+**참고:** `Hello World` + `l` → 3회 (`l` 세 곳)
+
+`scanf("%s")`만 쓰면 공백 전까지만 읽히므로, 예시1은 `fgets`가 맞습니다.
+
+---
+
+## 문제 4: 배열에서 짝수와 홀수 분리하기
+
 ### problem4.c
+
 ```c
 #include <stdio.h>
 
 int main() {
     int arr[8];
-    int i;
     int even[8], odd[8];
-    int evenCount = 0, oddCount = 0;
-    
+    int i, e = 0, o = 0;
+
     for (i = 0; i < 8; i++) {
         scanf("%d", &arr[i]);
+        if (arr[i] % 2 == 0)
+            even[e++] = arr[i];
+        else
+            odd[o++] = arr[i];
     }
-    
-    for (i = 0; i < 8; i++) {
-        if (arr[i] % 2 == 0) {
-            even[evenCount] = arr[i];
-            evenCount++;
-        } else {
-            odd[oddCount] = arr[i];
-            oddCount++;
-        }
-    }
-    
+
     printf("짝수: ");
-    if (evenCount == 0) {
+    if (e == 0) {
         printf("없음\n");
     } else {
-        for (i = 0; i < evenCount; i++) {
+        for (i = 0; i < e; i++) {
             printf("%d", even[i]);
-            if (i < evenCount - 1) {
-                printf(" ");
-            }
+            if (i < e - 1) printf(" ");
         }
         printf("\n");
     }
-    
+
     printf("홀수: ");
-    if (oddCount == 0) {
+    if (o == 0) {
         printf("없음\n");
     } else {
-        for (i = 0; i < oddCount; i++) {
+        for (i = 0; i < o; i++) {
             printf("%d", odd[i]);
-            if (i < oddCount - 1) {
-                printf(" ");
-            }
+            if (i < o - 1) printf(" ");
         }
         printf("\n");
     }
-    
+
     return 0;
 }
 ```
 
 ---
 
-## 채점 기준 상세
+## 문제 5: 배열 역순 출력
 
-### 문제 1 (5점)
-- 컴파일 오류 없음: 1점
-- 배열 선언 및 입력 처리: 1점
-- 최댓값 찾기 로직: 1점
-- 최솟값 찾기 로직: 1점
-- 출력 형식 정확성: 1점
+### problem5.c
 
-### 문제 2 (5점)
-- 컴파일 오류 없음: 1점
-- 배열 선언 및 입력 처리: 1점
-- 평균 계산 로직 (형변환 포함): 1점
-- 평균 이상인 값 개수 계산 로직: 1점
-- 출력 형식 정확성 (소수점 둘째 자리): 1점
+```c
+#include <stdio.h>
 
-### 문제 3 (5점)
-- 컴파일 오류 없음: 1점
-- 문자열 및 문자 입력 처리 (fgets, scanf): 1점
-- 문자열 길이 구하기 (strlen): 1점
-- 문자 개수 세기 로직: 1점
-- 출력 형식 정확성: 1점
+int main() {
+    int arr[5];
+    int i;
 
-### 문제 4 (5점)
-- 컴파일 오류 없음: 1점
-- 배열 선언 및 입력 처리: 1점
-- 짝수 분리 로직 (% 연산자 사용): 1점
-- 홀수 분리 로직: 1점
-- 출력 형식 정확성 (공백 처리, "없음" 처리): 1점
+    for (i = 0; i < 5; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    printf("역순: ");
+    for (i = 4; i >= 0; i--) {
+        printf("%d", arr[i]);
+        if (i > 0) printf(" ");
+    }
+    printf("\n");
+
+    return 0;
+}
+```
+
+**실행 예:** `1 2 3 4 5` → `역순: 5 4 3 2 1`
 
 ---
 
-## 추가 설명
+## 문제 6: 배열에서 값 검색하기
 
-### 문제 1 - 최댓값/최솟값 찾기
-- 첫 번째 값을 초기값으로 설정하는 것이 중요
-- 비교 연산자 사용: `>` (크다), `<` (작다)
+### problem6.c
 
-### 문제 2 - 형변환
-- 정수 나눗셈: `sum / 10` → 정수 결과 (소수점 버림)
-- 실수 나눗셈: `(float)sum / 10` → 실수 결과
-- `%.2f`: 소수점 둘째 자리까지 출력
+```c
+#include <stdio.h>
 
-### 문제 3 - 문자열 입력
-- `scanf("%s")`: 공백 전까지만 입력 (공백 포함 문자열 불가)
-- `fgets()`: 공백 포함 문자열 입력 가능
-- `fgets()`는 `\n`도 포함하므로 제거 필요
-- `scanf(" %c")`: 앞의 공백으로 이전 입력의 `\n` 무시
+int main() {
+    int arr[5];
+    int key, i, found = 0, idx = -1;
 
-### 문제 4 - 출력 형식
-- 마지막 숫자 뒤 공백 제거: `if (i < count - 1) printf(" ");`
-- "없음" 처리: `if (count == 0) printf("없음\n");`
-- 나머지 연산자: `%` (예: `5 % 2 = 1`, `6 % 2 = 0`)
+    for (i = 0; i < 5; i++) {
+        scanf("%d", &arr[i]);
+    }
+    scanf("%d", &key);
+
+    for (i = 0; i < 5; i++) {
+        if (arr[i] == key) {
+            found = 1;
+            idx = i;
+            break;
+        }
+    }
+
+    if (found)
+        printf("인덱스: %d\n", idx);
+    else
+        printf("없음\n");
+
+    return 0;
+}
+```
+
+**실행 예:** `20` → 인덱스 2 / `99` → 없음
 
 ---
 
-## 핵심 포인트
+## 문제 7: 1부터 n까지 합 (함수)
 
-### 1. 배열 사용법
-- 배열 선언: `int arr[5];`
-- 배열 접근: `arr[i]` (인덱스는 0부터 시작)
-- 배열 입력: `scanf("%d", &arr[i]);`
+### problem7.c
 
-### 2. 반복문 활용
-- `for` 문: 반복 횟수가 정해진 경우
-- 배열과 함께 사용하여 모든 요소 처리
+```c
+#include <stdio.h>
 
-### 3. 조건문 활용
-- `if` 문: 조건에 따라 분기
-- 비교 연산자: `>`, `<`, `>=`, `==`
+int sumToN(int n) {
+    int i, sum = 0;
+    for (i = 1; i <= n; i++) {
+        sum += i;
+    }
+    return sum;
+}
 
-### 4. 형변환
-- `(float)변수`: 정수를 실수로 변환
-- 실수 나눗셈을 위해 필요
+int main() {
+    int n;
+    scanf("%d", &n);
+    printf("합: %d\n", sumToN(n));
+    return 0;
+}
+```
 
-### 5. 문자열 처리
-- `fgets()`: 공백 포함 문자열 입력
-- `strlen()`: 문자열 길이 구하기
-- `charAt()` 대신 배열 인덱스로 접근: `str[i]`
+**실행 예:** `10` → `합: 55`
+
+---
+
+## 문제 8: 두 수 교환하기 (포인터)
+
+### problem8.c
+
+```c
+#include <stdio.h>
+
+void swap(int *x, int *y) {
+    int temp = *x;
+    *x = *y;
+    *y = temp;
+}
+
+int main() {
+    int a, b;
+
+    scanf("%d %d", &a, &b);
+    printf("교환 전: a=%d b=%d\n", a, b);
+
+    swap(&a, &b);
+
+    printf("교환 후: a=%d b=%d\n", a, b);
+    return 0;
+}
+```
+
+**핵심:** `swap(&a, &b)` — 주소를 넘겨 원본 변경
+
+---
+
+## 문제 9: 학생 구조체 평균
+
+### problem9.c
+
+```c
+#include <stdio.h>
+
+struct Student {
+    char name[20];
+    int score;
+};
+
+int main() {
+    struct Student s[3];
+    int i, sum = 0;
+
+    for (i = 0; i < 3; i++) {
+        scanf("%s %d", s[i].name, &s[i].score);
+        sum += s[i].score;
+    }
+
+    printf("평균: %.2f\n", (double)sum / 3);
+    return 0;
+}
+```
+
+**실행 예:** Hong 85, Kim 90, Lee 80 → `평균: 85.00`
+
+---
+
+## 문제 10: 배열 오름차순 정렬 (버블 정렬)
+
+### problem10.c
+
+```c
+#include <stdio.h>
+
+int main() {
+    int arr[5];
+    int i, j, temp;
+
+    for (i = 0; i < 5; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    /* 버블 정렬 (오름차순) */
+    for (i = 0; i < 4; i++) {
+        for (j = 0; j < 4 - i; j++) {
+            if (arr[j] > arr[j + 1]) {
+                temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+
+    printf("정렬: ");
+    for (i = 0; i < 5; i++) {
+        printf("%d", arr[i]);
+        if (i < 4) printf(" ");
+    }
+    printf("\n");
+
+    return 0;
+}
+```
+
+**실행 예:** `5 2 8 1 9` → `정렬: 1 2 5 8 9`
+
+---
+
+## 채점용 빠른 체크
+
+| 문제 | 입력 예 | 기대 출력 |
+|------|---------|-----------|
+| 1 | `10 5 20 8 15` | 최댓값 20 / 최솟값 5 |
+| 2 | `85 90 75 60 95 80 70 65 88 92` | 평균 80.00 / 개수 5 |
+| 3 | `Hello World` + `l` | 횟수 3 |
+| 4 | `1 2 3 4 5 6 7 8` | 짝수 2 4 6 8 / 홀수 1 3 5 7 |
+| 5 | `1 2 3 4 5` | 역순: 5 4 3 2 1 |
+| 6 | `10 5 20 8 15` + `20` | 인덱스: 2 |
+| 7 | `10` | 합: 55 |
+| 8 | `10 20` | 교환 후 a=20 b=10 |
+| 9 | Hong 85 / Kim 90 / Lee 80 | 평균: 85.00 |
+| 10 | `5 2 8 1 9` | 정렬: 1 2 5 8 9 |
+
+---
+
+## 제출 파일
+
+```
+problem1.c  …  problem10.c
+```

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap 레이아웃 — Header / Nav / Card / Footer</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ========== Header ========== -->
+  <header class="site-header text-white py-3">
+    <div class="container d-flex justify-content-between align-items-center">
+      <h1 class="h4 mb-0">
+        <i class="bi bi-bootstrap me-2"></i>BOOT LAYOUT
+      </h1>
+      <p class="mb-0 small opacity-75">
+        <a href="index.html" class="text-white-50 text-decoration-none">← 목록</a>
+        · Header · Nav · Grid · Card · Footer
+      </p>
+    </div>
+  </header>
+
+  <!-- ========== Nav ========== -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">MySite</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#mainNav"
+        aria-controls="mainNav"
+        aria-expanded="false"
+        aria-label="메뉴 열기"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" href="#home">홈</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#cards">카드</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#about">소개</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">문의</a>
+          </li>
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control form-control-sm me-2" type="search" placeholder="검색" aria-label="검색">
+          <button class="btn btn-outline-light btn-sm" type="submit">
+            <i class="bi bi-search"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ========== Main (Grid + Cards) ========== -->
+  <main class="container my-5" id="home">
+
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Bootstrap Grid + Card</h2>
+      <p class="text-muted">
+        <code>row</code> + <code>col-md-4</code> 로 카드 3개를 배치합니다.
+      </p>
+    </div>
+
+    <!-- Grid: 3 cards -->
+    <section class="row g-4" id="cards">
+
+      <div class="col-12 col-md-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body text-center">
+            <i class="bi bi-laptop display-4 text-primary mb-3"></i>
+            <h5 class="card-title">웹 개발</h5>
+            <p class="card-text text-muted">
+              HTML, CSS, Bootstrap으로 반응형 레이아웃을 구성합니다.
+            </p>
+            <a href="#" class="btn btn-primary">자세히 보기</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body text-center">
+            <i class="bi bi-phone display-4 text-success mb-3"></i>
+            <h5 class="card-title">반응형</h5>
+            <p class="card-text text-muted">
+              모바일에서는 1열, 태블릿 이상에서는 3열로 자동 배치됩니다.
+            </p>
+            <a href="#" class="btn btn-success">자세히 보기</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body text-center">
+            <i class="bi bi-grid-3x3-gap display-4 text-info mb-3"></i>
+            <h5 class="card-title">그리드</h5>
+            <p class="card-text text-muted">
+              Bootstrap 12칸 그리드로 화면을 균등하게 나눕니다.
+            </p>
+            <a href="#" class="btn btn-info text-white">자세히 보기</a>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- 소개 영역 -->
+    <section class="row mt-5" id="about">
+      <div class="col-12">
+        <div class="p-4 bg-light rounded border">
+          <h3 class="h5">화면 구성</h3>
+          <ul class="mb-0">
+            <li><strong>Header</strong> — 사이트 제목 / 브랜드</li>
+            <li><strong>Nav</strong> — 메뉴 네비게이션</li>
+            <li><strong>Grid + Card × 3</strong> — <code>col-md-4</code> 3개</li>
+            <li><strong>Footer</strong> — 하단 정보</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========== Footer ========== -->
+  <footer class="site-footer text-white py-4 mt-auto" id="contact">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6 mb-2 mb-md-0">
+          <p class="mb-0">
+            <i class="bi bi-c-circle me-1"></i>
+            2026 BOOT LAYOUT — Bootstrap 수업용
+          </p>
+        </div>
+        <div class="col-md-6 text-md-end">
+          <a href="#" class="text-white text-decoration-none me-3">이용약관</a>
+          <a href="#" class="text-white text-decoration-none">문의</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

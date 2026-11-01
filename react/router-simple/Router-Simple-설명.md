@@ -1,36 +1,54 @@
-# Router Simple (react-router-dom) 설명
+# Router Simple 설명
 
-이 문서는 `react/router-simple` 프로젝트가 **React Router DOM v6**로 여러 URL에 다른 화면을 보여 주는 방식을 정리한 것입니다. 아래에는 **전체 JSX 소스**를 그대로 포함합니다.
+`react/router-simple`은 **React Router DOM v6**로  
+**공통 레이아웃(헤더·푸터) + 가운데만 바뀌는 페이지**를 만드는 예제입니다.
+
+```bash
+cd react/router-simple
+npm install
+npm run dev
+```
+
+
 
 ---
 
-## 1. 개요
+## 1. 이 프로젝트가 보여주는 것
 
-- **`BrowserRouter`**: 브라우저 주소창의 URL과 React 트리를 연결합니다. (`main.jsx`)
-- **`Routes` / `Route`**: 경로(`path`)와 그때 그릴 컴포넌트(`element`)를 쌍으로 둡니다. (`App.jsx`)
-- **중첩 라우트**: 부모 `Route`의 `element`가 `<Layout />`이고, 자식 `Route`들은 **같은 레이아웃 안**에서만 바뀌는 영역을 담당합니다.
-- **`Outlet`**: “자식 라우트가 여기 들어간다”는 자리 표시자입니다. (`Layout.jsx`)
-- **`NavLink`**: 클릭 시 이동 + **현재 경로와 일치하면** `className` 함수로 활성 스타일을 줄 수 있습니다.
-- **`Link`**: 일반 링크(예: 404에서 홈으로).
+일반 사이트처럼 주소가 바뀌면 화면이 바뀝니다.
 
-스타일은 `index.css`에 있으며, 이 문서에서는 JSX만 포함합니다.
+| URL | 화면 |
+|-----|------|
+| `/` | 홈 |
+| `/about` | 소개 |
+| `/contact` | 문의 폼 |
+| `/없는주소` | 404 |
+
+다만 **헤더·푸터는 그대로** 두고, **본문(`Outlet`)만** 바꿉니다.  
+이게 **중첩 라우트(Nested Routes)** 입니다.
+
+```text
+┌──────────────────────────┐
+│  Header (NavLink)        │  ← Layout (항상)
+├──────────────────────────┤
+│  Outlet ← 여기만 교체      │  ← Home / About / Contact / 404
+├──────────────────────────┤
+│  Footer                  │  ← Layout (항상)
+└──────────────────────────┘
+```
 
 ---
 
 ## 2. 폴더 구조
 
-```
+```text
 router-simple/
-├── index.html
-├── vite.config.js
-├── package.json
-├── Router-Simple-설명.md    ← 이 파일
 └── src/
-    ├── main.jsx             ← BrowserRouter
-    ├── App.jsx              ← Routes 정의
+    ├── main.jsx          ← BrowserRouter
+    ├── App.jsx           ← Routes / Route
     ├── index.css
     ├── components/
-    │   └── Layout.jsx       ← NavLink, Outlet, 푸터
+    │   └── Layout.jsx    ← NavLink + Outlet
     └── pages/
         ├── Home.jsx
         ├── About.jsx
@@ -38,51 +56,32 @@ router-simple/
         └── NotFound.jsx
 ```
 
----
-
-## 3. URL과 컴포넌트
-
-부모 경로가 `/`이므로 자식은 **상대 경로**로 붙습니다 (`about` → 실제 URL `/about`).
-
-| 브라우저 URL   | 매칭되는 화면 | 비고 |
-|----------------|---------------|------|
-| `/`            | `Layout` + `Home` (index) | |
-| `/about`       | `Layout` + `About` | |
-| `/contact`     | `Layout` + `Contact` | |
-| 그 외 (예: `/x`) | `Layout` + `NotFound` | `path="*"` 스플랫 |
-
-`Layout`은 항상 그려지고, `<main>` 안의 **`Outlet`만** 위 표에 따라 바뀝니다.
+| 파일 | 역할 |
+|------|------|
+| `main.jsx` | 앱 전체에 라우터 환경 제공 |
+| `App.jsx` | URL ↔ 페이지 연결표 |
+| `Layout.jsx` | 공통 UI + 자식이 들어갈 구멍(`Outlet`) |
+| `pages/*` | 각 URL의 실제 내용 |
 
 ---
 
-## 4. 렌더링 흐름 (한 줄 요약)
+## 3. 핵심 API 6개
 
-```
-URL 변경 (주소 입력·NavLink·Link)
-  → Router가 현재 URL과 일치하는 Route 트리 선택
-  → Layout 렌더 → Outlet 위치에 해당 페이지 컴포넌트 삽입
-```
-
----
-
-## 5. 포인트 정리
-
-- **`NavLink`의 `end`**: `to="/"` 일 때 `/about`에서는 홈 링크가 활성으로 남지 않게 **정확히 일치**할 때만 active 처리합니다.
-- **`Contact`**: `onSubmit`에서 `preventDefault` 후 로컬 state만 바꿉니다. **API 호출 없음** (연습용).
-- **`NotFound`**: 정의되지 않은 경로용; `Link to="/"` 로 홈 복귀.
+| API | 역할 | 위치 |
+|-----|------|------|
+| **BrowserRouter** | 브라우저 주소와 React 연결 | `main.jsx` |
+| **Routes** | Route들을 모아 관리 | `App.jsx` |
+| **Route** | `path`와 `element` 한 쌍 | `App.jsx` |
+| **Outlet** | 자식 페이지가 그려질 자리 | `Layout.jsx` |
+| **NavLink** | 이동 + **현재 페이지면 활성 스타일** | `Layout.jsx` |
+| **Link** | 단순 이동 (활성 스타일 불필요) | `NotFound.jsx` |
 
 ---
 
-## 6. 전체 JSX 코드
-
-### `src/main.jsx`
+## 4. main.jsx — BrowserRouter
 
 ```jsx
-import React from 'react';
-import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-import App from './App';
-import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -93,231 +92,198 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 );
 ```
 
-### `src/App.jsx`
+`BrowserRouter` 안에 있는 컴포넌트만 `Routes`, `NavLink`, `Link` 등을 쓸 수 있습니다.
+
+---
+
+## 5. App.jsx — 중첩 Route
 
 ```jsx
-import { Routes, Route } from 'react-router-dom';
-import Layout from './components/Layout';
-import Home from './pages/Home';
-import About from './pages/About';
-import Contact from './pages/Contact';
-import NotFound from './pages/NotFound';
-
-export default function App() {
-  return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<Home />} />
-        <Route path="about" element={<About />} />
-        <Route path="contact" element={<Contact />} />
-        <Route path="*" element={<NotFound />} />
-      </Route>
-    </Routes>
-  );
-}
+<Routes>
+  <Route path="/" element={<Layout />}>
+    <Route index element={<Home />} />
+    <Route path="about" element={<About />} />
+    <Route path="contact" element={<Contact />} />
+    <Route path="*" element={<NotFound />} />
+  </Route>
+</Routes>
 ```
 
-### `src/components/Layout.jsx`
+### 읽는 법
+
+1. **부모** `path="/"` + `element={<Layout />}`  
+   → 레이아웃을 먼저 그린다.
+2. **자식**은 Layout의 `<Outlet />` 자리에 들어간다.
+3. `index` → 부모와 같은 URL(`/`)일 때 Home
+4. `path="about"` → 실제 주소는 **`/about`** (부모 `/` + about)
+5. `path="*"` → 위에 해당 없는 모든 주소 → NotFound
+
+> 자식 path에 `/about`처럼 앞에 `/`를 붙이지 않는 것이 일반적입니다.  
+> 상대 경로로 부모 아래에 붙습니다.
+
+---
+
+## 6. Layout.jsx — NavLink + Outlet
+
+### Outlet
 
 ```jsx
-import { NavLink, Outlet } from 'react-router-dom';
+<main className="site-main">
+  <Outlet />
+</main>
+```
 
+URL이 `/about`이면 여기에 `<About />`이 들어갑니다.  
+헤더·푸터 코드는 한 번만 작성하면 됩니다.
+
+### NavLink
+
+```jsx
 const navLinkClass = ({ isActive }) =>
   isActive ? 'nav-link nav-link--active' : 'nav-link';
 
-export default function Layout() {
-  return (
-    <div className="layout">
-      <header className="site-header">
-        <div className="site-header__inner">
-          <NavLink to="/" className="brand" end>
-            Router Simple
-          </NavLink>
-          <nav className="site-nav" aria-label="주 메뉴">
-            <NavLink to="/" className={navLinkClass} end>
-              홈
-            </NavLink>
-            <NavLink to="/about" className={navLinkClass}>
-              소개
-            </NavLink>
-            <NavLink to="/contact" className={navLinkClass}>
-              문의
-            </NavLink>
-          </nav>
-        </div>
-      </header>
-
-      <main className="site-main">
-        <Outlet />
-      </main>
-
-      <footer className="site-footer">
-        <p>React Router DOM v6 · 중첩 라우트 · NavLink</p>
-      </footer>
-    </div>
-  );
-}
+<NavLink to="/about" className={navLinkClass}>
+  소개
+</NavLink>
 ```
 
-### `src/pages/Home.jsx`
+- `Link`와 같이 SPA 내부 이동
+- 추가로 **지금 이 메뉴가 선택된 페이지인지** `isActive`로 알려 줌
+- CSS에서 `.nav-link--active`로 강조
+
+### end 속성
 
 ```jsx
-export default function Home() {
-  return (
-    <article className="page">
-      <h1>홈</h1>
-      <p className="lead">
-        이 사이트는 <code>react-router-dom</code>의 <code>BrowserRouter</code>,{' '}
-        <code>Routes</code>, <code>Route</code>, <code>NavLink</code>,{' '}
-        <code>Outlet</code>으로 페이지를 나눈 예제입니다.
-      </p>
-      <ul className="feature-list">
-        <li>
-          <strong>소개</strong> — 라우팅 구조와 역할을 짧게 설명합니다.
-        </li>
-        <li>
-          <strong>문의</strong> — 폼은 데모용이며 실제 전송은 하지 않습니다.
-        </li>
-      </ul>
-    </article>
-  );
-}
+<NavLink to="/" className={navLinkClass} end>
+  홈
+</NavLink>
 ```
 
-### `src/pages/About.jsx`
+`to="/"` 는 `/about`의 **앞부분**과도 겹칩니다.  
+`end`가 없으면 `/about`에서도 홈이 활성으로 남을 수 있습니다.  
+`end` → **경로가 정확히 `/`일 때만** 홈 active.
+
+---
+
+## 7. 페이지별 역할
+
+### Home
+
+라우터로 나눈 사이트라는 소개 + 소개/문의 안내 목록.
+
+### About
+
+Layout · Outlet 개념 설명 + URL/컴포넌트 **표**.
+
+### Contact
 
 ```jsx
-export default function About() {
-  return (
-    <article className="page">
-      <h1>소개</h1>
-      <p>
-        <code>App.jsx</code>에서 경로별로 <code>element</code>를 연결하고, 공통 뼈대는{' '}
-        <code>Layout</code> 한 곳에 둡니다. 자식 페이지는 <code>Outlet</code> 위치에
-        렌더링됩니다.
-      </p>
-      <section className="card-block">
-        <h2>경로 요약</h2>
-        <table className="route-table">
-          <thead>
-            <tr>
-              <th>URL</th>
-              <th>컴포넌트</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <code>/</code>
-              </td>
-              <td>Home</td>
-            </tr>
-            <tr>
-              <td>
-                <code>/about</code>
-              </td>
-              <td>About</td>
-            </tr>
-            <tr>
-              <td>
-                <code>/contact</code>
-              </td>
-              <td>Contact</td>
-            </tr>
-            <tr>
-              <td>
-                <code>/*</code> (없는 주소)
-              </td>
-              <td>NotFound</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-    </article>
-  );
-}
+const [sent, setSent] = useState(false);
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+  setSent(true);
+};
 ```
 
-### `src/pages/Contact.jsx`
+- 제출해도 **서버로 안 보냄** (수업용 데모)
+- `preventDefault`로 새로고침 방지
+- `sent`가 true면 안내 문구 표시
+
+### NotFound
 
 ```jsx
-import { useState } from 'react';
-
-export default function Contact() {
-  const [sent, setSent] = useState(false);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setSent(true);
-  };
-
-  return (
-    <article className="page">
-      <h1>문의</h1>
-      <p>아래는 라우팅 연습용 폼입니다. 제출해도 서버로 전송되지 않습니다.</p>
-
-      {sent ? (
-        <p className="notice notice--ok" role="status">
-          데모: 제출된 것처럼 표시만 했습니다.
-        </p>
-      ) : null}
-
-      <form className="contact-form" onSubmit={handleSubmit}>
-        <label className="field">
-          <span>이름</span>
-          <input name="name" type="text" required autoComplete="name" placeholder="홍길동" />
-        </label>
-        <label className="field">
-          <span>메시지</span>
-          <textarea name="message" rows={4} required placeholder="내용을 입력하세요" />
-        </label>
-        <button type="submit" className="btn-primary">
-          보내기 (데모)
-        </button>
-      </form>
-    </article>
-  );
-}
+<Link to="/" className="btn-primary">
+  홈으로
+</Link>
 ```
 
-### `src/pages/NotFound.jsx`
+없는 주소용. `NavLink` 대신 `Link`만 써도 됩니다 (메뉴 활성 불필요).
 
-```jsx
-import { Link } from 'react-router-dom';
+---
 
-export default function NotFound() {
-  return (
-    <article className="page page--center">
-      <h1>404</h1>
-      <p>이 주소에는 페이지가 없습니다.</p>
-      <Link to="/" className="btn-primary">
-        홈으로
-      </Link>
-    </article>
-  );
-}
+## 8. 동작 흐름
+
+```text
+사용자가 「소개」 NavLink 클릭
+        ↓
+주소창이 /about 으로 변경 (페이지 전체 새로고침 없음)
+        ↓
+Routes가 일치하는 Route 선택
+        ↓
+Layout 렌더 (헤더·푸터 유지)
+        ↓
+Outlet 자리에 About 삽입
+        ↓
+소개 NavLink에 isActive → 활성 스타일
 ```
 
 ---
 
-## 7. 실행 방법
+## 9. `<a>` vs Link / NavLink
 
-프로젝트 루트(`router-simple`)에서:
+| | `<a href>` | `Link` / `NavLink` |
+|--|------------|-------------------|
+| 동작 | 브라우저가 문서를 다시 요청 | React가 URL만 바꾸고 컴포넌트 교체 |
+| 결과 | 깜빡임 · 상태 초기화 가능 | SPA답게 부드러운 전환 |
+| 이 예제 | 사용하지 않음 | 메뉴·홈으로 버튼에 사용 |
 
-```bash
-npm install
-npm run dev
+---
+
+## 10. CSS 포인트 (`index.css`)
+
+- CSS 변수(`--bg`, `--accent` 등)로 다크 톤 UI
+- `.layout` = column flex, 최소 높이 100vh
+- `.nav-link--active` = 현재 메뉴 강조
+- `.contact-form` / `.field` = 문의 폼 간격
+
+스타일은 자유롭게 바꿔도 라우팅 구조는 그대로입니다.
+
+---
+
+## 11. 학생용 한 장 정리
+
+```text
+BrowserRouter     라우터 켜기
+     ↓
+Routes / Route    URL ↔ 화면 표
+     ↓
+Layout            헤더 · 푸터 고정
+     ↓
+Outlet            가운데 페이지만 교체
+     ↓
+NavLink           메뉴 이동 + 활성 표시
+Link              단순 이동 (404 → 홈)
+```
+
+**외울 구조**
+
+```jsx
+<Route path="/" element={<Layout />}>
+  <Route index element={<Home />} />
+  <Route path="about" element={<About />} />
+  <Route path="*" element={<NotFound />} />
+</Route>
 ```
 
 ---
 
-## 8. 학습 포인트 체크리스트
+## 12. 자주 하는 실수
 
-- [ ] `BrowserRouter`를 **한 번만** 최상단(보통 `main.jsx`)에 두는 이유
-- [ ] 중첩 `Route`에서 부모 `element`와 자식 `element`가 어떻게 합쳐지는지 (`Outlet`)
-- [ ] `index` 라우트와 `path="about"` 의 URL 차이
-- [ ] `path="*"` 가 “나머지 전부”에 쓰이는 방식
-- [ ] `NavLink`의 `className` 함수와 `isActive`, 홈 링크에 `end`를 쓰는 이유
-- [ ] `Link`와 일반 `<a href>`의 차이(클라이언트 쪽 이동)
+| 실수 | 결과 | 해결 |
+|------|------|------|
+| `BrowserRouter` 없음 | NavLink/Routes 에러 | `main.jsx`에서 감싸기 |
+| Layout에 `Outlet` 없음 | 자식 페이지가 안 보임 | `<Outlet />` 추가 |
+| 홈 NavLink에 `end` 없음 | 다른 페이지에서도 홈 활성 | `end` 추가 |
+| 자식 path를 `/about`으로만 헷갈림 | 중첩 매칭 혼란 | 예제는 `about` (상대) |
+| Contact에서 `preventDefault` 누락 | 제출 시 새로고침 | `e.preventDefault()` |
 
-이 문서는 `src/main.jsx`, `src/App.jsx`, `src/components/Layout.jsx`, `src/pages/*.jsx`를 기준으로 작성되었습니다.
+---
+
+## 13. 다음 단계
+
+| 주제 | 참고 |
+|------|------|
+| URL 파라미터 `/products/:id` | `router-basic`, `routerBasic.md` |
+| 슬라이드·포트폴리오 | `router-project` |
+| 직접 만들어 보기 | `Router-Simple-작업지시서.md` |

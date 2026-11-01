@@ -1,0 +1,508 @@
+@charset "UTF-8";
+
+/* ===== Reset / Base ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  font-size: 16px;
+  color: #2f2f2f;
+  background: #fff;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  vertical-align: top;
+  border: 0;
+}
+
+.container {
+  position: relative;
+  overflow: hidden;
+}
+
+/* ===== Header ===== */
+.header {
+  border-bottom: 1px solid #eee;
+}
+
+.header-inner {
+  position: relative;
+  max-width: 1100px;
+  height: 80px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.logo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: 4px;
+}
+
+.logo a:hover {
+  color: #b4252d;
+}
+
+.util-left,
+.util-right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 16px;
+}
+
+.util-left {
+  left: 20px;
+}
+
+.util-right {
+  right: 20px;
+}
+
+.util-link {
+  font-size: 13px;
+  color: #797d85;
+}
+
+.util-link:hover {
+  color: #b4252d;
+}
+
+/* ===== Mobile tab (햄버거) ===== */
+.mobile_tab {
+  display: none;
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 120;
+  width: 28px;
+  height: 22px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.mobile_tab span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  margin: 5px 0;
+  background: #2f2f2f;
+  transition: 0.3s;
+}
+
+/* 모바일 메뉴 상단 X 닫기 버튼 */
+.mobile_close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 2;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.mobile_close span {
+  position: absolute;
+  left: 4px;
+  top: 15px;
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: #2f2f2f;
+}
+
+.mobile_close span:nth-child(1) {
+  transform: rotate(45deg);
+}
+
+.mobile_close span:nth-child(2) {
+  transform: rotate(-45deg);
+}
+
+.mobile_close:hover span {
+  background: #b4252d;
+}
+
+/* ===== PC Nav (지센 스타일) ===== */
+.nav {
+  position: relative;
+  z-index: 50;
+}
+
+.nav > ul {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 54px;
+  overflow: hidden;
+  text-align: center;
+  background: #f7f7f7;
+  border-bottom: 1px solid #e5e5e5;
+  transition: height 0.3s;
+}
+
+.nav > ul.over {
+  height: 180px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.nav > ul > li {
+  display: inline-block;
+  position: relative;
+  margin-left: 48px;
+  vertical-align: top;
+}
+
+.nav > ul > li:first-child {
+  margin-left: 0;
+}
+
+.nav > ul > li > a {
+  display: block;
+  padding: 0 12px;
+  line-height: 54px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.nav > ul > li:hover > a {
+  color: #b4252d;
+}
+
+.nav .sub {
+  position: absolute;
+  left: 0;
+  padding-top: 10px;
+  text-align: left;
+  min-width: 100%;
+}
+
+.nav .sub a {
+  display: block;
+  padding: 7px 12px;
+  font-size: 12px;
+  color: #888;
+}
+
+.nav .sub a:hover {
+  color: #000;
+  text-decoration: underline;
+}
+
+/* ===== Mobile Nav ===== */
+.mobile_nav {
+  position: fixed;
+  right: -260px;
+  top: 0;
+  z-index: 150;
+  width: 260px;
+  height: 100%;
+  padding: 56px 20px 24px; /* 상단 X 버튼 공간 */
+  background: #fff;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
+  box-sizing: border-box;
+  transition: right 0.35s ease-out;
+  overflow-y: auto;
+}
+
+.mobile_nav.active {
+  right: 0;
+}
+
+.mobile_nav > ul > li > a {
+  display: block;
+  height: 48px;
+  line-height: 48px;
+  padding: 0 8px;
+  font-size: 15px;
+  font-weight: 700;
+  border-bottom: 1px dotted #ccc;
+}
+
+.mobile_nav > ul > li > a:hover {
+  color: #b4252d;
+}
+
+.mobile_nav .sub {
+  display: none;
+}
+
+.mobile_nav .sub li a {
+  display: block;
+  padding: 0 12px;
+  line-height: 38px;
+  font-size: 13px;
+  color: #444;
+  background: #f4f4f4;
+  border-bottom: 1px dotted #eaeaea;
+}
+
+.mobile_nav .sub li a:hover {
+  background: #fff;
+}
+
+.transparency {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 130;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.transparency.active {
+  display: block;
+}
+
+/* ===== Hero Slick Slider ===== */
+.hero-slider {
+  position: relative;
+  margin-top: 54px; /* PC GNB 높이 */
+  background: #111;
+}
+
+.main-slider .slide {
+  position: relative;
+}
+
+.main-slider .slide img {
+  width: 100%;
+  height: 520px;
+  object-fit: cover;
+  display: block;
+}
+
+.slide-caption {
+  position: absolute;
+  left: 8%;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+  z-index: 2;
+}
+
+.slide-eyebrow {
+  font-size: 13px;
+  letter-spacing: 3px;
+  margin-bottom: 10px;
+  opacity: 0.9;
+}
+
+.slide-caption h2 {
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.slide-btn {
+  display: inline-block;
+  padding: 12px 28px;
+  background: #b4252d;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  border-radius: 2px;
+  transition: background 0.3s;
+}
+
+.slide-btn:hover {
+  background: #8d1d24;
+}
+
+/* 어두운 그라데이션 (텍스트 가독성) */
+.main-slider .slide::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.1) 55%, transparent 100%);
+  pointer-events: none;
+}
+
+.slider-control {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  background: rgba(0, 0, 0, 0.45);
+  border-radius: 4px;
+  color: #fff;
+}
+
+.slider-control button {
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  line-height: 1;
+  padding: 4px 6px;
+}
+
+.slider-control .pager {
+  font-size: 13px;
+  min-width: 48px;
+  text-align: center;
+}
+
+.slider-control .slick-pause-btn {
+  font-size: 11px;
+}
+
+/* Slick dots 커스텀 (선택) */
+.hero-slider .slick-dots {
+  bottom: 28px;
+  left: 24px;
+  width: auto;
+  text-align: left;
+}
+
+.hero-slider .slick-dots li button:before {
+  color: #fff;
+  opacity: 0.5;
+  font-size: 10px;
+}
+
+.hero-slider .slick-dots li.slick-active button:before {
+  color: #b4252d;
+  opacity: 1;
+}
+
+/* ===== Intro ===== */
+.intro {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 60px 20px 80px;
+  text-align: center;
+}
+
+.intro h2 {
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+.intro p {
+  line-height: 1.8;
+  color: #555;
+}
+
+/* ===== Responsive ===== */
+@media screen and (max-width: 1024px) {
+  .nav > ul > li {
+    margin-left: 28px;
+  }
+
+  .main-slider .slide img {
+    height: 420px;
+  }
+
+  .slide-caption h2 {
+    font-size: 32px;
+  }
+}
+
+/* 지센과 동일: 850px에서 모바일 전환 */
+@media screen and (max-width: 850px) {
+  .util-left,
+  .util-right {
+    display: none;
+  }
+
+  .header-inner {
+    height: 64px;
+  }
+
+  .logo {
+    left: 20px;
+    transform: translateY(-50%);
+    font-size: 22px;
+    letter-spacing: 2px;
+  }
+
+  .mobile_tab {
+    display: block;
+  }
+
+  .nav {
+    display: none;
+  }
+
+  .hero-slider {
+    margin-top: 0;
+  }
+
+  .main-slider .slide img {
+    height: 360px;
+  }
+
+  .slide-caption {
+    left: 6%;
+    right: 6%;
+  }
+
+  .slide-caption h2 {
+    font-size: 26px;
+  }
+
+  .slider-control {
+    right: 12px;
+    bottom: 12px;
+  }
+
+  .hero-slider .slick-dots {
+    bottom: 16px;
+    left: 12px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .main-slider .slide img {
+    height: 280px;
+  }
+
+  .slide-caption h2 {
+    font-size: 22px;
+    margin-bottom: 12px;
+  }
+
+  .slide-btn {
+    padding: 10px 18px;
+    font-size: 12px;
+  }
+
+  .intro {
+    padding: 40px 16px 60px;
+  }
+}

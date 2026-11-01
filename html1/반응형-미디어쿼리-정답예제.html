@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>반응형 · 미디어쿼리 정답 예제</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f5f5f5;
+      color: #222;
+      line-height: 1.6;
+    }
+
+    /* ========== 17번. 헤더 / 메뉴 ========== */
+    .site-header {
+      background: #2c3e50;
+      color: #fff;
+      padding: 14px 20px;
+    }
+
+    .nav-bar {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo {
+      font-size: 1.4rem;
+      font-weight: bold;
+    }
+
+    .menu-toggle {
+      margin-left: auto;
+      display: block;
+      background: transparent;
+      color: #fff;
+      border: 1px solid #fff;
+      padding: 8px 12px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .nav {
+      display: none;
+      list-style: none;
+      flex-direction: column;
+      flex-basis: 100%;
+      width: 100%;
+      gap: 0;
+    }
+
+    .nav.open {
+      display: flex;
+    }
+
+    .nav a {
+      display: block;
+      color: #fff;
+      text-decoration: none;
+      padding: 12px 4px;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    @media (min-width: 768px) {
+      .menu-toggle {
+        display: none;
+      }
+
+      .nav {
+        display: flex;
+        flex-direction: row;
+        flex-basis: auto;
+        width: auto;
+        margin-left: auto;
+        gap: 8px;
+      }
+
+      .nav a {
+        border: none;
+        padding: 8px 14px;
+      }
+    }
+
+    /* ========== 본문 ========== */
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 28px 20px 60px;
+    }
+
+    h1 {
+      margin-bottom: 8px;
+      font-size: 1.6rem;
+    }
+
+    .guide {
+      color: #666;
+      margin-bottom: 28px;
+      font-size: 0.95rem;
+    }
+
+    .section {
+      background: #fff;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    .section h2 {
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+      color: #2c3e50;
+      border-bottom: 2px solid #3498db;
+      padding-bottom: 8px;
+    }
+
+    .section .desc {
+      color: #666;
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #eaf4fb;
+      color: #2980b9;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+    }
+
+    code {
+      display: block;
+      margin-top: 14px;
+      padding: 12px;
+      background: #f0f3f6;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      white-space: pre-wrap;
+    }
+
+    .answer-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    .answer-table th,
+    .answer-table td {
+      border: 1px solid #e0e0e0;
+      padding: 8px 10px;
+      text-align: left;
+    }
+
+    .answer-table th {
+      background: #ecf0f1;
+    }
+
+    /* ========== 16번. 카드 그리드 ========== */
+    .card-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    @media (min-width: 768px) {
+      .card-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .card-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid #e5e5e5;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .card-thumb {
+      height: 120px;
+    }
+
+    .card:nth-child(1) .card-thumb { background: linear-gradient(135deg, #667eea, #764ba2); }
+    .card:nth-child(2) .card-thumb { background: linear-gradient(135deg, #11998e, #38ef7d); }
+    .card:nth-child(3) .card-thumb { background: linear-gradient(135deg, #f093fb, #f5576c); }
+
+    .card-body {
+      padding: 16px;
+    }
+
+    .card-body h3 {
+      font-size: 1rem;
+      margin-bottom: 6px;
+    }
+
+    .card-body p {
+      font-size: 0.88rem;
+      color: #777;
+    }
+
+    /* ========== 18번. 사이드바 ========== */
+    .content-layout {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .sidebar {
+      background: #34495e;
+      color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .sidebar h3 {
+      margin-bottom: 12px;
+    }
+
+    .sidebar ul {
+      list-style: none;
+    }
+
+    .sidebar li {
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      font-size: 0.9rem;
+    }
+
+    .main-content {
+      background: #fafafa;
+      border: 1px solid #e5e5e5;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    @media (min-width: 768px) {
+      .content-layout {
+        flex-direction: row;
+      }
+
+      .sidebar {
+        flex: 0 0 250px;
+      }
+
+      .main-content {
+        flex: 1;
+      }
+    }
+
+    .bp-box {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .bp {
+      flex: 1 1 140px;
+      background: #ecf0f1;
+      border-radius: 8px;
+      padding: 14px;
+      text-align: center;
+    }
+
+    .bp strong {
+      display: block;
+      font-size: 1.1rem;
+      color: #2980b9;
+    }
+  </style>
+</head>
+<body>
+  <!-- 17번 헤더 -->
+  <header class="site-header">
+    <div class="nav-bar">
+      <div class="logo">Responsive Lab</div>
+      <button class="menu-toggle" type="button" onclick="toggleMenu()">MENU</button>
+      <ul class="nav" id="nav">
+        <li><a href="#">홈</a></li>
+        <li><a href="#cards">카드</a></li>
+        <li><a href="#sidebar">레이아웃</a></li>
+        <li><a href="#answers">정답</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <h1>반응형 · 미디어쿼리 정답 예제</h1>
+    <p class="guide">
+      브라우저 너비를 줄이거나 F12 → 반응형 모드로 확인하세요.<br>
+      모바일: 1열 + MENU / 768px~: 2열 + 가로 메뉴 / 1024px~: 3열
+    </p>
+
+    <!-- 정답 요약 -->
+    <section class="section" id="answers">
+      <h2>객관식 · OX · 빈칸 정답 요약</h2>
+      <p class="desc">이론 문제 정답입니다.</p>
+      <table class="answer-table">
+        <tr><th>문제</th><th>정답</th><th>문제</th><th>정답</th></tr>
+        <tr><td>1</td><td>②</td><td>12</td><td>max-width</td></tr>
+        <tr><td>2</td><td>②</td><td>13</td><td>repeat</td></tr>
+        <tr><td>3</td><td>②</td><td>14</td><td>viewport</td></tr>
+        <tr><td>4</td><td>②</td><td>15</td><td>auto</td></tr>
+        <tr><td>5</td><td>②</td><td>19</td><td>O</td></tr>
+        <tr><td>6</td><td>②</td><td>20</td><td>X</td></tr>
+        <tr><td>7</td><td>④</td><td>21</td><td>O</td></tr>
+        <tr><td>8</td><td>②</td><td>22</td><td>O</td></tr>
+        <tr><td>9</td><td>②</td><td>10</td><td>①</td></tr>
+        <tr><td>11</td><td>min-width</td><td></td><td></td></tr>
+      </table>
+    </section>
+
+    <!-- 브레이크포인트 -->
+    <section class="section">
+      <h2>브레이크포인트</h2>
+      <div class="bp-box">
+        <div class="bp"><strong>~767</strong>모바일 1열</div>
+        <div class="bp"><strong>768+</strong>태블릿 2열</div>
+        <div class="bp"><strong>1024+</strong>데스크톱 3열</div>
+      </div>
+    </section>
+
+    <!-- 16번 카드 -->
+    <section class="section" id="cards">
+      <span class="badge">16번 정답</span>
+      <h2>카드 그리드 (1 → 2 → 3열)</h2>
+      <p class="desc">화면을 넓히면 열 수가 바뀝니다.</p>
+
+      <div class="card-grid">
+        <article class="card">
+          <div class="card-thumb"></div>
+          <div class="card-body">
+            <h3>카드 1</h3>
+            <p>모바일에서는 세로로 쌓입니다.</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-thumb"></div>
+          <div class="card-body">
+            <h3>카드 2</h3>
+            <p>768px 이상이면 2열입니다.</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-thumb"></div>
+          <div class="card-body">
+            <h3>카드 3</h3>
+            <p>1024px 이상이면 3열입니다.</p>
+          </div>
+        </article>
+      </div>
+
+      <code>.card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+@media (min-width: 768px) {
+  .card-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  .card-grid { grid-template-columns: repeat(3, 1fr); }
+}</code>
+    </section>
+
+    <!-- 18번 사이드바 -->
+    <section class="section" id="sidebar">
+      <span class="badge">18번 정답</span>
+      <h2>사이드바 레이아웃</h2>
+      <p class="desc">모바일: 세로 / 768px 이상: 사이드바 250px + 본문 flex:1</p>
+
+      <div class="content-layout">
+        <aside class="sidebar">
+          <h3>사이드바</h3>
+          <ul>
+            <li>메뉴 1</li>
+            <li>메뉴 2</li>
+            <li>메뉴 3</li>
+          </ul>
+        </aside>
+        <div class="main-content">
+          <h3>메인 콘텐츠</h3>
+          <p>좁은 화면에서는 아래에, 넓은 화면에서는 옆에 배치됩니다.</p>
+        </div>
+      </div>
+
+      <code>.content-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+@media (min-width: 768px) {
+  .content-layout { flex-direction: row; }
+  .sidebar { flex: 0 0 250px; }
+  .main-content { flex: 1; }
+}</code>
+    </section>
+
+    <!-- 17번 설명 -->
+    <section class="section">
+      <span class="badge">17번 정답</span>
+      <h2>헤더 메뉴 전환</h2>
+      <p class="desc">위쪽 MENU 버튼을 눌러보세요. 768px 이상에서는 가로 메뉴로 바뀝니다.</p>
+      <code>.menu-toggle { display: block; }
+.nav { display: none; }
+.nav.open { display: flex; }
+
+@media (min-width: 768px) {
+  .menu-toggle { display: none; }
+  .nav {
+    display: flex;
+    flex-direction: row;
+  }
+}</code>
+    </section>
+  </main>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("nav").classList.toggle("open");
+    }
+  </script>
+</body>
+</html>

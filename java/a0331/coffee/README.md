@@ -43,6 +43,7 @@ java CoffeeImpl
 - 재주문 처리
 - 주문 내역 출력
 - 결제 처리
+- **상세 정리:** [CoffeeService-완전정리.md](./CoffeeService-완전정리.md)
 
 ### Customer.java
 - 고객 정보 관리
