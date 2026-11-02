@@ -68,25 +68,45 @@ export async function initAuth() {
   return state;
 }
 
+function mapAuthError(error) {
+  const msg = error?.message || String(error);
+  if (/failed to fetch|networkerror|fetch/i.test(msg)) {
+    return new Error(
+      'Supabase에 연결하지 못했습니다. .env.local의 VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY가 실제 프로젝트 값인지 확인한 뒤 npm run dev를 재시작하세요.'
+    );
+  }
+  return error instanceof Error ? error : new Error(msg);
+}
+
 export async function signUp({ email, password, nickname, realName }) {
-  const { data, error } = await supabase.auth.signUp({
-    email,
-    password,
-    options: {
-      data: { nickname, real_name: realName || '' },
-    },
-  });
-  if (error) throw error;
-  return data;
+  if (!supabase) throw new Error('Supabase가 설정되지 않았습니다. .env.local을 확인하세요.');
+  try {
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: { nickname, real_name: realName || '' },
+      },
+    });
+    if (error) throw error;
+    return data;
+  } catch (e) {
+    throw mapAuthError(e);
+  }
 }
 
 export async function signIn({ email, password }) {
-  const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-  if (error) throw error;
-  state.session = data.session;
-  state.profile = await loadProfile(data.user.id);
-  emit();
-  return data;
+  if (!supabase) throw new Error('Supabase가 설정되지 않았습니다. .env.local을 확인하세요.');
+  try {
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) throw error;
+    state.session = data.session;
+    state.profile = await loadProfile(data.user.id);
+    emit();
+    return data;
+  } catch (e) {
+    throw mapAuthError(e);
+  }
 }
 
 export async function signOut() {

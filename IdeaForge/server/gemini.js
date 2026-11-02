@@ -35,7 +35,7 @@ function extractJson(text) {
 }
 
 async function withModelFallback(run) {
-  const models = [env.geminiModel, 'gemini-3.5-flash-lite', 'gemini-2.0-flash-lite'];
+  const models = [env.geminiModel, 'gemini-flash-latest', 'gemini-2.5-flash', 'gemini-2.5-flash-lite'];
   const tried = new Set();
   let lastErr;
   for (const model of models) {

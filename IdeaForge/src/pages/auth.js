@@ -4,7 +4,12 @@ import { supabaseConfigured } from '../lib/supabaseClient.js';
 
 function configBanner() {
   if (supabaseConfigured) return '';
-  return `<div class="alert error">Supabase 환경변수가 없습니다. .env.local에 VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY를 설정하세요.</div>`;
+  return `<div class="alert error">
+    Supabase가 아직 연결되지 않았습니다.<br />
+    1) Supabase → Project Settings → API<br />
+    2) <code>.env.local</code>에 Project URL · anon key 입력<br />
+    3) <code>npm run dev</code> <strong>재시작</strong>
+  </div>`;
 }
 
 export function renderLogin(root) {

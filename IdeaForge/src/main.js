@@ -40,7 +40,11 @@ async function route() {
   root.innerHTML = `<div class="container" style="padding:40px 0"><div class="card">페이지를 찾을 수 없습니다. <a href="#/">홈</a></div></div>`;
 }
 
-await initAuth();
-window.addEventListener('hashchange', () => route());
-onAuthChange(() => route());
-await route();
+async function boot() {
+  await initAuth();
+  window.addEventListener('hashchange', () => route());
+  onAuthChange(() => route());
+  await route();
+}
+
+boot();

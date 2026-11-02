@@ -1,9 +1,6 @@
 /**
- * Vercel 배포용 엔트리 (추후 연결 시 사용).
- * 로컬은 server/index.js 를 사용합니다.
+ * Vercel Functions 엔트리 — Express 앱을 서버리스로 연결 (PRD: Vercel Serverless + Supabase).
  */
-import appModule from '../server/vercel-app.js';
+import app from '../server/vercel-app.js';
 
-export default async function handler(req, res) {
-  return appModule(req, res);
-}
+export default app;

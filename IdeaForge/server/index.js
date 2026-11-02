@@ -334,16 +334,20 @@ app.get('/api/admin/me', async (req, res) => {
   }
 });
 
-// production static
-const dist = path.resolve(__dirname, '../dist');
-app.use(express.static(dist));
-app.get(/^(?!\/api).*/, (req, res, next) => {
-  if (req.method !== 'GET') return next();
-  res.sendFile(path.join(dist, 'index.html'), (err) => {
-    if (err) next();
+// local/prod Node 서버에서만 정적 파일 제공 (Vercel은 dist를 CDN으로 서빙)
+if (!process.env.VERCEL) {
+  const dist = path.resolve(__dirname, '../dist');
+  app.use(express.static(dist));
+  app.get(/^(?!\/api).*/, (req, res, next) => {
+    if (req.method !== 'GET') return next();
+    res.sendFile(path.join(dist, 'index.html'), (err) => {
+      if (err) next();
+    });
   });
-});
 
-app.listen(env.port, () => {
-  console.log(`IdeaForge API http://127.0.0.1:${env.port}`);
-});
+  app.listen(env.port, () => {
+    console.log(`IdeaForge API http://127.0.0.1:${env.port}`);
+  });
+}
+
+export default app;
